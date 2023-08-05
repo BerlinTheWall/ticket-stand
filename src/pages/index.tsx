@@ -22,7 +22,7 @@ export default function Home() {
           Material UI - Next.js example in TypeScript
         </Typography>
         <Link href="/about" color="secondary">
-          Go to the about page
+          Go to the about page x
         </Link>
         <ProTip />
         <Copyright />
