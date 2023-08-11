@@ -1,5 +1,4 @@
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
+import { Box } from "@mui/material";
 import { ReactNode } from "react";
 
 export type Props = {
@@ -9,9 +8,9 @@ export type Props = {
 const SimpleLayout: React.FC<Props> = ({ children }) => {
   return (
     <>
-      <Navbar />
-      <main>{children}</main>
-      <Footer />
+      <Box component={"main"} sx={{ bgcolor: "background.default" }}>
+        {children}
+      </Box>
     </>
   );
 };
