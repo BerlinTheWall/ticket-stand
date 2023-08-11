@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import Document, {
   Html,
   Head,
@@ -6,12 +6,12 @@ import Document, {
   NextScript,
   DocumentProps,
   DocumentContext,
-} from 'next/document';
-import createEmotionServer from '@emotion/server/create-instance';
-import { AppType } from 'next/app';
-import theme, { roboto } from '../utils/theme';
-import createEmotionCache from '../createEmotionCache';
-import { MyAppProps } from './_app';
+} from "next/document";
+import createEmotionServer from "@emotion/server/create-instance";
+import { AppType } from "next/app";
+import { roboto } from "../utils/theme";
+import createEmotionCache from "../createEmotionCache";
+import { MyAppProps } from "./_app";
 
 interface MyDocumentProps extends DocumentProps {
   emotionStyleTags: JSX.Element[];
@@ -22,7 +22,7 @@ export default function MyDocument({ emotionStyleTags }: MyDocumentProps) {
     <Html lang="en" className={roboto.className}>
       <Head>
         {/* PWA primary color */}
-        
+
         {/* TODO */}
         {/* <meta name="theme-color" content={theme.palette.primary.main} /> */}
         <link rel="shortcut icon" href="/favicon.ico" />
@@ -71,7 +71,9 @@ MyDocument.getInitialProps = async (ctx: DocumentContext) => {
 
   ctx.renderPage = () =>
     originalRenderPage({
-      enhanceApp: (App: React.ComponentType<React.ComponentProps<AppType> & MyAppProps>) =>
+      enhanceApp: (
+        App: React.ComponentType<React.ComponentProps<AppType> & MyAppProps>
+      ) =>
         function EnhanceApp(props) {
           return <App emotionCache={cache} {...props} />;
         },
@@ -83,7 +85,7 @@ MyDocument.getInitialProps = async (ctx: DocumentContext) => {
   const emotionStyles = extractCriticalToChunks(initialProps.html);
   const emotionStyleTags = emotionStyles.styles.map((style) => (
     <style
-      data-emotion={`${style.key} ${style.ids.join(' ')}`}
+      data-emotion={`${style.key} ${style.ids.join(" ")}`}
       key={style.key}
       // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={{ __html: style.css }}
