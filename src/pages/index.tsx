@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import Link from "../Link";
 import ProTip from "../ProTip";
 import Copyright from "../Copyright";
+import SimpleLayout from "@/layout/SimpleLayout";
 
 export default function Home() {
   return (
@@ -12,7 +13,6 @@ export default function Home() {
       maxWidth="lg"
       sx={{
         minHeight: "100vh",
-        bgcolor: "red",
       }}
     >
       <Box
@@ -36,3 +36,5 @@ export default function Home() {
     </Container>
   );
 }
+
+Home.PageLayout = SimpleLayout;

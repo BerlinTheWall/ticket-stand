@@ -8,7 +8,10 @@ export type Props = {
 const SimpleLayout: React.FC<Props> = ({ children }) => {
   return (
     <>
-      <Box component={"main"} sx={{ bgcolor: "background.default" }}>
+      <Box
+        component={"main"}
+        sx={{ bgcolor: "background.default", minHeight: "100vh" }}
+      >
         {children}
       </Box>
     </>

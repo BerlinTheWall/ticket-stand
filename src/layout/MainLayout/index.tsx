@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import { ReactNode } from "react";
@@ -10,7 +11,12 @@ const MainLayout: React.FC<Props> = ({ children }) => {
   return (
     <>
       <Navbar />
-      <main>{children}</main>
+      <Box
+        component={"main"}
+        sx={{ bgcolor: "background.default", minHeight: "100vh" }}
+      >
+        {children}
+      </Box>
       <Footer />
     </>
   );
