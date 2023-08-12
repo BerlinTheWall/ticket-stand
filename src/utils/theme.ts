@@ -19,6 +19,15 @@ export const roboto = Roboto({
 
 // Create a theme instance.
 export const lightTheme = createTheme({
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          padding: "10px",
+        },
+      },
+    },
+  },
   typography: {
     fontFamily: roboto.style.fontFamily,
   },
@@ -40,6 +49,18 @@ export const lightTheme = createTheme({
 });
 
 export const darkTheme = createTheme({
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          padding: "10px 24px",
+          borderRadius: "10px",
+          fontSize: "12px",
+          fontWeight: "600",
+        },
+      },
+    },
+  },
   typography: {
     fontFamily: roboto.style.fontFamily,
   },
@@ -52,7 +73,7 @@ export const darkTheme = createTheme({
       main: "#00925D",
     },
     secondary: {
-      main: "#EB3F5E",
+      main: "#FFFFFF",
     },
     error: {
       main: red.A400,
