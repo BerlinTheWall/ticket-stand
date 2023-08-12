@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Link from "../Link";
 import ProTip from "../ProTip";
 import Copyright from "../Copyright";
-import SimpleLayout from "@/layout/SimpleLayout";
+import MainLayout from "@/layout/MainLayout";
 
 export default function Home() {
   return (
@@ -37,4 +37,4 @@ export default function Home() {
   );
 }
 
-Home.PageLayout = SimpleLayout;
+Home.PageLayout = MainLayout;

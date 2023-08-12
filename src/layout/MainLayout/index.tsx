@@ -11,12 +11,12 @@ const MainLayout: React.FC<Props> = ({ children }) => {
   return (
     <>
       <Navbar />
-      <Box
+      {/* <Box
         component={"main"}
         sx={{ bgcolor: "background.default", minHeight: "100vh" }}
       >
         {children}
-      </Box>
+      </Box> */}
       <Footer />
     </>
   );
