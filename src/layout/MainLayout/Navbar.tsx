@@ -194,7 +194,6 @@ const Navbar: React.FC = () => {
             </Menu>
           </Box>
           {/* SM Drawer */}
-
           <Box sx={{ display: { xs: "flex", md: "none" }, gap: 2 }}>
             <SearchIcon />
             <Fragment key={"right"}>
