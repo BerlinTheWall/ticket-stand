@@ -1,4 +1,4 @@
-import * as React from "react";
+import { Fragment, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,18 +11,80 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { Stack } from "@mui/material";
+import DehazeIcon from "@mui/icons-material/Dehaze";
+import SearchIcon from "@mui/icons-material/Search";
+
+import {
+  Divider,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Stack,
+} from "@mui/material";
+import Image from "next/image";
+import Images from "../../utils/imageHelper";
 
 const pages = ["Home", "Discover", "Movie Release", "Forum", "About"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const profile = ["Profile", "Account", "Dashboard", "Logout"];
+type Anchor = "right";
 
 const Navbar: React.FC = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
+  const [drawerState, setDrawerState] = useState(false);
+  const [loginState, setLoginState] = useState(false);
+
+  const toggleDrawer = () => {
+    setDrawerState((prev) => !prev);
+  };
+
+  const list = (anchor: Anchor) => (
+    <Box
+      role="presentation"
+      onClick={toggleDrawer}
+      onKeyDown={toggleDrawer}
+      sx={{ width: "150px" }}
+    >
+      <List>
+        {pages.map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <Box
+        sx={{
+          display: loginState ? "none" : "flex",
+          flexDirection: "column-reverse",
+          paddingTop: 1,
+          paddingX: 1,
+          gap: 1,
+        }}
+      >
+        <Button variant="outlined" fullWidth color="secondary">
+          Sign up
+        </Button>
+        <Button variant="contained" fullWidth color="primary">
+          Login
+        </Button>
+      </Box>
+      <List sx={{ display: loginState ? "block" : "none" }}>
+        {profile.map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
   );
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -40,7 +102,14 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ bgcolor: "transparent" }}>
+    <AppBar
+      position="static"
+      sx={{
+        bgcolor: "transparent",
+        backgroundImage: "none",
+        boxShadow: "none",
+      }}
+    >
       <Container maxWidth="xl">
         <Toolbar
           disableGutters
@@ -50,25 +119,16 @@ const Navbar: React.FC = () => {
             alignItems: "center",
           }}
         >
+          {/* Logo */}
           <Box>
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              LOGO
-            </Typography>
+            <Image
+              src={Images.Logo}
+              alt={"Logo"}
+              width={80}
+              height={70}
+            ></Image>
           </Box>
+          {/* MD Items */}
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
@@ -80,14 +140,28 @@ const Navbar: React.FC = () => {
               </Button>
             ))}
           </Box>
-          <Stack direction={"row"} spacing={1} whiteSpace={"nowrap"}>
+          {/* MD Login btns */}
+          <Stack
+            sx={{ display: loginState ? "none" : { xs: "none", md: "flex" } }}
+            direction={"row"}
+            alignItems={"center"}
+            gap={1}
+            spacing={1}
+            whiteSpace={"nowrap"}
+          >
+            <SearchIcon />
             <Button variant="outlined" fullWidth color="secondary">
               Sign up
             </Button>
             <Button variant="contained" fullWidth color="primary">
               Login
             </Button>
-            {/* <Tooltip title="Open settings">
+          </Stack>
+          {/* MD Profile */}
+          <Box
+            sx={{ display: !loginState ? "none" : { xs: "none", md: "block" } }}
+          >
+            <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
@@ -108,66 +182,32 @@ const Navbar: React.FC = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+              {profile.map((setting) => (
+                <MenuItem
+                  key={setting}
+                  onClick={handleCloseUserMenu}
+                  sx={{ padding: "10px 20px" }}
+                >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
-            </Menu> */}
-          </Stack>
-
-          {/* <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            ></IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
             </Menu>
-          </Box> */}
-          {/* <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography> */}
+          </Box>
+          {/* SM Drawer */}
+
+          <Box sx={{ display: { xs: "flex", md: "none" }, gap: 2 }}>
+            <SearchIcon />
+            <Fragment key={"right"}>
+              <DehazeIcon onClick={toggleDrawer}>{"right"}</DehazeIcon>
+              <Drawer
+                anchor={"right"}
+                open={drawerState}
+                onClose={toggleDrawer}
+              >
+                {list("right")}
+              </Drawer>
+            </Fragment>
+          </Box>
         </Toolbar>
       </Container>
     </AppBar>
