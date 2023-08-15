@@ -1,29 +1,27 @@
 import { Fragment, useState } from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-// import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import DehazeIcon from "@mui/icons-material/Dehaze";
-import SearchIcon from "@mui/icons-material/Search";
-
 import {
+  Box,
+  AppBar,
+  Toolbar,
+  Tooltip,
+  Container,
   Divider,
   Drawer,
+  IconButton,
+  Button,
+  Avatar,
   List,
   ListItem,
   ListItemButton,
-  ListItemIcon,
   ListItemText,
+  Menu,
+  MenuItem,
   Stack,
+  Typography,
 } from "@mui/material";
+import DehazeIcon from "@mui/icons-material/Dehaze";
+import SearchIcon from "@mui/icons-material/Search";
+
 import Image from "next/image";
 import Images from "../../utils/imageHelper";
 
@@ -41,10 +39,11 @@ const Navbar: React.FC = () => {
 
   const list = (anchor: Anchor) => (
     <Box
-      role="presentation"
+      role="menubar"
       onClick={toggleDrawer}
       onKeyDown={toggleDrawer}
       sx={{ width: "150px" }}
+      display={{ md: "none" }}
     >
       <List>
         {pages.map((text, index) => (
@@ -120,12 +119,14 @@ const Navbar: React.FC = () => {
           }}
         >
           {/* Logo */}
-          <Box>
+          <Box sx={{ pt: 1, pl: 2 }}>
             <Image
-              src={Images.Logo}
+              src={Images.LogoWhite}
               alt={"Logo"}
-              width={80}
+              width={70}
               height={70}
+              style={{ cursor: "pointer" }}
+              onClick={() => {}}
             ></Image>
           </Box>
           {/* MD Items */}
