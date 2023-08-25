@@ -23,7 +23,10 @@ export const lightTheme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          padding: "10px",
+          padding: "10px 24px",
+          borderRadius: "10px",
+          fontSize: "12px",
+          fontWeight: "600",
         },
       },
     },
@@ -40,7 +43,7 @@ export const lightTheme = createTheme({
       main: "#00925D",
     },
     secondary: {
-      main: "#EB3F5E",
+      main: "#0D0C0F",
     },
     error: {
       main: red.A400,
