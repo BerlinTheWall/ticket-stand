@@ -9,14 +9,16 @@ export type Props = {
 
 const MainLayout: React.FC<Props> = ({ children }) => {
   return (
-    <Container
-      sx={{ bgcolor: "background.default", minHeight: "100vh" }}
-      maxWidth="xl"
+    <Box
+      sx={{
+        bgcolor: "background.default",
+        minHeight: "100vh",
+      }}
     >
       <Navbar />
       <Box component={"main"}>{children}</Box>
       <Footer />
-    </Container>
+    </Box>
   );
 };
 
