@@ -33,7 +33,6 @@ const NavbarDrawer = ({ toggleDrawer, loginState, setLoginState }: any) => (
     role="menubar"
     onClick={toggleDrawer}
     onKeyDown={toggleDrawer}
-    display={{ md: "none" }}
     width={"150px"}
   >
     <List>
@@ -149,7 +148,17 @@ const Navbar: React.FC = () => {
               gap={2}
               whiteSpace={"nowrap"}
             >
-              <SearchIcon />
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  bgcolor: "GrayText",
+                  borderRadius: "100px",
+                  padding: 1,
+                }}
+              >
+                <SearchIcon />
+              </Box>
               <Button variant="outlined" fullWidth color="secondary">
                 Sign up
               </Button>
@@ -204,24 +213,37 @@ const Navbar: React.FC = () => {
             </Box>
           )}
           {/* SM Drawer */}
-          <Box sx={{ display: { xs: "flex", md: "none" }, gap: 2 }}>
-            <SearchIcon />
-            <Fragment key={"right"}>
-              <MenuRoundedIcon onClick={toggleDrawer}>
-                {"right"}
-              </MenuRoundedIcon>
-              <Drawer
-                anchor={"right"}
-                open={drawerState}
-                onClose={toggleDrawer}
-              >
-                <NavbarDrawer
-                  toggleDrawer={toggleDrawer}
-                  loginState={loginState}
-                  setLoginState={setLoginState}
-                />
-              </Drawer>
-            </Fragment>
+          <Box
+            sx={{
+              display: { xs: "flex", md: "none" },
+              gap: 2,
+              alignItems: "center",
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                bgcolor: "GrayText",
+                borderRadius: "100px",
+                padding: 0.5,
+              }}
+            >
+              <SearchIcon />
+            </Box>
+            <MenuRoundedIcon onClick={toggleDrawer} />
+            <Drawer
+              anchor={"right"}
+              open={drawerState}
+              onClose={toggleDrawer}
+              sx={{ display: { md: "none" } }}
+            >
+              <NavbarDrawer
+                toggleDrawer={toggleDrawer}
+                loginState={loginState}
+                setLoginState={setLoginState}
+              />
+            </Drawer>
           </Box>
         </Toolbar>
       </Container>

@@ -1,6 +1,6 @@
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
-import { common } from "@mui/material/colors";
 import Link from "next/link";
+import { Fragment } from "react";
 
 const FOOTER_LINKS = [
   { title: "Home", link: "/" },
@@ -17,9 +17,9 @@ const FOOTER_LINKS_2 = [
 
 const Footer: React.FC = () => {
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" sx={{ paddingBottom: 5 }}>
       <Grid container spacing={3}>
-        <Grid item lg={2.5} md={6} xs={12}>
+        <Grid item lg={5} md={6} xs={12}>
           <Typography fontSize={28}>
             Our platform is trusted by millions & features best updated movies
             all around the world.
@@ -41,14 +41,18 @@ const Footer: React.FC = () => {
             >
               {FOOTER_LINKS.map((link, index) => {
                 return (
-                  <>
-                    <Link href={link.link} key={link.link}>
+                  <Fragment key={link.title}>
+                    <Link
+                      href={link.link}
+                      prefetch={false}
+                      style={{ fontWeight: "inherit" }}
+                    >
                       {link.title}
                     </Link>
                     {index !== FOOTER_LINKS.length - 1 && (
                       <span style={{ padding: "0px 10px" }}>/</span>
                     )}
-                  </>
+                  </Fragment>
                 );
               })}
             </Stack>
@@ -66,72 +70,20 @@ const Footer: React.FC = () => {
       <Stack
         direction={{ sm: "row", xs: "column" }}
         justifyContent={"space-between"}
-        marginTop={3}
+        marginTop={5}
         spacing={3}
       >
         <Stack direction={"row"} spacing={3}>
           {FOOTER_LINKS_2.map((link) => {
             return (
-              <>
-                <Link prefetch={false} href={link.link} key={link.link}>
-                  <Typography fontSize={{ xs: "13px" }}>
-                    {link.title}
-                  </Typography>
-                </Link>
-              </>
+              <Link prefetch={false} href={link.link} key={link.title}>
+                <Typography fontSize={{ xs: "13px" }}>{link.title}</Typography>
+              </Link>
             );
           })}
         </Stack>
-        <Typography textAlign={{ xs: "center" }}>©2023</Typography>
+        <Typography textAlign={{ xs: "center" }}>© 2023</Typography>
       </Stack>
-      {/* <Box
-        sx={{
-          display: "flex",
-          flexDirection: { xs: "column", md: "row" },
-          justifyContent: { xs: "space-between", md: "space-between" },
-        }}
-      >
-        <Box sx={{ width: "40%" }}>
-          <Typography fontSize={28}>
-            Our platform is trusted by millions & features best updated movies
-            all around the world.
-          </Typography>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            alignItems: "end",
-          }}
-        >
-          <Box>
-            <Link href={"/"}>Home</Link>
-            <span style={{ padding: "0px 10px" }}>/</span>
-            <Link href={"/"}>Discover</Link>
-            <span style={{ padding: "0px 10px" }}>/</span>
-            <Link href={"/"}>Influence</Link>
-            <span style={{ padding: "0px 10px" }}>/</span>
-            <Link href={"/"}>Release</Link>
-          </Box>
-          <Box>Icons</Box>
-        </Box>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          my: 7,
-        }}
-      >
-        <Box sx={{ display: "flex", flexDirection: "row", gap: 4 }}>
-          <Typography>Privacy policy</Typography>
-          <Typography>Term of service</Typography>
-          <Typography>Language</Typography>
-        </Box>
-        <Box>@2023</Box>
-      </Box> */}
     </Container>
   );
 };
