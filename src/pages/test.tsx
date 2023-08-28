@@ -65,7 +65,6 @@ const DisplayTest = () => {
                           borderRadius: 1,
                           bgcolor: "primary.main",
                         }}
-                        
                       >
                         1-SX props sample
                       </Box>
@@ -515,7 +514,7 @@ const DisplayTest = () => {
                       borderRadius={1}
                       sx={{
                         // bgcolor: (theme) => theme.palette.info.main,
-                        bgcolor: "info.main"
+                        bgcolor: "info.main",
                       }}
                     >
                       info
