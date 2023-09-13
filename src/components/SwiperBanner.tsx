@@ -1,8 +1,10 @@
-import { Box, Container, Grid, Stack, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { Fragment } from "react";
 // core version + navigation, pagination modules:
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 // import Swiper and modules styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -15,14 +17,6 @@ const blastTeam = [
   { id: 0, name: "ab", position: 1, iconPosition: "right" },
   ,
   { id: 1, name: "b", position: 1, iconPosition: "right" },
-  ,
-  { id: 2, name: "v", position: 1, iconPosition: "right" },
-  { id: 3, name: "d", position: 1, iconPosition: "right" },
-
-  { id: 4, name: "s", position: 1, iconPosition: "right" },
-  { id: 5, name: "e", position: 1, iconPosition: "right" },
-  { id: 6, name: "kooni", position: 1, iconPosition: "right" },
-  { id: 7, name: "kooni", position: 1, iconPosition: "right" },
 ];
 
 const SwiperBanner: React.FC = () => {
@@ -30,7 +24,7 @@ const SwiperBanner: React.FC = () => {
     <Box sx={{ paddingBottom: 5 }}>
       <Swiper
         autoplay={{
-          delay: 5000,
+          delay: 500000,
           disableOnInteraction: false,
         }}
         grabCursor={true}
@@ -40,18 +34,70 @@ const SwiperBanner: React.FC = () => {
         {blastTeam.map((e) => {
           return (
             <SwiperSlide key={e?.id} style={{ width: "100%" }}>
-              <Box width="100%" bgcolor={"red"}>
-                <Box width={"100%"} height={600} position={"relative"}>
-                  <Image
-                    src={Images.DemoImage}
-                    alt={""}
+              <Box width={"100%"} height={600} position={"relative"}>
+                <Image
+                  src={Images.DemoImage}
+                  alt={""}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    backgroundPosition: "center center",
+                  }}
+                />
+                <Box
+                  sx={{
+                    width: { xs: "100%", sm: "50%", md: "45%", xl: "25%" },
+                    left: { xs: 0, sm: 50 },
+                    px: { xs: "10px", sm: "0px" },
+                  }}
+                  bottom={70}
+                  position={"absolute"}
+                >
+                  <Typography sx={{ fontSize: "36px", fontWeight: "bold" }}>
+                    Star Wars: The force Awaken
+                  </Typography>
+                  <ul
                     style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      backgroundPosition: "center center",
+                      listStyleType: "disc",
+                      display: "flex",
+                      gap: 20,
+                      fontSize: "14px",
                     }}
-                  ></Image>
+                  >
+                    <li style={{ listStyleType: "none" }}>2h40m</li>
+                    <li>2022</li>
+                    <li>Fantasy</li>
+                    <li>Actions</li>
+                  </ul>
+                  <Typography marginTop={1}>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
+                    blanditiis atque doloribus ducimus, minus reprehenderit
+                    provident molestias sed placeat qui iste ipsam nulla quis
+                    alias nisi totam obcaecati facere doloremque!
+                  </Typography>
+                  <Stack
+                    direction={"row"}
+                    alignItems={"center"}
+                    gap={2}
+                    mt={2}
+                    sx={{ width: { md: "75%", lg: "75%" } }}
+                    whiteSpace={"nowrap"}
+                  >
+                    <Button
+                      variant="contained"
+                      fullWidth
+                      color="primary"
+                      onClick={() => {}}
+                    >
+                      <PlayCircleFilledIcon style={{ marginRight: "8px" }} />{" "}
+                      Watch Trailer
+                    </Button>
+                    <Button variant="outlined" fullWidth color="secondary">
+                      <BookmarkBorderIcon style={{ marginRight: "8px" }} /> Add
+                      Watchlist
+                    </Button>
+                  </Stack>
                 </Box>
               </Box>
             </SwiperSlide>
