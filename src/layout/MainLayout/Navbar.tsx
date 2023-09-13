@@ -100,11 +100,12 @@ const Navbar: React.FC = () => {
 
   return (
     <AppBar
-      position="static"
+      position="absolute"
       sx={{
         bgcolor: "transparent",
         backgroundImage: "none",
         boxShadow: "none",
+        paddingX: 5,
       }}
     >
       <Container maxWidth="xl">

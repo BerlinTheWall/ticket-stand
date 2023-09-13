@@ -6,15 +6,18 @@ import Link from "../Link";
 import ProTip from "../ProTip";
 import Copyright from "../Copyright";
 import MainLayout from "@/layout/MainLayout";
+import SwiperBanner from "@/components/SwiperBanner";
 
 export default function Home() {
   return (
-    <Container
-      maxWidth="lg"
+    <Box
       sx={{
         minHeight: "100vh",
+        // maxWidth: "lg",
+        // mx: "auto",
       }}
     >
+      <SwiperBanner />
       <Box
         sx={{
           my: 4,
@@ -33,7 +36,7 @@ export default function Home() {
         <ProTip />
         <Copyright />
       </Box>
-    </Container>
+    </Box>
   );
 }
 
