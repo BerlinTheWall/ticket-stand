@@ -19,3 +19,11 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.swiper-banner-panigation
+  .swiper-pagination
+  .swiper-pagination-clickable
+  .swiper-pagination-bullets
+  .swiper-pagination-horizontal {
+  width: 10px !important;
+}
