@@ -100,11 +100,12 @@ const Navbar: React.FC = () => {
 
   return (
     <AppBar
-      position="static"
+      position="absolute"
       sx={{
         bgcolor: "transparent",
         backgroundImage: "none",
         boxShadow: "none",
+        paddingX: 0,
       }}
     >
       <Container maxWidth="xl">
@@ -174,11 +175,24 @@ const Navbar: React.FC = () => {
           )}
           {/* MD Profile */}
           {loginState && (
-            <Box
+            <Stack
               sx={{
-                display: { xs: "none", md: "block" },
+                display: { xs: "none", md: "flex" },
               }}
+              gap={5}
+              direction={"row"}
             >
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  bgcolor: "GrayText",
+                  borderRadius: "100px",
+                  padding: 1,
+                }}
+              >
+                <SearchIcon />
+              </Box>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -210,7 +224,7 @@ const Navbar: React.FC = () => {
                   </MenuItem>
                 ))}
               </Menu>
-            </Box>
+            </Stack>
           )}
           {/* SM Drawer */}
           <Box
@@ -229,7 +243,7 @@ const Navbar: React.FC = () => {
                 padding: 0.5,
               }}
             >
-              <SearchIcon />
+              <SearchIcon sx={{ cursor: "pointer" }} />
             </Box>
             <MenuRoundedIcon onClick={toggleDrawer} />
             <Drawer
