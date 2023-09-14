@@ -1,8 +1,8 @@
-import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { Fragment } from "react";
 // core version + navigation, pagination modules:
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 // import Swiper and modules styles
@@ -54,22 +54,31 @@ const SwiperBanner: React.FC = () => {
                   bottom={70}
                   position={"absolute"}
                 >
-                  <Typography sx={{ fontSize: "36px", fontWeight: "bold" }}>
+                  <Typography
+                    sx={{ fontWeight: "bold", fontSize: "36px" }}
+                    component="h2"
+                  >
                     Star Wars: The force Awaken
                   </Typography>
-                  <ul
+                  <Box
                     style={{
                       listStyleType: "disc",
                       display: "flex",
                       gap: 20,
                       fontSize: "14px",
                     }}
+                    component="ul"
                   >
-                    <li style={{ listStyleType: "none" }}>2h40m</li>
-                    <li>2022</li>
-                    <li>Fantasy</li>
-                    <li>Actions</li>
-                  </ul>
+                    <Typography
+                      component="li"
+                      style={{ listStyleType: "none" }}
+                    >
+                      2h40m
+                    </Typography>
+                    <Typography component="li">2022</Typography>
+                    <Typography component="li">Fantasy</Typography>
+                    <Typography component="li">Actions</Typography>
+                  </Box>
                   <Typography marginTop={1}>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
                     blanditiis atque doloribus ducimus, minus reprehenderit
