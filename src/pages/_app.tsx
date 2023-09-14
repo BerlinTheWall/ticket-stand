@@ -4,7 +4,7 @@ import { AppProps } from "next/app";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import createEmotionCache from "../createEmotionCache";
 import AppState from "@/context/AppState";
-import MUIThemeProvider from "@/utils/muiThemeProvider";
+import MUIThemeProvider from "@/utils/MUIThemeProvider";
 import "../styles/globals.css";
 
 // Client-side cache, shared for the whole session of the user in the browser.
