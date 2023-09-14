@@ -24,10 +24,9 @@ const SwiperBanner: React.FC = () => {
     <Box sx={{ paddingBottom: 5 }}>
       <Swiper
         autoplay={{
-          delay: 500000,
+          delay: 5000,
           disableOnInteraction: false,
         }}
-        grabCursor={true}
         modules={[Autoplay]}
         slidesPerView={1}
       >
