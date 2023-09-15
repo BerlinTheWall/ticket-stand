@@ -54,10 +54,9 @@ const SwiperBanner: React.FC = () => {
                   sx={{
                     width: { xs: "100%", sm: "50%", md: "45%", xl: "25%" },
                     left: { xs: 0, sm: 50 },
-                    bottom: { xs: 35, sm: 70 },
                     px: { xs: "10px", sm: "0px" },
                   }}
-                  // bottom={70}
+                  bottom={70}
                   position={"absolute"}
                 >
                   <Typography

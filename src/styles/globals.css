@@ -61,7 +61,7 @@ a {
   border-radius: 40px;
   right: 40px !important;
   bottom: 70px !important;
-  background-color: rgba(0, 0, 0, 0.575) !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
 @media (max-width: 599px) {
