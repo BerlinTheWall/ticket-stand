@@ -20,10 +20,14 @@ a {
   text-decoration: none;
 }
 
-.swiper-banner-panigation
-  .swiper-pagination
-  .swiper-pagination-clickable
-  .swiper-pagination-bullets
-  .swiper-pagination-horizontal {
-  width: 10px !important;
+.sample-slider .swiper-pagination-bullets {
+  width: 100px;
+  height: 30px;
+  color: black !important;
+  background-color: red;
+}
+
+.swiper-pagination-bullet-active {
+  color: #fff;
+  background: #007aff;
 }
