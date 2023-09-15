@@ -1,6 +1,4 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
-import Link from "next/link";
-import { Fragment } from "react";
 // core version + navigation, pagination modules:
 import { Autoplay, Pagination } from "swiper/modules";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
@@ -23,18 +21,20 @@ const SwiperBanner: React.FC = () => {
   return (
     <Box sx={{ paddingBottom: 5 }}>
       <Swiper
-        className="swiper-banner-panigation"
-        style={{
-          "--swiper-pagination-color": "#FFF",
-          "--swiper-pagination-bullet-inactive-color": "#55555c",
-          "--swiper-pagination-bullet-inactive-opacity": "1",
-          "--swiper-pagination-bullet-size": "10px",
-          "--swiper-pagination-bullet-horizontal-gap": "4px",
-          "--swiper-pagination-bottom": "60px",
-          "--swiper-pagination-top": "auto",
-          "--swiper-pagination-right": "auto",
-          "--swiper-pagination-left": "10px",
-        }}
+        className=""
+        style={
+          {
+            // "--swiper-pagination-color": "#FFF",
+            // "--swiper-pagination-bullet-inactive-color": "#55555c",
+            // "--swiper-pagination-bullet-inactive-opacity": "1",
+            // "--swiper-pagination-bullet-size": "10px",
+            // "--swiper-pagination-bullet-horizontal-gap": "4px",
+            // "--swiper-pagination-bottom": "60px",
+            // "--swiper-pagination-top": "auto",
+            // "--swiper-pagination-right": "auto",
+            // "--swiper-pagination-left": "10px",
+          }
+        }
         spaceBetween={10}
         autoplay={{
           delay: 500000,
@@ -64,9 +64,10 @@ const SwiperBanner: React.FC = () => {
                   sx={{
                     width: { xs: "100%", sm: "50%", md: "45%", xl: "25%" },
                     left: { xs: 0, sm: 50 },
+                    bottom: { xs: 35, sm: 70 },
                     px: { xs: "10px", sm: "0px" },
                   }}
-                  bottom={70}
+                  // bottom={70}
                   position={"absolute"}
                 >
                   <Typography
