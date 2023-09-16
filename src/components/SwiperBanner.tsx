@@ -1,6 +1,4 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
-import Link from "next/link";
-import { Fragment } from "react";
 // core version + navigation, pagination modules:
 import { Autoplay, Pagination } from "swiper/modules";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
@@ -17,6 +15,9 @@ const blastTeam = [
   { id: 0, name: "ab", position: 1, iconPosition: "right" },
   ,
   { id: 1, name: "b", position: 1, iconPosition: "right" },
+  { id: 1, name: "b", position: 1, iconPosition: "right" },
+  { id: 1, name: "b", position: 1, iconPosition: "right" },
+  { id: 1, name: "b", position: 1, iconPosition: "right" },
 ];
 
 const SwiperBanner: React.FC = () => {
@@ -24,17 +25,6 @@ const SwiperBanner: React.FC = () => {
     <Box sx={{ paddingBottom: 5 }}>
       <Swiper
         className="swiper-banner-panigation"
-        style={{
-          "--swiper-pagination-color": "#FFF",
-          "--swiper-pagination-bullet-inactive-color": "#55555c",
-          "--swiper-pagination-bullet-inactive-opacity": "1",
-          "--swiper-pagination-bullet-size": "10px",
-          "--swiper-pagination-bullet-horizontal-gap": "4px",
-          "--swiper-pagination-bottom": "60px",
-          "--swiper-pagination-top": "auto",
-          "--swiper-pagination-right": "auto",
-          "--swiper-pagination-left": "10px",
-        }}
         spaceBetween={10}
         autoplay={{
           delay: 500000,
