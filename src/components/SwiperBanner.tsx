@@ -13,7 +13,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 const blastTeam = [
   { id: 0, name: "ab", position: 1, iconPosition: "right" },
-  ,
   { id: 1, name: "b", position: 1, iconPosition: "right" },
   { id: 1, name: "b", position: 1, iconPosition: "right" },
   { id: 1, name: "b", position: 1, iconPosition: "right" },
