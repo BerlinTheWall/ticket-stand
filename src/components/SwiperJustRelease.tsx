@@ -25,6 +25,9 @@ const blastTeam = [
 const SwiperJustRelease: React.FC = () => {
   return (
     <Box sx={{ paddingX: 5 }}>
+      <Typography component="h1" fontSize={24} fontWeight={"bold"} mb={3}>
+        Just Release
+      </Typography>
       <Swiper
         className="swiper-banner-panigation"
         spaceBetween={10}
