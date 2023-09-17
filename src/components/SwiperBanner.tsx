@@ -26,7 +26,7 @@ const SwiperBanner: React.FC = () => {
         className="swiper-banner-panigation"
         spaceBetween={10}
         autoplay={{
-          delay: 500000,
+          delay: 5000,
           disableOnInteraction: false,
         }}
         pagination={{
@@ -34,6 +34,7 @@ const SwiperBanner: React.FC = () => {
         }}
         modules={[Autoplay, Pagination]}
         slidesPerView={1}
+        loop={true}
       >
         {blastTeam.map((e) => {
           return (
@@ -56,6 +57,10 @@ const SwiperBanner: React.FC = () => {
                     px: { xs: "10px", sm: "0px" },
                   }}
                   bottom={70}
+                  component={"div"}
+                  data-swiper-parallax="-300"
+                  data-swiper-parallax-duration="600"
+                  data-swiper-parallax-opacity="0.5"
                   position={"absolute"}
                 >
                   <Typography

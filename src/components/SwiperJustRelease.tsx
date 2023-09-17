@@ -1,6 +1,6 @@
 import { Box, Divider, Stack, Typography } from "@mui/material";
 // core version + navigation, pagination modules:
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 // import Swiper and modules styles
 import "swiper/css";
@@ -19,7 +19,6 @@ const blastTeam = [
   { id: 1, name: "b", position: 1, iconPosition: "right" },
   { id: 1, name: "b", position: 1, iconPosition: "right" },
   { id: 1, name: "b", position: 1, iconPosition: "right" },
-  { id: 1, name: "b", position: 1, iconPosition: "right" },
 ];
 
 const SwiperJustRelease: React.FC = () => {
@@ -29,17 +28,40 @@ const SwiperJustRelease: React.FC = () => {
         Just Release
       </Typography>
       <Swiper
-        className="swiper-banner-panigation"
+        className="swiper-just-release-navigation"
         spaceBetween={10}
-        autoplay={{
-          delay: 500000,
-          disableOnInteraction: false,
+        navigation={true}
+        modules={[Autoplay, Navigation]}
+        breakpoints={{
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 50,
+          },
+          500: {
+            slidesPerView: 1.5,
+            spaceBetween: 20,
+          },
+          650: {
+            slidesPerView: 2.5,
+            spaceBetween: 20,
+          },
+          950: {
+            slidesPerView: 3.5,
+            spaceBetween: 10,
+          },
+          1000: {
+            slidesPerView: 4,
+            spaceBetween: 10,
+          },
+          1250: {
+            slidesPerView: 4.5,
+            spaceBetween: 10,
+          },
+          1750: {
+            slidesPerView: 6.5,
+            spaceBetween: 10,
+          },
         }}
-        pagination={{
-          clickable: true,
-        }}
-        modules={[Autoplay, Pagination]}
-        slidesPerView={4.5}
       >
         {blastTeam.map((e) => {
           return (
