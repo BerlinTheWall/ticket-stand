@@ -79,11 +79,36 @@ a {
   }
 }
 
-.swiper-button-prev .swiper-button-next {
-  background-color: #fff !important;
-  color: #fff !important;
+.swiper-just-release-navigation .swiper-button-next {
+  height: auto !important;
+  padding: 8px 15px !important;
+  border-radius: 100%;
+  background-color: #28262d !important;
+  color: #b5b4b6 !important;
+}
+
+.swiper-just-release-navigation .swiper-button-prev {
+  height: auto !important;
+  padding: 8px 15px !important;
+  border-radius: 100%;
+  background-color: #28262d !important;
+  color: #b5b4b6 !important;
+}
+
+.swiper-just-release-navigation .swiper-button-next::after {
+  padding: 0px !important;
+  --swiper-navigation-size: 14px;
+}
+
+.swiper-just-release-navigation .swiper-button-prev::after {
+  padding: 0px !important;
+  --swiper-navigation-size: 14px;
+}
+
+.swiper-just-release-navigation .swiper-just-release-navigation {
+  background-color: #28262d !important;
 }
 
 .swiper-just-release-navigation .swiper-button-disabled {
-  color: red !important;
+  display: none;
 }
