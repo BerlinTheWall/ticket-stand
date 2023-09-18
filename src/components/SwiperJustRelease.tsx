@@ -29,7 +29,7 @@ const SwiperJustRelease: React.FC = () => {
       </Typography>
       <Swiper
         className="swiper-just-release-navigation"
-        spaceBetween={10}
+        spaceBetween={15}
         navigation={true}
         modules={[Autoplay, Navigation]}
         breakpoints={{
