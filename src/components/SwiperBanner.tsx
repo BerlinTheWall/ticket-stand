@@ -26,9 +26,11 @@ const SwiperBanner: React.FC = () => {
         className="swiper-banner-panigation"
         spaceBetween={10}
         autoplay={{
-          delay: 5000,
+          delay: 50000,
           disableOnInteraction: false,
         }}
+        noSwiping
+        allowTouchMove={false}
         pagination={{
           clickable: true,
         }}
@@ -54,7 +56,10 @@ const SwiperBanner: React.FC = () => {
                   sx={{
                     width: { xs: "100%", sm: "50%", md: "45%", xl: "25%" },
                     left: { xs: 0, sm: 50 },
-                    px: { xs: "10px", sm: "0px" },
+                    px: { xs: "10px", sm: "20px" },
+                    py: { xs: "10px", sm: "10px" },
+                    borderRadius: 2,
+                    bgcolor: "rgba(3,3,3,0.8)",
                   }}
                   bottom={70}
                   component={"div"}
