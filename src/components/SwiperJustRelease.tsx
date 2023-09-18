@@ -9,6 +9,7 @@ import "swiper/css/pagination";
 import Image from "next/image";
 import Images from "@/utils/imageHelper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import MovieCardDetail from "./MovieCardDetail";
 
 const blastTeam = [
   { id: 0, name: "ab", position: 1, iconPosition: "right" },
@@ -32,6 +33,7 @@ const SwiperJustRelease: React.FC = () => {
         spaceBetween={15}
         navigation={true}
         modules={[Autoplay, Navigation]}
+        grabCursor={true}
         breakpoints={{
           320: {
             slidesPerView: 1,
@@ -91,56 +93,7 @@ const SwiperJustRelease: React.FC = () => {
                       "linear-gradient(to bottom, transparent 0%, #000 50%)",
                   }}
                 ></Box>
-                <Box
-                  sx={{
-                    width: "100%",
-                    px: { xs: "20px", sm: "16px" },
-                  }}
-                  bottom={12}
-                  position={"absolute"}
-                >
-                  <Typography
-                    sx={{ fontWeight: "bold", fontSize: "18px" }}
-                    component="h3"
-                  >
-                    Star Wars
-                  </Typography>
-
-                  <Stack
-                    direction={"row"}
-                    alignItems={"center"}
-                    gap={1}
-                    mt={1}
-                    whiteSpace={"nowrap"}
-                  >
-                    <StarRateRoundedIcon sx={{ color: "yellow" }} />
-                    <Typography fontWeight={"bold"}>4.8</Typography>
-                    <Divider
-                      orientation="vertical"
-                      flexItem
-                      sx={{ borderRightWidth: "2px", color: "gray" }}
-                    ></Divider>
-                    <Box
-                      style={{
-                        listStyleType: "disc",
-                        display: "flex",
-                        gap: 20,
-                        opacity: 0.7,
-                      }}
-                      component="ul"
-                    >
-                      <Typography
-                        component="li"
-                        style={{ listStyleType: "none", fontSize: "14px" }}
-                      >
-                        Action
-                      </Typography>
-                      <Typography component="li" style={{ fontSize: "14px" }}>
-                        Movie
-                      </Typography>
-                    </Box>
-                  </Stack>
-                </Box>
+                <MovieCardDetail />
               </Box>
             </SwiperSlide>
           );
