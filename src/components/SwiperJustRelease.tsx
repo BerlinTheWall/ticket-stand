@@ -136,19 +136,19 @@ const NextPrevEl = ({
   return (
     <Box
       sx={{
-        px: 1,
+        px: 0.5,
         position: "absolute",
         top: 0,
         bottom: 0,
         color: "white",
         zIndex: 10,
-        boxShadow: (theme) =>
-          `inset -38px 0px 67px 5px ${theme.palette.background.default}`,
+        // boxShadow: (theme) =>
+        //   `inset -38px 0px 67px 5px ${theme.palette.background.default}`,
         display: "flex",
         alignItems: "center",
-        // "& .swiper-button-disabled": {
-        //   display: "none",
-        // },
+        "& .swiper-button-disabled": {
+          display: "none",
+        },
         ...sx,
       }}
     >
@@ -157,6 +157,9 @@ const NextPrevEl = ({
         sx={{
           bgcolor: "background.paper",
           color: "text.primary",
+          "&:hover": {
+            bgcolor: (theme) => ` ${theme.palette.primary.main}`,
+          },
         }}
       >
         {Icon}
