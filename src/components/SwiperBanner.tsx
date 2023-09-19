@@ -1,11 +1,9 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
-// core version + navigation, pagination modules:
+// core version +  pagination modules:
 import { Autoplay, Pagination } from "swiper/modules";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 // import Swiper and modules styles
-import "swiper/css";
-import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Image from "next/image";
 import Images from "@/utils/imageHelper";
