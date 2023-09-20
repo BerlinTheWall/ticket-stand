@@ -155,7 +155,7 @@ const NextPrevEl = ({
       <IconButton
         className={className}
         sx={{
-          bgcolor: "background.paper",
+          bgcolor: "#403e3ee0",
           color: "text.primary",
           "&:hover": {
             bgcolor: (theme) => ` ${theme.palette.primary.main}`,
