@@ -52,7 +52,7 @@ const SwiperBanner: React.FC = () => {
                 />
                 <Box
                   sx={{
-                    width: { xs: "100%", sm: "50%", md: "45%", xl: "25%" },
+                    width: { xs: "100%", sm: "55%", md: "45%", xl: "25%" },
                     left: { xs: 0, sm: 50 },
                     px: { xs: "10px", sm: "20px" },
                     py: { xs: "10px", sm: "10px" },
@@ -102,7 +102,7 @@ const SwiperBanner: React.FC = () => {
                     alignItems={"center"}
                     gap={2}
                     mt={2}
-                    sx={{ width: { md: "75%", lg: "75%" } }}
+                    sx={{ width: { md: "85%", lg: "85%" } }}
                     whiteSpace={"nowrap"}
                   >
                     <Button
