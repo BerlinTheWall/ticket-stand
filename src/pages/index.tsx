@@ -7,6 +7,7 @@ import ProTip from "../ProTip";
 import Copyright from "../Copyright";
 import MainLayout from "@/layout/MainLayout";
 import SwiperBanner from "@/components/SwiperBanner";
+import SwiperJustRelease from "@/components/SwiperJustRelease";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       }}
     >
       <SwiperBanner />
+      <SwiperJustRelease />
       <Box
         sx={{
           my: 4,

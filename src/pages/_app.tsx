@@ -6,6 +6,7 @@ import createEmotionCache from "../createEmotionCache";
 import AppState from "@/context/AppState";
 import MUIThemeProvider from "@/utils/MUIThemeProvider";
 import "../styles/globals.css";
+import "swiper/css";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();

@@ -1,11 +1,9 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
-// core version + navigation, pagination modules:
+// core version +  pagination modules:
 import { Autoplay, Pagination } from "swiper/modules";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 // import Swiper and modules styles
-import "swiper/css";
-import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Image from "next/image";
 import Images from "@/utils/imageHelper";
@@ -13,7 +11,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 const blastTeam = [
   { id: 0, name: "ab", position: 1, iconPosition: "right" },
-  ,
   { id: 1, name: "b", position: 1, iconPosition: "right" },
   { id: 1, name: "b", position: 1, iconPosition: "right" },
   { id: 1, name: "b", position: 1, iconPosition: "right" },
@@ -27,14 +24,17 @@ const SwiperBanner: React.FC = () => {
         className="swiper-banner-panigation"
         spaceBetween={10}
         autoplay={{
-          delay: 500000,
+          delay: 50000,
           disableOnInteraction: false,
         }}
+        noSwiping
+        allowTouchMove={false}
         pagination={{
           clickable: true,
         }}
         modules={[Autoplay, Pagination]}
         slidesPerView={1}
+        loop={true}
       >
         {blastTeam.map((e) => {
           return (
@@ -52,11 +52,18 @@ const SwiperBanner: React.FC = () => {
                 />
                 <Box
                   sx={{
-                    width: { xs: "100%", sm: "50%", md: "45%", xl: "25%" },
+                    width: { xs: "100%", sm: "55%", md: "45%", xl: "25%" },
                     left: { xs: 0, sm: 50 },
-                    px: { xs: "10px", sm: "0px" },
+                    px: { xs: "10px", sm: "20px" },
+                    py: { xs: "10px", sm: "10px" },
+                    borderRadius: 2,
+                    bgcolor: "rgba(3,3,3,0.8)",
                   }}
                   bottom={70}
+                  component={"div"}
+                  data-swiper-parallax="-300"
+                  data-swiper-parallax-duration="600"
+                  data-swiper-parallax-opacity="0.5"
                   position={"absolute"}
                 >
                   <Typography
@@ -95,7 +102,7 @@ const SwiperBanner: React.FC = () => {
                     alignItems={"center"}
                     gap={2}
                     mt={2}
-                    sx={{ width: { md: "75%", lg: "75%" } }}
+                    sx={{ width: { md: "85%", lg: "85%" } }}
                     whiteSpace={"nowrap"}
                   >
                     <Button
@@ -113,6 +120,17 @@ const SwiperBanner: React.FC = () => {
                     </Button>
                   </Stack>
                 </Box>
+                <Box
+                  sx={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "15%",
+                    background:
+                      "linear-gradient(to bottom, transparent 0%, #0D0C0F 100%)",
+                  }}
+                ></Box>
               </Box>
             </SwiperSlide>
           );
