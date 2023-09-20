@@ -1,59 +1,27 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 let tryCount = 0;
-const baseURL = process.env.REACT_APP_API_URL;
-const apiCode = process.env.REACT_APP_API_CODE;
+const baseURL = process.env.NEXT_PUBLIC_API_URL;
+const apiCode = process.env.NEXT_PUBLIC_API_CODE;
 
 // controlled
 const client = axios.create({
   baseURL: baseURL,
   headers: {
-    "x-api-key": apiCode,
+    Authorization: "Bearer " + apiCode,
     Accept: "application/json",
     "Content-Type": "application/json",
   },
 });
-
-// uncontrolled
-const uncontrolled_client = axios.create({
-  baseURL: baseURL,
-  headers: {
-    "x-api-key": apiCode,
-    Accept: "application/json",
-    "Content-Type": "application/json",
-  },
-});
-
-// uncontrolled
-export const uncontrolledAxiosApi = ({ ...options }) => {
-  if (!Cookies.get("token")) {
-    window.location.href = "/login";
-  }
-
-  uncontrolled_client.defaults.headers.Authorization =
-    "Bearer " + Cookies.get("token");
-
-  const onSuccess = (response) => response;
-  const onError = (error) => {
-    let e = error;
-    let msg = e.response.data.Message;
-
-    toast.error(msg ?? "خطا  ");
-
-    throw error;
-  };
-
-  return uncontrolled_client(options).catch((e) => onError(e));
-};
 
 // controlled
 export const simpleAxiosApi = ({ ...options }) => {
   // client.defaults.headers.common.apiCode = apiCode;
   // client.defaults.headers.common.Accept = "application/json";
   //   client.defaults.headers.common["Content-Type"] = "application/json";
-  const onSuccess = (response) => response;
-  const onError = (error) => {
+  const onSuccess = (response: any) => response;
+  const onError = (error: any) => {
     console.log(error);
     // optionaly catch errors and add additional logging here
     return error;
@@ -64,23 +32,23 @@ export const simpleAxiosApi = ({ ...options }) => {
 
 // controlled
 export const axiosApi = ({ ...options }) => {
-  if (!Cookies.get("token")) {
-    window.location.href = "/login";
-  }
+  // if (!Cookies.get("token")) {
+  //   window.location.href = "/login";
+  // }
 
-  client.defaults.headers.Authorization = "Bearer " + Cookies.get("token");
+  // client.defaults.headers.Authorization = "Bearer " + Cookies.get("token");
   // client.defaults.headers.common.apiCode = apiCode;
   // client.defaults.headers.common.Accept = "application/json";
   // client.defaults.headers.common["Content-Type"] = "application/json";
 
-  const onSuccess = (response) => response;
-  const onError = (error) => {
+  const onSuccess = (response: any) => response;
+  const onError = (error: any) => {
     let e = error;
     let msg = e.response.data.Message;
 
     console.log(error);
 
-    toast.error(msg ?? "خطا  ");
+    // toast.error(msg ?? "خطا  ");
 
     throw error;
   };
