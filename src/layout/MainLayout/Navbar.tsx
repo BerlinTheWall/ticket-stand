@@ -100,12 +100,13 @@ const Navbar: React.FC = () => {
 
   return (
     <AppBar
-      position="absolute"
+      position="fixed"
       sx={{
-        bgcolor: "transparent",
+        bgcolor: "rgba(22,22,23,0.8)",
         backgroundImage: "none",
         boxShadow: "none",
         paddingX: 0,
+        fliter: "blur(5px)",
       }}
     >
       <Container maxWidth="xl">

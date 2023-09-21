@@ -35,6 +35,7 @@ export default function Home() {
       }}
     >
       <SwiperBanner />
+      <SwiperJustRelease />
       <Box
         sx={{
           my: 4,
