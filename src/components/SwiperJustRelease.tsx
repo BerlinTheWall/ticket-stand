@@ -13,12 +13,12 @@ import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 const blastTeam = [
   { id: 0, name: "ab", position: 1, iconPosition: "right" },
   { id: 1, name: "b", position: 1, iconPosition: "right" },
-  { id: 1, name: "b", position: 1, iconPosition: "right" },
-  { id: 1, name: "b", position: 1, iconPosition: "right" },
-  { id: 1, name: "b", position: 1, iconPosition: "right" },
-  { id: 1, name: "b", position: 1, iconPosition: "right" },
-  { id: 1, name: "b", position: 1, iconPosition: "right" },
-  { id: 1, name: "b", position: 1, iconPosition: "right" },
+  { id: 2, name: "b", position: 1, iconPosition: "right" },
+  { id: 3, name: "b", position: 1, iconPosition: "right" },
+  { id: 4, name: "b", position: 1, iconPosition: "right" },
+  { id: 5, name: "b", position: 1, iconPosition: "right" },
+  { id: 6, name: "b", position: 1, iconPosition: "right" },
+  { id: 7, name: "b", position: 1, iconPosition: "right" },
 ];
 
 const SwiperJustRelease: React.FC = () => {
