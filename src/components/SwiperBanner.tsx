@@ -17,14 +17,21 @@ const blastTeam = [
   { id: 1, name: "b", position: 1, iconPosition: "right" },
 ];
 
-const SwiperBanner: React.FC = () => {
+type Props = {
+  movies: any;
+};
+
+const SwiperBanner: React.FC<Props> = ({ movies }) => {
+  // const firstFiveMovies = movies.slice(0, 5);
+
+  console.log(movies);
   return (
     <Box sx={{ paddingBottom: 5 }}>
       <Swiper
         className="swiper-banner-panigation"
         spaceBetween={10}
         autoplay={{
-          delay: 50000,
+          delay: 500000,
           disableOnInteraction: false,
         }}
         noSwiping
@@ -36,13 +43,19 @@ const SwiperBanner: React.FC = () => {
         slidesPerView={1}
         loop={true}
       >
-        {blastTeam.map((e) => {
+        {movies?.map((movie: any) => {
+          const image =
+            "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
+            movie.backdrop_path;
           return (
-            <SwiperSlide key={e?.id} style={{ width: "100%" }}>
+            <SwiperSlide key={movie?.id} style={{ width: "100%" }}>
               <Box width={"100%"} height={600} position={"relative"}>
                 <Image
-                  src={Images.DemoImage}
+                  // src={Images.DemoImage}
+                  src={image}
                   alt={""}
+                  width={100000000000000}
+                  height={100}
                   style={{
                     width: "100%",
                     height: "100%",
@@ -57,7 +70,7 @@ const SwiperBanner: React.FC = () => {
                     px: { xs: "10px", sm: "20px" },
                     py: { xs: "10px", sm: "10px" },
                     borderRadius: 2,
-                    bgcolor: "rgba(3,3,3,0.8)",
+                    bgcolor: "rgba(3,3,3,0.7)",
                   }}
                   bottom={70}
                   component={"div"}
@@ -70,7 +83,7 @@ const SwiperBanner: React.FC = () => {
                     sx={{ fontWeight: "bold", fontSize: "36px" }}
                     component="h2"
                   >
-                    Star Wars: The force Awaken
+                    {movie.original_title}
                   </Typography>
                   <Box
                     style={{
@@ -85,18 +98,13 @@ const SwiperBanner: React.FC = () => {
                       component="li"
                       style={{ listStyleType: "none" }}
                     >
-                      2h40m
+                      2h40m {movie.vote_average}
                     </Typography>
-                    <Typography component="li">2022</Typography>
+                    <Typography component="li">{movie.release_date}</Typography>
                     <Typography component="li">Fantasy</Typography>
                     <Typography component="li">Actions</Typography>
                   </Box>
-                  <Typography marginTop={1}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
-                    blanditiis atque doloribus ducimus, minus reprehenderit
-                    provident molestias sed placeat qui iste ipsam nulla quis
-                    alias nisi totam obcaecati facere doloremque!
-                  </Typography>
+                  <Typography marginTop={1}>{movie.overview}</Typography>
                   <Stack
                     direction={"row"}
                     alignItems={"center"}
