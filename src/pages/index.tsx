@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -10,21 +10,28 @@ import MainLayout from "@/layout/MainLayout";
 import SwiperBanner from "@/components/SwiperBanner";
 import axios from "axios";
 import { axiosApi, simpleAxiosApi } from "@/api/newApi";
+import SwiperJustRelease from "@/components/SwiperJustRelease";
+import { GetServerSideProps } from "next";
+import { getPopularMovies } from "@/api/movies";
 
-export default function Home() {
+export default function Home({ movies }) {
+  // const [movie, setMovies] = useState(movies);
+
   console.log(process.env.NEXT_PUBLIC_API_URL);
-  const getMovies = async () => {
-    try {
-      const res = await simpleAxiosApi({
-        url: "/movie/popular?language=en-US&page=1",
-      });
-      console.log(res.data);
-    } catch (error) {}
-  };
+  // const getMovies = async () => {
+  //   try {
+  //     const res = await simpleAxiosApi({
+  //       url: "/movie/popular?page=1",
+  //     });
+  //     const firstFiveMovies = res.data.results.slice(0, 5);
+  //     // console.log(res.data.results);
+  //     setMovies(firstFiveMovies);
+  //   } catch (error) {}
+  // };
 
-  useEffect(() => {
-    getMovies();
-  }, []);
+  // useEffect(() => {
+  //   getMovies();
+  // }, []);
 
   return (
     <Box
@@ -34,7 +41,7 @@ export default function Home() {
         // mx: "auto",
       }}
     >
-      <SwiperBanner />
+      <SwiperBanner movies={movies} />
       <SwiperJustRelease />
       <Box
         sx={{
@@ -59,3 +66,13 @@ export default function Home() {
 }
 
 Home.PageLayout = MainLayout;
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const movies = await getPopularMovies();
+  // console.log(movies);
+  return {
+    props: {
+      movies,
+    },
+  };
+};
