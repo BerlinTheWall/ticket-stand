@@ -8,23 +8,16 @@ import "swiper/css/pagination";
 import Image from "next/image";
 import Images from "@/utils/imageHelper";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-const blastTeam = [
-  { id: 0, name: "ab", position: 1, iconPosition: "right" },
-  { id: 1, name: "b", position: 1, iconPosition: "right" },
-  { id: 1, name: "b", position: 1, iconPosition: "right" },
-  { id: 1, name: "b", position: 1, iconPosition: "right" },
-  { id: 1, name: "b", position: 1, iconPosition: "right" },
-];
+import { Movie } from "@/types/movie";
 
 type Props = {
-  movies: any;
+  movies: Movie[];
 };
 
 const SwiperBanner: React.FC<Props> = ({ movies }) => {
-  // const firstFiveMovies = movies.slice(0, 5);
+  const firstFiveMovies = movies.slice(0, 5);
 
-  console.log(movies);
+  // console.log(movies);
   return (
     <Box sx={{ paddingBottom: 5 }}>
       <Swiper
@@ -43,22 +36,22 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
         slidesPerView={1}
         loop={true}
       >
-        {movies?.map((movie: any) => {
-          const image =
-            "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
-            movie.backdrop_path;
+        {firstFiveMovies?.map((movie: Movie) => {
           return (
             <SwiperSlide key={movie?.id} style={{ width: "100%" }}>
               <Box width={"100%"} height={600} position={"relative"}>
                 <Image
-                  // src={Images.DemoImage}
-                  src={image}
-                  alt={""}
-                  width={100000000000000}
+                  src={
+                    "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
+                    movie.backdrop_path
+                  }
+                  alt={movie.original_title}
+                  width={10000}
                   height={100}
+                  priority={true}
+                  className="swiper-banner-image"
                   style={{
                     width: "100%",
-                    height: "100%",
                     objectFit: "cover",
                     backgroundPosition: "center center",
                   }}
@@ -119,7 +112,7 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
                       color="primary"
                       onClick={() => {}}
                     >
-                      <PlayCircleFilledIcon style={{ marginRight: "8px" }} />{" "}
+                      <PlayCircleFilledIcon style={{ marginRight: "8px" }} />
                       Watch Trailer
                     </Button>
                     <Button variant="outlined" fullWidth color="secondary">

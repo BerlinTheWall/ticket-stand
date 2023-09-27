@@ -6,26 +6,28 @@ import "swiper/css/navigation";
 import Image from "next/image";
 import Images from "@/utils/imageHelper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import MovieCardDetail from "./MovieCardDetail";
+import MovieCardDetail from "../MovieCardDetail";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
+import { Movie } from "@/types/movie";
+import NextPrevEl from "../NextPrevButton";
 
-const blastTeam = [
-  { id: 0, name: "ab", position: 1, iconPosition: "right" },
-  { id: 1, name: "b", position: 1, iconPosition: "right" },
-  { id: 2, name: "b", position: 1, iconPosition: "right" },
-  { id: 3, name: "b", position: 1, iconPosition: "right" },
-  { id: 4, name: "b", position: 1, iconPosition: "right" },
-  { id: 5, name: "b", position: 1, iconPosition: "right" },
-  { id: 6, name: "b", position: 1, iconPosition: "right" },
-  { id: 7, name: "b", position: 1, iconPosition: "right" },
-];
+interface Props {
+  title: string;
+  movies: Movie[];
+}
 
-const SwiperJustRelease: React.FC = () => {
+const MovieSwiperXl: React.FC<Props> = ({ title, movies }) => {
   return (
-    <Box sx={{ paddingX: 5 }}>
-      <Typography component="h1" fontSize={24} fontWeight={"bold"} mb={3}>
-        Just Release
+    <Box sx={{ paddingX: { sm: 5 } }}>
+      <Typography
+        component="h1"
+        fontSize={24}
+        fontWeight={"bold"}
+        my={3}
+        paddingLeft={2}
+      >
+        {title}
       </Typography>
       <Box
         sx={{
@@ -34,12 +36,12 @@ const SwiperJustRelease: React.FC = () => {
         }}
       >
         <NextPrevEl
-          className="nextElSwiper"
+          className="XlNextElSwiper"
           sx={{ right: 0 }}
           Icon={<ChevronRightRoundedIcon color="inherit" />}
         />
         <NextPrevEl
-          className="prevElSwiper"
+          className="XlPrevElSwiper"
           sx={{ left: 0 }}
           Icon={<ChevronLeftRoundedIcon color="inherit" />}
         />
@@ -49,49 +51,62 @@ const SwiperJustRelease: React.FC = () => {
           spaceBetween={15}
           navigation={{
             enabled: true,
-            nextEl: ".nextElSwiper",
-            prevEl: ".prevElSwiper",
+            nextEl: ".XlNextElSwiper",
+            prevEl: ".XlPrevElSwiper",
           }}
           modules={[Autoplay, Navigation]}
           grabCursor={true}
           breakpoints={{
             320: {
-              slidesPerView: 1,
-              spaceBetween: 50,
-            },
-            500: {
               slidesPerView: 1.5,
               spaceBetween: 20,
             },
-            650: {
+            400: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            500: {
               slidesPerView: 2.5,
               spaceBetween: 20,
             },
-            950: {
+            650: {
               slidesPerView: 3.5,
-              spaceBetween: 10,
+              spaceBetween: 20,
             },
-            1000: {
-              slidesPerView: 4,
-              spaceBetween: 10,
-            },
-            1250: {
+            950: {
               slidesPerView: 4.5,
               spaceBetween: 10,
             },
-            1750: {
+            1000: {
+              slidesPerView: 5,
+              spaceBetween: 10,
+            },
+            1250: {
+              slidesPerView: 5.5,
+              spaceBetween: 10,
+            },
+            1450: {
               slidesPerView: 6.5,
+              spaceBetween: 10,
+            },
+            1750: {
+              slidesPerView: 7.5,
               spaceBetween: 10,
             },
           }}
         >
-          {blastTeam.map((e) => {
+          {movies?.map((movie: Movie) => {
             return (
-              <SwiperSlide key={e?.id} style={{ width: "100%" }}>
-                <Box width={"100%"} height={350} position={"relative"}>
+              <SwiperSlide key={movie?.id} style={{ width: "100%" }}>
+                <Box width={"100%"} height={300} position={"relative"}>
                   <Image
-                    src={Images.DemoImage}
-                    alt={""}
+                    src={
+                      "https://www.themoviedb.org/t/p/w220_and_h330_face" +
+                      movie.poster_path
+                    }
+                    alt={movie.original_title}
+                    width={100}
+                    height={100}
                     style={{
                       width: "100%",
                       height: "90%",
@@ -106,14 +121,17 @@ const SwiperJustRelease: React.FC = () => {
                       bottom: 0,
                       left: 0,
                       width: "100%",
-                      height: "20%",
+                      height: "35%",
                       borderBottomLeftRadius: "15px",
                       borderBottomRightRadius: "15px",
                       background:
-                        "linear-gradient(to bottom, transparent 0%, #000 50%)",
+                        "linear-gradient(to bottom, transparent 0%, #000 20%)",
                     }}
                   ></Box>
-                  <MovieCardDetail />
+                  <MovieCardDetail
+                    title={movie.original_title}
+                    rating={movie.vote_average}
+                  />
                 </Box>
               </SwiperSlide>
             );
@@ -124,48 +142,4 @@ const SwiperJustRelease: React.FC = () => {
   );
 };
 
-const NextPrevEl = ({
-  className,
-  Icon,
-  sx,
-}: {
-  className: string;
-  Icon: any;
-  sx: any;
-}) => {
-  return (
-    <Box
-      sx={{
-        px: 0.5,
-        position: "absolute",
-        top: 0,
-        bottom: 0,
-        color: "white",
-        zIndex: 10,
-        // boxShadow: (theme) =>
-        //   `inset -38px 0px 67px 5px ${theme.palette.background.default}`,
-        display: "flex",
-        alignItems: "center",
-        "& .swiper-button-disabled": {
-          display: "none",
-        },
-        ...sx,
-      }}
-    >
-      <IconButton
-        className={className}
-        sx={{
-          bgcolor: "#403e3ee0",
-          color: "text.primary",
-          "&:hover": {
-            bgcolor: (theme) => ` ${theme.palette.primary.main}`,
-          },
-        }}
-      >
-        {Icon}
-      </IconButton>
-    </Box>
-  );
-};
-
-export default SwiperJustRelease;
+export default MovieSwiperXl;

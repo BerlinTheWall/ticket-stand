@@ -2,23 +2,24 @@ import { Box, Divider, Stack, Typography } from "@mui/material";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 
 type Props = {
-  title?: string;
-  rating?: string;
+  title: string;
+  rating: number;
   genres?: string[];
+  isMd?: boolean;
 };
 
-const MovieCardDetail: React.FC<Props> = () => {
+const MovieCardDetail: React.FC<Props> = ({ title, rating, isMd }) => {
   return (
     <Box
       sx={{
         width: "100%",
-        px: { xs: "20px", sm: "16px" },
+        px: { xs: "6px", sm: "16px" },
       }}
-      bottom={12}
+      bottom={isMd ? 6 : 12}
       position={"absolute"}
     >
       <Typography sx={{ fontWeight: "bold", fontSize: "18px" }} component="h3">
-        Star Wars
+        {title}
       </Typography>
 
       <Stack
@@ -29,7 +30,7 @@ const MovieCardDetail: React.FC<Props> = () => {
         whiteSpace={"nowrap"}
       >
         <StarRateRoundedIcon sx={{ color: "#f7cf4b", mb: 0.3 }} />
-        <Typography fontWeight={"bold"}>4.8</Typography>
+        <Typography fontWeight={"bold"}>{rating}</Typography>
         <Divider
           orientation="vertical"
           flexItem
