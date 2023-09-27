@@ -10,4 +10,17 @@ module.exports = {
   images: {
     domains: ["image.tmdb.org", "www.themoviedb.org"], // Allow images from this domain
   },
+  async headers() {
+    return [
+      {
+        source: "/",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=9999999999, must-revalidate",
+          },
+        ],
+      },
+    ];
+  },
 };
