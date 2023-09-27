@@ -36,6 +36,16 @@ a {
   text-align: right !important;
 }
 
+.swiper-banner-image {
+  height: 100% !important;
+}
+
+@media (min-width: 1400px) {
+  .swiper-banner-image {
+    height: 120% !important;
+  }
+}
+
 .swiper-panigation {
   text-align: right !important;
 }
