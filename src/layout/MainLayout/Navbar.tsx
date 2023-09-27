@@ -134,7 +134,7 @@ const Navbar: React.FC = () => {
             {pages.map((page) => (
               <Button
                 key={page}
-                sx={{ my: 2, display: "block" }}
+                sx={{ my: 2, display: "block", fontSize: "14px" }}
                 color="secondary"
               >
                 {page}
@@ -150,17 +150,7 @@ const Navbar: React.FC = () => {
               gap={2}
               whiteSpace={"nowrap"}
             >
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  bgcolor: "GrayText",
-                  borderRadius: "100px",
-                  padding: 1,
-                }}
-              >
-                <SearchIcon />
-              </Box>
+              <SearchIcon sx={{ cursor: "pointer" }} />
               <Button variant="outlined" fullWidth color="secondary">
                 Sign up
               </Button>
@@ -235,18 +225,11 @@ const Navbar: React.FC = () => {
               alignItems: "center",
             }}
           >
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                bgcolor: "GrayText",
-                borderRadius: "100px",
-                padding: 0.5,
-              }}
-            >
-              <SearchIcon sx={{ cursor: "pointer" }} />
-            </Box>
-            <MenuRoundedIcon onClick={toggleDrawer} />
+            <SearchIcon sx={{ cursor: "pointer" }} />
+            <MenuRoundedIcon
+              onClick={toggleDrawer}
+              sx={{ cursor: "pointer" }}
+            />
             <Drawer
               anchor={"right"}
               open={drawerState}
