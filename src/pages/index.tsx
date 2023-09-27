@@ -7,42 +7,31 @@ import Link from "../Link";
 import ProTip from "../ProTip";
 import Copyright from "../Copyright";
 import MainLayout from "@/layout/MainLayout";
-import SwiperBanner from "@/components/SwiperBanner";
 import axios from "axios";
 import { axiosApi, simpleAxiosApi } from "@/api/newApi";
-import SwiperJustRelease from "@/components/SwiperJustRelease";
-import { GetServerSideProps } from "next";
+import MovieSwiperXl from "@/components/SwiperSlides/MovieSwiperXl";
+import { GetServerSideProps, NextPage } from "next";
 import { getPopularMovies } from "@/api/movies";
+import { Movie } from "@/types/movie";
+import MovieSwiperMd from "@/components/SwiperSlides/MovieSwiperMd";
+import SwiperBanner from "@/components/SwiperSlides/SwiperBanner";
+import MovieSwiperSm from "@/components/SwiperSlides/MovieSwiperSm";
 
-export default function Home({ movies }) {
-  // const [movie, setMovies] = useState(movies);
-
-  console.log(process.env.NEXT_PUBLIC_API_URL);
-  // const getMovies = async () => {
-  //   try {
-  //     const res = await simpleAxiosApi({
-  //       url: "/movie/popular?page=1",
-  //     });
-  //     const firstFiveMovies = res.data.results.slice(0, 5);
-  //     // console.log(res.data.results);
-  //     setMovies(firstFiveMovies);
-  //   } catch (error) {}
-  // };
-
-  // useEffect(() => {
-  //   getMovies();
-  // }, []);
-
+interface Props {
+  movies: Movie[];
+}
+export default function Home({ movies }: Props) {
   return (
     <Box
       sx={{
         minHeight: "100vh",
-        // maxWidth: "lg",
-        // mx: "auto",
       }}
     >
       <SwiperBanner movies={movies} />
-      <SwiperJustRelease />
+      <MovieSwiperXl title="Just Release" movies={movies} />
+      <MovieSwiperSm title="Movies" movies={movies} />
+      <MovieSwiperMd title="Movies" movies={movies} />
+
       <Box
         sx={{
           my: 4,
@@ -52,14 +41,14 @@ export default function Home({ movies }) {
           alignItems: "center",
         }}
       >
-        <Typography variant="h4" component="h1" gutterBottom>
+        {/* <Typography variant="h4" component="h1" gutterBottom>
           Material UI - Next.js example in TypeScript
         </Typography>
         <Link href="/about" color="secondary">
           Go to the about page
         </Link>
         <ProTip />
-        <Copyright />
+        <Copyright /> */}
       </Box>
     </Box>
   );
@@ -68,8 +57,7 @@ export default function Home({ movies }) {
 Home.PageLayout = MainLayout;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const movies = await getPopularMovies();
-  // console.log(movies);
+  const movies = await getPopularMovies({ page: 1 });
   return {
     props: {
       movies,
