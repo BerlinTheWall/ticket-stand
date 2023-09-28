@@ -16,6 +16,7 @@ import { Movie } from "@/types/movie";
 import MovieSwiperMd from "@/components/SwiperSlides/MovieSwiperMd";
 import SwiperBanner from "@/components/SwiperSlides/SwiperBanner";
 import MovieSwiperSm from "@/components/SwiperSlides/MovieSwiperSm";
+import MovieSwiperFeatured from "@/components/SwiperSlides/MovieSwiperFeatured";
 
 interface Props {
   movies: Movie[];
@@ -30,6 +31,7 @@ export default function Home({ movies }: Props) {
       <SwiperBanner movies={movies} />
       <MovieSwiperXl title="Just Release" movies={movies} />
       <MovieSwiperSm title="Movies" movies={movies} />
+      <MovieSwiperFeatured movies={movies} />
       <MovieSwiperMd title="Movies" movies={movies} />
 
       <Box
