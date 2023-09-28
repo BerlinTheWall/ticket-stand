@@ -6,7 +6,6 @@ import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 // import Swiper and modules styles
 import "swiper/css/pagination";
 import Image from "next/image";
-import Images from "@/utils/imageHelper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Movie } from "@/types/movie";
 
@@ -17,7 +16,6 @@ type Props = {
 const SwiperBanner: React.FC<Props> = ({ movies }) => {
   const firstFiveMovies = movies.slice(0, 5);
 
-  // console.log(movies);
   return (
     <Box sx={{ paddingBottom: 5 }}>
       <Swiper
