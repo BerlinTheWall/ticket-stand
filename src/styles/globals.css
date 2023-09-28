@@ -20,6 +20,26 @@ a {
   text-decoration: none;
 }
 
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+@media (min-width: 900px) {
+  .truncate {
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+  }
+}
+
+.swiper-featured-selected-image {
+  border: 1px solid #00925d;
+}
+
 .sample-slider .swiper-pagination-bullets {
   width: 100px;
   height: 30px;
@@ -44,6 +64,10 @@ a {
   .swiper-banner-image {
     height: 120% !important;
   }
+}
+
+.swiper-featured-image {
+  height: 600px !important;
 }
 
 .swiper-panigation {
