@@ -38,12 +38,12 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
         }}
       >
         <NextPrevEl
-          className="nextElSwiper"
+          className="SmNextElSwiper"
           sx={{ right: 0 }}
           Icon={<ChevronRightRoundedIcon color="inherit" />}
         />
         <NextPrevEl
-          className="prevElSwiper"
+          className="SmPrevElSwiper"
           sx={{ left: 0 }}
           Icon={<ChevronLeftRoundedIcon color="inherit" />}
         />
@@ -53,8 +53,8 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
           spaceBetween={15}
           navigation={{
             enabled: true,
-            nextEl: ".nextElSwiper",
-            prevEl: ".prevElSwiper",
+            nextEl: ".SmNextElSwiper",
+            prevEl: ".SmPrevElSwiper",
           }}
           modules={[Autoplay, Navigation]}
           grabCursor={true}
@@ -93,22 +93,23 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
             return (
               <SwiperSlide key={movie?.id} style={{ width: "100%" }}>
                 <Stack
-                  direction={"row"}
-                  justifyItems={"center"}
-                  width={"100%"}
+                  direction="row"
+                  justifyItems="center"
+                  width="100%"
                   height={175}
-                  position={"relative"}
+                  position="relative"
                   gap={2}
-                  bgcolor={"#000"}
+                  bgcolor="#000"
                   borderRadius={4}
                   px={1.5}
                 >
                   <Typography
-                    my={"auto"}
-                    fontWeight={"bold"}
+                    my="auto"
+                    fontWeight="bold"
                     fontSize={45}
-                    component={"h2"}
-                    maxWidth={"auto"}
+                    component="h2"
+                    maxWidth="auto"
+                    position="absolute"
                   >
                     {++index}
                   </Typography>
