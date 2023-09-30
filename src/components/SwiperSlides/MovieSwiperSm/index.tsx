@@ -13,6 +13,8 @@ import { Movie } from "@/types/movie";
 import NextPrevEl from "../NextPrevButton";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import LocalMoviesIcon from "@mui/icons-material/LocalMovies";
+import GenresList from "../GenresList";
+import { convertMovieGenreIdsToNames } from "@/helper/genreConverter";
 
 interface Props {
   title: string;
@@ -166,39 +168,9 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
                       >
                         {movie.original_title}
                       </Typography>
-                      <Stack
-                        direction={"row"}
-                        alignItems={"center"}
-                        gap={1}
-                        sx={{ opacity: 0.7 }}
-                      >
-                        <LocalMoviesIcon sx={{ px: 0 }} />
-                        <Box
-                          style={{
-                            listStyleType: "disc",
-                            display: "flex",
-                            gap: 20,
-                          }}
-                          component="ul"
-                        >
-                          <Typography
-                            component="li"
-                            style={{
-                              listStyleType: "none",
-                              fontSize: "0.8rem",
-                            }}
-                          >
-                            Action
-                          </Typography>
-                          <Typography
-                            component="li"
-                            style={{ fontSize: "0.8rem" }}
-                          >
-                            Movie
-                          </Typography>
-                        </Box>
-                      </Stack>
-
+                      <GenresList
+                        genres={convertMovieGenreIdsToNames(movie.genre_ids)}
+                      />
                       <Stack
                         direction={"row"}
                         alignItems={"center"}

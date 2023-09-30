@@ -12,6 +12,8 @@ import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 import { Movie } from "@/types/movie";
 import NextPrevEl from "../NextPrevButton";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
+import GenresList from "../GenresList";
+import { convertMovieGenreIdsToNames } from "@/helper/genreConverter";
 
 interface Props {
   title: string;
@@ -147,43 +149,9 @@ const MovieSwiperXl: React.FC<Props> = ({ title, movies }) => {
                     >
                       {movie.original_title}
                     </Typography>
-
-                    <Stack
-                      direction={"row"}
-                      alignItems={"center"}
-                      gap={1}
-                      mt={1}
-                      whiteSpace={"nowrap"}
-                    >
-                      <StarRateRoundedIcon sx={{ color: "#f7cf4b", mb: 0.3 }} />
-                      <Typography fontWeight={"bold"}>
-                        {movie.vote_average}
-                      </Typography>
-                      <Divider
-                        orientation="vertical"
-                        flexItem
-                        sx={{ borderRightWidth: "2px", color: "gray" }}
-                      ></Divider>
-                      <Box
-                        style={{
-                          listStyleType: "disc",
-                          display: "flex",
-                          gap: 20,
-                          opacity: 0.7,
-                        }}
-                        component="ul"
-                      >
-                        <Typography
-                          component="li"
-                          style={{ listStyleType: "none", fontSize: "12px" }}
-                        >
-                          Action
-                        </Typography>
-                        <Typography component="li" style={{ fontSize: "12px" }}>
-                          Movie
-                        </Typography>
-                      </Box>
-                    </Stack>
+                    <GenresList
+                      genres={convertMovieGenreIdsToNames(movie.genre_ids)}
+                    />
                   </Box>
                 </Box>
               </SwiperSlide>

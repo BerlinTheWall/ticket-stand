@@ -10,6 +10,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Movie } from "@/types/movie";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import LocalMoviesIcon from "@mui/icons-material/LocalMovies";
+import { convertMovieGenreIdsToNames } from "@/helper/genreConverter";
+import GenresList from "../GenresList";
 
 type Props = {
   movies: Movie[];
@@ -37,6 +39,7 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
         loop={true}
       >
         {firstFiveMovies?.map((movie: Movie) => {
+          // const genres = convertMovieGenreIdsToNames(movie.genre_ids);
           return (
             <SwiperSlide key={movie?.id} style={{ width: "100%" }}>
               <Box width={"100%"} height={600} position={"relative"}>
@@ -58,7 +61,7 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
                 />
                 <Box
                   sx={{
-                    width: { xs: "100%", sm: "55%", md: "45%", xl: "25%" },
+                    width: { xs: "100%", sm: "55%", md: "50%", xl: "25%" },
                     left: { xs: 0, sm: 50 },
                     px: { xs: "10px", sm: "20px" },
                     py: { xs: "10px", sm: "10px" },
@@ -77,7 +80,7 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
                     alignItems={"center"}
                     gap={1}
                     mt={1}
-                    whiteSpace={"nowrap"}
+                    // sx={{ whiteSpace: "pre-line" }}
                   >
                     <StarRateRoundedIcon sx={{ color: "#f7cf4b", mb: 0.3 }} />
                     <Typography fontWeight={"bold"}>
@@ -96,72 +99,11 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
                       flexItem
                       sx={{ borderRightWidth: "2px", bgcolor: "gray" }}
                     ></Divider>
-                    <Stack
-                      direction={"row"}
-                      alignItems={"center"}
-                      gap={1}
-                      sx={{ opacity: 0.7 }}
-                    >
-                      <LocalMoviesIcon sx={{ px: 0 }} />
-                      <Box
-                        style={{
-                          listStyleType: "disc",
-                          display: "flex",
-                          gap: 20,
-                        }}
-                        component="ul"
-                      >
-                        <Typography
-                          component="li"
-                          style={{ listStyleType: "none", fontSize: "0.8rem" }}
-                        >
-                          Action
-                        </Typography>
-                        <Typography
-                          component="li"
-                          style={{ fontSize: "0.8rem" }}
-                        >
-                          Movie
-                        </Typography>
-                      </Box>
-                    </Stack>
+
+                    <GenresList
+                      genres={convertMovieGenreIdsToNames(movie.genre_ids)}
+                    />
                   </Stack>
-                  {/* <Typography
-                    sx={{ fontWeight: "bold", fontSize: "36px" }}
-                    component="h2"
-                  >
-                    {movie.original_title}
-                  </Typography>
-
-                  <Box
-                    style={{
-                      listStyleType: "disc",
-                      display: "flex",
-                      gap: 22,
-                      fontSize: "14px",
-                    }}
-                    component="ul"
-                  >
-                    <Stack direction="row" alignItems={"center"} gap={0.5}>
-                      <StarRateRoundedIcon sx={{ color: "#f7cf4b", mb: 0.5 }} />
-                      <Typography
-                        component="li"
-                        style={{
-                          listStyleType: "none",
-                          fontWeight: "bold",
-                          marginBottom: 2,
-                        }}
-                      >
-                        {movie.vote_average}
-                      </Typography>
-                    </Stack>
-
-                    <Typography component="li" fontWeight="bold">
-                      {movie.release_date.slice(0, 4)}
-                    </Typography>
-                    <Typography component="li">Fantasy</Typography>
-                    <Typography component="li">Actions</Typography>
-                  </Box> */}
                   <Typography marginTop={1} className="truncate">
                     {movie.overview}
                   </Typography>

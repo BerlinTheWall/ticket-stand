@@ -13,6 +13,8 @@ import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import LocalMoviesIcon from "@mui/icons-material/LocalMovies";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
+import { convertMovieGenreIdsToNames } from "@/helper/genreConverter";
+import GenresList from "../GenresList";
 
 interface Props {
   movies: Movie[];
@@ -109,32 +111,9 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
             flexItem
             sx={{ borderRightWidth: "2px", bgcolor: "gray" }}
           ></Divider>
-          <Stack
-            direction={"row"}
-            alignItems={"center"}
-            gap={1}
-            sx={{ opacity: 0.7 }}
-          >
-            <LocalMoviesIcon sx={{ px: 0 }} />
-            <Box
-              style={{
-                listStyleType: "disc",
-                display: "flex",
-                gap: 20,
-              }}
-              component="ul"
-            >
-              <Typography
-                component="li"
-                style={{ listStyleType: "none", fontSize: "0.8rem" }}
-              >
-                Action
-              </Typography>
-              <Typography component="li" style={{ fontSize: "0.8rem" }}>
-                Movie
-              </Typography>
-            </Box>
-          </Stack>
+          <GenresList
+            genres={convertMovieGenreIdsToNames(selectedMovie.genre_ids)}
+          />
         </Stack>
         <Typography marginTop={1} className="truncate">
           {selectedMovie.overview}
@@ -247,6 +226,10 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
                   height={300}
                   position="relative"
                   sx={{ cursor: "pointer" }}
+                  borderRadius="15px"
+                  border={
+                    selectedMovie.id === movie.id ? "3px solid #00925D" : "none"
+                  }
                 >
                   <Image
                     src={
@@ -280,6 +263,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
                   <MovieCardDetail
                     title={movie.original_title}
                     rating={movie.vote_average}
+                    genres={movie.genre_ids}
                   />
                 </Box>
               </SwiperSlide>
