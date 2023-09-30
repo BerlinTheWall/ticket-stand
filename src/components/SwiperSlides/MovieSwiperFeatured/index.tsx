@@ -26,7 +26,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
   };
 
   return (
-    <Box position="relative" marginTop="5rem">
+    <Box position="relative" marginTop="5rem" height={620}>
       <Box>
         <Image
           src={

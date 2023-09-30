@@ -1,4 +1,4 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 // core version +  pagination modules:
 import { Autoplay, Pagination } from "swiper/modules";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
@@ -8,6 +8,8 @@ import "swiper/css/pagination";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Movie } from "@/types/movie";
+import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
+import LocalMoviesIcon from "@mui/icons-material/LocalMovies";
 
 type Props = {
   movies: Movie[];
@@ -70,32 +72,99 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
                   data-swiper-parallax-opacity="0.5"
                   position={"absolute"}
                 >
-                  <Typography
+                  <Stack
+                    direction={"row"}
+                    alignItems={"center"}
+                    gap={1}
+                    mt={1}
+                    whiteSpace={"nowrap"}
+                  >
+                    <StarRateRoundedIcon sx={{ color: "#f7cf4b", mb: 0.3 }} />
+                    <Typography fontWeight={"bold"}>
+                      {movie.vote_average}
+                    </Typography>
+                    <Divider
+                      orientation="vertical"
+                      flexItem
+                      sx={{ borderRightWidth: "2px", bgcolor: "gray" }}
+                    ></Divider>
+                    <Typography fontWeight={"bold"} sx={{ opacity: 1 }}>
+                      {movie.release_date.slice(0, 4)}
+                    </Typography>
+                    <Divider
+                      orientation="vertical"
+                      flexItem
+                      sx={{ borderRightWidth: "2px", bgcolor: "gray" }}
+                    ></Divider>
+                    <Stack
+                      direction={"row"}
+                      alignItems={"center"}
+                      gap={1}
+                      sx={{ opacity: 0.7 }}
+                    >
+                      <LocalMoviesIcon sx={{ px: 0 }} />
+                      <Box
+                        style={{
+                          listStyleType: "disc",
+                          display: "flex",
+                          gap: 20,
+                        }}
+                        component="ul"
+                      >
+                        <Typography
+                          component="li"
+                          style={{ listStyleType: "none", fontSize: "0.8rem" }}
+                        >
+                          Action
+                        </Typography>
+                        <Typography
+                          component="li"
+                          style={{ fontSize: "0.8rem" }}
+                        >
+                          Movie
+                        </Typography>
+                      </Box>
+                    </Stack>
+                  </Stack>
+                  {/* <Typography
                     sx={{ fontWeight: "bold", fontSize: "36px" }}
                     component="h2"
                   >
                     {movie.original_title}
                   </Typography>
+
                   <Box
                     style={{
                       listStyleType: "disc",
                       display: "flex",
-                      gap: 20,
+                      gap: 22,
                       fontSize: "14px",
                     }}
                     component="ul"
                   >
-                    <Typography
-                      component="li"
-                      style={{ listStyleType: "none" }}
-                    >
-                      2h40m {movie.vote_average}
+                    <Stack direction="row" alignItems={"center"} gap={0.5}>
+                      <StarRateRoundedIcon sx={{ color: "#f7cf4b", mb: 0.5 }} />
+                      <Typography
+                        component="li"
+                        style={{
+                          listStyleType: "none",
+                          fontWeight: "bold",
+                          marginBottom: 2,
+                        }}
+                      >
+                        {movie.vote_average}
+                      </Typography>
+                    </Stack>
+
+                    <Typography component="li" fontWeight="bold">
+                      {movie.release_date.slice(0, 4)}
                     </Typography>
-                    <Typography component="li">{movie.release_date}</Typography>
                     <Typography component="li">Fantasy</Typography>
                     <Typography component="li">Actions</Typography>
-                  </Box>
-                  <Typography marginTop={1}>{movie.overview}</Typography>
+                  </Box> */}
+                  <Typography marginTop={1} className="truncate">
+                    {movie.overview}
+                  </Typography>
                   <Stack
                     direction={"row"}
                     alignItems={"center"}
