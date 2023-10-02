@@ -3,7 +3,7 @@ export type GenreType = {
   name: string;
 };
 
-export const MovieGenreEnum = [
+export const MovieGenreEnum: GenreType[] = [
   { id: 28, name: "Action" },
   { id: 12, name: "Adventure" },
   { id: 16, name: "Animation" },
@@ -25,7 +25,7 @@ export const MovieGenreEnum = [
   { id: 37, name: "Western" },
 ];
 
-export const SeriesGenreEnum = [
+export const SeriesGenreEnum: GenreType[] = [
   {
     id: 10759,
     name: "Action",
@@ -46,43 +46,3 @@ export const SeriesGenreEnum = [
   { id: 10768, name: "War" },
   { id: 37, name: "Western" },
 ];
-// export const MovieGenreEnum = {
-//   Action: 28,
-//   Adventure: 12,
-//   Animation: 16,
-//   Comedy: 35,
-//   Crime: 80,
-//   Documentary: 99,
-//   Drama: 18,
-//   Family: 10751,
-//   Fantasy: 14,
-//   History: 36,
-//   Horror: 27,
-//   Music: 10402,
-//   Mystery: 9648,
-//   Romance: 10749,
-//   ScienceFiction: 878,
-//   TVMovie: 10770,
-//   Thriller: 53,
-//   War: 10752,
-//   Western: 37,
-// };
-
-// export const SeriesGenreEnum = {
-//   ActionAdventure: 10759,
-//   Animation: 16,
-//   Comedy: 35,
-//   Crime: 80,
-//   Documentary: 99,
-//   Drama: 18,
-//   Family: 10751,
-//   Kids: 10762,
-//   Mystery: 9648,
-//   News: 10763,
-//   Reality: 10764,
-//   SciFiFantasy: 10765,
-//   Soap: 10766,
-//   Talk: 10767,
-//   WarPolitics: 10768,
-//   Western: 37,
-// };
