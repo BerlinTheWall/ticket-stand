@@ -1,17 +1,4 @@
-import { Box, Button, Divider, Stack, Typography } from "@mui/material";
-// core version +  pagination modules:
-import { Autoplay, Pagination } from "swiper/modules";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
-// import Swiper and modules styles
-import "swiper/css/pagination";
-import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Movie } from "@/types/movie";
-import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
-import LocalMoviesIcon from "@mui/icons-material/LocalMovies";
-import { convertMovieGenreIdsToNames } from "@/helper/genreConverter";
-import { GenreType } from "@/types/genres";
+import { Box, Typography } from "@mui/material";
 
 type Props = {
   genres: string[];
@@ -31,12 +18,6 @@ const GenresList: React.FC<Props> = ({ genres }) => {
       {genres.map((genre: string, index: number) => {
         return (
           <Box key={genre}>
-            <Typography
-              component="li"
-              style={{ listStyleType: "none", fontSize: "0.8rem" }}
-            >
-              {}
-            </Typography>
             <Typography
               component="li"
               style={{

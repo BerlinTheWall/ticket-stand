@@ -1,19 +1,14 @@
-import { Box, Divider, IconButton, Stack, Typography } from "@mui/material";
-// core version + navigation,  modules:
+import { Box, Typography } from "@mui/material";
 import { Autoplay, Navigation } from "swiper/modules";
-// import Swiper and modules styles
 import "swiper/css/navigation";
 import Image from "next/image";
-import Images from "@/utils/imageHelper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import MovieCardDetail from "../MovieCardDetail";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 import { Movie } from "@/types/movie";
 import NextPrevEl from "../NextPrevButton";
-import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import GenresList from "../GenresList";
-import { convertMovieGenreIdsToNames } from "@/helper/genreConverter";
+import { convertMovieGenreIdsToNames } from "@/utils/genreConverter";
 
 interface Props {
   title: string;
@@ -134,14 +129,14 @@ const MovieSwiperXl: React.FC<Props> = ({ title, movies }) => {
                       background:
                         "linear-gradient(to bottom, transparent 0%, #000 20%)",
                     }}
-                  ></Box>
+                  />
                   <Box
                     sx={{
                       width: "100%",
-                      px: { xs: "6px", sm: "6px" },
+                      px: "6px",
+                      bottom: 12,
+                      position: "absolute",
                     }}
-                    bottom={12}
-                    position={"absolute"}
                   >
                     <Typography
                       sx={{ fontWeight: "bold", fontSize: "18px" }}

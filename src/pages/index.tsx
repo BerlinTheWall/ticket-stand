@@ -1,16 +1,8 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Link from "../Link";
-import ProTip from "../ProTip";
-import Copyright from "../Copyright";
 import MainLayout from "@/layout/MainLayout";
-import axios from "axios";
-import { axiosApi, simpleAxiosApi } from "@/api/newApi";
 import MovieSwiperXl from "@/components/SwiperSlides/MovieSwiperXl";
-import { GetServerSideProps, NextPage } from "next";
+import { GetServerSideProps } from "next";
 import { getPopularMovies } from "@/api/movies";
 import { Movie } from "@/types/movie";
 import MovieSwiperMd from "@/components/SwiperSlides/MovieSwiperMd";
@@ -42,16 +34,7 @@ export default function Home({ movies }: Props) {
           justifyContent: "center",
           alignItems: "center",
         }}
-      >
-        {/* <Typography variant="h4" component="h1" gutterBottom>
-          Material UI - Next.js example in TypeScript
-        </Typography>
-        <Link href="/about" color="secondary">
-          Go to the about page
-        </Link>
-        <ProTip />
-        <Copyright /> */}
-      </Box>
+      ></Box>
     </Box>
   );
 }

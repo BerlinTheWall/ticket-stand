@@ -1,20 +1,15 @@
-import { Box, Divider, IconButton, Stack, Typography } from "@mui/material";
-// core version + navigation,  modules:
+import { Box, Divider, Stack, Typography } from "@mui/material";
 import { Autoplay, Navigation } from "swiper/modules";
-// import Swiper and modules styles
 import "swiper/css/navigation";
 import Image from "next/image";
-import Images from "@/utils/imageHelper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import MovieCardDetail from "../MovieCardDetail";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 import { Movie } from "@/types/movie";
 import NextPrevEl from "../NextPrevButton";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
-import LocalMoviesIcon from "@mui/icons-material/LocalMovies";
 import GenresList from "../GenresList";
-import { convertMovieGenreIdsToNames } from "@/helper/genreConverter";
+import { convertMovieGenreIdsToNames } from "@/utils/genreConverter";
 
 interface Props {
   title: string;
@@ -106,15 +101,15 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
                   <Typography
                     top={-1.5}
                     left={0}
-                    textAlign={"center"}
-                    width={"50px"}
-                    height={"41px"}
+                    textAlign="center"
+                    width="50px"
+                    height="41px"
                     fontWeight="bold"
                     fontSize={27}
                     component="h2"
                     bgcolor="#00925D"
-                    position={"absolute"}
-                    sx={{ borderRadius: "15px 0px" }}
+                    position="absolute"
+                    borderRadius="15px 0px"
                     zIndex={999}
                   >
                     {++index}

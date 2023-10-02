@@ -1,10 +1,7 @@
-import { Box, Divider, IconButton, Stack, Typography } from "@mui/material";
-// core version + navigation,  modules:
+import { Box, Typography } from "@mui/material";
 import { Autoplay, Navigation } from "swiper/modules";
-// import Swiper and modules styles
 import "swiper/css/navigation";
 import Image from "next/image";
-import Images from "@/utils/imageHelper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import MovieCardDetail from "../MovieCardDetail";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
@@ -23,7 +20,7 @@ const MovieSwiperMd: React.FC<Props> = ({ title, movies }) => {
       <Typography
         component="h1"
         fontSize={24}
-        fontWeight={"bold"}
+        fontWeight="bold"
         my={3}
         paddingLeft={2}
       >
@@ -90,7 +87,7 @@ const MovieSwiperMd: React.FC<Props> = ({ title, movies }) => {
           {movies?.map((movie: Movie) => {
             return (
               <SwiperSlide key={movie?.id} style={{ width: "100%" }}>
-                <Box width={"100%"} height={250} position={"relative"}>
+                <Box width="100%" height={250} position="relative">
                   <Image
                     src={
                       "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +

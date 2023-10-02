@@ -4,16 +4,12 @@ import "swiper/css/navigation";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import MovieCardDetail from "../MovieCardDetail";
-import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
-import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 import { Movie } from "@/types/movie";
-import NextPrevEl from "../NextPrevButton";
 import { useState } from "react";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
-import LocalMoviesIcon from "@mui/icons-material/LocalMovies";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
-import { convertMovieGenreIdsToNames } from "@/helper/genreConverter";
+import { convertMovieGenreIdsToNames } from "@/utils/genreConverter";
 import GenresList from "../GenresList";
 
 interface Props {
@@ -38,7 +34,6 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
           alt={selectedMovie.original_title}
           width={10000}
           height={100}
-          priority={true}
           className="swiper-featured-image"
           style={{
             width: "100%",
@@ -88,14 +83,14 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
           {selectedMovie.original_title}
         </Typography>
         <Stack
-          direction={"row"}
-          alignItems={"center"}
+          direction="row"
+          alignItems="center"
           gap={1}
           mt={1}
-          whiteSpace={"nowrap"}
+          whiteSpace="nowrap"
         >
           <StarRateRoundedIcon sx={{ color: "#f7cf4b", mb: 0.3 }} />
-          <Typography fontWeight={"bold"}>
+          <Typography fontWeight="bold">
             {selectedMovie.vote_average}
           </Typography>
           <Divider
@@ -103,7 +98,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
             flexItem
             sx={{ borderRightWidth: "2px", bgcolor: "gray" }}
           ></Divider>
-          <Typography fontWeight={"bold"} sx={{ opacity: 1 }}>
+          <Typography sx={{ opacity: 1, fontWeight: "bold" }}>
             {selectedMovie.release_date.slice(0, 4)}
           </Typography>
           <Divider
@@ -119,12 +114,12 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
           {selectedMovie.overview}
         </Typography>
         <Stack
-          direction={"row"}
-          alignItems={"center"}
+          direction="row"
+          alignItems="center"
           gap={2}
           mt={2}
           width="100%"
-          whiteSpace={"nowrap"}
+          whiteSpace="nowrap"
         >
           <Button
             variant="contained"
@@ -222,7 +217,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
                 onClick={() => handleSelectMovie(movie)}
               >
                 <Box
-                  width={"100%"}
+                  width="100%"
                   height={300}
                   position="relative"
                   sx={{ cursor: "pointer" }}
