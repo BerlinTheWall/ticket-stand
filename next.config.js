@@ -3,8 +3,6 @@ const nextConfig = {
   reactStrictMode: true,
 };
 
-// module.exports = nextConfig;
-
 module.exports = {
   ...nextConfig, // Include the existing config options
   images: {
