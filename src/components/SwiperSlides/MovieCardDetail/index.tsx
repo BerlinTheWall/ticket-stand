@@ -37,7 +37,7 @@ const MovieCardDetail: React.FC<Props> = ({ title, rating, genres, isMd }) => {
           orientation="vertical"
           flexItem
           sx={{ borderRightWidth: "2px", color: "gray" }}
-        ></Divider>
+        />
         <GenresList genres={convertMovieGenreIdsToNames(genres)} />
       </Stack>
     </Box>

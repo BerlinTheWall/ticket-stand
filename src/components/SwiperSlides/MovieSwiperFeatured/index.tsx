@@ -52,7 +52,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
             borderBottomRightRadius: "15px",
             background: "linear-gradient(to bottom, transparent 0%, #000 95%)",
           }}
-        ></Box>
+        />
         <Box
           sx={{
             position: "absolute",
@@ -64,7 +64,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
             borderBottomRightRadius: "15px",
             background: "linear-gradient(to top, transparent 0%, #000 95%)",
           }}
-        ></Box>
+        />
       </Box>
       <Box
         sx={{
@@ -97,7 +97,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
             orientation="vertical"
             flexItem
             sx={{ borderRightWidth: "2px", bgcolor: "gray" }}
-          ></Divider>
+          />
           <Typography sx={{ opacity: 1, fontWeight: "bold" }}>
             {selectedMovie.release_date.slice(0, 4)}
           </Typography>
@@ -105,7 +105,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
             orientation="vertical"
             flexItem
             sx={{ borderRightWidth: "2px", bgcolor: "gray" }}
-          ></Divider>
+          />
           <GenresList
             genres={convertMovieGenreIdsToNames(selectedMovie.genre_ids)}
           />
@@ -254,7 +254,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
                       background:
                         "linear-gradient(to bottom, transparent 0%, #000 20%)",
                     }}
-                  ></Box>
+                  />
                   <MovieCardDetail
                     title={movie.original_title}
                     rating={movie.vote_average}

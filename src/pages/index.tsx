@@ -25,16 +25,6 @@ export default function Home({ movies }: Props) {
       <MovieSwiperSm title="Movies" movies={movies} />
       <MovieSwiperFeatured movies={movies} />
       <MovieSwiperMd title="Movies" movies={movies} />
-
-      <Box
-        sx={{
-          my: 4,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      ></Box>
     </Box>
   );
 }

@@ -183,7 +183,7 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
                           orientation="vertical"
                           flexItem
                           sx={{ borderRightWidth: "2px", color: "gray" }}
-                        ></Divider>
+                        />
                         <Typography fontWeight={"bold"}>
                           {movie.release_date.slice(0, 4)}
                         </Typography>

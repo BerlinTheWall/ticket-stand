@@ -116,7 +116,7 @@ const MovieSwiperMd: React.FC<Props> = ({ title, movies }) => {
                       background:
                         "linear-gradient(to bottom, transparent 0%, #000 50%)",
                     }}
-                  ></Box>
+                  />
                   <MovieCardDetail
                     isMd
                     title={movie.original_title}

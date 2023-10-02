@@ -125,7 +125,7 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
                     background:
                       "linear-gradient(to bottom, transparent 0%, #0D0C0F 100%)",
                   }}
-                ></Box>
+                />
               </Box>
             </SwiperSlide>
           );
