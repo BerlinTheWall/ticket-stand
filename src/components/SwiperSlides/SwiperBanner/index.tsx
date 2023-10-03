@@ -1,8 +1,9 @@
 import { Box, Button, Divider, Stack, Typography } from "@mui/material";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay, Pagination, EffectFade } from "swiper/modules";
+import "swiper/css/effect-fade";
+import "swiper/css/pagination";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
-import "swiper/css/pagination";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Movie } from "@/types/movie";
@@ -21,17 +22,19 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
         className="swiper-banner-panigation"
         spaceBetween={10}
         autoplay={{
-          delay: 2000,
+          delay: 5000,
           disableOnInteraction: false,
+          pauseOnMouseEnter: true,
         }}
         noSwiping
-        allowTouchMove={false}
+        allowTouchMove={true}
         pagination={{
           clickable: true,
         }}
-        modules={[Autoplay, Pagination]}
+        modules={[Autoplay, Pagination, EffectFade]}
         slidesPerView={1}
         loop={true}
+        effect="fade"
       >
         {movies.slice(0, 5)?.map((movie: Movie) => {
           return (
