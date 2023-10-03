@@ -44,7 +44,6 @@ a {
   width: 100px;
   height: 30px;
   color: black !important;
-  background-color: red;
 }
 
 .swiper-pagination-bullet-active {
@@ -102,14 +101,18 @@ a {
   .swiper-horizontal > .swiper-pagination-bullets,
   .swiper-pagination-bullets.swiper-pagination-horizontal {
     text-align: center !important;
+    justify-content: space-between !important;
     bottom: 25px !important;
     margin-right: auto !important;
     right: 0px !important;
+    width: 140px !important;
+    display: flex !important;
+    padding: 10px 10px !important;
   }
 
   .swiper-pagination-bullet {
-    width: 8px !important;
-    height: 8px !important;
+    width: 10px !important;
+    height: 10px !important;
   }
 }
 
