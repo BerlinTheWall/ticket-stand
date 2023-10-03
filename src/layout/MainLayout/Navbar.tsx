@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import {
   Box,
   AppBar,
@@ -18,6 +18,8 @@ import {
   MenuItem,
   Stack,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import SearchIcon from "@mui/icons-material/Search";
@@ -84,6 +86,9 @@ const Navbar: React.FC = () => {
   const [drawerState, setDrawerState] = useState<boolean>(false);
   const [loginState, setLoginState] = useState<boolean>(false);
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.up("md"));
+
   const toggleDrawer = () => {
     setDrawerState((prev) => !prev);
   };
@@ -123,8 +128,8 @@ const Navbar: React.FC = () => {
             <Image
               src={Images.LogoWhite}
               alt={"Logo"}
-              width={70}
-              height={70}
+              width={!isMobile ? 50 : 70}
+              height={!isMobile ? 50 : 70}
               style={{ cursor: "pointer" }}
               onClick={() => {}}
             />
@@ -225,10 +230,11 @@ const Navbar: React.FC = () => {
               alignItems: "center",
             }}
           >
-            <SearchIcon sx={{ cursor: "pointer" }} />
+            <SearchIcon sx={{ cursor: "pointer" }} fontSize="large" />
             <MenuRoundedIcon
               onClick={toggleDrawer}
               sx={{ cursor: "pointer" }}
+              fontSize="large"
             />
             <Drawer
               anchor={"right"}

@@ -1,4 +1,12 @@
-import { Box, Button, Divider, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css/navigation";
 import Image from "next/image";
@@ -17,11 +25,14 @@ interface Props {
 }
 
 const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
+  const theme = useTheme();
   const [selectedMovie, setSelectedMovie] = useState<Movie>(movies[0]);
 
   const handleSelectMovie = (movie: Movie) => {
     setSelectedMovie(movie);
   };
+
+  const isMobile = useMediaQuery(theme.breakpoints.up("md"));
 
   return (
     <Box position="relative" marginTop="5rem" height={620}>
@@ -88,6 +99,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
           gap={1}
           mt={1}
           whiteSpace="nowrap"
+          sx={{ display: { xs: "none", md: "flex" } }}
         >
           <StarRateRoundedIcon sx={{ color: "#f7cf4b", mb: 0.3 }} />
           <Typography fontWeight="bold">
@@ -110,9 +122,11 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
             genres={convertMovieGenreIdsToNames(selectedMovie.genre_ids)}
           />
         </Stack>
-        <Typography marginTop={1} className="truncate">
-          {selectedMovie.overview}
-        </Typography>
+        {isMobile && (
+          <Typography marginTop={1} className="truncate">
+            {selectedMovie.overview}
+          </Typography>
+        )}
         <Stack
           direction="row"
           alignItems="center"
@@ -126,7 +140,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
             fullWidth
             color="primary"
             sx={{
-              fontSize: { xs: "0.65rem", sm: "0.8rem" },
+              fontSize: { xs: "0.7rem", sm: "0.8rem" },
             }}
             onClick={() => {}}
           >
@@ -137,7 +151,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
             variant="outlined"
             fullWidth
             color="secondary"
-            sx={{ fontSize: { xs: "0.65rem", sm: "0.8rem" } }}
+            sx={{ fontSize: { xs: "0.7rem", sm: "0.8rem" } }}
           >
             <BookmarkBorderIcon style={{ marginRight: "8px" }} /> Add Watchlist
           </Button>
