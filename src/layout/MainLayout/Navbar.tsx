@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import {
   Box,
   AppBar,
@@ -18,6 +18,8 @@ import {
   MenuItem,
   Stack,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import SearchIcon from "@mui/icons-material/Search";
@@ -84,6 +86,9 @@ const Navbar: React.FC = () => {
   const [drawerState, setDrawerState] = useState<boolean>(false);
   const [loginState, setLoginState] = useState<boolean>(false);
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.up("md"));
+
   const toggleDrawer = () => {
     setDrawerState((prev) => !prev);
   };
@@ -123,8 +128,8 @@ const Navbar: React.FC = () => {
             <Image
               src={Images.LogoWhite}
               alt={"Logo"}
-              width={70}
-              height={70}
+              width={!isMobile ? 50 : 70}
+              height={!isMobile ? 50 : 70}
               style={{ cursor: "pointer" }}
               onClick={() => {}}
             />
@@ -134,7 +139,7 @@ const Navbar: React.FC = () => {
             {pages.map((page) => (
               <Button
                 key={page}
-                sx={{ my: 2, display: "block" }}
+                sx={{ my: 2, display: "block", fontSize: "14px" }}
                 color="secondary"
               >
                 {page}
@@ -150,17 +155,7 @@ const Navbar: React.FC = () => {
               gap={2}
               whiteSpace={"nowrap"}
             >
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  bgcolor: "GrayText",
-                  borderRadius: "100px",
-                  padding: 1,
-                }}
-              >
-                <SearchIcon />
-              </Box>
+              <SearchIcon sx={{ cursor: "pointer" }} />
               <Button variant="outlined" fullWidth color="secondary">
                 Sign up
               </Button>
@@ -235,18 +230,12 @@ const Navbar: React.FC = () => {
               alignItems: "center",
             }}
           >
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                bgcolor: "GrayText",
-                borderRadius: "100px",
-                padding: 0.5,
-              }}
-            >
-              <SearchIcon sx={{ cursor: "pointer" }} />
-            </Box>
-            <MenuRoundedIcon onClick={toggleDrawer} />
+            <SearchIcon sx={{ cursor: "pointer" }} fontSize="large" />
+            <MenuRoundedIcon
+              onClick={toggleDrawer}
+              sx={{ cursor: "pointer" }}
+              fontSize="large"
+            />
             <Drawer
               anchor={"right"}
               open={drawerState}
