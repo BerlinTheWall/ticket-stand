@@ -10,6 +10,8 @@ import NextPrevEl from "../NextPrevButton";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import GenresList from "../GenresList";
 import { convertMovieGenreIdsToNames } from "@/utils/genreConverter";
+import { useState } from "react";
+import { getPopularMovies } from "@/api/movies";
 
 interface Props {
   title: string;
@@ -17,6 +19,17 @@ interface Props {
 }
 
 const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
+  const [updatedMovies, setUpdatedMovies] = useState(movies);
+  const [page, setPages] = useState<number>(1);
+
+  const handleShow = async () => {
+    setPages(page + 1);
+    const movie: Movie[] = (await getPopularMovies({
+      page: page,
+    })) as unknown as Movie[];
+    setUpdatedMovies((prevMovies) => [...prevMovies, ...movie]);
+  };
+
   return (
     <Box sx={{ paddingX: { sm: 5 } }}>
       <Typography
@@ -53,6 +66,7 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
             nextEl: ".SmNextElSwiper",
             prevEl: ".SmPrevElSwiper",
           }}
+          onReachEnd={handleShow}
           modules={[Autoplay, Navigation]}
           grabCursor={true}
           style={{ position: "relative" }}
@@ -91,7 +105,7 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
             },
           }}
         >
-          {movies?.map((movie: Movie, index) => {
+          {updatedMovies?.map((movie: Movie, index) => {
             return (
               <>
                 <SwiperSlide
