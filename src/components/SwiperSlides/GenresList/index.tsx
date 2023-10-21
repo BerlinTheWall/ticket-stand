@@ -14,6 +14,7 @@ const GenresList: React.FC<Props> = ({ genres }) => {
         opacity: 0.7,
       }}
       component="ul"
+      className="truncate"
     >
       {genres.map((genre: string, index: number) => {
         return (

@@ -69,8 +69,12 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
                   component="div"
                   position="absolute"
                 >
+                  <Typography fontWeight="bold" fontSize={26}>
+                    {movie.original_title}
+                  </Typography>
                   <Stack direction="row" alignItems="center" gap={1} mt={1}>
                     <StarRateRoundedIcon sx={{ color: "#f7cf4b", mb: 0.3 }} />
+
                     <Typography fontWeight="bold">
                       {movie.vote_average}
                     </Typography>
@@ -87,7 +91,6 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
                       flexItem
                       sx={{ borderRightWidth: "2px", bgcolor: "gray" }}
                     />
-
                     <GenresList
                       genres={convertMovieGenreIdsToNames(movie.genre_ids)}
                     />
