@@ -26,6 +26,7 @@ import SearchIcon from "@mui/icons-material/Search";
 
 import Image from "next/image";
 import Images from "@/utils/imageHelper";
+import { green } from "@mui/material/colors";
 
 const pages = ["Home", "Discover", "Movie Release", "About"];
 const profile = ["Profile", "Account", "Dashboard", "Logout"];
@@ -35,13 +36,16 @@ const NavbarDrawer = ({ toggleDrawer, loginState, setLoginState }: any) => (
     role="menubar"
     onClick={toggleDrawer}
     onKeyDown={toggleDrawer}
-    width={"150px"}
+    width={"200px"}
   >
     <List>
       {pages.map((text) => (
         <ListItem key={text} disablePadding>
           <ListItemButton>
-            <ListItemText primary={text} />
+            <ListItemText
+              primary={text}
+              primaryTypographyProps={{ fontSize: 18 }}
+            />
           </ListItemButton>
         </ListItem>
       ))}
@@ -56,13 +60,19 @@ const NavbarDrawer = ({ toggleDrawer, loginState, setLoginState }: any) => (
         gap: 1,
       }}
     >
-      <Button variant="outlined" fullWidth color="secondary">
+      <Button
+        variant="outlined"
+        fullWidth
+        sx={{ fontSize: 15 }}
+        color="secondary"
+      >
         Sign up
       </Button>
       <Button
         variant="contained"
         fullWidth
         color="primary"
+        sx={{ fontSize: 15 }}
         onClick={() => setLoginState(true)}
       >
         Login
@@ -73,7 +83,10 @@ const NavbarDrawer = ({ toggleDrawer, loginState, setLoginState }: any) => (
         {profile.map((text) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
-              <ListItemText primary={text} />
+              <ListItemText
+                primary={text}
+                primaryTypographyProps={{ fontSize: 18 }}
+              />
             </ListItemButton>
           </ListItem>
         ))}
@@ -131,7 +144,6 @@ const Navbar: React.FC = () => {
               width={!isMobile ? 50 : 70}
               height={!isMobile ? 50 : 70}
               style={{ cursor: "pointer" }}
-              onClick={() => {}}
             />
           </Box>
           {/* MD Items */}
@@ -182,7 +194,6 @@ const Navbar: React.FC = () => {
                 sx={{
                   display: "flex",
                   justifyContent: "center",
-                  bgcolor: "GrayText",
                   borderRadius: "100px",
                   padding: 1,
                 }}
