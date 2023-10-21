@@ -40,6 +40,7 @@ a {
   border: 1px solid #00925d;
 }
 
+/* Swiper Pagination */
 .sample-slider .swiper-pagination-bullets {
   width: 100px;
   height: 30px;
@@ -116,6 +117,7 @@ a {
   }
 }
 
+/* Swiper Navigation */
 .swiper-just-release-navigation .swiper-button-next {
   height: auto !important;
   padding: 8px 15px !important;
@@ -148,4 +150,10 @@ a {
 
 .swiper-just-release-navigation .swiper-button-disabled {
   display: none;
+}
+
+/* MUI List Pagination */
+.mui-style-1mu1ari-MuiButtonBase-root-MuiPaginationItem-root {
+  font-weight: 700 !important;
+  font-size: large !important;
 }
