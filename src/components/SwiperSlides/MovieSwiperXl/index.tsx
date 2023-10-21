@@ -103,8 +103,7 @@ const MovieSwiperXl: React.FC<Props> = ({ title, movies }) => {
                 <Box width={"100%"} height={300} position={"relative"}>
                   <Image
                     src={
-                      "https://www.themoviedb.org/t/p/w220_and_h330_face" +
-                      movie.poster_path
+                      "https://www.themoviedb.org/t/p/w500/" + movie.poster_path
                     }
                     alt={movie.original_title}
                     width={100}

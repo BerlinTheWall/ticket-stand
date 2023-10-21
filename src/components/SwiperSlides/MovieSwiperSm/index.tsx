@@ -127,7 +127,7 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
                   >
                     <Image
                       src={
-                        "https://www.themoviedb.org/t/p/w220_and_h330_face" +
+                        "https://www.themoviedb.org/t/p/w500/" +
                         movie.poster_path
                       }
                       alt={movie.original_title}
