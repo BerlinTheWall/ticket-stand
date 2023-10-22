@@ -12,6 +12,7 @@ const GenresList: React.FC<Props> = ({ genres }) => {
         display: "flex",
         gap: 20,
         opacity: 0.7,
+        overflow: "hidden",
       }}
       component="ul"
     >

@@ -15,7 +15,7 @@ const MovieCardDetail: React.FC<Props> = ({ title, rating, genres, isMd }) => {
     <Box
       sx={{
         width: "100%",
-        px: { xs: "6px", sm: "16px" },
+        px: { xs: "6px", sm: "8px" },
         position: "absolute",
       }}
       bottom={isMd ? 6 : 12}
