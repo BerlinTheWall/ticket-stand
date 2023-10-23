@@ -16,3 +16,29 @@ export const getPopularMovies = async (
     throw error;
   }
 };
+
+// export const getTrendingMovies = async (): Promise<AxiosResponse<Movie>> => {
+//   const queryParams = filteringMethod(filters);
+//   try {
+//     const res = await simpleAxiosApi({
+//       url: `/movie/popular${queryParams}`,
+//     });
+//     return res.data.results;
+//   } catch (error) {
+//     throw error;
+//   }
+// };
+
+export const getMoviesByGenre = async (
+  genre = {}
+): Promise<AxiosResponse<Movie>> => {
+  const queryParams = filteringMethod(genre);
+  try {
+    const res = await simpleAxiosApi({
+      url: `/discover/movie${queryParams}`,
+    });
+    return res.data.results;
+  } catch (error) {
+    throw error;
+  }
+};

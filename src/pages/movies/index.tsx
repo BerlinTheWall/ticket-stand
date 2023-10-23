@@ -3,7 +3,7 @@ import MainLayout from "@/layout/MainLayout";
 
 import { GetServerSideProps, NextPage } from "next";
 import { Movie } from "@/types/movie";
-import { getPopularMovies } from "@/api/movies";
+import { getMoviesByGenre } from "@/api/movies";
 import MoviesList from "@/components/MoviesList";
 
 interface Props {
@@ -27,7 +27,7 @@ const MoviePage: NextPage<Props> = ({ movies }) => {
 export default MoviePage;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const movies = await getPopularMovies({ page: 2 });
+  const movies = await getMoviesByGenre({ with_genres: 28, page: 1 });
   return {
     props: {
       movies,
