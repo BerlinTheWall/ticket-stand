@@ -19,7 +19,6 @@ const MovieCard: React.FC<Props> = ({ movie }) => {
       sm={5}
       md={2.5}
       lg={2}
-      xl={1.5}
       position={"relative"}
       sx={{ cursor: "pointer", mx: { xs: 1, sm: 2 } }}
       my={1}
