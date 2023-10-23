@@ -23,12 +23,12 @@ import {
 } from "@mui/material";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import SearchIcon from "@mui/icons-material/Search";
-
+import ThemeSwitch from "./themeSwitch";
 import Image from "next/image";
 import Images from "@/utils/imageHelper";
 import { green } from "@mui/material/colors";
 
-const pages = ["Home", "Discover", "Movie Release", "About"];
+const pages = ["Home", "Discover", "Movie Release"];
 const profile = ["Profile", "Account", "Dashboard", "Logout"];
 
 const NavbarDrawer = ({ toggleDrawer, loginState, setLoginState }: any) => (
@@ -167,7 +167,8 @@ const Navbar: React.FC = () => {
               gap={2}
               whiteSpace={"nowrap"}
             >
-              <SearchIcon sx={{ cursor: "pointer" }} />
+              <ThemeSwitch />
+              <SearchIcon sx={{ cursor: "pointer", marginRight: 1.5 }} />
               <Button variant="outlined" fullWidth color="secondary">
                 Sign up
               </Button>
@@ -189,7 +190,9 @@ const Navbar: React.FC = () => {
               }}
               gap={5}
               direction={"row"}
+              alignItems={"center"}
             >
+              <ThemeSwitch />
               <Box
                 sx={{
                   display: "flex",
@@ -200,6 +203,7 @@ const Navbar: React.FC = () => {
               >
                 <SearchIcon />
               </Box>
+
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -241,6 +245,7 @@ const Navbar: React.FC = () => {
               alignItems: "center",
             }}
           >
+            <ThemeSwitch />
             <SearchIcon sx={{ cursor: "pointer" }} fontSize="large" />
             <MenuRoundedIcon
               onClick={toggleDrawer}

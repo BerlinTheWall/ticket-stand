@@ -132,7 +132,7 @@ const MovieSwiperXl: React.FC<Props> = ({ title, movies }) => {
                   <Box
                     sx={{
                       width: "100%",
-                      px: "6px",
+                      px: "8px",
                       bottom: 12,
                       position: "absolute",
                     }}

@@ -89,6 +89,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
       >
         <Typography
           sx={{ fontSize: "2.5rem", fontWeight: "bold" }}
+          className="truncate"
           component="h1"
         >
           {selectedMovie.original_title}
@@ -231,7 +232,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
                 onClick={() => handleSelectMovie(movie)}
               >
                 <Box
-                  width="100%"
+                  width="95%"
                   height={300}
                   position="relative"
                   sx={{ cursor: "pointer" }}
@@ -249,7 +250,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
                     height={100}
                     style={{
                       width: "100%",
-                      height: "90%",
+                      height: "100%",
                       objectFit: "cover",
                       backgroundPosition: "center center",
                       borderRadius: "15px",

@@ -69,7 +69,10 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
                   component="div"
                   position="absolute"
                 >
-                  <Typography fontWeight="bold" fontSize={26}>
+                  <Typography
+                    fontWeight="bold"
+                    sx={{ fontSize: { xs: 28, sm: 36 } }}
+                  >
                     {movie.original_title}
                   </Typography>
                   <Stack direction="row" alignItems="center" gap={1} mt={1}>
