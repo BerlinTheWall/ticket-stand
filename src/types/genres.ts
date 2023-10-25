@@ -1,9 +1,9 @@
-export type GenreType = {
+export type Genre = {
   id: number;
   name: string;
 };
 
-export const MovieGenreEnum: GenreType[] = [
+export const MovieGenre: Genre[] = [
   { id: 28, name: "Action" },
   { id: 12, name: "Adventure" },
   { id: 16, name: "Animation" },
@@ -25,7 +25,7 @@ export const MovieGenreEnum: GenreType[] = [
   { id: 37, name: "Western" },
 ];
 
-export const SeriesGenreEnum: GenreType[] = [
+export const SeriesGenre: Genre[] = [
   {
     id: 10759,
     name: "Action",
