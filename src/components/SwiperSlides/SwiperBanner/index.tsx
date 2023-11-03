@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Stack, Typography } from "@mui/material";
+import { Box, Button, Divider, Grid, Stack, Typography } from "@mui/material";
 import { Autoplay, Pagination, EffectFade } from "swiper/modules";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
@@ -41,10 +41,11 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
             <SwiperSlide key={movie?.id} style={{ width: "100%" }}>
               <Box width={"100%"} height={600} position={"relative"}>
                 <Image
-                  src={
-                    "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
-                    movie.backdrop_path
-                  }
+                  // src={
+                  //   "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
+                  //   movie.backdrop_path
+                  // }
+                  src={"/assets/images/demo-image.jpg"}
                   alt={movie.original_title}
                   width={10000}
                   height={100}
@@ -58,25 +59,21 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
                 />
                 <Box
                   sx={{
-                    width: { xs: "100%", sm: "55%", md: "50%", xl: "25%" },
+                    width: { xs: "100%", sm: "55%", md: "50%", xl: "30%" },
                     left: { xs: 0, sm: 50 },
                     px: { xs: "10px", sm: "20px" },
                     py: { xs: "10px", sm: "10px" },
-                    borderRadius: 2,
-                    bgcolor: "rgba(3,3,3,0.7)",
+                    borderRadius: { sm: 2, xs: 0 },
+                    bgcolor: (theme) => `${theme.palette.background.paper}d6`,
+                    position: "absolute",
+                    bottom: 70,
                   }}
-                  bottom={70}
                   component="div"
-                  position="absolute"
                 >
-                  <Typography
-                    fontWeight="bold"
-                    sx={{ fontSize: { xs: 28, sm: 36 } }}
-                  >
-                    {movie.original_title}
-                  </Typography>
                   <Stack direction="row" alignItems="center" gap={1} mt={1}>
-                    <StarRateRoundedIcon sx={{ color: "#f7cf4b", mb: 0.3 }} />
+                    <StarRateRoundedIcon
+                      sx={{ color: "warning.light", mb: 0.3 }}
+                    />
                     <Typography fontWeight="bold">
                       {movie.vote_average}
                     </Typography>
@@ -101,28 +98,36 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
                   <Typography marginTop={1} className="truncate">
                     {movie.overview}
                   </Typography>
-                  <Stack
-                    direction="row"
-                    alignItems="center"
-                    gap={2}
-                    mt={2}
-                    sx={{ width: { md: "85%", lg: "85%" } }}
-                    whiteSpace="nowrap"
-                  >
-                    <Button
-                      variant="contained"
-                      fullWidth
-                      color="primary"
-                      onClick={() => {}}
-                    >
-                      <PlayCircleFilledIcon style={{ marginRight: "8px" }} />
-                      Watch Trailer
-                    </Button>
-                    <Button variant="outlined" fullWidth color="secondary">
-                      <BookmarkBorderIcon style={{ marginRight: "8px" }} />
-                      Add Watchlist
-                    </Button>
-                  </Stack>
+
+                  <Grid container spacing={2} mt={0.5}>
+                    <Grid item sm={6} xs={12}>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        fullWidth
+                        onClick={() => {}}
+                        startIcon={<PlayCircleFilledIcon />}
+                        sx={{
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        Watch Trailer
+                      </Button>
+                    </Grid>
+                    <Grid item sm={6} xs={12}>
+                      <Button
+                        variant="outlined"
+                        color="secondary"
+                        fullWidth
+                        startIcon={<BookmarkBorderIcon />}
+                        sx={{
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        Add WatchList
+                      </Button>
+                    </Grid>
+                  </Grid>
                 </Box>
                 <Box
                   sx={{
@@ -131,8 +136,8 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
                     left: 0,
                     width: "100%",
                     height: "15%",
-                    background:
-                      "linear-gradient(to bottom, transparent 0%, #0D0C0F 100%)",
+                    background: (theme) =>
+                      `linear-gradient(to bottom, transparent 0%, ${theme.palette.background.paper} 100%)`,
                   }}
                 />
               </Box>

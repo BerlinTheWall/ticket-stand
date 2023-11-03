@@ -27,6 +27,9 @@ const DisplayTest = () => {
       >
         toggle Theme, {mode}
       </Button>
+      <Button color="tertiary" variant="contained" sx={{ mt: 5 }} fullWidth>
+        button
+      </Button>
       <Box p={5}>
         <Grid container spacing={2}>
           <Grid item xs={12}>

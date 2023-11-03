@@ -31,7 +31,7 @@ const MovieCardDetail: React.FC<Props> = ({ title, rating, genres, isMd }) => {
         mt={1}
         whiteSpace="nowrap"
       >
-        <StarRateRoundedIcon sx={{ color: "#f7cf4b", mb: 0.3 }} />
+        <StarRateRoundedIcon sx={{ color: "warning.light", mb: 0.3 }} />
         <Typography fontWeight="bold">{rating}</Typography>
         <Divider
           orientation="vertical"
