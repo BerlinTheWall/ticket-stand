@@ -38,10 +38,12 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
     <Box position="relative" marginTop="5rem" height={620}>
       <Box>
         <Image
-          src={
-            "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
-            selectedMovie.backdrop_path
-          }
+          // src={
+          //   "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
+          //   selectedMovie.backdrop_path
+          // }
+
+          src={"/assets/images/demo-image.jpg"}
           alt={selectedMovie.original_title}
           width={10000}
           height={100}
@@ -59,9 +61,8 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
             left: 0,
             width: "100%",
             height: "75%",
-            borderBottomLeftRadius: "15px",
-            borderBottomRightRadius: "15px",
-            background: "linear-gradient(to bottom, transparent 0%, #000 95%)",
+            background: (theme) =>
+              `linear-gradient(to bottom, transparent 0%, ${theme.palette.background.paper} 95%)`,
           }}
         />
         <Box
@@ -70,10 +71,9 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
             top: 0,
             left: 0,
             width: "100%",
-            height: "75%",
-            borderBottomLeftRadius: "15px",
-            borderBottomRightRadius: "15px",
-            background: "linear-gradient(to top, transparent 0%, #000 95%)",
+            height: "100%",
+            background: (theme) =>
+              `linear-gradient(to left, transparent -40%, ${theme.palette.background.paper} 105%)`,
           }}
         />
       </Box>
@@ -102,7 +102,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
           whiteSpace="nowrap"
           sx={{ display: { xs: "none", md: "flex" } }}
         >
-          <StarRateRoundedIcon sx={{ color: "#f7cf4b", mb: 0.3 }} />
+          <StarRateRoundedIcon sx={{ color: "warning.light", mb: 0.3 }} />
           <Typography fontWeight="bold">
             {selectedMovie.vote_average}
           </Typography>
@@ -236,16 +236,19 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
                   height={300}
                   position="relative"
                   sx={{ cursor: "pointer" }}
-                  borderRadius="15px"
-                  border={
-                    selectedMovie.id === movie.id ? "3px solid #00925D" : "none"
+                  borderRadius={5}
+                  border={(theme) =>
+                    selectedMovie.id === movie.id
+                      ? `3px solid ${theme.palette.primary.main}`
+                      : "none"
                   }
                 >
                   <Image
-                    src={
-                      "https://www.themoviedb.org/t/p/w220_and_h330_face" +
-                      movie.poster_path
-                    }
+                    // src={
+                    //   "https://www.themoviedb.org/t/p/w220_and_h330_face" +
+                    //   movie.poster_path
+                    // }
+                    src={"/assets/images/demo-image.jpg"}
                     alt={movie.original_title}
                     width={100}
                     height={100}
@@ -266,8 +269,8 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
                       height: "35%",
                       borderBottomLeftRadius: "15px",
                       borderBottomRightRadius: "15px",
-                      background:
-                        "linear-gradient(to bottom, transparent 0%, #000 20%)",
+                      background: (theme) =>
+                        `linear-gradient(to bottom, transparent 0%, ${theme.palette.background.paper} 20%)`,
                     }}
                   />
                   <MovieCardDetail

@@ -1,3 +1,4 @@
+import { THEME_VALUES } from "@/MUI/theme";
 import { Box, IconButton } from "@mui/material";
 
 const NextPrevEl = ({
@@ -18,8 +19,6 @@ const NextPrevEl = ({
         bottom: 0,
         color: "white",
         zIndex: 10,
-        // boxShadow: (theme) =>
-        //   `inset -38px 0px 67px 5px ${theme.palette.background.default}`,
         display: "flex",
         alignItems: "center",
         "& .swiper-button-disabled": {
@@ -31,10 +30,11 @@ const NextPrevEl = ({
       <IconButton
         className={className}
         sx={{
-          bgcolor: "#403e3ee0",
-          color: "text.primary",
+          bgcolor: (theme) =>
+            theme.palette.mode === THEME_VALUES.dark ? "grey.800" : "grey.500",
+          color: "white",
           "&:hover": {
-            bgcolor: (theme) => ` ${theme.palette.primary.main}`,
+            bgcolor: "primary.main",
           },
         }}
       >

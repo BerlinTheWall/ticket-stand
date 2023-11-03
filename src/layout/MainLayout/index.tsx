@@ -13,6 +13,7 @@ const MainLayout: React.FC<Props> = ({ children }) => {
       sx={{
         bgcolor: "background.default",
         minHeight: "100vh",
+        color: "text.primary",
       }}
     >
       <Navbar />

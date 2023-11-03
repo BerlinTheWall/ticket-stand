@@ -100,12 +100,18 @@ const MovieSwiperXl: React.FC<Props> = ({ title, movies }) => {
           {movies?.map((movie: Movie) => {
             return (
               <SwiperSlide key={movie?.id} style={{ width: "100%" }}>
-                <Box width={"100%"} height={300} position={"relative"}>
+                <Box
+                  width={"100%"}
+                  height={300}
+                  position={"relative"}
+                  color="text.primary"
+                >
                   <Image
-                    src={
-                      "https://www.themoviedb.org/t/p/w220_and_h330_face" +
-                      movie.poster_path
-                    }
+                    // src={
+                    //   "https://www.themoviedb.org/t/p/w220_and_h330_face" +
+                    //   movie.poster_path
+                    // }
+                    src={"/assets/images/demo-image.jpg"}
                     alt={movie.original_title}
                     width={100}
                     height={100}
@@ -126,8 +132,8 @@ const MovieSwiperXl: React.FC<Props> = ({ title, movies }) => {
                       height: "35%",
                       borderBottomLeftRadius: "15px",
                       borderBottomRightRadius: "15px",
-                      background:
-                        "linear-gradient(to bottom, transparent 0%, #000 20%)",
+                      background: (theme) =>
+                        `linear-gradient(to bottom, transparent 0%, ${theme.palette.background.paper} 20%)`,
                     }}
                   />
                   <Box
@@ -139,7 +145,10 @@ const MovieSwiperXl: React.FC<Props> = ({ title, movies }) => {
                     }}
                   >
                     <Typography
-                      sx={{ fontWeight: "bold", fontSize: "18px" }}
+                      sx={{
+                        fontWeight: "bold",
+                        fontSize: "18px",
+                      }}
                       component="h3"
                     >
                       {movie.original_title}

@@ -77,7 +77,7 @@ export const TERTIARY = {
 };
 export const BACKGROUND = {
   dark: { default: "#0D0C0F", paper: "#121212" },
-  light: { default: "#F4F4F4", paper: "#FFFFFF" },
+  light: { default: "#ffffff", paper: "#dddddd" },
 };
 export const TEXT = {
   dark: {

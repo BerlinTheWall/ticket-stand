@@ -1,4 +1,3 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import MainLayout from "@/layout/MainLayout";
 import MovieSwiperXl from "@/components/SwiperSlides/MovieSwiperXl";
@@ -39,3 +38,4 @@ export const getServerSideProps: GetServerSideProps = async () => {
     },
   };
 };
+// cdcfcd
