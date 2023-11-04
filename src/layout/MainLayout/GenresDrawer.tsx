@@ -25,21 +25,20 @@ const GenresDrawer: React.FC = ({ item }: any) => {
             <Grid container spacing={0}>
               {MovieGenre.map((genre) => {
                 return (
-                  <Grid item md={4} key={genre.id} sx={{ px: 2, my: 2 }}>
+                  <Grid item md={4} key={genre.id} sx={{ px: 2, my: 1.2 }}>
                     <Typography
                       fontWeight={700}
                       component="h3"
                       sx={{
                         pl: 1,
                         cursor: "pointer",
-                        borderLeft: "2px solid #00925D",
+                        borderLeft: `2px solid ${theme.palette.primary.main}`,
                         ":hover": {
                           pl: 1.5,
-                          // borderBottom: "2px solid #00925D",
                         },
                       }}
                       onClick={() => {
-                        console.log(genre.name);
+                        // console.log(genre.name);
                       }}
                     >
                       {genre.name}
@@ -53,7 +52,6 @@ const GenresDrawer: React.FC = ({ item }: any) => {
               component="ul"
               sx={{
                 listStyle: "none",
-                p: 2,
               }}
             ></Stack>
           </Box>
@@ -62,7 +60,7 @@ const GenresDrawer: React.FC = ({ item }: any) => {
         componentsProps={{
           tooltip: {
             sx: {
-              background: "rgba(3, 3, 3, 0.9)",
+              background: `${theme.palette.background.paper}f6`,
               color: theme.palette.text.primary,
               boxShadow: 2,
               // filter: "blur(2px)",

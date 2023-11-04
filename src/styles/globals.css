@@ -20,7 +20,26 @@ a {
   text-decoration: none;
 }
 
-.truncate {
+/* truncates */
+.truncate-1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.truncate-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.truncate-2-4 {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -30,12 +49,13 @@ a {
 }
 
 @media (min-width: 900px) {
-  .truncate {
+  .truncate-2-4 {
     -webkit-line-clamp: 4;
     line-clamp: 4;
   }
 }
 
+/* Swiper */
 .swiper-featured-selected-image {
   border: 1px solid #00925d;
 }

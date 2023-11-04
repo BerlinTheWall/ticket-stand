@@ -20,7 +20,11 @@ const MovieCardDetail: React.FC<Props> = ({ title, rating, genres, isMd }) => {
       }}
       bottom={isMd ? 6 : 12}
     >
-      <Typography sx={{ fontWeight: "bold", fontSize: "18px" }} component="h3">
+      <Typography
+        sx={{ fontWeight: "bold", fontSize: "18px" }}
+        className={"truncate-1"}
+        component="h3"
+      >
         {title}
       </Typography>
 

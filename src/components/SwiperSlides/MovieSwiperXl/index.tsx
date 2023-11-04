@@ -148,6 +148,7 @@ const MovieSwiperXl: React.FC<Props> = ({ title, movies }) => {
                         fontSize: "18px",
                       }}
                       component="h3"
+                      className="truncate-2"
                     >
                       {movie.original_title}
                     </Typography>

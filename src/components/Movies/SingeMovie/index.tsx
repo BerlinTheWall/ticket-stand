@@ -108,7 +108,7 @@ const SingleMovie: React.FC<Props> = ({ movie }) => {
             <Box>
               <Typography
                 sx={{ fontSize: "3rem", fontWeight: "bold" }}
-                className="truncate"
+                className="truncate-2-4"
                 component="h1"
               >
                 {movie.original_title}

@@ -28,6 +28,7 @@ import Image from "next/image";
 import Images from "@/utils/imageHelper";
 import { THEME_VALUES } from "@/MUI/theme";
 import GenresDrawer from "./GenresDrawer";
+import { PRIMARY } from "@/MUI/Colors";
 
 const PAGES = ["Home", "Discover", "Movie Release"];
 const PROFILE_ITEMS = ["Profile", "Account", "Dashboard", "Logout"];
@@ -184,8 +185,16 @@ const Navbar: React.FC = () => {
               gap={2}
               whiteSpace={"nowrap"}
             >
+              <Button color="secondary" sx={{ px: 0, mx: 0, borderRadius: 20 }}>
+                <SearchIcon
+                  sx={{
+                    cursor: "pointer",
+                    px: 0,
+                    mx: 0,
+                  }}
+                />
+              </Button>
               <ThemeSwitch />
-              <SearchIcon sx={{ cursor: "pointer", marginRight: 1.5 }} />
               <Button variant="outlined" fullWidth color="secondary">
                 Sign up
               </Button>
