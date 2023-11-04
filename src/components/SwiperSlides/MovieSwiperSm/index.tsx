@@ -24,10 +24,10 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
 
   const handleShow = async () => {
     setPages(page + 1);
-    const movie: Movie[] = (await getPopularMovies({
-      page: page,
-    })) as unknown as Movie[];
-    setUpdatedMovies((prevMovies) => [...prevMovies, ...movie]);
+    const { data: movies } = await getPopularMovies({
+      page: page + 1,
+    });
+    setUpdatedMovies((prevMovies) => [...prevMovies, ...movies.results]);
   };
 
   return (

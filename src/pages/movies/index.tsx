@@ -4,13 +4,13 @@ import MainLayout from "@/layout/MainLayout";
 import { GetServerSideProps, NextPage } from "next";
 import { Movie } from "@/types/movie";
 import { getMoviesByGenre } from "@/api/movies";
-import MoviesList from "@/components/MoviesList";
+import MoviesList from "@/components/Movies/MoviesList";
 
 interface Props {
   movies: Movie[];
 }
 
-const MoviePage: NextPage<Props> = ({ movies }) => {
+const MoviesPage: NextPage<Props> = ({ movies }) => {
   return (
     <MainLayout>
       <Box
@@ -19,15 +19,17 @@ const MoviePage: NextPage<Props> = ({ movies }) => {
           minHeight: "100vh",
         }}
       >
-        <MoviesList movies={movies} />
+        <MoviesList initialMovies={movies} />
       </Box>
     </MainLayout>
   );
 };
-export default MoviePage;
+export default MoviesPage;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const movies = await getMoviesByGenre({ with_genres: 28, page: 1 });
+  const { data: movies } = await getMoviesByGenre({ with_genres: 28, page: 1 });
+  // const movie = await getPopularMovies();
+  // console.log(movies);
   return {
     props: {
       movies,

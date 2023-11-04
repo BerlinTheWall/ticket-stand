@@ -9,6 +9,8 @@ import MovieSwiperMd from "@/components/SwiperSlides/MovieSwiperMd";
 import SwiperBanner from "@/components/SwiperSlides/SwiperBanner";
 import MovieSwiperSm from "@/components/SwiperSlides/MovieSwiperSm";
 import MovieSwiperFeatured from "@/components/SwiperSlides/MovieSwiperFeatured";
+import { simpleAxiosApi } from "@/api/newApi";
+import { useEffect } from "react";
 
 interface Props {
   movies: Movie[];
@@ -32,10 +34,11 @@ export default function Home({ movies }: Props) {
 Home.PageLayout = MainLayout;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const movies = await getPopularMovies({ page: 1 });
+  const { data: movies } = await getPopularMovies({ page: 1 });
+  // console.log(movies);
   return {
     props: {
-      movies,
+      movies: movies.results,
     },
   };
 };
