@@ -41,11 +41,10 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
             <SwiperSlide key={movie?.id} style={{ width: "100%" }}>
               <Box width={"100%"} height={600} position={"relative"}>
                 <Image
-                  // src={
-                  //   "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
-                  //   movie.backdrop_path
-                  // }
-                  src={"/assets/images/demo-image.jpg"}
+                  src={
+                    "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
+                    movie.backdrop_path
+                  }
                   alt={movie.original_title}
                   width={10000}
                   height={100}
@@ -94,7 +93,7 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
                       genres={convertMovieGenreIdsToNames(movie.genre_ids)}
                     />
                   </Stack>
-                  <Typography marginTop={1} className="truncate">
+                  <Typography marginTop={1} className="truncate-2-4">
                     {movie.overview}
                   </Typography>
 
