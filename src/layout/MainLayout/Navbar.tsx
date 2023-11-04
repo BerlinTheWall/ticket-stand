@@ -26,7 +26,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import ThemeSwitch from "./themeSwitch";
 import Image from "next/image";
 import Images from "@/utils/imageHelper";
-import { green } from "@mui/material/colors";
+import GenresDrawer from "./GenresDrawer";
 
 const pages = ["Home", "Discover", "Movie Release"];
 const profile = ["Profile", "Account", "Dashboard", "Logout"];
@@ -148,17 +148,32 @@ const Navbar: React.FC = () => {
           </Box>
           {/* MD Items */}
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                sx={{ my: 2, display: "block", fontSize: "14px" }}
-                color="secondary"
-              >
-                {page}
-              </Button>
-            ))}
+            {/* {pages.map((page) => ( */}
+
+            <Button
+              key={0}
+              sx={{ my: 2, display: "block", fontSize: "14px" }}
+              color="secondary"
+            >
+              HOME
+            </Button>
+            {/* <Button
+              key={1}
+              sx={{ my: 2, display: "block", fontSize: "14px" }}
+              color="secondary"
+            > */}
+            <GenresDrawer />
+            {/* </Button> */}
+            <Button
+              key={2}
+              sx={{ my: 2, display: "block", fontSize: "14px" }}
+              color="secondary"
+            >
+              MOVIE RELEASE
+            </Button>
+            {/* ))} */}
           </Box>
-          {/* MD Login btns */}
+          {/* MD Login buttons */}
           {!loginState && (
             <Stack
               sx={{ display: { xs: "none", md: "flex" } }}
@@ -167,8 +182,8 @@ const Navbar: React.FC = () => {
               gap={2}
               whiteSpace={"nowrap"}
             >
-              <ThemeSwitch />
               <SearchIcon sx={{ cursor: "pointer", marginRight: 1.5 }} />
+              <ThemeSwitch />
               <Button variant="outlined" fullWidth color="secondary">
                 Sign up
               </Button>
@@ -203,7 +218,6 @@ const Navbar: React.FC = () => {
               >
                 <SearchIcon />
               </Box>
-
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -245,8 +259,8 @@ const Navbar: React.FC = () => {
               alignItems: "center",
             }}
           >
-            <ThemeSwitch />
             <SearchIcon sx={{ cursor: "pointer" }} fontSize="large" />
+            <ThemeSwitch />
             <MenuRoundedIcon
               onClick={toggleDrawer}
               sx={{ cursor: "pointer" }}
