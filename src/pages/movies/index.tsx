@@ -28,11 +28,10 @@ export default MoviesPage;
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const { data: movies } = await getMoviesByGenre({ with_genres: 28, page: 1 });
-  // const movie = await getPopularMovies();
-  // console.log(movies);
+
   return {
     props: {
-      movies,
+      movies: movies.results,
     },
   };
 };
