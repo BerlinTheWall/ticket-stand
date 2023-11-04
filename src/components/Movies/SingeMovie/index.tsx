@@ -10,6 +10,7 @@ import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 import { convertMinuteToHour } from "@/utils/movieLengthConverter";
+import { PRIMARY } from "@/MUI/Colors";
 
 interface Props {
   movie: Movie;
@@ -44,7 +45,8 @@ const SingleMovie: React.FC<Props> = ({ movie }) => {
             height: "75%",
             borderBottomLeftRadius: "15px",
             borderBottomRightRadius: "15px",
-            background: "linear-gradient(to bottom, transparent 0%, #000 95%)",
+            background: (theme) =>
+              `linear-gradient(to bottom, transparent 0%, ${theme.palette.background.paper} 95%)`,
           }}
         />
         <Box
@@ -56,7 +58,8 @@ const SingleMovie: React.FC<Props> = ({ movie }) => {
             height: "75%",
             borderBottomLeftRadius: "15px",
             borderBottomRightRadius: "15px",
-            background: "linear-gradient(to top, transparent 0%, #000 95%)",
+            background: (theme) =>
+              `linear-gradient(to top, transparent 0%, ${theme.palette.background.paper} 95%)`,
           }}
         />
         <Box
@@ -68,7 +71,8 @@ const SingleMovie: React.FC<Props> = ({ movie }) => {
             height: "100%",
             borderBottomLeftRadius: "15px",
             borderBottomRightRadius: "15px",
-            background: "linear-gradient(to left, transparent 0%, #000 95%)",
+            background: (theme) =>
+              `linear-gradient(to left, transparent 0%, ${theme.palette.background.paper} 95%)`,
           }}
         />
         <Box
@@ -88,7 +92,8 @@ const SingleMovie: React.FC<Props> = ({ movie }) => {
             height="90%"
             position="relative"
             borderRadius="15px"
-            border={"3px solid #00925D"}
+            border="3px solid"
+            borderColor="primary.main"
           >
             <Image
               src={"https://www.themoviedb.org/t/p/w500/" + movie.poster_path}
@@ -100,7 +105,7 @@ const SingleMovie: React.FC<Props> = ({ movie }) => {
                 height: "100%",
                 objectFit: "cover",
                 backgroundPosition: "center center",
-                borderRadius: "15px",
+                borderRadius: "12px",
               }}
             />
           </Box>

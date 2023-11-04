@@ -1,4 +1,11 @@
-import { Box, Divider, Grid, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Divider,
+  Grid,
+  Stack,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import { convertMovieGenreIdsToNames } from "@/utils/genreConverter";
 import GenresList from "@/components/SwiperSlides/GenresList";
@@ -11,10 +18,14 @@ type Props = {
 };
 
 const MovieCard: React.FC<Props> = ({ movie }) => {
+  const isMobileXs = useMediaQuery("(max-width:380px)");
+  const isMobile = useMediaQuery("(min-width:600px)");
+  const isLaptop = useMediaQuery("(max-width:1400px)");
+
   return (
     <Grid
       item
-      height={300}
+      height={!isMobile && !isMobileXs ? 550 : 350}
       xs={10}
       sm={5}
       md={2.5}
@@ -45,7 +56,9 @@ const MovieCard: React.FC<Props> = ({ movie }) => {
           height: "45%",
           borderBottomLeftRadius: "12px",
           borderBottomRightRadius: "12px",
-          background: "linear-gradient(to bottom, transparent 0%, #000 50%)",
+
+          background: (theme) =>
+            `linear-gradient(to bottom, transparent 0%, ${theme.palette.background.paper} 50%)`,
         }}
       />
       <MovieCardDetail
