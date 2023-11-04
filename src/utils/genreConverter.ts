@@ -1,4 +1,5 @@
-import { MovieGenre, SeriesGenre } from "@/types/genres";
+import { MovieGenre, SeriesGenre } from "@/constants/movie-genre";
+import { Genre } from "@/types/genres";
 
 // convert array of genre ids (Movies) to their genre name and return the fist two item
 export const convertMovieGenreIdsToNames = (genreIds: number[]): string[] => {
@@ -11,6 +12,27 @@ export const convertMovieGenreIdsToNames = (genreIds: number[]): string[] => {
       }
     }
   }
+  return genreNames.slice(0, 2);
+};
+
+// convert array of genre ids (Movies) to their genre name and return the fist two item
+export const convertMovieGenreIdArraysToNames = (genres: Genre[]): string[] => {
+  const genreNames: string[] = [];
+  genres.map((genre) => {
+    for (const key in MovieGenre) {
+      if (MovieGenre[key].id === genre.id) {
+        genreNames.push(MovieGenre[key].name);
+        break;
+      }
+    }
+  });
+  // for (const key in MovieGenre) {
+  //   if (MovieGenre[key].id === genreIds.) {
+  //     genreNames.push(MovieGenre[key].name);
+  //     break;
+
+  // }
+  // }
   return genreNames.slice(0, 2);
 };
 
