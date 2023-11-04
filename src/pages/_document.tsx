@@ -9,7 +9,7 @@ import Document, {
 } from "next/document";
 import createEmotionServer from "@emotion/server/create-instance";
 import { AppType } from "next/app";
-import { roboto } from "../utils/theme";
+import { roboto } from "../MUI/theme";
 import createEmotionCache from "../createEmotionCache";
 import { MyAppProps } from "./_app";
 

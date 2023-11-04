@@ -23,13 +23,14 @@ import {
 } from "@mui/material";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import SearchIcon from "@mui/icons-material/Search";
-import ThemeSwitch from "./themeSwitch";
+import ThemeSwitch from "../../components/SwitchTheme";
 import Image from "next/image";
 import Images from "@/utils/imageHelper";
+import { THEME_VALUES } from "@/MUI/theme";
 import GenresDrawer from "./GenresDrawer";
 
-const pages = ["Home", "Discover", "Movie Release"];
-const profile = ["Profile", "Account", "Dashboard", "Logout"];
+const PAGES = ["Home", "Discover", "Movie Release"];
+const PROFILE_ITEMS = ["Profile", "Account", "Dashboard", "Logout"];
 
 const NavbarDrawer = ({ toggleDrawer, loginState, setLoginState }: any) => (
   <Box
@@ -39,7 +40,7 @@ const NavbarDrawer = ({ toggleDrawer, loginState, setLoginState }: any) => (
     width={"200px"}
   >
     <List>
-      {pages.map((text) => (
+      {PAGES.map((text) => (
         <ListItem key={text} disablePadding>
           <ListItemButton>
             <ListItemText
@@ -80,13 +81,10 @@ const NavbarDrawer = ({ toggleDrawer, loginState, setLoginState }: any) => (
     </Box>
     {loginState && (
       <List>
-        {profile.map((text) => (
-          <ListItem key={text} disablePadding>
+        {PROFILE_ITEMS.map((item) => (
+          <ListItem key={item} disablePadding>
             <ListItemButton>
-              <ListItemText
-                primary={text}
-                primaryTypographyProps={{ fontSize: 18 }}
-              />
+              <ListItemText primary={item} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -120,11 +118,11 @@ const Navbar: React.FC = () => {
     <AppBar
       position="fixed"
       sx={{
-        bgcolor: "rgba(22,22,23,0.8)",
+        // bgcolor: "rgba(22,22,23,0.8)",
+        bgcolor: (theme) => `${theme.palette.background.paper}d6`,
         backgroundImage: "none",
         boxShadow: "none",
         paddingX: 0,
-        fliter: "blur(5px)",
       }}
     >
       <Container maxWidth="xl">
@@ -139,7 +137,11 @@ const Navbar: React.FC = () => {
           {/* Logo */}
           <Box sx={{ pt: 1, pl: 2 }}>
             <Image
-              src={Images.LogoWhite}
+              src={
+                theme.palette.mode === THEME_VALUES.dark
+                  ? Images.LogoWhite
+                  : Images.LogoBlack
+              }
               alt={"Logo"}
               width={!isMobile ? 50 : 70}
               height={!isMobile ? 50 : 70}
@@ -182,8 +184,8 @@ const Navbar: React.FC = () => {
               gap={2}
               whiteSpace={"nowrap"}
             >
-              <SearchIcon sx={{ cursor: "pointer", marginRight: 1.5 }} />
               <ThemeSwitch />
+              <SearchIcon sx={{ cursor: "pointer", marginRight: 1.5 }} />
               <Button variant="outlined" fullWidth color="secondary">
                 Sign up
               </Button>
@@ -239,13 +241,13 @@ const Navbar: React.FC = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {profile.map((setting) => (
+                {PROFILE_ITEMS.map((item) => (
                   <MenuItem
-                    key={setting}
+                    key={item}
                     onClick={handleCloseUserMenu}
                     sx={{ px: 2.5, py: 1.25 }}
                   >
-                    <Typography textAlign="center">{setting}</Typography>
+                    <Typography textAlign="center">{item}</Typography>
                   </MenuItem>
                 ))}
               </Menu>

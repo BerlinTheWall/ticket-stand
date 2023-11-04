@@ -121,7 +121,7 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
                     fontWeight="bold"
                     fontSize={27}
                     component="h2"
-                    bgcolor="#00925D"
+                    bgcolor="primary.main"
                     position="absolute"
                     borderRadius="15px 0px"
                     zIndex={999}
@@ -135,7 +135,7 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
                     height={175}
                     position="relative"
                     gap={2}
-                    bgcolor="#000"
+                    bgcolor="background.paper"
                     borderRadius={4}
                     px={0}
                   >
@@ -152,7 +152,8 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
                         height: "100%",
                         objectFit: "cover",
                         backgroundPosition: "center center",
-                        borderRadius: "15px",
+                        borderTopLeftRadius: "15px",
+                        borderBottomLeftRadius: "15px",
                       }}
                     />
                     <Stack direction={"column"} justifyContent={"space-evenly"}>
@@ -160,7 +161,7 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
                         sx={{
                           fontWeight: "bold",
                           fontSize: "12px",
-                          border: "1px solid #FFF",
+                          border: "1px solid",
                           opacity: "0.7",
                           borderRadius: "7px",
                           width: "55px",
@@ -188,7 +189,7 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
                         whiteSpace={"nowrap"}
                       >
                         <StarRateRoundedIcon
-                          sx={{ color: "#f7cf4b", mb: 0.3 }}
+                          sx={{ color: "warning.light", mb: 0.3 }}
                         />
                         <Typography fontWeight={"bold"}>
                           {movie.vote_average}

@@ -89,10 +89,11 @@ const MovieSwiperMd: React.FC<Props> = ({ title, movies }) => {
               <SwiperSlide key={movie?.id} style={{ width: "100%" }}>
                 <Box width="100%" height={250} position="relative">
                   <Image
-                    src={
-                      "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
-                      movie.backdrop_path
-                    }
+                    // src={
+                    //   "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
+                    //   movie.backdrop_path
+                    // }
+                    src={"/assets/images/demo-image.jpg"}
                     alt={movie.original_title}
                     width={1000}
                     height={100}
@@ -101,7 +102,8 @@ const MovieSwiperMd: React.FC<Props> = ({ title, movies }) => {
                       height: "70%",
                       objectFit: "cover",
                       backgroundPosition: "center center",
-                      borderRadius: "15px",
+                      borderTopLeftRadius: "15px",
+                      borderTopRightRadius: "15px",
                     }}
                   />
                   <Box
@@ -113,8 +115,8 @@ const MovieSwiperMd: React.FC<Props> = ({ title, movies }) => {
                       height: "30%",
                       borderBottomLeftRadius: "15px",
                       borderBottomRightRadius: "15px",
-                      background:
-                        "linear-gradient(to bottom, transparent 0%, #000 50%)",
+                      background: (theme) =>
+                        `linear-gradient(to bottom, transparent 0%, ${theme.palette.background.paper} 50%)`,
                     }}
                   />
                   <MovieCardDetail
