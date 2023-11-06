@@ -8,9 +8,9 @@ import {
   getSingleMovie,
   getSingleMovieCredits,
 } from "@/api/movies";
-import SingleMovie from "@/components/Movies/SingeMovie";
+import SingleMovie from "@/components/Movies/SingleMovie";
 import { Credit } from "@/types/credits";
-import Casts from "@/components/Movies/SingeMovie/Credits";
+import Casts from "@/components/Movies/SingleMovie/Credits";
 
 interface Props {
   movie: Movie;
@@ -18,8 +18,6 @@ interface Props {
 }
 
 const MoviePage: NextPage<Props> = ({ movie, credits }) => {
-  console.log(movie);
-  console.log(credits);
   return (
     <MainLayout>
       <Box
@@ -51,7 +49,7 @@ export async function getStaticPaths() {
   const paths = data.results.map((movie: Movie) => ({
     params: { movieId: movie.id.toString() },
   }));
-  console.log(paths);
+  // console.log(paths);
   // We'll pre-render only these paths at build time.
   // { fallback: 'blocking' } will server-render pages
   // on-demand if the path doesn't exist.
@@ -59,7 +57,7 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  console.log(params);
+  // console.log(params);
   const movie = await getSingleMovie(params!.movieId);
   const credits = await getSingleMovieCredits(params!.movieId);
 

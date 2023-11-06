@@ -4,16 +4,14 @@ import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
-import { Cast, Credit } from "@/types/credits";
+import { Cast } from "@/types/credits";
 import Image from "next/image";
-import { grey } from "@mui/material/colors";
 
 interface Props {
   casts: Cast[];
 }
 
 const Casts: React.FC<Props> = ({ casts }) => {
-  console.log(casts);
   return (
     <Box sx={{ paddingX: { sm: 5 } }}>
       <Typography

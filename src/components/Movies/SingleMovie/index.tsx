@@ -1,8 +1,5 @@
-import { Box, Button, Divider, Stack, Typography } from "@mui/material";
-import {
-  convertMovieGenreIdArraysToNames,
-  convertMovieGenreIdsToNames,
-} from "@/utils/genreConverter";
+import { Box, Button, Divider, Grid, Stack, Typography } from "@mui/material";
+import { convertMovieGenreIdArraysToNames } from "@/utils/genreConverter";
 import GenresList from "@/components/SwiperSlides/GenresList";
 import { Movie } from "@/types/movie";
 import Image from "next/image";
@@ -10,14 +7,13 @@ import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 import { convertMinuteToHour } from "@/utils/movieLengthConverter";
-import { PRIMARY } from "@/MUI/Colors";
 
 interface Props {
   movie: Movie;
 }
 
 const SingleMovie: React.FC<Props> = ({ movie }) => {
-  console.log(movie);
+  // console.log(movie);
   return (
     <Box position="relative" height={620}>
       <Box>
@@ -126,7 +122,7 @@ const SingleMovie: React.FC<Props> = ({ movie }) => {
                 whiteSpace="nowrap"
                 sx={{ display: { xs: "none", md: "flex" } }}
               >
-                <StarRateRoundedIcon sx={{ color: "#f7cf4b", mb: 0.3 }} />
+                <StarRateRoundedIcon sx={{ color: "warning.light", mb: 0.3 }} />
                 <Typography fontWeight="bold">
                   {movie.vote_average.toFixed(1)}
                 </Typography>
@@ -157,37 +153,35 @@ const SingleMovie: React.FC<Props> = ({ movie }) => {
                 {movie.overview}
               </Typography>
             </Box>
-
-            <Stack
-              direction="row"
-              alignItems="start"
-              mt={7}
-              gap={2}
-              // width="50%"
-              whiteSpace="nowrap"
-            >
-              <Button
-                variant="contained"
-                fullWidth
-                color="primary"
-                sx={{
-                  fontSize: { xs: "0.7rem", sm: "0.8rem" },
-                }}
-                onClick={() => {}}
-              >
-                <PlayCircleFilledIcon style={{ marginRight: "8px" }} />
-                Watch Trailer
-              </Button>
-              <Button
-                variant="outlined"
-                fullWidth
-                color="secondary"
-                sx={{ fontSize: { xs: "0.7rem", sm: "0.8rem" } }}
-              >
-                <BookmarkBorderIcon style={{ marginRight: "8px" }} /> Add
-                Watchlist
-              </Button>
-            </Stack>
+            <Grid container spacing={2} mt={0.5}>
+              <Grid item sm={6} xs={12}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  onClick={() => {}}
+                  startIcon={<PlayCircleFilledIcon />}
+                  sx={{
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  Watch Trailer
+                </Button>
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  fullWidth
+                  startIcon={<BookmarkBorderIcon />}
+                  sx={{
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  Add WatchList
+                </Button>
+              </Grid>
+            </Grid>
           </Box>
         </Box>
       </Box>

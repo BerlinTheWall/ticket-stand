@@ -28,7 +28,6 @@ import Image from "next/image";
 import Images from "@/utils/imageHelper";
 import { THEME_VALUES } from "@/MUI/theme";
 import GenresDrawer from "./GenresDrawer";
-import { PRIMARY } from "@/MUI/Colors";
 
 const PAGES = ["Home", "Discover", "Movie Release"];
 const PROFILE_ITEMS = ["Profile", "Account", "Dashboard", "Logout"];
@@ -151,8 +150,6 @@ const Navbar: React.FC = () => {
           </Box>
           {/* MD Items */}
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            {/* {pages.map((page) => ( */}
-
             <Button
               key={0}
               sx={{ my: 2, display: "block", fontSize: "14px" }}
@@ -160,13 +157,7 @@ const Navbar: React.FC = () => {
             >
               HOME
             </Button>
-            {/* <Button
-              key={1}
-              sx={{ my: 2, display: "block", fontSize: "14px" }}
-              color="secondary"
-            > */}
             <GenresDrawer />
-            {/* </Button> */}
             <Button
               key={2}
               sx={{ my: 2, display: "block", fontSize: "14px" }}
@@ -174,7 +165,6 @@ const Navbar: React.FC = () => {
             >
               MOVIE RELEASE
             </Button>
-            {/* ))} */}
           </Box>
           {/* MD Login buttons */}
           {!loginState && (
