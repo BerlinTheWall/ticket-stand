@@ -1,14 +1,4 @@
-import {
-  Box,
-  Divider,
-  Grid,
-  Stack,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
-import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
-import { convertMovieGenreIdsToNames } from "@/utils/genreConverter";
-import GenresList from "@/components/SwiperSlides/GenresList";
+import { Box, Grid, useMediaQuery } from "@mui/material";
 import Image from "next/image";
 import { Movie } from "@/types/movie";
 import MovieCardDetail from "../MovieCardDetail";
