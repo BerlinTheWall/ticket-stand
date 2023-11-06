@@ -1,15 +1,13 @@
 import Box from "@mui/material/Box";
-import MainLayout from "@/layout/MainLayout";
-import MovieSwiperXl from "@/components/SwiperSlides/MovieSwiperXl";
+import MainLayout from "@/layout/main-layout";
+import MovieSwiperXl from "@/components/swiper-slides/movie-swiper-xl";
 import { GetServerSideProps } from "next";
 import { getPopularMovies } from "@/api/movies";
 import { Movie } from "@/types/movie";
-import MovieSwiperMd from "@/components/SwiperSlides/MovieSwiperMd";
-import SwiperBanner from "@/components/SwiperSlides/SwiperBanner";
-import MovieSwiperSm from "@/components/SwiperSlides/MovieSwiperSm";
-import MovieSwiperFeatured from "@/components/SwiperSlides/MovieSwiperFeatured";
-import { simpleAxiosApi } from "@/api/newApi";
-import { useEffect } from "react";
+import MovieSwiperMd from "@/components/swiper-slides/movie-swiper-md";
+import SwiperBanner from "@/components/swiper-slides/swiper-banner";
+import MovieSwiperSm from "@/components/swiper-slides/movie-swiper-sm";
+import MovieSwiperFeatured from "@/components/swiper-slides/movie-swiper-featured";
 
 interface Props {
   movies: Movie[];
@@ -34,11 +32,9 @@ Home.PageLayout = MainLayout;
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const { data: movies } = await getPopularMovies({ page: 1 });
-  // console.log(movies);
   return {
     props: {
       movies: movies.results,
     },
   };
 };
-// cdcfcd

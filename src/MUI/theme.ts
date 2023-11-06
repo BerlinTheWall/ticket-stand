@@ -1,7 +1,7 @@
 import { Roboto } from "next/font/google";
 import { createTheme, PaletteOptions } from "@mui/material/styles";
-import { BORDER_RADIUS } from "./BorderRadius";
-import { SPACING } from "./Spacing";
+import { BORDER_RADIUS } from "./border-radius";
+import { SPACING } from "./spacing";
 import {
   BACKGROUND,
   ERROR,
@@ -13,8 +13,8 @@ import {
   TERTIARY,
   TEXT,
   WARNING,
-} from "./Colors";
-import { BOXSHADOW } from "./BoxShadow";
+} from "./colors";
+import { BOXSHADOW } from "./box-shadow";
 export type AllowedTheme = NonNullable<PaletteOptions["mode"]>;
 
 export const DEFAULT_THEME: AllowedTheme = "dark";
