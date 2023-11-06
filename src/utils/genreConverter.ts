@@ -1,12 +1,13 @@
-import { MovieGenreEnum, SeriesGenreEnum } from "@/types/genres";
+import { MovieGenre, SeriesGenre } from "@/constants/movie-genre";
+import { Genre } from "@/types/genres";
 
 // convert array of genre ids (Movies) to their genre name and return the fist two item
 export const convertMovieGenreIdsToNames = (genreIds: number[]): string[] => {
   const genreNames: string[] = [];
   for (const id of genreIds) {
-    for (const key in MovieGenreEnum) {
-      if (MovieGenreEnum[key].id === id) {
-        genreNames.push(MovieGenreEnum[key].name);
+    for (const key in MovieGenre) {
+      if (MovieGenre[key].id === id) {
+        genreNames.push(MovieGenre[key].name);
         break;
       }
     }
@@ -14,12 +15,33 @@ export const convertMovieGenreIdsToNames = (genreIds: number[]): string[] => {
   return genreNames.slice(0, 2);
 };
 
+// convert array of genre ids (Movies) to their genre name and return the fist two item
+export const convertMovieGenreIdArraysToNames = (genres: Genre[]): string[] => {
+  const genreNames: string[] = [];
+  genres.map((genre) => {
+    for (const key in MovieGenre) {
+      if (MovieGenre[key].id === genre.id) {
+        genreNames.push(MovieGenre[key].name);
+        break;
+      }
+    }
+  });
+  // for (const key in MovieGenre) {
+  //   if (MovieGenre[key].id === genreIds.) {
+  //     genreNames.push(MovieGenre[key].name);
+  //     break;
+
+  // }
+  // }
+  return genreNames.slice(0, 2);
+};
+
 // convert array of genre ids (Series - TV Shows) to their genre name and return the fist two item
 const convertSeriesGenreIdsToNames = (genreIds: number[]): string[] => {
   const genreNames: string[] = [];
   for (const id of genreIds) {
-    for (const key in SeriesGenreEnum) {
-      if (SeriesGenreEnum[key].id === id) {
+    for (const key in SeriesGenre) {
+      if (SeriesGenre[key].id === id) {
         genreNames.push(key);
         break;
       }

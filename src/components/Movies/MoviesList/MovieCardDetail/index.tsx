@@ -1,28 +1,27 @@
 import { Box, Divider, Stack, Typography } from "@mui/material";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
-import GenresList from "../GenresList";
 import { convertMovieGenreIdsToNames } from "@/utils/genreConverter";
+import GenresList from "@/components/SwiperSlides/GenresList";
 
 type Props = {
   title: string;
   rating: number;
   genres: number[];
-  isMd?: boolean;
 };
 
-const MovieCardDetail: React.FC<Props> = ({ title, rating, genres, isMd }) => {
+const MovieCardDetail: React.FC<Props> = ({ title, rating, genres }) => {
   return (
     <Box
       sx={{
         width: "100%",
-        px: { xs: "6px", sm: "8px" },
+        px: { xs: "6px", sm: "10px" },
         position: "absolute",
       }}
-      bottom={isMd ? 6 : 12}
+      bottom={6}
     >
       <Typography
         sx={{ fontWeight: "bold", fontSize: "18px" }}
-        className={"truncate-1"}
+        className="truncate-1"
         component="h3"
       >
         {title}

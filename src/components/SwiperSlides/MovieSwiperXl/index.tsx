@@ -107,11 +107,9 @@ const MovieSwiperXl: React.FC<Props> = ({ title, movies }) => {
                   color="text.primary"
                 >
                   <Image
-                    // src={
-                    //   "https://www.themoviedb.org/t/p/w220_and_h330_face" +
-                    //   movie.poster_path
-                    // }
-                    src={"/assets/images/demo-image.jpg"}
+                    src={
+                      "https://www.themoviedb.org/t/p/w500/" + movie.poster_path
+                    }
                     alt={movie.original_title}
                     width={100}
                     height={100}
@@ -150,6 +148,7 @@ const MovieSwiperXl: React.FC<Props> = ({ title, movies }) => {
                         fontSize: "18px",
                       }}
                       component="h3"
+                      className="truncate-2"
                     >
                       {movie.original_title}
                     </Typography>

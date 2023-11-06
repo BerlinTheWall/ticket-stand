@@ -1,3 +1,5 @@
+import { Genre } from "./genres";
+
 export type Movie = {
   id: number;
   title: string;
@@ -9,4 +11,6 @@ export type Movie = {
   poster_path: string;
   vote_average: number;
   adult: boolean;
+  genres: Genre[];
+  runtime: number;
 };

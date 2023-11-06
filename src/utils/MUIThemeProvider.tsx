@@ -1,5 +1,5 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { IChildren } from "@/types/IChildren";
+import { IChildren } from "@/types/componentType/IChildren";
 import { responsiveFontSizes } from "@mui/material/styles";
 import { useContext } from "react";
 import { AppContext } from "@/context/AppContext";

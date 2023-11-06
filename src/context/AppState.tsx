@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { AppContext } from "./AppContext";
 import Cookies from "js-cookie";
-import { IChildren } from "@/types/IChildren";
+import { IChildren } from "@/types/componentType/IChildren";
 import { darkTheme, lightTheme } from "@/MUI/theme";
 
 const AppState = ({ children }: IChildren) => {

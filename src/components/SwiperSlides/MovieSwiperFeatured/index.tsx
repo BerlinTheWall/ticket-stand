@@ -38,12 +38,10 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
     <Box position="relative" marginTop="5rem" height={620}>
       <Box>
         <Image
-          // src={
-          //   "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
-          //   selectedMovie.backdrop_path
-          // }
-
-          src={"/assets/images/demo-image.jpg"}
+          src={
+            "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
+            selectedMovie.backdrop_path
+          }
           alt={selectedMovie.original_title}
           width={10000}
           height={100}
@@ -89,7 +87,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
       >
         <Typography
           sx={{ fontSize: "2.5rem", fontWeight: "bold" }}
-          className="truncate"
+          className="truncate-2-4"
           component="h1"
         >
           {selectedMovie.original_title}
@@ -124,7 +122,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
           />
         </Stack>
         {isMobile && (
-          <Typography marginTop={1} className="truncate">
+          <Typography marginTop={1} className="truncate-2-4">
             {selectedMovie.overview}
           </Typography>
         )}
@@ -244,11 +242,9 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
                   }
                 >
                   <Image
-                    // src={
-                    //   "https://www.themoviedb.org/t/p/w220_and_h330_face" +
-                    //   movie.poster_path
-                    // }
-                    src={"/assets/images/demo-image.jpg"}
+                    src={
+                      "https://www.themoviedb.org/t/p/w500/" + movie.poster_path
+                    }
                     alt={movie.original_title}
                     width={100}
                     height={100}

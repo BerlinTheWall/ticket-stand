@@ -15,6 +15,7 @@ const GenresList: React.FC<Props> = ({ genres }) => {
         overflow: "hidden",
       }}
       component="ul"
+      className="truncate-2-4"
     >
       {genres.map((genre: string, index: number) => {
         return (

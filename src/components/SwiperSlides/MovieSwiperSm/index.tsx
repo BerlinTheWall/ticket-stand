@@ -24,10 +24,10 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
 
   const handleShow = async () => {
     setPages(page + 1);
-    const movie: Movie[] = (await getPopularMovies({
-      page: page,
-    })) as unknown as Movie[];
-    setUpdatedMovies((prevMovies) => [...prevMovies, ...movie]);
+    const { data: movies } = await getPopularMovies({
+      page: page + 1,
+    });
+    setUpdatedMovies((prevMovies) => [...prevMovies, ...movies.results]);
   };
 
   return (
@@ -140,11 +140,10 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
                     px={0}
                   >
                     <Image
-                      // src={
-                      //   "https://www.themoviedb.org/t/p/w220_and_h330_face" +
-                      //   movie.poster_path
-                      // }
-                      src={"/assets/images/demo-image.jpg"}
+                      src={
+                        "https://www.themoviedb.org/t/p/w500/" +
+                        movie.poster_path
+                      }
                       alt={movie.original_title}
                       width={100}
                       height={100}

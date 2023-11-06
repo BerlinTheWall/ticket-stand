@@ -27,6 +27,7 @@ import ThemeSwitch from "../../components/SwitchTheme";
 import Image from "next/image";
 import Images from "@/utils/imageHelper";
 import { THEME_VALUES } from "@/MUI/theme";
+import GenresDrawer from "./GenresDrawer";
 
 const PAGES = ["Home", "Discover", "Movie Release"];
 const PROFILE_ITEMS = ["Profile", "Account", "Dashboard", "Logout"];
@@ -36,13 +37,16 @@ const NavbarDrawer = ({ toggleDrawer, loginState, setLoginState }: any) => (
     role="menubar"
     onClick={toggleDrawer}
     onKeyDown={toggleDrawer}
-    width={"150px"}
+    width={"200px"}
   >
     <List>
       {PAGES.map((text) => (
         <ListItem key={text} disablePadding>
           <ListItemButton>
-            <ListItemText primary={text} />
+            <ListItemText
+              primary={text}
+              primaryTypographyProps={{ fontSize: 18 }}
+            />
           </ListItemButton>
         </ListItem>
       ))}
@@ -57,13 +61,19 @@ const NavbarDrawer = ({ toggleDrawer, loginState, setLoginState }: any) => (
         gap: 1,
       }}
     >
-      <Button variant="outlined" fullWidth color="secondary">
+      <Button
+        variant="outlined"
+        fullWidth
+        sx={{ fontSize: 15 }}
+        color="secondary"
+      >
         Sign up
       </Button>
       <Button
         variant="contained"
         fullWidth
         color="primary"
+        sx={{ fontSize: 15 }}
         onClick={() => setLoginState(true)}
       >
         Login
@@ -136,22 +146,27 @@ const Navbar: React.FC = () => {
               width={!isMobile ? 50 : 70}
               height={!isMobile ? 50 : 70}
               style={{ cursor: "pointer" }}
-              onClick={() => {}}
             />
           </Box>
           {/* MD Items */}
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            {PAGES.map((page) => (
-              <Button
-                key={page}
-                sx={{ my: 2, display: "block", fontSize: "14px" }}
-                color="secondary"
-              >
-                {page}
-              </Button>
-            ))}
+            <Button
+              key={0}
+              sx={{ my: 2, display: "block", fontSize: "14px" }}
+              color="secondary"
+            >
+              HOME
+            </Button>
+            <GenresDrawer />
+            <Button
+              key={2}
+              sx={{ my: 2, display: "block", fontSize: "14px" }}
+              color="secondary"
+            >
+              MOVIE RELEASE
+            </Button>
           </Box>
-          {/* MD Login btns */}
+          {/* MD Login buttons */}
           {!loginState && (
             <Stack
               sx={{ display: { xs: "none", md: "flex" } }}
@@ -160,14 +175,16 @@ const Navbar: React.FC = () => {
               gap={2}
               whiteSpace={"nowrap"}
             >
+              <Button color="secondary" sx={{ px: 0, mx: 0, borderRadius: 20 }}>
+                <SearchIcon
+                  sx={{
+                    cursor: "pointer",
+                    px: 0,
+                    mx: 0,
+                  }}
+                />
+              </Button>
               <ThemeSwitch />
-              <SearchIcon
-                sx={{
-                  cursor: "pointer",
-                  marginRight: 1.5,
-                  color: "text.primary",
-                }}
-              />
               <Button variant="outlined" fullWidth color="secondary">
                 Sign up
               </Button>
@@ -202,7 +219,6 @@ const Navbar: React.FC = () => {
               >
                 <SearchIcon />
               </Box>
-
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -244,8 +260,8 @@ const Navbar: React.FC = () => {
               alignItems: "center",
             }}
           >
-            <ThemeSwitch />
             <SearchIcon sx={{ cursor: "pointer" }} fontSize="large" />
+            <ThemeSwitch />
             <MenuRoundedIcon
               onClick={toggleDrawer}
               sx={{ cursor: "pointer" }}

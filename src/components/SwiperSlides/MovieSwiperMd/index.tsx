@@ -89,11 +89,10 @@ const MovieSwiperMd: React.FC<Props> = ({ title, movies }) => {
               <SwiperSlide key={movie?.id} style={{ width: "100%" }}>
                 <Box width="100%" height={250} position="relative">
                   <Image
-                    // src={
-                    //   "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
-                    //   movie.backdrop_path
-                    // }
-                    src={"/assets/images/demo-image.jpg"}
+                    src={
+                      "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
+                      movie.backdrop_path
+                    }
                     alt={movie.original_title}
                     width={1000}
                     height={100}
