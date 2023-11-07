@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { AppContext } from "./AppContext";
 import Cookies from "js-cookie";
-import { IChildren } from "@/types/componentType/IChildren";
-import { darkTheme, lightTheme } from "@/MUI/theme";
+import { IChildren } from "@/types/component-type/IChildren";
+import { darkTheme, lightTheme } from "@/mui/theme";
 
 const AppState = ({ children }: IChildren) => {
   const [mode, setMode] = useState(Cookies.get("mode") ?? "dark");

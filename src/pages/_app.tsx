@@ -2,9 +2,9 @@ import * as React from "react";
 import Head from "next/head";
 import { AppProps } from "next/app";
 import { CacheProvider, EmotionCache } from "@emotion/react";
-import createEmotionCache from "../createEmotionCache";
+import createEmotionCache from "../helper/create-emotion-cache";
 import AppState from "@/context/AppState";
-import MUIThemeProvider from "@/utils/MUIThemeProvider";
+import MUIThemeProvider from "@/utils/mui-theme-provider";
 import "../styles/globals.css";
 import "swiper/css";
 

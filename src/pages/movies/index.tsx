@@ -1,10 +1,10 @@
 import Box from "@mui/material/Box";
-import MainLayout from "@/layout/MainLayout";
+import MainLayout from "@/layout/main-layout";
 
 import { GetServerSideProps, NextPage } from "next";
 import { Movie } from "@/types/movie";
 import { getMoviesByGenre } from "@/api/movies";
-import MoviesList from "@/components/Movies/MoviesList";
+import MoviesList from "@/components/movies/movies-list";
 
 interface Props {
   movies: Movie[];

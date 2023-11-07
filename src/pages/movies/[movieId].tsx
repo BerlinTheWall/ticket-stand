@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import MainLayout from "@/layout/MainLayout";
+import MainLayout from "@/layout/main-layout";
 
 import { GetStaticProps, NextPage } from "next";
 import { Movie } from "@/types/movie";
@@ -8,9 +8,9 @@ import {
   getSingleMovie,
   getSingleMovieCredits,
 } from "@/api/movies";
-import SingleMovie from "@/components/Movies/SingleMovie";
+import SingleMovie from "@/components/movies/single-movie";
 import { Credit } from "@/types/credits";
-import Casts from "@/components/Movies/SingleMovie/Credits";
+import Casts from "@/components/movies/single-movie/credits";
 
 interface Props {
   movie: Movie;
