@@ -1,6 +1,6 @@
 import { Grid, Pagination, Typography, useMediaQuery } from "@mui/material";
 import { Movie } from "@/types/movie";
-import MovieCard from "./movie-card";
+import MovieCard from "../movie-card";
 import { useCallback, useEffect, useState } from "react";
 import { getMoviesByGenre } from "@/api/movies";
 
@@ -10,27 +10,27 @@ type Props = {
 
 const MoviesList: React.FC<Props> = ({ initialMovies }) => {
   const isMobile = useMediaQuery("(max-width:600px)");
-  const [page, setPage] = useState<number>(1);
-  const [movies, setMovies] = useState<Movie[]>(initialMovies);
+  // const [page, setPage] = useState<number>(1);
+  // const [movies, setMovies] = useState<Movie[]>(initialMovies);
 
-  const fetchMovies = useCallback(() => {
-    getMoviesByGenre({ with_genres: 28, page: page })
-      .then((movies) => {
-        console.log(movies);
-        setMovies(movies.data.results);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [page]);
+  // const fetchMovies = useCallback(() => {
+  //   getMoviesByGenre({ with_genres: 28, page: page })
+  //     .then((movies) => {
+  //       console.log(movies);
+  //       setMovies(movies.data.results);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }, [page]);
 
-  useEffect(() => {
-    fetchMovies();
-  }, [fetchMovies, page]);
+  // useEffect(() => {
+  //   fetchMovies();
+  // }, [fetchMovies, page]);
 
-  const handleChange = (event: any, value: number) => {
-    setPage(value);
-  };
+  // const handleChange = (event: any, value: number) => {
+  //   setPage(value);
+  // };
 
   return (
     <>
@@ -43,7 +43,7 @@ const MoviesList: React.FC<Props> = ({ initialMovies }) => {
       >
         All Movies
       </Typography>
-      <Grid container justifyContent="center">
+      {/* <Grid container justifyContent="center">
         {movies.map((movie) => {
           return <MovieCard key={movie.id} movie={movie} />;
         })}
@@ -55,7 +55,7 @@ const MoviesList: React.FC<Props> = ({ initialMovies }) => {
           siblingCount={isMobile ? 0 : 1}
           onChange={handleChange}
         />
-      </Grid>
+      </Grid> */}
     </>
   );
 };
