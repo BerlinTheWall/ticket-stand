@@ -1,12 +1,14 @@
 import * as React from "react";
 import Head from "next/head";
 import { AppProps } from "next/app";
+import NextNProgress from "nextjs-progressbar";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import createEmotionCache from "../helper/create-emotion-cache";
 import AppState from "@/context/AppState";
 import MUIThemeProvider from "@/utils/mui-theme-provider";
 import "../styles/globals.css";
 import "swiper/css";
+import { lightTheme } from "@/mui/theme";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -28,12 +30,12 @@ export default function MyApp(props: MyAppProps) {
         </Head>
 
         <MUIThemeProvider>
-          {/* <NextNProgress
-            height={8}
+          <NextNProgress
+            height={4}
             color={lightTheme.palette.primary.main}
             showOnShallow={true}
             startPosition={0.3}
-          /> */}
+          />
           {Component.PageLayout ? (
             <Component.PageLayout>
               <Component {...pageProps} />
