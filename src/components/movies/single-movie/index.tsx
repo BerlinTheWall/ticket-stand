@@ -113,7 +113,12 @@ const SingleMovie: React.FC<Props> = ({ movie }) => {
             />
           </Box>
         )}
-        <Box sx={{ width: { xs: "100%", sm: "65%" } }} paddingTop={5}>
+        <Box
+          sx={{
+            width: { xs: "100%", sm: "65%" },
+            paddingTop: { xs: 0, md: 5 },
+          }}
+        >
           <Box>
             <Typography
               sx={{ fontSize: "3rem", fontWeight: "bold" }}

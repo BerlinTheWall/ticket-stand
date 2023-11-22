@@ -53,11 +53,11 @@ const Casts: React.FC<Props> = ({ casts }) => {
           style={{ position: "relative" }}
           breakpoints={{
             320: {
-              slidesPerView: 1,
+              slidesPerView: 1.5,
               spaceBetween: 20,
             },
             400: {
-              slidesPerView: 1.25,
+              slidesPerView: 2,
               spaceBetween: 20,
             },
             500: {

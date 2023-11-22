@@ -108,111 +108,106 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
         >
           {updatedMovies?.map((movie: Movie, index) => {
             return (
-              <>
-                <SwiperSlide
-                  key={movie.id}
-                  style={{ width: "100%", display: "flex" }}
-                >
-                  <Link href={`/movies/${movie.id}`} style={{ width: "100%" }}>
-                    <Typography
-                      top={-1.5}
-                      left={0}
-                      textAlign="center"
-                      width="50px"
-                      height="41px"
-                      fontWeight="bold"
-                      fontSize={27}
-                      component="h2"
-                      bgcolor="primary.main"
-                      position="absolute"
-                      borderRadius="15px 0px"
-                      zIndex={999}
-                    >
-                      {++index}
-                    </Typography>
-                    <Stack
-                      direction="row"
-                      justifyItems="center"
-                      width="100%"
-                      height={175}
-                      position="relative"
-                      gap={2}
-                      bgcolor="background.paper"
-                      borderRadius={4}
-                      px={0}
-                    >
-                      <Image
-                        src={
-                          "https://www.themoviedb.org/t/p/w500/" +
-                          movie.poster_path
-                        }
-                        alt={movie.original_title}
-                        width={100}
-                        height={100}
-                        style={{
-                          width: "35%",
-                          height: "100%",
-                          objectFit: "cover",
-                          backgroundPosition: "center center",
-                          borderTopLeftRadius: "15px",
-                          borderBottomLeftRadius: "15px",
+              <SwiperSlide
+                key={movie.id}
+                style={{ width: "100%", display: "flex" }}
+              >
+                <Link href={`/movies/${movie.id}`} style={{ width: "100%" }}>
+                  <Typography
+                    top={-1.5}
+                    left={0}
+                    textAlign="center"
+                    width="50px"
+                    height="41px"
+                    fontWeight="bold"
+                    fontSize={27}
+                    component="h2"
+                    bgcolor="primary.main"
+                    position="absolute"
+                    borderRadius="15px 0px"
+                    zIndex={999}
+                  >
+                    {++index}
+                  </Typography>
+                  <Stack
+                    direction="row"
+                    justifyItems="center"
+                    width="100%"
+                    height={175}
+                    position="relative"
+                    gap={2}
+                    bgcolor="background.paper"
+                    borderRadius={4}
+                    px={0}
+                  >
+                    <Image
+                      src={
+                        "https://www.themoviedb.org/t/p/w500/" +
+                        movie.poster_path
+                      }
+                      alt={movie.original_title}
+                      width={100}
+                      height={100}
+                      style={{
+                        width: "35%",
+                        height: "100%",
+                        objectFit: "cover",
+                        backgroundPosition: "center center",
+                        borderTopLeftRadius: "15px",
+                        borderBottomLeftRadius: "15px",
+                      }}
+                    />
+                    <Stack direction={"column"} justifyContent={"space-evenly"}>
+                      <Typography
+                        sx={{
+                          fontWeight: "bold",
+                          fontSize: "12px",
+                          border: "1px solid",
+                          opacity: "0.7",
+                          borderRadius: "7px",
+                          width: "55px",
+                          px: 1,
+                          display: !movie.adult ? "block" : "none",
                         }}
+                        component="h3"
+                      >
+                        PG-13
+                      </Typography>
+                      <Typography
+                        sx={{ fontWeight: "bold", fontSize: "1rem" }}
+                        component="h3"
+                      >
+                        {movie.original_title}
+                      </Typography>
+                      <GenresList
+                        genres={convertMovieGenreIdsToNames(movie.genre_ids)}
                       />
                       <Stack
-                        direction={"column"}
-                        justifyContent={"space-evenly"}
+                        direction={"row"}
+                        alignItems={"center"}
+                        gap={1}
+                        mt={1}
+                        whiteSpace={"nowrap"}
                       >
-                        <Typography
-                          sx={{
-                            fontWeight: "bold",
-                            fontSize: "12px",
-                            border: "1px solid",
-                            opacity: "0.7",
-                            borderRadius: "7px",
-                            width: "55px",
-                            px: 1,
-                            display: !movie.adult ? "block" : "none",
-                          }}
-                          component="h3"
-                        >
-                          PG-13
-                        </Typography>
-                        <Typography
-                          sx={{ fontWeight: "bold", fontSize: "1rem" }}
-                          component="h3"
-                        >
-                          {movie.original_title}
-                        </Typography>
-                        <GenresList
-                          genres={convertMovieGenreIdsToNames(movie.genre_ids)}
+                        <StarRateRoundedIcon
+                          sx={{ color: "warning.light", mb: 0.3 }}
                         />
-                        <Stack
-                          direction={"row"}
-                          alignItems={"center"}
-                          gap={1}
-                          mt={1}
-                          whiteSpace={"nowrap"}
-                        >
-                          <StarRateRoundedIcon
-                            sx={{ color: "warning.light", mb: 0.3 }}
-                          />
-                          <Typography fontWeight={"bold"}>
-                            {movie.vote_average.toFixed(1)}
-                          </Typography>
-                          <Divider
-                            orientation="vertical"
-                            flexItem
-                            sx={{ borderRightWidth: "2px", color: "gray" }}
-                          />
-                          <Typography fontWeight={"bold"}>
-                            {movie.release_date.slice(0, 4)}
-                          </Typography>
-                        </Stack>
+                        <Typography fontWeight={"bold"}>
+                          {movie.vote_average.toFixed(1)}
+                        </Typography>
+                        <Divider
+                          orientation="vertical"
+                          flexItem
+                          sx={{ borderRightWidth: "2px", color: "gray" }}
+                        />
+                        <Typography fontWeight={"bold"}>
+                          {movie.release_date.slice(0, 4)}
+                        </Typography>
                       </Stack>
                     </Stack>
-                  </Link>
-                </SwiperSlide>
-              </>
+                  </Stack>
+                </Link>
+              </SwiperSlide>
             );
           })}
         </Swiper>
