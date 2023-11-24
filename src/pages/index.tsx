@@ -19,7 +19,7 @@ export default function Home({ movies }: Props) {
         minHeight: "100vh",
       }}
     >
-      {/* <SwiperBanner movies={movies} /> */}
+      <SwiperBanner movies={movies} />
       {/* <MovieSwiperXl title="Just Release" movies={movies} /> */}
       {/* <MovieSwiperSm title="Movies" movies={movies} /> */}
       {/* <MovieSwiperFeatured movies={movies} /> */}
