@@ -20,10 +20,10 @@ export default function Home({ movies }: Props) {
       }}
     >
       <SwiperBanner movies={movies} />
-      {/* <MovieSwiperXl title="Just Release" movies={movies} /> */}
-      {/* <MovieSwiperSm title="Movies" movies={movies} /> */}
-      {/* <MovieSwiperFeatured movies={movies} /> */}
-      {/* <MovieSwiperMd title="Movies" movies={movies} /> */}
+      <MovieSwiperXl title="Just Release" movies={movies} />
+      <MovieSwiperSm title="Movies" movies={movies} />
+      <MovieSwiperFeatured movies={movies} />
+      <MovieSwiperMd title="Movies" movies={movies} />
     </Box>
   );
 }
