@@ -16,7 +16,7 @@ const MainLayout: React.FC<Props> = ({ children }) => {
         color: "text.primary",
       }}
     >
-      {/* <Navbar /> */}
+      <Navbar />
       <Box component={"main"}>{children}</Box>
       <Footer />
     </Box>
