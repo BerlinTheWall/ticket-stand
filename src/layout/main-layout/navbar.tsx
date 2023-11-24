@@ -158,6 +158,8 @@ const Navbar: React.FC = () => {
                 width={!isMobile ? 50 : 70}
                 height={!isMobile ? 50 : 70}
                 style={{ cursor: "pointer" }}
+                priority
+                loading="eager"
               />
             </Box>
             {/* MD Items */}
