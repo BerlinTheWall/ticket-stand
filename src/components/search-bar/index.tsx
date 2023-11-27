@@ -80,6 +80,9 @@ const SearchBar: React.FC = () => {
             name={"score"}
             control={control}
             label={"IMDB Rating"}
+            step={1}
+            min={0}
+            max={10}
           />
         </Grid>
         <Grid item lg={true} md={2} xs={12} alignSelf={"center"}>

@@ -1,15 +1,22 @@
 import { useController } from "react-hook-form";
-import TextField from "@mui/material/TextField";
 import { FormInputProps } from "./input-props";
 import { Box, Slider, Typography } from "@mui/material";
-import { useState } from "react";
+
+interface Props extends FormInputProps {
+  step: number;
+  min: number;
+  max: number;
+}
 
 export const FormInputSlider = ({
   name,
   control,
   label,
   rules,
-}: FormInputProps) => {
+  step,
+  min,
+  max,
+}: Props) => {
   const {
     field: { onChange, value },
     fieldState: { error },
@@ -17,7 +24,7 @@ export const FormInputSlider = ({
     name,
     control,
     rules,
-    defaultValue: [0, 10],
+    defaultValue: [min, max],
   });
 
   return (
@@ -35,10 +42,10 @@ export const FormInputSlider = ({
         value={value}
         onChange={onChange}
         valueLabelDisplay="auto"
-        step={1}
+        step={step}
         marks
-        min={0}
-        max={10}
+        min={min}
+        max={max}
       />
     </Box>
   );

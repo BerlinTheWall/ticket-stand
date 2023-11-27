@@ -7,7 +7,6 @@ export interface FormInputProps {
   inputType?: string;
   options?: Genre[];
   selectedDropdownText?: string;
-  ref?: any;
   setValue?: any;
   rules?: any;
 }

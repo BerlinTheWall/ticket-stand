@@ -41,7 +41,7 @@ export const FormInputSelect: React.FC<FormInputProps> = ({
       defaultValue={""}
     >
       <MenuItem value={""} disabled>
-        {selectedDropdownText ? selectedDropdownText : "Select"}
+        {selectedDropdownText ? selectedDropdownText : label}
       </MenuItem>
       {generateSingleOption()}
     </TextField>
