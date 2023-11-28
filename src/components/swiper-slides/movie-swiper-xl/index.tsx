@@ -9,6 +9,7 @@ import { Movie } from "@/types/movie";
 import NextPrevEl from "../next-prev-button";
 import GenresList from "../genres-list";
 import { convertMovieGenreIdsToNames } from "@/utils/genre-converter";
+import Link from "next/link";
 
 interface Props {
   title: string;
@@ -99,64 +100,67 @@ const MovieSwiperXl: React.FC<Props> = ({ title, movies }) => {
         >
           {movies?.map((movie: Movie) => {
             return (
-              <SwiperSlide key={movie?.id} style={{ width: "100%" }}>
-                <Box
-                  width={"100%"}
-                  height={300}
-                  position={"relative"}
-                  color="text.primary"
-                >
-                  <Image
-                    src={
-                      "https://www.themoviedb.org/t/p/w500/" + movie.poster_path
-                    }
-                    alt={movie.original_title}
-                    width={100}
-                    height={100}
-                    style={{
-                      width: "100%",
-                      height: "90%",
-                      objectFit: "cover",
-                      backgroundPosition: "center center",
-                      borderRadius: "15px",
-                    }}
-                  />
+              <SwiperSlide key={movie.id} style={{ width: "100%" }}>
+                <Link href={`/movies/${movie.id}`}>
                   <Box
-                    sx={{
-                      position: "absolute",
-                      bottom: 0,
-                      left: 0,
-                      width: "100%",
-                      height: "35%",
-                      borderBottomLeftRadius: "15px",
-                      borderBottomRightRadius: "15px",
-                      background: (theme) =>
-                        `linear-gradient(to bottom, transparent 0%, ${theme.palette.background.paper} 20%)`,
-                    }}
-                  />
-                  <Box
-                    sx={{
-                      width: "100%",
-                      px: "8px",
-                      bottom: 12,
-                      position: "absolute",
-                    }}
+                    width={"100%"}
+                    height={300}
+                    position={"relative"}
+                    color="text.primary"
                   >
-                    <Typography
-                      sx={{
-                        fontWeight: "bold",
-                        fontSize: "18px",
+                    <Image
+                      src={
+                        "https://www.themoviedb.org/t/p/w500/" +
+                        movie.poster_path
+                      }
+                      alt={movie.original_title}
+                      width={100}
+                      height={100}
+                      style={{
+                        width: "100%",
+                        height: "90%",
+                        objectFit: "cover",
+                        backgroundPosition: "center center",
+                        borderRadius: "15px",
                       }}
-                      component="h3"
-                      className="truncate-2"
-                    >
-                      {movie.original_title}
-                    </Typography>
-                    <GenresList
-                      genres={convertMovieGenreIdsToNames(movie.genre_ids)}
                     />
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        bottom: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "35%",
+                        borderBottomLeftRadius: "15px",
+                        borderBottomRightRadius: "15px",
+                        background: (theme) =>
+                          `linear-gradient(to bottom, transparent 0%, ${theme.palette.background.paper} 20%)`,
+                      }}
+                    />
+                    <Box
+                      sx={{
+                        width: "100%",
+                        px: "8px",
+                        bottom: 12,
+                        position: "absolute",
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontWeight: "bold",
+                          fontSize: "18px",
+                        }}
+                        component="h3"
+                        className="truncate-2"
+                      >
+                        {movie.original_title}
+                      </Typography>
+                      <GenresList
+                        genres={convertMovieGenreIdsToNames(movie.genre_ids)}
+                      />
+                    </Box>
                   </Box>
-                </Box>
+                </Link>
               </SwiperSlide>
             );
           })}

@@ -44,7 +44,9 @@ export const getMoviesByGenre = async (
   }
 };
 
-export const getSingleMovie = async (movieId: any): Promise<any> => {
+export const getSingleMovie = async (
+  movieId: any
+): Promise<AxiosResponse<Movie>> => {
   try {
     const res = await simpleAxiosApi({
       url: `/movie/${movieId}`,

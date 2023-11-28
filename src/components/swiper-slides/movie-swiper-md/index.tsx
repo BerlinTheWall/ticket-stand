@@ -8,6 +8,7 @@ import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 import { Movie } from "@/types/movie";
 import NextPrevEl from "../next-prev-button";
+import Link from "next/link";
 
 interface Props {
   title: string;
@@ -86,45 +87,47 @@ const MovieSwiperMd: React.FC<Props> = ({ title, movies }) => {
         >
           {movies?.map((movie: Movie) => {
             return (
-              <SwiperSlide key={movie?.id} style={{ width: "100%" }}>
-                <Box width="100%" height={250} position="relative">
-                  <Image
-                    src={
-                      "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
-                      movie.backdrop_path
-                    }
-                    alt={movie.original_title}
-                    width={1000}
-                    height={100}
-                    style={{
-                      width: "100%",
-                      height: "70%",
-                      objectFit: "cover",
-                      backgroundPosition: "center center",
-                      borderTopLeftRadius: "15px",
-                      borderTopRightRadius: "15px",
-                    }}
-                  />
-                  <Box
-                    sx={{
-                      position: "absolute",
-                      bottom: 0,
-                      left: 0,
-                      width: "100%",
-                      height: "30%",
-                      borderBottomLeftRadius: "15px",
-                      borderBottomRightRadius: "15px",
-                      background: (theme) =>
-                        `linear-gradient(to bottom, transparent 0%, ${theme.palette.background.paper} 50%)`,
-                    }}
-                  />
-                  <MovieCardDetail
-                    isMd
-                    title={movie.original_title}
-                    rating={movie.vote_average}
-                    genres={movie.genre_ids}
-                  />
-                </Box>
+              <SwiperSlide key={movie.id} style={{ width: "100%" }}>
+                <Link href={`/movies/${movie.id}`}>
+                  <Box width="100%" height={250} position="relative">
+                    <Image
+                      src={
+                        "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
+                        movie.backdrop_path
+                      }
+                      alt={movie.original_title}
+                      width={1000}
+                      height={100}
+                      style={{
+                        width: "100%",
+                        height: "70%",
+                        objectFit: "cover",
+                        backgroundPosition: "center center",
+                        borderTopLeftRadius: "15px",
+                        borderTopRightRadius: "15px",
+                      }}
+                    />
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        bottom: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "30%",
+                        borderBottomLeftRadius: "15px",
+                        borderBottomRightRadius: "15px",
+                        background: (theme) =>
+                          `linear-gradient(to bottom, transparent 0%, ${theme.palette.background.paper} 50%)`,
+                      }}
+                    />
+                    <MovieCardDetail
+                      isMd
+                      title={movie.original_title}
+                      rating={movie.vote_average}
+                      genres={movie.genre_ids}
+                    />
+                  </Box>
+                </Link>
               </SwiperSlide>
             );
           })}

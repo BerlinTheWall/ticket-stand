@@ -1,4 +1,12 @@
-import { Box, Button, Divider, Grid, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  Grid,
+  Stack,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import { Autoplay, Pagination, EffectFade } from "swiper/modules";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
@@ -16,6 +24,8 @@ type Props = {
 };
 
 const SwiperBanner: React.FC<Props> = ({ movies }) => {
+  const isMobile = useMediaQuery("(min-width:600px)");
+
   return (
     <Box sx={{ paddingBottom: 5 }}>
       <Swiper
@@ -69,12 +79,15 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
                   }}
                   component="div"
                 >
+                  <Typography component="h2" fontWeight="bold" fontSize={34}>
+                    {movie.title}
+                  </Typography>
                   <Stack direction="row" alignItems="center" gap={1} mt={1}>
                     <StarRateRoundedIcon
                       sx={{ color: "warning.light", mb: 0.3 }}
                     />
                     <Typography fontWeight="bold">
-                      {movie.vote_average}
+                      {movie.vote_average.toFixed(1)}
                     </Typography>
                     <Divider
                       orientation="vertical"
@@ -93,12 +106,14 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
                       genres={convertMovieGenreIdsToNames(movie.genre_ids)}
                     />
                   </Stack>
-                  <Typography marginTop={1} className="truncate-2-4">
-                    {movie.overview}
-                  </Typography>
+                  {isMobile && (
+                    <Typography sx={{ mt: 1 }} className="truncate-2-4">
+                      {movie.overview}
+                    </Typography>
+                  )}
 
                   <Grid container spacing={2} mt={0.5}>
-                    <Grid item sm={6} xs={12}>
+                    <Grid item sm={6} xs={6}>
                       <Button
                         variant="contained"
                         color="primary"
@@ -112,7 +127,7 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
                         Watch Trailer
                       </Button>
                     </Grid>
-                    <Grid item sm={6} xs={12}>
+                    <Grid item sm={6} xs={6}>
                       <Button
                         variant="outlined"
                         color="secondary"

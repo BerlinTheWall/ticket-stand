@@ -225,7 +225,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
           {movies?.map((movie: Movie) => {
             return (
               <SwiperSlide
-                key={movie?.id}
+                key={movie.id}
                 style={{ width: "100%" }}
                 onClick={() => handleSelectMovie(movie)}
               >

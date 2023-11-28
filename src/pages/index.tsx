@@ -8,6 +8,7 @@ import MovieSwiperMd from "@/components/swiper-slides/movie-swiper-md";
 import SwiperBanner from "@/components/swiper-slides/swiper-banner";
 import MovieSwiperSm from "@/components/swiper-slides/movie-swiper-sm";
 import MovieSwiperFeatured from "@/components/swiper-slides/movie-swiper-featured";
+import SearchBar from "@/components/search-bar";
 
 interface Props {
   movies: Movie[];
@@ -20,6 +21,7 @@ export default function Home({ movies }: Props) {
       }}
     >
       <SwiperBanner movies={movies} />
+      <SearchBar />
       <MovieSwiperXl title="Just Release" movies={movies} />
       <MovieSwiperSm title="Movies" movies={movies} />
       <MovieSwiperFeatured movies={movies} />

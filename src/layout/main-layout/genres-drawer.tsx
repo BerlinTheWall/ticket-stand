@@ -33,8 +33,10 @@ const GenresDrawer: React.FC = ({ item }: any) => {
                         pl: 1,
                         cursor: "pointer",
                         borderLeft: `2px solid ${theme.palette.primary.main}`,
+                        transition: "padding-left 0.2s ease-in-out",
                         ":hover": {
                           pl: 1.5,
+                          color: theme.palette.primary.main,
                         },
                       }}
                       onClick={() => {

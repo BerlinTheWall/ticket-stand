@@ -12,9 +12,10 @@ import GenresList from "../genres-list";
 import { convertMovieGenreIdsToNames } from "@/utils/genre-converter";
 import { useState } from "react";
 import { getPopularMovies } from "@/api/movies";
+import Link from "next/link";
 
 interface Props {
-  title: string;
+  title?: string;
   movies: Movie[];
 }
 
@@ -107,11 +108,11 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
         >
           {updatedMovies?.map((movie: Movie, index) => {
             return (
-              <>
-                <SwiperSlide
-                  key={movie?.id}
-                  style={{ width: "100%", display: "flex" }}
-                >
+              <SwiperSlide
+                key={movie.id}
+                style={{ width: "100%", display: "flex" }}
+              >
+                <Link href={`/movies/${movie.id}`} style={{ width: "100%" }}>
                   <Typography
                     top={-1.5}
                     left={0}
@@ -192,7 +193,7 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
                           sx={{ color: "warning.light", mb: 0.3 }}
                         />
                         <Typography fontWeight={"bold"}>
-                          {movie.vote_average}
+                          {movie.vote_average.toFixed(1)}
                         </Typography>
                         <Divider
                           orientation="vertical"
@@ -205,8 +206,8 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
                       </Stack>
                     </Stack>
                   </Stack>
-                </SwiperSlide>
-              </>
+                </Link>
+              </SwiperSlide>
             );
           })}
         </Swiper>
