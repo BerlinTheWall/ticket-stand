@@ -10,7 +10,7 @@ import {
 } from "@/api/movies";
 import SingleMovie from "@/components/movies/single-movie";
 import { Credit } from "@/types/credits";
-import Casts from "@/components/movies/single-movie/credits";
+import Credits from "@/components/movies/single-movie/credits";
 import MovieSwiperSm from "@/components/swiper-slides/movie-swiper-sm";
 
 interface Props {
@@ -28,7 +28,7 @@ const MoviePage: NextPage<Props> = ({ movie, credits, movies }) => {
         }}
       >
         <SingleMovie movie={movie} />
-        <Casts casts={credits.cast} />
+        <Credits casts={credits.cast} />
         <Box sx={{ mt: 10 }}>
           <MovieSwiperSm movies={movies} title="Recommended for you" />
         </Box>

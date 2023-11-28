@@ -102,7 +102,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
         >
           <StarRateRoundedIcon sx={{ color: "warning.light", mb: 0.3 }} />
           <Typography fontWeight="bold">
-            {selectedMovie.vote_average}
+            {selectedMovie.vote_average.toFixed(1)}
           </Typography>
           <Divider
             orientation="vertical"
