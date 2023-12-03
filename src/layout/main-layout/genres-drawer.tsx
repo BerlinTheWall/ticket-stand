@@ -8,6 +8,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import Link from "next/link";
 import { useState } from "react";
 
 const GenresDrawer: React.FC = ({ item }: any) => {
@@ -26,25 +27,24 @@ const GenresDrawer: React.FC = ({ item }: any) => {
               {MovieGenre.map((genre) => {
                 return (
                   <Grid item md={4} key={genre.id} sx={{ px: 2, my: 1.2 }}>
-                    <Typography
-                      fontWeight={700}
-                      component="h3"
-                      sx={{
-                        pl: 1,
-                        cursor: "pointer",
-                        borderLeft: `2px solid ${theme.palette.primary.main}`,
-                        transition: "padding-left 0.2s ease-in-out",
-                        ":hover": {
-                          pl: 1.5,
-                          color: theme.palette.primary.main,
-                        },
-                      }}
-                      onClick={() => {
-                        // console.log(genre.name);
-                      }}
-                    >
-                      {genre.name}
-                    </Typography>
+                    <Link href={`/list?with_genres=${genre.id}`}>
+                      <Typography
+                        fontWeight={700}
+                        component="h3"
+                        sx={{
+                          pl: 1,
+                          cursor: "pointer",
+                          borderLeft: `2px solid ${theme.palette.primary.main}`,
+                          transition: "padding-left 0.2s ease-in-out",
+                          ":hover": {
+                            pl: 1.5,
+                            color: theme.palette.primary.main,
+                          },
+                        }}
+                      >
+                        {genre.name}
+                      </Typography>
+                    </Link>
                   </Grid>
                 );
               })}
