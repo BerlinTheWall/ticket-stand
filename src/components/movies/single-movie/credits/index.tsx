@@ -11,7 +11,7 @@ interface Props {
   casts: Cast[];
 }
 
-const Casts: React.FC<Props> = ({ casts }) => {
+const Credits: React.FC<Props> = ({ casts }) => {
   return (
     <Box sx={{ paddingX: { sm: 5 } }}>
       <Typography
@@ -30,12 +30,12 @@ const Casts: React.FC<Props> = ({ casts }) => {
         }}
       >
         <NextPrevEl
-          className="SmNextElSwiper"
+          className="CreditsNextElSwiper"
           sx={{ right: 0 }}
           Icon={<ChevronRightRoundedIcon color="inherit" />}
         />
         <NextPrevEl
-          className="SmPrevElSwiper"
+          className="CreditsPrevElSwiper"
           sx={{ left: 0 }}
           Icon={<ChevronLeftRoundedIcon color="inherit" />}
         />
@@ -45,8 +45,8 @@ const Casts: React.FC<Props> = ({ casts }) => {
           spaceBetween={15}
           navigation={{
             enabled: true,
-            nextEl: ".SmNextElSwiper",
-            prevEl: ".SmPrevElSwiper",
+            nextEl: ".CreditsNextElSwiper",
+            prevEl: ".CreditsPrevElSwiper",
           }}
           modules={[Autoplay, Navigation]}
           grabCursor={true}
@@ -135,4 +135,4 @@ const Casts: React.FC<Props> = ({ casts }) => {
   );
 };
 
-export default Casts;
+export default Credits;

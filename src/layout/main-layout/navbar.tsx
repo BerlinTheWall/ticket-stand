@@ -30,6 +30,7 @@ import { THEME_VALUES } from "@/mui/theme";
 import GenresDrawer from "./genres-drawer";
 import { NAVBAR_HEIGHT } from "./var";
 import { useRouter } from "next/router";
+import Link from "next/link";
 const PAGES = ["Home", "Discover", "Movie Release"];
 const PROFILE_ITEMS = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -148,19 +149,21 @@ const Navbar: React.FC = () => {
           >
             {/* Logo */}
             <Box sx={{ pt: 1, pl: 2 }}>
-              <Image
-                src={
-                  theme.palette.mode === THEME_VALUES.dark
-                    ? Images.LogoWhite
-                    : Images.LogoBlack
-                }
-                alt={"Logo"}
-                width={!isMobile ? 50 : 70}
-                height={!isMobile ? 50 : 70}
-                style={{ cursor: "pointer" }}
-                priority
-                loading="eager"
-              />
+              <Link href="/">
+                <Image
+                  src={
+                    theme.palette.mode === THEME_VALUES.dark
+                      ? Images.LogoWhite
+                      : Images.LogoBlack
+                  }
+                  alt={"Logo"}
+                  width={!isMobile ? 50 : 70}
+                  height={!isMobile ? 50 : 70}
+                  style={{ cursor: "pointer" }}
+                  priority
+                  loading="eager"
+                />
+              </Link>
             </Box>
             {/* MD Items */}
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
