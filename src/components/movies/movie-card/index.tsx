@@ -1,7 +1,7 @@
 import { Box, Grid, useMediaQuery } from "@mui/material";
 import Image from "next/image";
 import { Movie } from "@/types/movie";
-import MovieCardDetail from "../movies-list/movie-card-detail";
+import MovieCardDetail from "../movie-card-detail";
 
 type Props = {
   movie: Movie;
