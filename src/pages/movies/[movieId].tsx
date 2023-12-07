@@ -4,7 +4,7 @@ import MainLayout from "@/layout/main-layout";
 import { GetServerSideProps, NextPage } from "next";
 import { Movie } from "@/types/movie";
 import {
-  getPopularMovies,
+  getMovieRecommendations,
   getSingleMovie,
   getSingleMovieCredits,
 } from "@/api/movies";
@@ -40,8 +40,7 @@ export default MoviePage;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const movieId = ctx.params!.movieId;
-  // const movieId = 951491;
-  const { data: movies } = await getPopularMovies();
+  const { data: movies } = await getMovieRecommendations(movieId);
   const movie = await getSingleMovie(movieId);
   const credits = await getSingleMovieCredits(movieId);
   return {
