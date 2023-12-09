@@ -135,7 +135,8 @@ const Navbar: React.FC = () => {
           backgroundImage: "none",
           boxShadow: "none",
           paddingX: 0,
-          height: `${NAVBAR_HEIGHT}px`,
+          backdropFilter: "blur(5px)",
+          height: { md: `${NAVBAR_HEIGHT}px` },
         }}
       >
         <Container maxWidth="xl">
