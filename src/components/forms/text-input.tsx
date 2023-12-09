@@ -3,6 +3,7 @@ import TextField from "@mui/material/TextField";
 import { FormInputProps } from "./input-props";
 
 interface Props extends FormInputProps {
+  inputType: string;
   maxLength?: number;
 }
 
@@ -38,7 +39,7 @@ export const FormInputText = ({
       inputProps={{ maxLength: maxLength }}
       onInput={
         inputType === "number"
-          ? (e) => {
+          ? (e: any) => {
               e.target.value = Math.max(0, parseInt(e.target.value))
                 .toString()
                 .slice(0, maxLength);
