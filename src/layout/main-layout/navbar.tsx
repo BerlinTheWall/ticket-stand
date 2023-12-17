@@ -36,12 +36,7 @@ import {
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { LANDING_PAGE, LOGIN_PAGE } from "@/constants/urls";
-import {
-  NavbarSearch,
-  Search,
-  SearchIconWrapper,
-  StyledInputBase,
-} from "@/components/navbar/search";
+import { NavbarSearch } from "@/components/navbar/search";
 const PAGES = ["Home", "Discover", "Movie Release"];
 const PROFILE_ITEMS = ["Profile", "Account", "Dashboard", "Logout"];
 
