@@ -1,19 +1,16 @@
-import { MovieGenre } from "@/constants/movie-genre";
-import { Genre } from "@/types/genres";
 import Image from "next/image";
-import {
-  Box,
-  Button,
-  Grid,
-  Link,
-  Stack,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Button, Link, Stack, Typography, useTheme } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FormInputText } from "../forms/text-input";
 import Images from "@/utils/image-helper";
 import { THEME_VALUES } from "@/mui/theme";
+import {
+  createSessionLogin,
+  getAccount,
+  getRequestToken,
+  getSessionId,
+} from "@/api/login";
+import { useRouter } from "next/router";
 
 interface IFormInput {
   username: string;
@@ -26,7 +23,23 @@ const defaultValues = {
 };
 
 const LoginForm: React.FC = () => {
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+  const router = useRouter();
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    try {
+      const token = await getRequestToken();
+      const login_token = await createSessionLogin(
+        data.username,
+        data.password,
+        token.data.request_token
+      );
+      const sessionId = await getSessionId(login_token.data.request_token);
+      getAccount(sessionId.data.session_id);
+      router.back();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const {
     handleSubmit,
     reset,
