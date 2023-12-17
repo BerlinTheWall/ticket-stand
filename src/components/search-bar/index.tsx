@@ -44,9 +44,7 @@ const SearchBar: React.FC = () => {
         border: `2px solid ${theme.palette.primary.main}`,
         borderRadius: 5,
         boxShadow: 5,
-        // ":hover": {
         bgcolor: `${theme.palette.primary.main}15`,
-        // },
       }}
     >
       <Grid container spacing={2} py={3}>

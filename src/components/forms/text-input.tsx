@@ -1,6 +1,8 @@
 import { useController } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import { FormInputProps } from "./input-props";
+import InputAdornment from "@mui/material/InputAdornment";
+import SearchIcon from "@mui/icons-material/Search";
 
 export const FormInputText = ({
   name,
@@ -8,6 +10,8 @@ export const FormInputText = ({
   label,
   inputType,
   rules,
+  sx,
+  inputSx,
 }: FormInputProps) => {
   const {
     field: { onChange, value, ref },
@@ -23,6 +27,7 @@ export const FormInputText = ({
       helperText={error ? error.message : null}
       fullWidth
       size="small"
+      sx={sx}
       error={!!error}
       onChange={onChange}
       value={value}
@@ -30,6 +35,15 @@ export const FormInputText = ({
       type={inputType ? inputType : "text"}
       variant="outlined"
       inputRef={ref}
+      placeholder="Movie, TV..."
+      InputProps={{
+        startAdornment: (
+          <InputAdornment position="start">
+            <SearchIcon />
+          </InputAdornment>
+        ),
+        sx: { ...inputSx },
+      }}
     />
   );
 };

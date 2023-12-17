@@ -35,6 +35,13 @@ import {
 } from "./var";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { LANDING_PAGE, LOGIN_PAGE } from "@/constants/urls";
+import {
+  NavbarSearch,
+  Search,
+  SearchIconWrapper,
+  StyledInputBase,
+} from "@/components/navbar/search";
 const PAGES = ["Home", "Discover", "Movie Release"];
 const PROFILE_ITEMS = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -154,7 +161,7 @@ const Navbar: React.FC = () => {
           >
             {/* Logo */}
             <Box sx={{ pt: 1, pl: 2 }}>
-              <Link href="/">
+              <Link href={LANDING_PAGE}>
                 <Image
                   src={
                     theme.palette.mode === THEME_VALUES.dark
@@ -197,30 +204,18 @@ const Navbar: React.FC = () => {
                 gap={2}
                 whiteSpace={"nowrap"}
               >
-                <Button
-                  color="secondary"
-                  sx={{ px: 0, mx: 0, borderRadius: 20 }}
-                >
-                  <SearchIcon
-                    sx={{
-                      cursor: "pointer",
-                      px: 0,
-                      mx: 0,
-                    }}
-                  />
-                </Button>
+                <NavbarSearch />
                 <ThemeSwitch />
-                <Button variant="outlined" fullWidth color="secondary">
-                  Sign up
-                </Button>
-                <Button
-                  variant="contained"
-                  fullWidth
-                  color="primary"
-                  onClick={() => setLoginState(true)}
-                >
-                  Login
-                </Button>
+                <Link href={LOGIN_PAGE}>
+                  <Button variant="outlined" fullWidth color="secondary">
+                    Sign up
+                  </Button>
+                </Link>
+                <Link href={LOGIN_PAGE}>
+                  <Button variant="contained" fullWidth color="primary">
+                    Login
+                  </Button>
+                </Link>
               </Stack>
             )}
             {/* MD Profile */}
@@ -286,9 +281,12 @@ const Navbar: React.FC = () => {
                 display: { xs: "flex", md: "none" },
                 gap: 2,
                 alignItems: "center",
+                justifyContent: "end",
               }}
             >
-              <SearchIcon sx={{ cursor: "pointer" }} fontSize="large" />
+              <Box width={"50%"}>
+                <NavbarSearch />
+              </Box>
               <ThemeSwitch />
               <MenuRoundedIcon
                 onClick={toggleDrawer}
