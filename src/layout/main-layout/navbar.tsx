@@ -142,10 +142,7 @@ const Navbar: React.FC = () => {
           backgroundImage: "none",
           boxShadow: "none",
           backdropFilter: "blur(5px)",
-          height: {
-            md: { md: `${NAVBAR_HEIGHT}px` },
-            xs: `${NAVBAR_HEIGHT_MOBILE}px`,
-          },
+          height: `${NAVBAR_HEIGHT}px`,
           pr: "0 !important",
         }}
       >

@@ -7,6 +7,7 @@ import { FormInputSwitch } from "../forms/switch-input";
 import { FormInputSlider } from "../forms/slider-input";
 import { useRouter } from "next/router";
 import { filterObject, filteringMethod } from "@/utils/utils";
+import { MOVIES_PAGE } from "@/constants/urls";
 
 interface IFormInput {
   primary_release_year: string;
@@ -33,7 +34,7 @@ const SearchBar: React.FC = () => {
       "vote_average.gte": data.score[0].toString(),
       "vote_average.lte": data.score[1].toString(),
     };
-    router.push("/list" + filteringMethod(filterObject(newData)));
+    router.push(MOVIES_PAGE + filteringMethod(filterObject(newData)));
   };
   const {
     handleSubmit,

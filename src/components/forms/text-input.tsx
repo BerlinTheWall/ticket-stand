@@ -33,7 +33,6 @@ export const FormInputText = ({
       helperText={error ? error.message : null}
       fullWidth
       size="small"
-      sx={sx}
       error={!!error}
       onChange={onChange}
       value={value}
@@ -41,6 +40,16 @@ export const FormInputText = ({
       type={inputType ? inputType : "text"}
       variant="outlined"
       inputRef={ref}
+      inputProps={{ maxLength: maxLength }}
+      onInput={
+        inputType === "number"
+          ? (e: any) => {
+              e.target.value = Math.max(0, parseInt(e.target.value))
+                .toString()
+                .slice(0, maxLength);
+            }
+          : () => {}
+      }
     />
   );
 };
