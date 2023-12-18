@@ -6,19 +6,18 @@ import { FormInputSelect } from "../forms/select-input";
 import { FormInputSwitch } from "../forms/switch-input";
 import { FormInputSlider } from "../forms/slider-input";
 import { useRouter } from "next/router";
+import { filterObject, filteringMethod } from "@/utils/utils";
 
 interface IFormInput {
-  // movieName: string;
-  year: string;
-  genre: number | string;
+  primary_release_year: string;
+  with_genres: number | string;
   isAdult: boolean;
   score: number[];
 }
 
 const defaultValues = {
-  // movieName: "",
-  year: "",
-  genre: "",
+  primary_release_year: "",
+  with_genres: "",
   isAdult: false,
   score: [0, 10],
 };
@@ -27,21 +26,15 @@ const SearchBar: React.FC = () => {
   const router = useRouter();
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log(data);
-    let query = "";
-    if (data.year !== "") query += "primary_release_year=" + data.year;
-    if (data.isAdult) {
-      query += "&certification=" + 18;
-      query += "&certification_country=" + "DE";
-    }
-    if (data.genre !== "") query += "&with_genres=" + data.genre;
-    query +=
-      "&vote_average.gte=" +
-      data.score[0] +
-      "&vote_average.lte" +
-      data.score[1];
-    // console.log(query);
-    router.push("/list?" + query);
+    let newData = {
+      ...data,
+      certification: data.isAdult ? 18 : null,
+      certification_country: data.isAdult ? "DE" : null,
+      "vote_average.gte": data.score[0].toString(),
+      "vote_average.lte": data.score[1].toString(),
+    };
+    console.log(filteringMethod(filterObject(newData)));
+    router.push("/list" + filteringMethod(filterObject(newData)));
   };
   const {
     handleSubmit,
@@ -80,7 +73,7 @@ const SearchBar: React.FC = () => {
             // }}
           /> */}
           <FormInputText
-            name={"year"}
+            name={"primary_release_year"}
             control={control}
             label={"Movie year"}
             inputType="number"
@@ -93,7 +86,7 @@ const SearchBar: React.FC = () => {
         </Grid>
         <Grid item md={2} xs={6}>
           <FormInputSelect
-            name={"genre"}
+            name={"with_genres"}
             control={control}
             label={"Genre"}
             options={MovieGenre}

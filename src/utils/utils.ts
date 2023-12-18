@@ -27,3 +27,24 @@ export const filteringMethod = (filterItems: any) => {
 
   return queryParams;
 };
+
+// Filter objects and remove null, undefined and empty values
+export const filterObject = (obj: any): any => {
+  const filteredObject: any = {};
+
+  for (const key in obj) {
+    const value = obj[key];
+
+    // Check if the value is not null, undefined, or an empty string
+    if (
+      value !== null &&
+      value !== undefined &&
+      value !== "" &&
+      !Array.isArray(value)
+    ) {
+      filteredObject[key] = value;
+    }
+  }
+
+  return filteredObject;
+};
