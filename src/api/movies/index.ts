@@ -78,3 +78,14 @@ export const getSearchMovie = async (movieName: string): Promise<any> => {
     throw error;
   }
 };
+
+export const getMovieRecommendations = async (movieId: any): Promise<any> => {
+  try {
+    const res = await simpleAxiosApi({
+      url: `/movie/${movieId}/recommendations`,
+    });
+    return res;
+  } catch (error) {
+    throw error;
+  }
+};

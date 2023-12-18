@@ -53,22 +53,22 @@ const Credits: React.FC<Props> = ({ casts }) => {
           style={{ position: "relative" }}
           breakpoints={{
             320: {
-              slidesPerView: 1.5,
+              slidesPerView: 1,
               spaceBetween: 20,
             },
             400: {
-              slidesPerView: 2,
+              slidesPerView: 1.25,
               spaceBetween: 20,
             },
             500: {
-              slidesPerView: 1.5,
+              slidesPerView: 1.7,
               spaceBetween: 20,
             },
             700: {
               slidesPerView: 2,
               spaceBetween: 20,
             },
-            950: {
+            800: {
               slidesPerView: 2.5,
               spaceBetween: 10,
             },
@@ -99,14 +99,14 @@ const Credits: React.FC<Props> = ({ casts }) => {
                   }}
                 >
                   <Stack direction="row" alignItems="center" gap={2}>
-                    <Box sx={{ width: 80 }}>
+                    <Box sx={{ minWidth: 80, width: 80 }}>
                       <Image
                         src={
                           "https://www.themoviedb.org/t/p/w276_and_h350_face" +
                           cast.profile_path
                         }
                         alt={cast.name}
-                        width={10000}
+                        width={100}
                         height={80}
                         style={{
                           width: "100%",

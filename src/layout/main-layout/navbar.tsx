@@ -141,7 +141,11 @@ const Navbar: React.FC = () => {
           bgcolor: (theme) => `${theme.palette.background.paper}d6`,
           backgroundImage: "none",
           boxShadow: "none",
-          height: { md: `${NAVBAR_HEIGHT}px`, xs: `${NAVBAR_HEIGHT_MOBILE}px` },
+          backdropFilter: "blur(5px)",
+          height: {
+            md: { md: `${NAVBAR_HEIGHT}px` },
+            xs: `${NAVBAR_HEIGHT_MOBILE}px`,
+          },
           pr: "0 !important",
         }}
       >

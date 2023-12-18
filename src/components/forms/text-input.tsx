@@ -4,6 +4,11 @@ import { FormInputProps } from "./input-props";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 
+interface Props extends FormInputProps {
+  inputType: string;
+  maxLength?: number;
+}
+
 export const FormInputText = ({
   name,
   control,
@@ -12,7 +17,8 @@ export const FormInputText = ({
   rules,
   sx,
   inputSx,
-}: FormInputProps) => {
+  maxLength,
+}: Props) => {
   const {
     field: { onChange, value, ref },
     fieldState: { error },
@@ -35,15 +41,6 @@ export const FormInputText = ({
       type={inputType ? inputType : "text"}
       variant="outlined"
       inputRef={ref}
-      placeholder="Movie, TV..."
-      InputProps={{
-        startAdornment: (
-          <InputAdornment position="start">
-            <SearchIcon />
-          </InputAdornment>
-        ),
-        sx: { ...inputSx },
-      }}
     />
   );
 };
