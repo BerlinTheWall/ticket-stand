@@ -28,7 +28,11 @@ import Image from "next/image";
 import Images from "@/utils/image-helper";
 import { THEME_VALUES } from "@/mui/theme";
 import GenresDrawer from "./genres-drawer";
-import { NAVBAR_HEIGHT } from "./var";
+import {
+  NAVBAR_HEIGHT,
+  NAVBAR_HEIGHT_MOBILE,
+  PAGE_NOT_MARGIN_NAVBAR,
+} from "./var";
 import { useRouter } from "next/router";
 import Link from "next/link";
 const PAGES = ["Home", "Discover", "Movie Release"];
@@ -95,8 +99,6 @@ const NavbarDrawer = ({ toggleDrawer, loginState, setLoginState }: any) => (
   </Box>
 );
 
-const PAGE_NOT_MARGIN_NAVBAR = ["/"];
-
 const Navbar: React.FC = () => {
   const [drawerState, setDrawerState] = useState<boolean>(false);
   const [loginState, setLoginState] = useState<boolean>(false);
@@ -125,7 +127,10 @@ const Navbar: React.FC = () => {
       mb={
         PAGE_NOT_MARGIN_NAVBAR.includes(router.pathname)
           ? 0
-          : `${NAVBAR_HEIGHT + 30}px`
+          : {
+              md: `${NAVBAR_HEIGHT + 30}px`,
+              xs: `${NAVBAR_HEIGHT_MOBILE + 30}px`,
+            }
       }
     >
       <AppBar
@@ -134,9 +139,12 @@ const Navbar: React.FC = () => {
           bgcolor: (theme) => `${theme.palette.background.paper}d6`,
           backgroundImage: "none",
           boxShadow: "none",
-          paddingX: 0,
           backdropFilter: "blur(5px)",
-          height: { md: `${NAVBAR_HEIGHT}px` },
+          height: {
+            md: { md: `${NAVBAR_HEIGHT}px` },
+            xs: `${NAVBAR_HEIGHT_MOBILE}px`,
+          },
+          pr: "0 !important",
         }}
       >
         <Container maxWidth="xl">

@@ -33,7 +33,6 @@ const SearchBar: React.FC = () => {
       "vote_average.gte": data.score[0].toString(),
       "vote_average.lte": data.score[1].toString(),
     };
-    console.log(filteringMethod(filterObject(newData)));
     router.push("/list" + filteringMethod(filterObject(newData)));
   };
   const {
