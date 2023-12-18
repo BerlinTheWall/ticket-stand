@@ -1,28 +1,40 @@
 import { MovieGenre } from "@/constants/movie-genre";
-import { Genre } from "@/types/genres";
 import { Box, Button, Grid, Stack, useTheme } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FormInputText } from "../forms/text-input";
 import { FormInputSelect } from "../forms/select-input";
 import { FormInputSwitch } from "../forms/switch-input";
 import { FormInputSlider } from "../forms/slider-input";
+import { useRouter } from "next/router";
+import { filterObject, filteringMethod } from "@/utils/utils";
 
 interface IFormInput {
-  movieName: string;
-  genre: number | string;
+  primary_release_year: string;
+  with_genres: number | string;
   isAdult: boolean;
   score: number[];
 }
 
 const defaultValues = {
-  movieName: "",
-  genre: "",
+  primary_release_year: "",
+  with_genres: "",
   isAdult: false,
   score: [0, 10],
 };
 
 const SearchBar: React.FC = () => {
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+  const router = useRouter();
+
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    let newData = {
+      ...data,
+      certification: data.isAdult ? 18 : null,
+      certification_country: data.isAdult ? "DE" : null,
+      "vote_average.gte": data.score[0].toString(),
+      "vote_average.lte": data.score[1].toString(),
+    };
+    router.push("/list" + filteringMethod(filterObject(newData)));
+  };
   const {
     handleSubmit,
     reset,
@@ -44,35 +56,44 @@ const SearchBar: React.FC = () => {
         border: `2px solid ${theme.palette.primary.main}`,
         borderRadius: 5,
         boxShadow: 5,
-        // ":hover": {
         bgcolor: `${theme.palette.primary.main}15`,
-        // },
       }}
     >
       <Grid container spacing={2} py={3}>
-        <Grid item md={3} xs={12}>
-          <FormInputText
+        <Grid item md={2} xs={6}>
+          {/* <FormInputText
             name={"movieName"}
             control={control}
             label={"Movie name"}
             inputType="text"
-            rules={{
-              required: "This field is required",
-              minLength: { value: 5, message: "Please enter more than 5 char" },
-            }}
+            // rules={{
+            //   required: "This field is required",
+            //   minLength: { value: 5, message: "Please enter more than 5 char" },
+            // }}
+          /> */}
+          <FormInputText
+            name={"primary_release_year"}
+            control={control}
+            label={"Movie year"}
+            inputType="number"
+            maxLength={4}
+            // rules={{
+            //   required: "This field is required",
+            //   minLength: { value: 5, message: "Please enter more than 5 char" },
+            // }}
           />
         </Grid>
-        <Grid item md={3} xs={12}>
+        <Grid item md={2} xs={6}>
           <FormInputSelect
-            name={"genre"}
+            name={"with_genres"}
             control={control}
             label={"Genre"}
             options={MovieGenre}
             selectedDropdownText="Select a genre"
-            rules={{
-              required: "Please select a genre",
-              valueAsNumber: true,
-            }}
+            // rules={{
+            //   required: "Please select a genre",
+            //   valueAsNumber: true,
+            // }}
           />
         </Grid>
         <Grid item xl={3} lg={4} md={6} xs={12} alignSelf={"center"}>
@@ -90,14 +111,14 @@ const SearchBar: React.FC = () => {
             <FormInputSwitch
               name={"isAdult"}
               control={control}
-              label={"PG-13"}
+              label={"R-Rated"}
             />
           </Box>
         </Grid>
         <Grid item md={true} xs={12}>
           <Stack
             direction={{ xs: "column", md: "row" }}
-            justifyContent={{ xs: "end", lg: "start" }}
+            justifyContent={{ xs: "end", lg: "end" }}
             gap={2}
           >
             <Button

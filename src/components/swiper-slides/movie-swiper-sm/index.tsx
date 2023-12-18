@@ -10,7 +10,7 @@ import NextPrevEl from "../next-prev-button";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import GenresList from "../genres-list";
 import { convertMovieGenreIdsToNames } from "@/utils/genre-converter";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getPopularMovies } from "@/api/movies";
 import Link from "next/link";
 
@@ -22,6 +22,10 @@ interface Props {
 const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
   const [updatedMovies, setUpdatedMovies] = useState(movies);
   const [page, setPages] = useState<number>(1);
+
+  useEffect(() => {
+    setUpdatedMovies(movies);
+  }, [movies]);
 
   const handleShow = async () => {
     setPages(page + 1);

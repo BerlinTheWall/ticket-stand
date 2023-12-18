@@ -1,8 +1,14 @@
-import { FormControl, MenuItem, TextField } from "@mui/material";
+import { MenuItem, TextField } from "@mui/material";
 import { useController } from "react-hook-form";
 import { FormInputProps } from "./input-props";
+import { Genre } from "@/types/genres";
 
-export const FormInputSelect: React.FC<FormInputProps> = ({
+interface Props extends FormInputProps {
+  options?: Genre[];
+  selectedDropdownText?: string;
+}
+
+export const FormInputSelect: React.FC<Props> = ({
   options,
   name,
   control,
