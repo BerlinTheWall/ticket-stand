@@ -2,6 +2,7 @@ import LoginForm from "@/components/login";
 import MainLayout from "@/layout/main-layout";
 import { Box, Container, useTheme } from "@mui/material";
 import { NextPage } from "next";
+import classes from "../styles/login.module.css";
 
 const LoginPage: NextPage = () => {
   const theme = useTheme();
@@ -25,7 +26,7 @@ const LoginPage: NextPage = () => {
           }}
         >
           <Box
-            className="square-2"
+            className={classes.square2}
             sx={{
               position: "absolute",
               filter: "blur(150px)",
@@ -36,7 +37,7 @@ const LoginPage: NextPage = () => {
             }}
           />
           <Box
-            className="square-1"
+            className={classes.square1}
             sx={{
               position: "absolute",
               filter: "blur(150px)",
@@ -48,7 +49,7 @@ const LoginPage: NextPage = () => {
             }}
           />
           <Box
-            className="square-3"
+            className={classes.square3}
             sx={{
               position: "absolute",
               filter: "blur(150px)",
@@ -60,7 +61,7 @@ const LoginPage: NextPage = () => {
             }}
           />
           <Box
-            className="square-4"
+            className={classes.square4}
             sx={{
               position: "absolute",
               filter: "blur(150px)",

@@ -24,6 +24,19 @@ const defaultValues = {
 
 const LoginForm: React.FC = () => {
   const router = useRouter();
+  const theme = useTheme();
+
+  const {
+    handleSubmit,
+    reset,
+    control,
+    formState: { errors },
+    setValue,
+    register,
+  } = useForm<IFormInput>({
+    defaultValues: defaultValues,
+  });
+
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     try {
       const token = await getRequestToken();
@@ -40,19 +53,6 @@ const LoginForm: React.FC = () => {
     }
   };
 
-  const {
-    handleSubmit,
-    reset,
-    control,
-    formState: { errors },
-    setValue,
-    register,
-  } = useForm<IFormInput>({
-    defaultValues: defaultValues,
-  });
-
-  const theme = useTheme();
-
   return (
     <Stack height={"100%"} width={"100%"} gap={3}>
       <Stack alignItems="center" direction="row" gap={9}>
@@ -67,7 +67,7 @@ const LoginForm: React.FC = () => {
           height={40}
         />
         <Typography
-          component={"h1"}
+          component="h1"
           sx={{ fontSize: 25, fontWeight: 500, textAlign: "center" }}
         >
           Login
@@ -80,7 +80,6 @@ const LoginForm: React.FC = () => {
         inputType="text"
         rules={{
           required: "This field is required",
-          minLength: { value: 5, message: "Please enter more than 5 char" },
         }}
       />
       <FormInputText
@@ -90,7 +89,6 @@ const LoginForm: React.FC = () => {
         inputType="password"
         rules={{
           required: "This field is required",
-          minLength: { value: 5, message: "Please enter more than 5 char" },
         }}
       />
       <Button

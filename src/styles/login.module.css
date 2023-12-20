@@ -1,0 +1,75 @@
+.square1 {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: animateY 15s linear infinite;
+  animation-delay: calc(-1s * var(--i));
+}
+
+.square3 {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: animateY2 15s linear infinite;
+  animation-delay: calc(-1s * var(--i));
+}
+
+.square2 {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: animateX 15s linear infinite;
+  animation-delay: calc(-1s * var(--i));
+}
+
+.square4 {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: animateX2 12s linear infinite;
+  animation-delay: calc(-1s * var(--i));
+}
+
+@keyframes animateY {
+  0%,
+  100% {
+    transform: translateY(-300px);
+  }
+  50% {
+    transform: translateY(100px);
+  }
+}
+
+@keyframes animateY2 {
+  0%,
+  100% {
+    transform: translateY(-200px);
+  }
+  50% {
+    transform: translateY(100px);
+  }
+}
+
+@keyframes animateX {
+  0%,
+  100% {
+    transform: translateX(-200px);
+  }
+  50% {
+    transform: translateX(200px);
+  }
+}
+
+@keyframes animateX2 {
+  0%,
+  100% {
+    transform: translateX(-250px);
+  }
+  50% {
+    transform: translateX(250px);
+  }
+}
