@@ -27,50 +27,11 @@ const LoginPage: NextPage = () => {
         >
           <Box
             className={classes.square2}
-            sx={{
-              position: "absolute",
-              filter: "blur(150px)",
-              top: "-150px",
-              width: "700px",
-              height: "700px",
-              backgroundColor: theme.palette.primary.main,
-            }}
+            bgcolor={theme.palette.primary.main}
           />
-          <Box
-            className={classes.square1}
-            sx={{
-              position: "absolute",
-              filter: "blur(150px)",
-              bottom: "-150px",
-              left: "100px",
-              width: "600px",
-              height: "600px",
-              backgroundColor: "#007aff",
-            }}
-          />
-          <Box
-            className={classes.square3}
-            sx={{
-              position: "absolute",
-              filter: "blur(150px)",
-              bottom: "100px",
-              right: "100px",
-              width: "400px",
-              height: "400px",
-              backgroundColor: "#5d6166",
-            }}
-          />
-          <Box
-            className={classes.square4}
-            sx={{
-              position: "absolute",
-              filter: "blur(150px)",
-              bottom: "-150px",
-              width: "400px",
-              height: "400px",
-              backgroundColor: "#4a1c68",
-            }}
-          />
+          <Box className={classes.square1} />
+          <Box className={classes.square3} />
+          <Box className={classes.square4} />
           <Container
             sx={{
               position: "relative",
