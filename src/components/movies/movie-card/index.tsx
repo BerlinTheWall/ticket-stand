@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Movie } from "@/types/movie";
 import MovieCardDetail from "../movie-card-detail";
 import Link from "next/link";
+import { SINGLE_MOVIE_PAGE } from "@/constants/urls";
 
 type Props = {
   movie: Movie;
@@ -25,7 +26,7 @@ const MovieCard: React.FC<Props> = ({ movie }) => {
       sx={{ cursor: "pointer", mx: { xs: 1, sm: 2 } }}
       my={1}
     >
-      <Link href={`/movies/${movie.id}`}>
+      <Link href={`${SINGLE_MOVIE_PAGE}/${movie.id}`}>
         <Image
           src={"https://www.themoviedb.org/t/p/w500/" + movie.poster_path}
           alt={movie.original_title}

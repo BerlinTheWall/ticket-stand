@@ -68,6 +68,17 @@ export const getSingleMovieCredits = async (movieId: any): Promise<any> => {
   }
 };
 
+export const getSearchMovie = async (movieName: string): Promise<any> => {
+  try {
+    const res = await simpleAxiosApi({
+      url: `/search/movie?query=${movieName}`,
+    });
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const getMovieRecommendations = async (movieId: any): Promise<any> => {
   try {
     const res = await simpleAxiosApi({

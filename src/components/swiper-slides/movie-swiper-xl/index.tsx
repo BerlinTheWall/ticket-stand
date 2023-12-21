@@ -10,6 +10,7 @@ import NextPrevEl from "../next-prev-button";
 import GenresList from "../genres-list";
 import { convertMovieGenreIdsToNames } from "@/utils/genre-converter";
 import Link from "next/link";
+import { SINGLE_MOVIE_PAGE } from "@/constants/urls";
 
 interface Props {
   title: string;
@@ -101,7 +102,7 @@ const MovieSwiperXl: React.FC<Props> = ({ title, movies }) => {
           {movies?.map((movie: Movie) => {
             return (
               <SwiperSlide key={movie.id} style={{ width: "100%" }}>
-                <Link href={`/movies/${movie.id}`}>
+                <Link href={`${SINGLE_MOVIE_PAGE}/${movie.id}`}>
                   <Box
                     width={"100%"}
                     height={300}

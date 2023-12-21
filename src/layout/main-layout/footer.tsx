@@ -18,6 +18,7 @@ const FOOTER_LINKS_2 = [
 const Footer: React.FC = () => {
   return (
     <Box
+      position="relative"
       sx={{
         pt: 8,
         pb: 5,

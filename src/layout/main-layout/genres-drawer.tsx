@@ -1,4 +1,5 @@
 import { MovieGenre } from "@/constants/movie-genre";
+import { MOVIES_PAGE } from "@/constants/urls";
 import {
   Box,
   Button,
@@ -11,7 +12,7 @@ import {
 import Link from "next/link";
 import { useState } from "react";
 
-const GenresDrawer: React.FC = ({ item }: any) => {
+const GenresDrawer: React.FC = () => {
   const theme = useTheme();
   const [isHover, setIsHover] = useState(false);
 
@@ -27,7 +28,7 @@ const GenresDrawer: React.FC = ({ item }: any) => {
               {MovieGenre.map((genre) => {
                 return (
                   <Grid item md={4} key={genre.id} sx={{ px: 2, my: 1.2 }}>
-                    <Link href={`/list?with_genres=${genre.id}`}>
+                    <Link href={`${MOVIES_PAGE}?with_genres=${genre.id}`}>
                       <Typography
                         fontWeight={700}
                         component="h3"
@@ -65,7 +66,6 @@ const GenresDrawer: React.FC = ({ item }: any) => {
               background: `${theme.palette.background.paper}f6`,
               color: theme.palette.text.primary,
               boxShadow: 2,
-              // filter: "blur(2px)",
               px: 2.5,
               py: 1.5,
               minWidth: 530,

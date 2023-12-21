@@ -13,6 +13,7 @@ import { convertMovieGenreIdsToNames } from "@/utils/genre-converter";
 import { useEffect, useState } from "react";
 import { getPopularMovies } from "@/api/movies";
 import Link from "next/link";
+import { SINGLE_MOVIE_PAGE } from "@/constants/urls";
 
 interface Props {
   title?: string;
@@ -116,7 +117,10 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
                 key={movie.id}
                 style={{ width: "100%", display: "flex" }}
               >
-                <Link href={`/movies/${movie.id}`} style={{ width: "100%" }}>
+                <Link
+                  href={`${SINGLE_MOVIE_PAGE}/${movie.id}`}
+                  style={{ width: "100%" }}
+                >
                   <Typography
                     top={-1.5}
                     left={0}

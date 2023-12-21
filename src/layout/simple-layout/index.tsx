@@ -1,20 +1,17 @@
+import { IChildren } from "@/types/component-type/IChildren";
 import { Box } from "@mui/material";
-import { ReactNode } from "react";
 
-export type Props = {
-  children: ReactNode;
-};
-
-const SimpleLayout: React.FC<Props> = ({ children }) => {
+const SimpleLayout: React.FC<IChildren> = ({ children }) => {
   return (
-    <>
-      <Box
-        component={"main"}
-        sx={{ bgcolor: "background.default", minHeight: "100vh" }}
-      >
-        {children}
-      </Box>
-    </>
+    <Box
+      sx={{
+        bgcolor: "background.default",
+        minHeight: "100vh",
+        color: "text.primary",
+      }}
+    >
+      <Box component={"main"}>{children}</Box>
+    </Box>
   );
 };
 
