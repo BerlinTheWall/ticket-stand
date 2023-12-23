@@ -5,7 +5,10 @@ const nextConfig = {
 
 module.exports = {
   ...nextConfig, // Include the existing config options
+  // images: {
+  //   domains: ["image.tmdb.org", "www.themoviedb.org"], // Allow images from this domain
+  // },
   images: {
-    domains: ["image.tmdb.org", "www.themoviedb.org"], // Allow images from this domain
+    domains: ["tmdb.org", "www.themoviedb.org"],
   },
 };

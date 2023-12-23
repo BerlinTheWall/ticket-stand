@@ -1,19 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   AppBar,
   Toolbar,
   Tooltip,
   Container,
-  Divider,
   Drawer,
   IconButton,
   Button,
   Avatar,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
   Menu,
   MenuItem,
   Stack,
@@ -27,88 +22,42 @@ import ThemeSwitch from "../../components/switch-theme";
 import Image from "next/image";
 import Images from "@/utils/image-helper";
 import { THEME_VALUES } from "@/mui/theme";
-import GenresDrawer from "./genres-drawer";
 import {
   NAVBAR_HEIGHT,
   NAVBAR_HEIGHT_MOBILE,
   PAGE_NOT_MARGIN_NAVBAR,
+  PROFILE_ITEMS,
 } from "./var";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { LANDING_PAGE, LOGIN_PAGE } from "@/constants/urls";
 import { NavbarSearch } from "@/components/navbar/search";
-const PAGES = ["Home", "Discover", "Movie Release"];
-const PROFILE_ITEMS = ["Profile", "Account", "Dashboard", "Logout"];
-
-const NavbarDrawer = ({ toggleDrawer, loginState, setLoginState }: any) => (
-  <Box
-    role="menubar"
-    onClick={toggleDrawer}
-    onKeyDown={toggleDrawer}
-    width={"200px"}
-  >
-    <List>
-      {PAGES.map((text) => (
-        <ListItem key={text} disablePadding>
-          <ListItemButton>
-            <ListItemText
-              primary={text}
-              primaryTypographyProps={{ fontSize: 18 }}
-            />
-          </ListItemButton>
-        </ListItem>
-      ))}
-    </List>
-    <Divider />
-    <Box
-      sx={{
-        display: loginState ? "none" : "flex",
-        flexDirection: "column-reverse",
-        paddingTop: 1,
-        paddingX: 1,
-        gap: 1,
-      }}
-    >
-      <Button
-        variant="outlined"
-        fullWidth
-        sx={{ fontSize: 15 }}
-        color="secondary"
-      >
-        Sign up
-      </Button>
-      <Button
-        variant="contained"
-        fullWidth
-        color="primary"
-        sx={{ fontSize: 15 }}
-        onClick={() => setLoginState(true)}
-      >
-        Login
-      </Button>
-    </Box>
-    {loginState && (
-      <List>
-        {PROFILE_ITEMS.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton>
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    )}
-  </Box>
-);
+import GenresDrawer from "@/layout/main-layout/genres-drawer";
+import { NavbarSidebar } from "./navbar-sidebar";
+import Cookies from "js-cookie";
+import { PROFILE_COOKIE } from "@/constants/cookie";
+import { Profile } from "@/types/profile";
 
 const Navbar: React.FC = () => {
+  const theme = useTheme();
+
   const [drawerState, setDrawerState] = useState<boolean>(false);
   const [loginState, setLoginState] = useState<boolean>(false);
 
-  const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.up("md"));
 
   const router = useRouter();
+  let profile: Profile;
+
+  const storedData = localStorage.getItem(PROFILE_COOKIE);
+  if (storedData) profile = JSON.parse(storedData);
+
+  console.log(profile);
+
+  useEffect(() => {
+    if (profile !== undefined && profile !== null) setLoginState(true);
+    else setLoginState(false);
+  }, [profile]);
 
   const toggleDrawer = () => {
     setDrawerState((prev) => !prev);
@@ -175,16 +124,17 @@ const Navbar: React.FC = () => {
             </Box>
             {/* MD Items */}
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <Button
-                key={0}
-                sx={{ my: 2, display: "block", fontSize: "14px" }}
-                color="secondary"
-              >
-                HOME
-              </Button>
+              <Link href={LANDING_PAGE}>
+                <Button
+                  fullWidth
+                  color="secondary"
+                  sx={{ my: 2, display: "block", fontSize: "14px" }}
+                >
+                  HOME
+                </Button>
+              </Link>
               <GenresDrawer />
               <Button
-                key={2}
                 sx={{ my: 2, display: "block", fontSize: "14px" }}
                 color="secondary"
               >
@@ -192,30 +142,63 @@ const Navbar: React.FC = () => {
               </Button>
             </Box>
             {/* MD Login buttons */}
-            {!loginState && (
-              <Stack
-                sx={{ display: { xs: "none", md: "flex" } }}
-                direction={"row"}
-                alignItems={"center"}
-                gap={2}
-                whiteSpace={"nowrap"}
-              >
-                <NavbarSearch />
-                <ThemeSwitch />
-                <Link href={LOGIN_PAGE}>
-                  <Button variant="outlined" fullWidth color="secondary">
-                    Sign up
-                  </Button>
-                </Link>
-                <Link href={LOGIN_PAGE}>
-                  <Button variant="contained" fullWidth color="primary">
-                    Login
-                  </Button>
-                </Link>
-              </Stack>
-            )}
+            <Stack
+              sx={{ display: { xs: "none", md: "flex" } }}
+              direction={"row"}
+              alignItems={"center"}
+              gap={2}
+              whiteSpace={"nowrap"}
+            >
+              <NavbarSearch />
+              <ThemeSwitch />
+              {!loginState && (
+                <Box display={"flex"} gap={2}>
+                  <Link href={LOGIN_PAGE}>
+                    <Button variant="outlined" fullWidth color="secondary">
+                      Sign up
+                    </Button>
+                  </Link>
+                  <Link href={LOGIN_PAGE}>
+                    <Button variant="contained" fullWidth color="primary">
+                      Login
+                    </Button>
+                  </Link>
+                </Box>
+              )}
+              {loginState && (
+                <>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      borderRadius: "100px",
+                      padding: 1,
+                    }}
+                  ></Box>
+                  <Tooltip title="Open settings">
+                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                      {profile &&
+                      profile.avatar.tmdb.avatar_path !== undefined &&
+                      profile.avatar.tmdb.avatar_path !== null ? (
+                        <Image
+                          src={
+                            "http://www.themoviedb.org/t/p/w150_and_h150_face" +
+                            profile.avatar.tmdb.avatar_path
+                          }
+                          alt={""}
+                          width={40}
+                          height={40}
+                        />
+                      ) : (
+                        <Avatar alt="Profile Icon" />
+                      )}
+                    </IconButton>
+                  </Tooltip>
+                </>
+              )}
+            </Stack>
             {/* MD Profile */}
-            {loginState && (
+            {/* {loginState && (
               <Stack
                 sx={{
                   display: { xs: "none", md: "flex" },
@@ -224,6 +207,7 @@ const Navbar: React.FC = () => {
                 direction={"row"}
                 alignItems={"center"}
               >
+                <NavbarSearch />
                 <ThemeSwitch />
                 <Box
                   sx={{
@@ -232,15 +216,24 @@ const Navbar: React.FC = () => {
                     borderRadius: "100px",
                     padding: 1,
                   }}
-                >
-                  <SearchIcon />
-                </Box>
+                ></Box>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/2.jpg"
-                    />
+                    {profile &&
+                    profile.avatar.tmdb.avatar_path !== undefined &&
+                    profile.avatar.tmdb.avatar_path !== null ? (
+                      <Image
+                        src={
+                          "http://www.themoviedb.org/t/p/w150_and_h150_face" +
+                          profile.avatar.tmdb.avatar_path
+                        }
+                        alt={""}
+                        width={40}
+                        height={40}
+                      />
+                    ) : (
+                      <Avatar alt="Profile Icon" />
+                    )}
                   </IconButton>
                 </Tooltip>
                 <Menu
@@ -270,7 +263,7 @@ const Navbar: React.FC = () => {
                   ))}
                 </Menu>
               </Stack>
-            )}
+            )} */}
             {/* SM Drawer */}
             <Box
               sx={{
@@ -295,7 +288,7 @@ const Navbar: React.FC = () => {
                 onClose={toggleDrawer}
                 sx={{ display: { md: "none" } }}
               >
-                <NavbarDrawer
+                <NavbarSidebar
                   toggleDrawer={toggleDrawer}
                   loginState={loginState}
                   setLoginState={setLoginState}

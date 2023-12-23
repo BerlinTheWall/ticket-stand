@@ -1,13 +1,9 @@
-import { Box, Container } from "@mui/material";
-import Footer from "./footer";
-import Navbar from "./navbar";
-import { ReactNode } from "react";
+import { Box } from "@mui/material";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
+import { IChildren } from "@/types/component-type/IChildren";
 
-export type Props = {
-  children: ReactNode;
-};
-
-const MainLayout: React.FC<Props> = ({ children }) => {
+const MainLayout: React.FC<IChildren> = ({ children }) => {
   return (
     <Box
       sx={{
