@@ -11,6 +11,7 @@ import {
   getSessionId,
 } from "@/api/login";
 import { useRouter } from "next/router";
+import { LoadingButton } from "@mui/lab";
 
 interface IFormInput {
   username: string;
@@ -30,7 +31,7 @@ const LoginForm: React.FC = () => {
     handleSubmit,
     reset,
     control,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     setValue,
     register,
   } = useForm<IFormInput>({
@@ -91,13 +92,14 @@ const LoginForm: React.FC = () => {
           required: "This field is required",
         }}
       />
-      <Button
+      <LoadingButton
         onClick={handleSubmit(onSubmit)}
         variant={"contained"}
         sx={{ height: 40 }}
+        loading={isSubmitting}
       >
         Login
-      </Button>
+      </LoadingButton>
       <Typography sx={{ textAlign: "center", fontSize: 15 }}>
         Don&apos;t have an account? <Link>Sign up</Link>
       </Typography>

@@ -40,19 +40,16 @@ import { Profile } from "@/types/profile";
 
 const Navbar: React.FC = () => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.up("md"));
+  const router = useRouter();
 
   const [drawerState, setDrawerState] = useState<boolean>(false);
   const [loginState, setLoginState] = useState<boolean>(false);
-
-  const isMobile = useMediaQuery(theme.breakpoints.up("md"));
-
-  const router = useRouter();
-  let profile: Profile;
-
-  const storedData = localStorage.getItem(PROFILE_COOKIE);
-  if (storedData) profile = JSON.parse(storedData);
-
-  console.log(profile);
+  const [profile, setProfile] = useState<Profile>(
+    localStorage.getItem(PROFILE_COOKIE)
+      ? JSON.parse(localStorage.getItem(PROFILE_COOKIE)!)
+      : null
+  );
 
   useEffect(() => {
     if (profile !== undefined && profile !== null) setLoginState(true);
