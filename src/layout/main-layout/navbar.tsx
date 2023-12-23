@@ -37,7 +37,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { LANDING_PAGE, LOGIN_PAGE } from "@/constants/urls";
 import { NavbarSearch } from "@/components/navbar/search";
-const PAGES = ["Home", "Discover", "Movie Release"];
+const PAGES = ["Home2", "Discover", "Movie Release"];
 const PROFILE_ITEMS = ["Profile", "Account", "Dashboard", "Logout"];
 
 const NavbarDrawer = ({ toggleDrawer, loginState, setLoginState }: any) => (
