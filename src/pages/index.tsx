@@ -15,22 +15,22 @@ interface Props {
 }
 export default function Home({ movies }: Props) {
   return (
-    <Box
-      sx={{
-        minHeight: "100vh",
-      }}
-    >
-      <SwiperBanner movies={movies} />
-      <SearchBar />
-      <MovieSwiperXl title="Just Release" movies={movies} />
-      <MovieSwiperSm title="Movies" movies={movies} />
-      <MovieSwiperFeatured movies={movies} />
-      <MovieSwiperMd title="Movies" movies={movies} />
-    </Box>
+    <MainLayout>
+      <Box
+        sx={{
+          minHeight: "100vh",
+        }}
+      >
+        <SwiperBanner movies={movies} />
+        <SearchBar />
+        <MovieSwiperXl title="Just Release" movies={movies} />
+        <MovieSwiperSm title="Movies" movies={movies} />
+        <MovieSwiperFeatured movies={movies} />
+        <MovieSwiperMd title="Movies" movies={movies} />
+      </Box>
+    </MainLayout>
   );
 }
-
-Home.PageLayout = MainLayout;
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const { data: movies } = await getPopularMovies({ page: 1 });

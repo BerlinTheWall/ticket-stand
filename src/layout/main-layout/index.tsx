@@ -2,12 +2,14 @@ import { Box, Container } from "@mui/material";
 import Footer from "./footer";
 import Navbar from "./navbar";
 import { ReactNode } from "react";
+import { NEED_MARGIN_TOP_VALUE } from "./var";
 
 export type Props = {
   children: ReactNode;
+  needMargin?: boolean;
 };
 
-const MainLayout: React.FC<Props> = ({ children }) => {
+const MainLayout: React.FC<Props> = ({ children, needMargin = false }) => {
   return (
     <Box
       sx={{
@@ -17,7 +19,9 @@ const MainLayout: React.FC<Props> = ({ children }) => {
       }}
     >
       <Navbar />
-      <Box component={"main"}>{children}</Box>
+      <Box component={"main"} mt={needMargin ? NEED_MARGIN_TOP_VALUE : 0}>
+        {children}
+      </Box>
       <Footer />
     </Box>
   );

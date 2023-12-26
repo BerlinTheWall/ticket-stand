@@ -81,7 +81,9 @@ client.interceptors.response.use(
 
     // ************************************** 404
     if (error.config && error.response && error.response.status === 404) {
-      window.location.replace("/not-found");
+      if (typeof window !== "undefined" && window.location) {
+        window.location.replace("/not-found");
+      }
       return Promise.reject(error);
     }
 

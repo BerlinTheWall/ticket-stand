@@ -6,6 +6,7 @@ import {
   Stack,
   Typography,
   useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { Autoplay, Pagination, EffectFade } from "swiper/modules";
 import "swiper/css/effect-fade";
@@ -24,6 +25,7 @@ type Props = {
 };
 
 const SwiperBanner: React.FC<Props> = ({ movies }) => {
+  const theme = useTheme();
   const isMobile = useMediaQuery("(min-width:600px)");
 
   return (
@@ -51,6 +53,12 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
             <SwiperSlide key={movie?.id} style={{ width: "100%" }}>
               <Box width={"100%"} height={600} position={"relative"}>
                 <Image
+                  onError={(e) => {
+                    if (e.currentTarget.parentElement) {
+                      e.currentTarget.parentElement.style.backgroundColor =
+                        theme.palette.background.default;
+                    }
+                  }}
                   src={
                     "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
                     movie.backdrop_path
