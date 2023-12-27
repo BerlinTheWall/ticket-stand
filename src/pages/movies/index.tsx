@@ -28,13 +28,8 @@ const MovieList = () => {
   }
 
   return (
-    <>
-      <Typography
-        component="h1"
-        fontSize={24}
-        fontWeight="bold"
-        paddingLeft={5}
-      >
+    <MainLayout needMargin>
+      <Typography component="h1" fontSize={24} fontWeight="bold" pl={5}>
         All Movies
       </Typography>
       <Grid container justifyContent="center">
@@ -55,7 +50,7 @@ const MovieList = () => {
           page={data?.page || 1}
         />
       </Grid>
-    </>
+    </MainLayout>
   );
 };
 
@@ -66,7 +61,5 @@ const SkeletonLoader = () => {
       return <MovieCardSkeletonLoader key={i} />;
     });
 };
-
-MovieList.PageLayout = MainLayout;
 
 export default MovieList;
