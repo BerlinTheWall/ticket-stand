@@ -1,9 +1,15 @@
-import { Box } from "@mui/material";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { IChildren } from "@/types/component-type/IChildren";
+import { Box } from "@mui/material";
+import { NEED_MARGIN_TOP_VALUE } from "@/components/navbar/var";
 
-const MainLayout: React.FC<IChildren> = ({ children }) => {
+export type Props = {
+  children: IChildren["children"];
+  needMargin?: boolean;
+};
+
+const MainLayout: React.FC<Props> = ({ children, needMargin = false }) => {
   return (
     <Box
       sx={{
@@ -13,7 +19,9 @@ const MainLayout: React.FC<IChildren> = ({ children }) => {
       }}
     >
       <Navbar />
-      <Box component={"main"}>{children}</Box>
+      <Box component={"main"} mt={needMargin ? NEED_MARGIN_TOP_VALUE : 0}>
+        {children}
+      </Box>
       <Footer />
     </Box>
   );

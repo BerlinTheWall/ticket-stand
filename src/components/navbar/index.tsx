@@ -62,8 +62,8 @@ const Navbar: React.FC = () => {
         PAGE_NOT_MARGIN_NAVBAR.includes(router.pathname)
           ? 0
           : {
-              md: `${NAVBAR_HEIGHT + 30}px`,
-              xs: `${NAVBAR_HEIGHT_MOBILE + 30}px`,
+              md: `${NAVBAR_HEIGHT}px`,
+              xs: `${NAVBAR_HEIGHT_MOBILE}px`,
             }
       }
     >

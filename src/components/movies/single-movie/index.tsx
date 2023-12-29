@@ -23,21 +23,18 @@ interface Props {
 const SingleMovie: React.FC<Props> = ({ movie }) => {
   const isMobile = useMediaQuery("(min-width:600px)");
   const isTablet = useMediaQuery("(min-width:900px)");
+
   return (
     <Box position="relative" height={isTablet ? 620 : 480}>
-      <Image
-        src={
-          "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
-          movie.backdrop_path
-        }
-        alt={movie.original_title}
-        width={10000}
-        height={100}
-        style={{
-          width: "100%",
+      <Box
+        sx={{
+          backgroundImage: `url(${
+            "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
+            movie.backdrop_path
+          })`,
           height: "100%",
-          objectFit: "cover",
           backgroundPosition: "center center",
+          objectFit: "cover",
         }}
       />
       <Box
