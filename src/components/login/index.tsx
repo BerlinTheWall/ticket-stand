@@ -12,6 +12,10 @@ import {
 } from "@/api/login";
 import { useRouter } from "next/router";
 import { LoadingButton } from "@mui/lab";
+import Cookies from "js-cookie";
+import { ACCOUNT_COOKIE, SESSION_ID_COOKIE } from "@/constants/cookie";
+import { useContext } from "react";
+import { AppContext } from "@/context/AppContext";
 
 interface IFormInput {
   username: string;
@@ -24,6 +28,7 @@ const defaultValues = {
 };
 
 const LoginForm: React.FC = () => {
+  const { setUser } = useContext(AppContext);
   const router = useRouter();
   const theme = useTheme();
 
@@ -47,7 +52,10 @@ const LoginForm: React.FC = () => {
         token.data.request_token
       );
       const sessionId = await getSessionId(login_token.data.request_token);
-      getAccount(sessionId.data.session_id);
+      const account = await getAccount(sessionId.data.session_id);
+      Cookies.set(SESSION_ID_COOKIE, sessionId.data.session_id);
+      Cookies.set(ACCOUNT_COOKIE, JSON.stringify(account.data));
+      setUser(account.data);
       router.back();
     } catch (error) {
       console.log(error);

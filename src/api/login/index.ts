@@ -1,12 +1,9 @@
 import { AxiosResponse } from "axios";
 import { simpleAxiosApi } from "../new-api";
-import Cookies from "js-cookie";
 import { RequestToken, Session } from "@/types/authentication";
-import {
-  ACCOUNT_ID_COOKIE,
-  PROFILE_COOKIE,
-  SESSION_ID_COOKIE,
-} from "@/constants/cookie";
+import { Profile } from "@/types/profile";
+import Cookies from "js-cookie";
+import { ACCOUNT_COOKIE, SESSION_ID_COOKIE } from "@/constants/cookie";
 
 const api_key = process.env.NEXT_PUBLIC_API_KEY;
 
@@ -63,7 +60,7 @@ export const getSessionId = async (
 
 export const getAccount = async (
   session_id: string
-): Promise<AxiosResponse<string>> => {
+): Promise<AxiosResponse<Profile>> => {
   try {
     const res = await simpleAxiosApi({
       url: "account",
@@ -72,9 +69,25 @@ export const getAccount = async (
         session_id: session_id,
       },
     });
-    Cookies.set(SESSION_ID_COOKIE, session_id);
-    Cookies.set(ACCOUNT_ID_COOKIE, res.data.id);
-    localStorage.setItem(PROFILE_COOKIE, JSON.stringify(res.data));
+    return res;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const signOut = async (
+  session_id: string
+): Promise<AxiosResponse<any>> => {
+  try {
+    const res = await simpleAxiosApi({
+      url: "authentication/session",
+      method: "DELETE",
+      data: {
+        session_id: session_id,
+      },
+    });
+    Cookies.remove(SESSION_ID_COOKIE);
+    Cookies.remove(ACCOUNT_COOKIE);
     return res;
   } catch (error) {
     throw error;
