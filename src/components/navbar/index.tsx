@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import {
   Box,
   AppBar,
@@ -9,15 +9,11 @@ import {
   IconButton,
   Button,
   Avatar,
-  Menu,
-  MenuItem,
   Stack,
-  Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
-import SearchIcon from "@mui/icons-material/Search";
 import ThemeSwitch from "../../components/switch-theme";
 import Image from "next/image";
 import Images from "@/utils/image-helper";
@@ -26,7 +22,6 @@ import {
   NAVBAR_HEIGHT,
   NAVBAR_HEIGHT_MOBILE,
   PAGE_NOT_MARGIN_NAVBAR,
-  PROFILE_ITEMS,
 } from "./var";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -34,9 +29,9 @@ import { LANDING_PAGE, LOGIN_PAGE } from "@/constants/urls";
 import { NavbarSearch } from "@/components/navbar/search";
 import GenresDrawer from "@/layout/main-layout/genres-drawer";
 import { NavbarSidebar } from "./navbar-sidebar";
-import Cookies from "js-cookie";
-import { PROFILE_COOKIE } from "@/constants/cookie";
-import { Profile } from "@/types/profile";
+import { useIsLoggedIn } from "@/hooks/useIsLoggedIn";
+import { AppContext } from "@/context/AppContext";
+import ProfileDropdown from "./profile-dropdown";
 
 const Navbar: React.FC = () => {
   const theme = useTheme();
@@ -44,17 +39,8 @@ const Navbar: React.FC = () => {
   const router = useRouter();
 
   const [drawerState, setDrawerState] = useState<boolean>(false);
-  const [loginState, setLoginState] = useState<boolean>(false);
-  const [profile, setProfile] = useState<Profile>(
-    localStorage.getItem(PROFILE_COOKIE)
-      ? JSON.parse(localStorage.getItem(PROFILE_COOKIE)!)
-      : null
-  );
-
-  useEffect(() => {
-    if (profile !== undefined && profile !== null) setLoginState(true);
-    else setLoginState(false);
-  }, [profile]);
+  const loggedIn = useIsLoggedIn();
+  const { user } = useContext(AppContext);
 
   const toggleDrawer = () => {
     setDrawerState((prev) => !prev);
@@ -148,7 +134,7 @@ const Navbar: React.FC = () => {
             >
               <NavbarSearch />
               <ThemeSwitch />
-              {!loginState && (
+              {!loggedIn && (
                 <Box display={"flex"} gap={2}>
                   <Link href={LOGIN_PAGE}>
                     <Button variant="outlined" fullWidth color="secondary">
@@ -162,105 +148,32 @@ const Navbar: React.FC = () => {
                   </Link>
                 </Box>
               )}
-              {loginState && (
-                <>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      borderRadius: "100px",
-                      padding: 1,
-                    }}
-                  ></Box>
-                  <Tooltip title="Open settings">
-                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                      {profile &&
-                      profile.avatar.tmdb.avatar_path !== undefined &&
-                      profile.avatar.tmdb.avatar_path !== null ? (
-                        <Image
-                          src={
-                            "http://www.themoviedb.org/t/p/w150_and_h150_face" +
-                            profile.avatar.tmdb.avatar_path
-                          }
-                          alt={""}
-                          width={40}
-                          height={40}
-                        />
-                      ) : (
-                        <Avatar alt="Profile Icon" />
-                      )}
-                    </IconButton>
-                  </Tooltip>
-                </>
-              )}
-            </Stack>
-            {/* MD Profile */}
-            {/* {loginState && (
-              <Stack
-                sx={{
-                  display: { xs: "none", md: "flex" },
-                }}
-                gap={5}
-                direction={"row"}
-                alignItems={"center"}
-              >
-                <NavbarSearch />
-                <ThemeSwitch />
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    borderRadius: "100px",
-                    padding: 1,
-                  }}
-                ></Box>
+              {loggedIn && (
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    {profile &&
-                    profile.avatar.tmdb.avatar_path !== undefined &&
-                    profile.avatar.tmdb.avatar_path !== null ? (
+                    {loggedIn && user?.avatar?.tmdb?.avatar_path ? (
                       <Image
                         src={
                           "http://www.themoviedb.org/t/p/w150_and_h150_face" +
-                          profile.avatar.tmdb.avatar_path
+                          user.avatar.tmdb.avatar_path
                         }
                         alt={""}
                         width={40}
                         height={40}
+                        style={{ borderRadius: 20 }}
                       />
                     ) : (
                       <Avatar alt="Profile Icon" />
                     )}
                   </IconButton>
                 </Tooltip>
-                <Menu
-                  sx={{ mt: 7 }}
-                  id="menu-appbar"
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
-                >
-                  {PROFILE_ITEMS.map((item) => (
-                    <MenuItem
-                      key={item}
-                      onClick={handleCloseUserMenu}
-                      sx={{ px: 2.5, py: 1.25 }}
-                    >
-                      <Typography textAlign="center">{item}</Typography>
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </Stack>
-            )} */}
+              )}
+            </Stack>
+            {/* MD Profile */}
+            <ProfileDropdown
+              anchorElUser={anchorElUser}
+              handleCloseUserMenu={handleCloseUserMenu}
+            />
             {/* SM Drawer */}
             <Box
               sx={{
@@ -285,11 +198,7 @@ const Navbar: React.FC = () => {
                 onClose={toggleDrawer}
                 sx={{ display: { md: "none" } }}
               >
-                <NavbarSidebar
-                  toggleDrawer={toggleDrawer}
-                  loginState={loginState}
-                  setLoginState={setLoginState}
-                />
+                <NavbarSidebar toggleDrawer={toggleDrawer} />
               </Drawer>
             </Box>
           </Toolbar>

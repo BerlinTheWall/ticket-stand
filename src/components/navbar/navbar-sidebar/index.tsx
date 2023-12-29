@@ -8,74 +8,75 @@ import {
   ListItemText,
 } from "@mui/material";
 import { PAGES, PROFILE_ITEMS } from "../var";
-import { Dispatch, SetStateAction } from "react";
+import { useIsLoggedIn } from "@/hooks/useIsLoggedIn";
+import Link from "next/link";
+import { LOGIN_PAGE } from "@/constants/urls";
 
 type Props = {
   toggleDrawer: () => void;
-  loginState: boolean;
-  setLoginState: Dispatch<SetStateAction<boolean>>;
 };
-export const NavbarSidebar: React.FC<Props> = ({
-  toggleDrawer,
-  loginState,
-  setLoginState,
-}) => (
-  <Box
-    role="menubar"
-    onClick={toggleDrawer}
-    onKeyDown={toggleDrawer}
-    width={"200px"}
-  >
-    <List>
-      {PAGES.map((text) => (
-        <ListItem key={text} disablePadding>
-          <ListItemButton>
-            <ListItemText
-              primary={text}
-              primaryTypographyProps={{ fontSize: 18 }}
-            />
-          </ListItemButton>
-        </ListItem>
-      ))}
-    </List>
-    <Divider />
+export const NavbarSidebar: React.FC<Props> = ({ toggleDrawer }) => {
+  const loggedIn = useIsLoggedIn();
+
+  return (
     <Box
-      sx={{
-        display: loginState ? "none" : "flex",
-        flexDirection: "column-reverse",
-        paddingTop: 1,
-        paddingX: 1,
-        gap: 1,
-      }}
+      role="menubar"
+      onClick={toggleDrawer}
+      onKeyDown={toggleDrawer}
+      width={"200px"}
     >
-      <Button
-        variant="outlined"
-        fullWidth
-        sx={{ fontSize: 15 }}
-        color="secondary"
-      >
-        Sign up
-      </Button>
-      <Button
-        variant="contained"
-        fullWidth
-        color="primary"
-        sx={{ fontSize: 15 }}
-        onClick={() => setLoginState(true)}
-      >
-        Login
-      </Button>
-    </Box>
-    {loginState && (
       <List>
-        {PROFILE_ITEMS.map((item) => (
-          <ListItem key={item} disablePadding>
+        {PAGES.map((text) => (
+          <ListItem key={text} disablePadding>
             <ListItemButton>
-              <ListItemText primary={item} />
+              <ListItemText
+                primary={text}
+                primaryTypographyProps={{ fontSize: 18 }}
+              />
             </ListItemButton>
           </ListItem>
         ))}
       </List>
-    )}
-  </Box>
-);
+      <Divider />
+      <Box
+        sx={{
+          display: loggedIn ? "none" : "flex",
+          flexDirection: "column-reverse",
+          paddingTop: 1,
+          paddingX: 1,
+          gap: 1,
+        }}
+      >
+        <Button
+          variant="outlined"
+          fullWidth
+          sx={{ fontSize: 15 }}
+          color="secondary"
+        >
+          Sign up
+        </Button>
+        <Link href={LOGIN_PAGE}>
+          <Button
+            variant="contained"
+            fullWidth
+            color="primary"
+            sx={{ fontSize: 15 }}
+          >
+            Login
+          </Button>
+        </Link>
+      </Box>
+      {loggedIn && (
+        <List>
+          {PROFILE_ITEMS.map((item) => (
+            <ListItem key={item.title} disablePadding>
+              <ListItemButton>
+                <ListItemText primary={item.title} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      )}
+    </Box>
+  );
+};

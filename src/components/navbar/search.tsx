@@ -13,12 +13,11 @@ export const NavbarSearch = () => {
   const [searchResults, setSearchResults] = useState<Movie[]>([]);
 
   const handleChange = useDebounce(async (e: any) => {
-    console.log(e.target.value);
-    console.log("Searching for:", e.target.value);
+    // console.log(e.target.value);
+    // console.log("Searching for:", e.target.value);
     try {
       const movies = await getSearchMovie(e.target.value);
       setSearchResults(movies.results);
-      console.log(movies);
     } catch (error) {
       console.log(error);
     }
