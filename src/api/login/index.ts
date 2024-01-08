@@ -75,10 +75,10 @@ export const getAccount = async (
   }
 };
 
-export const signOut = async (
-  session_id: string
-): Promise<AxiosResponse<any>> => {
+export const signOut = async (): Promise<AxiosResponse<any>> => {
   try {
+    const session_id = Cookies.get(SESSION_ID_COOKIE);
+
     const res = await simpleAxiosApi({
       url: "authentication/session",
       method: "DELETE",
@@ -86,8 +86,6 @@ export const signOut = async (
         session_id: session_id,
       },
     });
-    Cookies.remove(SESSION_ID_COOKIE);
-    Cookies.remove(ACCOUNT_COOKIE);
     return res;
   } catch (error) {
     throw error;
