@@ -1,6 +1,5 @@
-import { Menu, MenuItem, Typography, useTheme } from "@mui/material";
+import { Menu, useTheme } from "@mui/material";
 import { PROFILE_ITEMS } from "../var";
-import { useState } from "react";
 import ProfileDropdownItem from "./profile-dropdown-item";
 
 type Props = {
@@ -42,13 +41,7 @@ const ProfileDropdown: React.FC<Props> = ({
       onClose={handleCloseUserMenu}
     >
       {PROFILE_ITEMS.map((item) => (
-        <ProfileDropdownItem
-          key={item.title}
-          title={item.title}
-          isLink={item.isLink}
-          href={item?.href}
-          onClick={item?.onClick}
-        />
+        <ProfileDropdownItem key={item.title} {...item} />
       ))}
     </Menu>
   );

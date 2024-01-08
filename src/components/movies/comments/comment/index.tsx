@@ -1,7 +1,7 @@
 import { Avatar, Box, Stack, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
-import ReadMore from "../read-more";
+import ReadMoreCollapse from "../read-more";
 import { convertDate } from "@/utils/date-converter";
 
 type Props = {
@@ -57,7 +57,7 @@ const Comment: React.FC<Props> = ({
           </Typography>
         </Stack>
       </Stack>
-      <ReadMore text={content} maxLength={290}></ReadMore>
+      <ReadMoreCollapse text={content} maxLength={290} />
     </Box>
   );
 };

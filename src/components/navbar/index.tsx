@@ -149,7 +149,7 @@ const Navbar: React.FC = () => {
                 </Box>
               )}
               {loggedIn && (
-                <Tooltip title="Open settings">
+                <Tooltip title={user.username}>
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     {loggedIn && user?.avatar?.tmdb?.avatar_path ? (
                       <Image
