@@ -8,7 +8,7 @@ type Props = {
   maxLength: number;
 };
 
-const ReadMore: React.FC<Props> = ({ text, maxLength }) => {
+const ReadMoreCollapse: React.FC<Props> = ({ text, maxLength }) => {
   const [expanded, setExpanded] = useState(false);
 
   const handleToggle = () => {
@@ -39,4 +39,4 @@ const ReadMore: React.FC<Props> = ({ text, maxLength }) => {
   );
 };
 
-export default ReadMore;
+export default ReadMoreCollapse;
