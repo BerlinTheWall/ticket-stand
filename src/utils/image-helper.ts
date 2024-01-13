@@ -1,7 +1,11 @@
 // Logo
-import Logo from "../../public/assets/images/ticket-stand-high-resolution-logo-color-on-transparent-background.svg";
-import LogoBlack from "../../public/assets/images/ticket-stand-high-resolution-logo-black-on-transparent-background.svg";
-import LogoWhite from "../../public/assets/images/ticket-stand-high-resolution-logo-white-on-transparent-background.svg";
+import Logo from "../../public/assets/images/ticket-stand-high-resolution-logo-transparent.svg";
+import LogoBlack from "../../public/assets/images/ticket-stand-high-resolution-logo-black-transparent.svg";
+import LogoWhite from "../../public/assets/images/ticket-stand-high-resolution-logo-white-transparent.svg";
+
+import OldLogo from "../../public/assets/images/ticket-stand-high-resolution-logo-color-on-transparent-background.svg";
+import OldLogoBlack from "../../public/assets/images/ticket-stand-high-resolution-logo-black-on-transparent-background.svg";
+import OldLogoWhite from "../../public/assets/images/ticket-stand-high-resolution-logo-white-on-transparent-background.svg";
 // 404
 import Shrek404 from "../../public/assets/images/shrek-404.png";
 // list background images
@@ -24,6 +28,8 @@ const Images = {
   Logo,
   LogoBlack,
   LogoWhite,
+  OldLogoBlack,
+  OldLogoWhite,
   DemoImage,
   // 404
   Shrek404,
