@@ -19,6 +19,37 @@ a {
   color: inherit;
   text-decoration: none;
 }
+/* scrollbars */
+::-webkit-scrollbar {
+  height: 2px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #dadada;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-track {
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  width: 0.5em;
+  height: 36px !important;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #5d5d5d;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+  background-color: #fff;
+  border-left: 3px solid #e8f0d7;
+  border-right: 3px solid #e8f0d7;
+  height: 1.5rem;
+}
 
 /* truncates */
 .truncate-1 {
