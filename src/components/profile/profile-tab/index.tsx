@@ -22,7 +22,7 @@ const TabComponent = () => {
   const [tabValue, setTabValue] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedOption, setSelectedOption] =
-    useState<profileListType>("movies");
+    useState<profileListType>("movie");
 
   const handleTabChange = (event: any, newValue: any) => {
     setTabValue(newValue);

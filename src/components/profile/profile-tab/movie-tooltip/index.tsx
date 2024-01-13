@@ -34,7 +34,7 @@ const MovieTooltip: React.FC<Props> = ({ title, setType }) => {
             <Typography
               fontWeight={700}
               component="h3"
-              onClick={() => handleMenuClose("movies")}
+              onClick={() => handleMenuClose("movie")}
               sx={{
                 pl: 1,
                 cursor: "pointer",
