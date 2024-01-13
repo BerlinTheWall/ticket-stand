@@ -4,9 +4,10 @@ import { useQuery } from "@tanstack/react-query";
 
 export const useWatchList = (
   accountId: string,
-  type: profileListType,
+  inputType: profileListType,
   options = {}
 ) => {
+  let type = inputType === "movie" ? "movies" : "tv";
   const watchList = useQuery({
     queryKey: ["watchlist", type],
     queryFn: () =>

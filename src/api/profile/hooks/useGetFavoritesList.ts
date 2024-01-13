@@ -4,9 +4,10 @@ import { useQuery } from "@tanstack/react-query";
 
 export const useFavoritesList = (
   accountId: string,
-  type: profileListType,
+  inputType: profileListType,
   options = {}
 ) => {
+  let type = inputType === "movie" ? "movies" : "tv";
   const favoriteList = useQuery({
     queryKey: ["favorites", type],
     queryFn: () =>
