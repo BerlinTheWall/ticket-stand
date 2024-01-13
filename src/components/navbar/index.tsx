@@ -97,7 +97,7 @@ const Navbar: React.FC = () => {
                       : Images.LogoBlack
                   }
                   alt={"Logo"}
-                  width={!isMobile ? 50 : 70}
+                  width={!isMobile ? 50 : 150}
                   height={!isMobile ? 50 : 70}
                   style={{ cursor: "pointer" }}
                   priority
