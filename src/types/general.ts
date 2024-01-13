@@ -1,1 +1,1 @@
-export type profileListType = "movies" | "tv";
+export type profileListType = "movie" | "tv";
