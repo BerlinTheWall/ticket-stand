@@ -9,27 +9,45 @@ import { PaginatedList } from "@/types/paginated-list";
 
 const api_key = process.env.NEXT_PUBLIC_API_KEY;
 
-export const getWatchListMovie = async (
-  account_id: string
-): Promise<AxiosResponse<PaginatedList<Movie>>> => {
+export const addToFavorites = async (
+  accountId: string,
+  mediaType: string,
+  mediaId: string,
+  sessionId: string
+): Promise<AxiosResponse<RequestToken>> => {
   try {
     const res = await simpleAxiosApi({
-      url: `/account/${account_id}/watchlist/movies`,
+      url: `account/${accountId}/favorite`,
+      method: "POST",
+      data: {
+        media_type: mediaType,
+        media_id: mediaId,
+        favorite: true,
+      },
     });
-    return res.data;
+    return res;
   } catch (error) {
     throw error;
   }
 };
 
-export const getWatchListTV = async (
-  account_id: string
-): Promise<AxiosResponse<PaginatedList<Movie>>> => {
+export const addToWatchlist = async (
+  accountId: string,
+  mediaType: string,
+  mediaId: string,
+  sessionId: string
+): Promise<AxiosResponse<RequestToken>> => {
   try {
     const res = await simpleAxiosApi({
-      url: `/account/${account_id}/watchlist/tv`,
+      url: `account/${accountId}/watchlist`,
+      method: "POST",
+      data: {
+        media_type: mediaType,
+        media_id: mediaId,
+        watchlist: true,
+      },
     });
-    return res.data;
+    return res;
   } catch (error) {
     throw error;
   }
