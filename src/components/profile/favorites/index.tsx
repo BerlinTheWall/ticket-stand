@@ -1,5 +1,4 @@
-import { getWatchListMovie } from "@/api/profile";
-import { useFavoritesList } from "@/api/profile/hooks/useFavoritesList";
+import { useFavoritesList } from "@/api/profile/hooks/useGetFavoritesList";
 import MovieCard from "@/components/movies/movie-card";
 import MovieCardSkeletonLoader from "@/components/movies/movie-card-skeleton-loader";
 import { AppContext } from "@/context/AppContext";
@@ -14,7 +13,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useMemo } from "react";
+import { useContext } from "react";
 
 type Props = {
   option: profileListType;
@@ -30,8 +29,6 @@ const Favorites: React.FC<Props> = ({ option }) => {
     option
   );
 
-  console.log(data);
-
   const handleChange = (event: any, value: number) => {
     router.replace({
       query: { ...router.query, page: value },
@@ -45,7 +42,7 @@ const Favorites: React.FC<Props> = ({ option }) => {
   return (
     <Stack direction={"column"}>
       <Typography component="h1" fontSize={24} fontWeight="bold" pl={0}>
-        Favorite {option === "movies" ? "Movies" : "TV Series"}
+        Favorite {option === "movie" ? "Movies" : "TV Series"}
       </Typography>
       <Grid container justifyContent="start" sx={{ pt: 1 }}>
         {isLoading || isFetching ? (

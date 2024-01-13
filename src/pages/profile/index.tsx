@@ -1,14 +1,5 @@
 import MainLayout from "@/layout/main-layout";
-import {
-  Avatar,
-  Box,
-  Menu,
-  Stack,
-  Tab,
-  Tabs,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Avatar, Box, Stack, Typography, useTheme } from "@mui/material";
 import { NextPage } from "next";
 import { useIsLoggedIn } from "@/hooks/useIsLoggedIn";
 import { useContext, useState } from "react";
@@ -20,7 +11,7 @@ const ProfilePage: NextPage = () => {
   const theme = useTheme();
   const loggedIn = useIsLoggedIn();
   const { user } = useContext(AppContext);
-  console.log(user);
+  // console.log(user);
   const [value, setValue] = useState("one");
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {

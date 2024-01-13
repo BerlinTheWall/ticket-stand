@@ -1,8 +1,9 @@
 import { useLists } from "@/api/profile/hooks/useLists";
-import MovieCard from "@/components/movies/movie-card";
+import ListCard from "@/components/lists/list-card";
 import MovieCardSkeletonLoader from "@/components/movies/movie-card-skeleton-loader";
 import { AppContext } from "@/context/AppContext";
-import { Movie } from "@/types/movie";
+import { ListType } from "@/types/list";
+import Images from "@/utils/image-helper";
 import {
   Box,
   Grid,
@@ -14,9 +15,20 @@ import {
 import { useRouter } from "next/router";
 import { useContext } from "react";
 
-// type Props = {
-//   option: profileListType;
-// };
+const listCardImages = [
+  Images.Background1,
+  Images.Background2,
+  Images.Background3,
+  Images.Background4,
+  Images.Background5,
+  Images.Background6,
+  Images.Background7,
+  Images.Background8,
+  Images.Background9,
+  Images.Background10,
+  Images.Background11,
+  Images.Background12,
+];
 
 const Lists: React.FC = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
@@ -40,16 +52,21 @@ const Lists: React.FC = () => {
   return (
     <Stack direction={"column"}>
       <Typography component="h1" fontSize={24} fontWeight="bold" pl={0}>
-        Lists
+        My Lists
       </Typography>
       <Grid container justifyContent="start" sx={{ pt: 1 }}>
         {isLoading || isFetching ? (
           <SkeletonLoader />
         ) : (
-          <></>
-          //   data?.results?.map((movie: Movie) => {
-          //     return <MovieCard key={movie.id} movie={movie} />;
-          //   })
+          data?.results?.map((list: ListType, index: number) => {
+            return (
+              <ListCard
+                key={list.id}
+                list={list}
+                backgroundImage={listCardImages[index]}
+              />
+            );
+          })
         )}
       </Grid>
       <Box display={"flex"} justifyContent={"center"}>

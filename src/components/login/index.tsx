@@ -37,7 +37,6 @@ const LoginForm: React.FC = () => {
     reset,
     control,
     formState: { errors, isSubmitting },
-    setValue,
     register,
   } = useForm<IFormInput>({
     defaultValues: defaultValues,
@@ -68,8 +67,8 @@ const LoginForm: React.FC = () => {
         <Image
           src={
             theme.palette.mode !== THEME_VALUES.dark
-              ? Images.LogoWhite
-              : Images.LogoBlack
+              ? Images.OldLogoWhite
+              : Images.OldLogoBlack
           }
           alt="logo"
           width={40}
@@ -77,7 +76,7 @@ const LoginForm: React.FC = () => {
         />
         <Typography
           component="h1"
-          sx={{ fontSize: 25, fontWeight: 500, textAlign: "center" }}
+          sx={{ fontSize: 25, fontWeight: 700, textAlign: "center" }}
         >
           Login
         </Typography>
