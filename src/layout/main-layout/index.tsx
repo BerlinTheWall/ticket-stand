@@ -1,11 +1,11 @@
-import { Box, Container } from "@mui/material";
-import Footer from "./footer";
-import Navbar from "./navbar";
-import { ReactNode } from "react";
-import { NEED_MARGIN_TOP_VALUE } from "./var";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
+import { IChildren } from "@/types/component-type/IChildren";
+import { Box } from "@mui/material";
+import { NEED_MARGIN_TOP_VALUE } from "@/components/navbar/var";
 
 export type Props = {
-  children: ReactNode;
+  children: IChildren["children"];
   needMargin?: boolean;
 };
 

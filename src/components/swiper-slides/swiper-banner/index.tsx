@@ -51,14 +51,13 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
         {movies.slice(0, 5)?.map((movie: Movie) => {
           return (
             <SwiperSlide key={movie?.id} style={{ width: "100%" }}>
-              <Box width={"100%"} height={600} position={"relative"}>
+              <Box
+                width={"100%"}
+                height={600}
+                position={"relative"}
+                bgcolor={"Background.default"}
+              >
                 <Image
-                  onError={(e) => {
-                    if (e.currentTarget.parentElement) {
-                      e.currentTarget.parentElement.style.backgroundColor =
-                        theme.palette.background.default;
-                    }
-                  }}
                   src={
                     "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
                     movie.backdrop_path
