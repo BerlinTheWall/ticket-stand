@@ -3,6 +3,9 @@ import { AppContext } from "./AppContext";
 import Cookies from "js-cookie";
 import { IChildren } from "@/types/component-type/IChildren";
 import { darkTheme, lightTheme } from "@/mui/theme";
+import { useIsLoggedIn } from "@/hooks/useIsLoggedIn";
+import { ACCOUNT_COOKIE } from "@/constants/cookie";
+import { Profile } from "@/types/profile";
 
 const AppState = ({ children }: IChildren) => {
   const [mode, setMode] = useState(Cookies.get("mode") ?? "dark");
@@ -10,6 +13,11 @@ const AppState = ({ children }: IChildren) => {
     Cookies && Cookies.get("mode") === "light" ? lightTheme : darkTheme
   );
   const [hasMounted, setHasMounted] = useState(false);
+  const [user, setUser] = useState<Profile>(
+    Cookies && Cookies.get(ACCOUNT_COOKIE)
+      ? JSON.parse(Cookies.get(ACCOUNT_COOKIE)!)
+      : null
+  );
 
   useEffect(() => {
     setHasMounted(true);
@@ -37,6 +45,8 @@ const AppState = ({ children }: IChildren) => {
         toggleTheme,
         appTheme,
         mode,
+        user,
+        setUser,
       }}
     >
       {children}

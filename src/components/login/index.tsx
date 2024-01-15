@@ -11,6 +11,11 @@ import {
   getSessionId,
 } from "@/api/login";
 import { useRouter } from "next/router";
+import { LoadingButton } from "@mui/lab";
+import Cookies from "js-cookie";
+import { ACCOUNT_COOKIE, SESSION_ID_COOKIE } from "@/constants/cookie";
+import { useContext } from "react";
+import { AppContext } from "@/context/AppContext";
 
 interface IFormInput {
   username: string;
@@ -23,6 +28,7 @@ const defaultValues = {
 };
 
 const LoginForm: React.FC = () => {
+  const { setUser } = useContext(AppContext);
   const router = useRouter();
   const theme = useTheme();
 
@@ -30,8 +36,7 @@ const LoginForm: React.FC = () => {
     handleSubmit,
     reset,
     control,
-    formState: { errors },
-    setValue,
+    formState: { errors, isSubmitting },
     register,
   } = useForm<IFormInput>({
     defaultValues: defaultValues,
@@ -46,7 +51,10 @@ const LoginForm: React.FC = () => {
         token.data.request_token
       );
       const sessionId = await getSessionId(login_token.data.request_token);
-      getAccount(sessionId.data.session_id);
+      const account = await getAccount(sessionId.data.session_id);
+      Cookies.set(SESSION_ID_COOKIE, sessionId.data.session_id);
+      Cookies.set(ACCOUNT_COOKIE, JSON.stringify(account.data));
+      setUser(account.data);
       router.back();
     } catch (error) {
       console.log(error);
@@ -59,8 +67,8 @@ const LoginForm: React.FC = () => {
         <Image
           src={
             theme.palette.mode !== THEME_VALUES.dark
-              ? Images.LogoWhite
-              : Images.LogoBlack
+              ? Images.OldLogoWhite
+              : Images.OldLogoBlack
           }
           alt="logo"
           width={40}
@@ -68,7 +76,7 @@ const LoginForm: React.FC = () => {
         />
         <Typography
           component="h1"
-          sx={{ fontSize: 25, fontWeight: 500, textAlign: "center" }}
+          sx={{ fontSize: 25, fontWeight: 700, textAlign: "center" }}
         >
           Login
         </Typography>
@@ -91,13 +99,14 @@ const LoginForm: React.FC = () => {
           required: "This field is required",
         }}
       />
-      <Button
+      <LoadingButton
         onClick={handleSubmit(onSubmit)}
         variant={"contained"}
         sx={{ height: 40 }}
+        loading={isSubmitting}
       >
         Login
-      </Button>
+      </LoadingButton>
       <Typography sx={{ textAlign: "center", fontSize: 15 }}>
         Don&apos;t have an account? <Link>Sign up</Link>
       </Typography>
