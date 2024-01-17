@@ -19,7 +19,7 @@ export const NavbarSearch = () => {
 
   const handleChange = useDebounce(async (e: any) => {
     // console.log(e.target.value);
-    console.log("Searching for:", e.target.value);
+    // console.log("Searching for:", e.target.value);
     try {
       const movies = await getSearchMovie(e.target.value);
       setSearchResults(movies.results);
@@ -146,13 +146,14 @@ export const NavbarSearch = () => {
                   />
                   <Stack direction={"column"}>
                     <Typography fontWeight="bold" pt={0.2}>
+                      {/* {searchResult.original_title} */}
                       {searchResult.original_title}
                     </Typography>
                     <Stack direction={"row"}>
                       <StarRateRoundedIcon sx={{ color: "warning.light" }} />
-                      <Typography fontWeight="400" pt={0.2}>
+                      {/* <Typography fontWeight="400" pt={0.2}>
                         {searchResult.vote_average.toFixed(1)}
-                      </Typography>
+                      </Typography> */}
                     </Stack>
                   </Stack>
                 </Stack>
