@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import Head from "next/head";
 import { AppProps } from "next/app";
 import NextNProgress from "nextjs-progressbar";
@@ -15,6 +15,8 @@ import {
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { lightTheme } from "@/mui/theme";
+import "react-toastify/dist/ReactToastify.css";
+import Toast from "@/components/toast";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -27,7 +29,8 @@ export interface MyAppProps extends AppProps {
 
 export default function MyApp(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-  const [queryClient] = React.useState(
+
+  const [queryClient] = useState(
     () =>
       new QueryClient({
         defaultOptions: {
@@ -70,6 +73,7 @@ export default function MyApp(props: MyAppProps) {
               ) : (
                 <Component {...pageProps} />
               )}
+              <Toast />
             </MUIThemeProvider>
           </CacheProvider>
         </AppState>
