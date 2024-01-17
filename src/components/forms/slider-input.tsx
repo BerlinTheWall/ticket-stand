@@ -6,6 +6,8 @@ interface Props extends FormInputProps {
   step: number;
   min: number;
   max: number;
+  marks?: any[];
+  isDouble?: boolean;
 }
 
 export const FormInputSlider = ({
@@ -16,6 +18,9 @@ export const FormInputSlider = ({
   step,
   min,
   max,
+  marks,
+  sx,
+  isDouble = false,
 }: Props) => {
   const {
     field: { onChange, value },
@@ -24,7 +29,7 @@ export const FormInputSlider = ({
     name,
     control,
     rules,
-    defaultValue: [min, max],
+    defaultValue: !isDouble ? min : [min, max],
   });
 
   return (
@@ -37,13 +42,15 @@ export const FormInputSlider = ({
         pr: 2,
       }}
     >
-      <Typography whiteSpace={"nowrap"}>{label}</Typography>
+      <Typography sx={sx} whiteSpace={"nowrap"}>
+        {label}
+      </Typography>
       <Slider
         value={value}
         onChange={onChange}
-        valueLabelDisplay="auto"
+        valueLabelDisplay={!isDouble ? "on" : "auto"}
         step={step}
-        marks
+        marks={marks}
         min={min}
         max={max}
       />

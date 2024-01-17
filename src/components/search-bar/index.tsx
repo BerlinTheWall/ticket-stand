@@ -105,6 +105,7 @@ const SearchBar: React.FC = () => {
             step={1}
             min={0}
             max={10}
+            isDouble
           />
         </Grid>
         <Grid item lg={true} md={2} xs={12} alignSelf={"center"}>
