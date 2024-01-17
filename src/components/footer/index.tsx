@@ -1,6 +1,9 @@
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { Fragment } from "react";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import TelegramIcon from "@mui/icons-material/Telegram";
 
 const FOOTER_LINKS = [
   { title: "Home", link: "/" },
@@ -58,7 +61,31 @@ const Footer: React.FC = () => {
                   xs: "space-between",
                 }}
               >
-                {FOOTER_LINKS.map((link, index) => {
+                <Typography fontSize={20}>
+                  Implemented by{" "}
+                  <Typography
+                    component={"span"}
+                    sx={{
+                      color: "primary.dark",
+                      fontWeight: "bold",
+                      fontSize: 20,
+                    }}
+                  >
+                    Hooman Shahidi
+                  </Typography>{" "}
+                  &{" "}
+                  <Typography
+                    component={"span"}
+                    sx={{
+                      color: "primary.dark",
+                      fontWeight: "bold",
+                      fontSize: 20,
+                    }}
+                  >
+                    Farnood Loftali
+                  </Typography>
+                </Typography>
+                {/* {FOOTER_LINKS.map((link, index) => {
                   return (
                     <Fragment key={link.title}>
                       <Link
@@ -73,16 +100,47 @@ const Footer: React.FC = () => {
                       )}
                     </Fragment>
                   );
-                })}
+                })} */}
               </Stack>
-              <Box
+              <Stack
+                direction={"row"}
+                gap={1}
                 order={{ md: 2, xs: 1 }}
                 display={"flex"}
                 justifyContent={{ md: "end", xs: "start" }}
                 alignSelf={"end"}
               >
-                Icons
-              </Box>
+                <Link
+                  href={"https://www.linkedin.com/in/hooman-shahidi-5927b4103/"}
+                  target="_blank"
+                >
+                  <LinkedInIcon
+                    sx={{
+                      color: "primary.dark",
+                      fontSize: 36,
+                      cursor: "pointer",
+                    }}
+                  />
+                </Link>
+                <Link href={"https://github.com/BerlinTheWall"} target="_blank">
+                  <GitHubIcon
+                    sx={{
+                      color: "primary.dark",
+                      fontSize: 34,
+                      cursor: "pointer",
+                    }}
+                  />
+                </Link>
+                <Link href={"https://t.me/TheWhoman"} target="_blank">
+                  <TelegramIcon
+                    sx={{
+                      color: "primary.dark",
+                      fontSize: 34,
+                      cursor: "pointer",
+                    }}
+                  />
+                </Link>
+              </Stack>
             </Box>
           </Grid>
         </Grid>
@@ -103,7 +161,9 @@ const Footer: React.FC = () => {
               );
             })}
           </Stack>
-          <Typography textAlign={{ xs: "center" }}>© 2023</Typography>
+          <Typography textAlign={{ xs: "center" }}>
+            © {new Date().getFullYear()}
+          </Typography>
         </Stack>
       </Box>
     </Box>
