@@ -12,4 +12,30 @@ export type TVSeries = {
   vote_average: number;
   adult: boolean;
   genres: Genre[];
+  seasons: Season[];
+  number_of_seasons: number;
+  number_of_episodes: number;
+};
+
+export type Season = {
+  id: number;
+  season_number: number;
+  name: string;
+  overview: string;
+  poster_path: string;
+  air_date: string;
+  episode_count: number;
+  vote_average: number;
+  episodes: Episode[];
+};
+
+export type Episode = {
+  id: number;
+  name: string;
+  episode_number: number;
+  overview: string;
+  air_date: string;
+  runtime: string;
+  vote_average: number;
+  still_path: string;
 };
