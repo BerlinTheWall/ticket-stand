@@ -4,7 +4,7 @@ import { AxiosResponse } from "axios";
 import { filteringMethod } from "@/utils/utils";
 import { PaginatedList } from "@/types/paginated-list";
 import { Comment } from "@/types/comment";
-import { TVSeries } from "@/types/tv-series";
+import { Season, TVSeries } from "@/types/tv-series";
 
 export const getPopularTVSeries = async (
   filters = {}
@@ -34,11 +34,11 @@ export const getPopularTVSeries = async (
 
 export const getTVSeriesByGenre = async (
   genre = {}
-): Promise<AxiosResponse<PaginatedList<Movie>>> => {
+): Promise<AxiosResponse<PaginatedList<TVSeries>>> => {
   const queryParams = filteringMethod(genre);
   try {
     const res = await simpleAxiosApi({
-      url: `/discover/movie${queryParams}`,
+      url: `/discover/tv${queryParams}`,
     });
     return res;
   } catch (error) {
@@ -47,11 +47,25 @@ export const getTVSeriesByGenre = async (
 };
 
 export const getSingleTVSeries = async (
-  movieId: any
-): Promise<AxiosResponse<Movie>> => {
+  tvSeriesId: string
+): Promise<AxiosResponse<TVSeries>> => {
   try {
     const res = await simpleAxiosApi({
-      url: `/movie/${movieId}`,
+      url: `/tv/${tvSeriesId}`,
+    });
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getTVSeriesSeasons = async (
+  tvSeriesId: string,
+  seasonNumber: number
+): Promise<AxiosResponse<Season>> => {
+  try {
+    const res = await simpleAxiosApi({
+      url: `/tv/${tvSeriesId}/season/${seasonNumber}`,
     });
     return res.data;
   } catch (error) {
