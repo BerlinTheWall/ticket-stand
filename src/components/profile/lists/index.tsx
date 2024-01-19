@@ -37,8 +37,6 @@ const Lists: React.FC = () => {
 
   const { data, isLoading, isFetching, isError } = useLists(user.id);
 
-  console.log(data);
-
   const handleChange = (event: any, value: number) => {
     router.replace({
       query: { ...router.query, page: value },
@@ -54,7 +52,7 @@ const Lists: React.FC = () => {
       <Typography component="h1" fontSize={24} fontWeight="bold" pl={0}>
         My Lists
       </Typography>
-      <Grid container justifyContent="start" sx={{ pt: 1 }}>
+      <Grid container justifyContent="start" sx={{ pt: 1 }} spacing={2}>
         {isLoading || isFetching ? (
           <SkeletonLoader />
         ) : (
