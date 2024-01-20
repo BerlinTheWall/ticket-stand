@@ -1,45 +1,44 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import Fade from "@mui/material/Fade";
+import { IChildren } from "@/types/component-type/IChildren";
+import { BORDER_RADIUS } from "@/mui/border-radius";
 
-const CustomModal: React.FC = () => {
+type Props = {
+  open: boolean;
+  onClose: (value: boolean) => void;
+  children: React.ReactNode;
+  width?: number;
+};
+
+const CustomModal: React.FC<Props> = ({ open, onClose, width, children }) => {
   const style = {
-    position: "absolute" as "absolute",
+    position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 400,
     bgcolor: "background.paper",
-    border: "2px solid #000",
     boxShadow: 24,
-    p: 4,
+    px: 3,
+    py: 2,
   };
 
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
   return (
-    <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+    <>
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={onClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        closeAfterTransition
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
-        </Box>
+        <Fade in={open} timeout={400}>
+          <Box sx={style} width={width} borderRadius={BORDER_RADIUS}>
+            {children}
+          </Box>
+        </Fade>
       </Modal>
-    </div>
+    </>
   );
 };
 
