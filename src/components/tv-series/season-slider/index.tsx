@@ -101,7 +101,7 @@ const SeasonSwiper: React.FC<Props> = ({ title, items, setSeason }) => {
               >
                 <Box
                   width="100%"
-                  height={250}
+                  height={400}
                   position="relative"
                   borderRadius={5}
                   border={(theme) =>
@@ -109,6 +109,7 @@ const SeasonSwiper: React.FC<Props> = ({ title, items, setSeason }) => {
                       ? `3px solid ${theme.palette.primary.main}`
                       : "none"
                   }
+                  overflow="hidden"
                 >
                   <Image
                     src={
@@ -119,11 +120,10 @@ const SeasonSwiper: React.FC<Props> = ({ title, items, setSeason }) => {
                     height={100}
                     style={{
                       width: "100%",
-                      height: "70%",
+                      height: "100%",
                       objectFit: "cover",
                       backgroundPosition: "center center",
-                      borderTopLeftRadius: "15px",
-                      borderTopRightRadius: "15px",
+           
                     }}
                   />
                   <Box
@@ -133,8 +133,7 @@ const SeasonSwiper: React.FC<Props> = ({ title, items, setSeason }) => {
                       left: 0,
                       width: "100%",
                       height: "30%",
-                      borderBottomLeftRadius: "15px",
-                      borderBottomRightRadius: "15px",
+          
                       background: (theme) =>
                         `linear-gradient(to bottom, transparent 0%, ${theme.palette.background.paper} 50%)`,
                     }}

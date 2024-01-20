@@ -82,7 +82,7 @@ const Footer: React.FC = () => {
                       fontSize: 20,
                     }}
                   >
-                    Farnood Loftali
+                    Farnood Lotfali
                   </Typography>
                 </Typography>
                 {/* {FOOTER_LINKS.map((link, index) => {
