@@ -9,7 +9,7 @@ import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 import { Movie } from "@/types/movie";
 import NextPrevEl from "../next-prev-button";
 import Link from "next/link";
-import { SINGLE_MOVIE_PAGE } from "@/constants/urls";
+import { SINGLE_MOVIE_PAGE, SINGLE_TVSERIES_PAGE } from "@/constants/urls";
 import { TVSeries } from "@/types/tv-series";
 
 interface Props {
@@ -94,7 +94,13 @@ const MovieSwiperMd: React.FC<Props> = ({ title, items }) => {
           {items?.map((item: Movie | TVSeries) => {
             return (
               <SwiperSlide key={item.id} style={{ width: "100%" }}>
-                <Link href={`${SINGLE_MOVIE_PAGE}/${item.id}`}>
+                <Link
+                  href={
+                    isMovie(item)
+                      ? `${SINGLE_MOVIE_PAGE}/${item.id}`
+                      : `${SINGLE_TVSERIES_PAGE}/${item.id}`
+                  }
+                >
                   <Box width="100%" height={250} position="relative">
                     <Image
                       src={
