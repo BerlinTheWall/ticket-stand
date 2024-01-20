@@ -1,4 +1,5 @@
 import { useLists } from "@/api/profile/hooks/useLists";
+import CreateListModal from "@/components/lists/create-list-modal";
 import ListCard from "@/components/lists/list-card";
 import MovieCardSkeletonLoader from "@/components/movies/movie-card-skeleton-loader";
 import { AppContext } from "@/context/AppContext";
@@ -37,8 +38,6 @@ const Lists: React.FC = () => {
 
   const { data, isLoading, isFetching, isError } = useLists(user.id);
 
-  console.log(data);
-
   const handleChange = (event: any, value: number) => {
     router.replace({
       query: { ...router.query, page: value },
@@ -46,14 +45,17 @@ const Lists: React.FC = () => {
   };
 
   if (isError) {
-    return <div className="">isError </div>;
+    return <div className="">isError</div>;
   }
 
   return (
     <Stack direction={"column"}>
-      <Typography component="h1" fontSize={24} fontWeight="bold" pl={0}>
-        My Lists
-      </Typography>
+      <Stack direction={"row"} justifyContent={"space-between"}>
+        <Typography component="h1" fontSize={24} fontWeight="bold" pl={0}>
+          My Lists
+        </Typography>
+        <CreateListModal />
+      </Stack>
       <Grid container justifyContent="start" sx={{ pt: 1 }}>
         {isLoading || isFetching ? (
           <SkeletonLoader />
