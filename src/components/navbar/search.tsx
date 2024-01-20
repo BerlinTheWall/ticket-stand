@@ -50,9 +50,9 @@ export const NavbarSearch = () => {
           placeholder="Movie, TV..."
           onChange={handleChange}
           sx={{
-            height: 44,
+            height: 40,
             pl: 0,
-            width: open ? { sm: 300, xs: 120 } : 44,
+            width: open ? { sm: 300, xs: 120 } : 40,
             transition: "all 0.5s ease-in-out",
             border: "none",
             borderRadius: 5,
@@ -70,7 +70,13 @@ export const NavbarSearch = () => {
             },
           }}
           startAdornment={
-            <InputAdornment sx={{ m: 0 }} position="start">
+            <InputAdornment
+              onClick={() => {
+                toggleOpen();
+              }}
+              sx={{ m: 0 }}
+              position="start"
+            >
               <Box
                 sx={{
                   p: 1.5,
