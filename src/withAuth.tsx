@@ -1,12 +1,13 @@
 import Router from "next/router";
 import { useIsLoggedIn } from "./hooks/useIsLoggedIn";
+import { LOGIN_PAGE } from "./constants/urls";
 
 const withAuth = (WrappedComponent: any) => {
   const WithAuth = (props: any) => {
     const isLoggedIn = useIsLoggedIn();
 
     if (!isLoggedIn) {
-      Router.push("/");
+      Router.push(LOGIN_PAGE);
       return null;
     }
 
