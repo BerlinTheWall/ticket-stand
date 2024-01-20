@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import { AppContext } from "@/context/AppContext";
 import Image from "next/image";
 import TabComponent from "@/components/profile/profile-tab";
+import withAuth from "@/withAuth";
 
 const ProfilePage: NextPage = () => {
   const theme = useTheme();
@@ -102,4 +103,4 @@ const ProfilePage: NextPage = () => {
     </MainLayout>
   );
 };
-export default ProfilePage;
+export default withAuth(ProfilePage);

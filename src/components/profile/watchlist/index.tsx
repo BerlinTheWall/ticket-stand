@@ -13,20 +13,19 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import MovieTypeChooser from "../profile-tab/movie-type-chooser";
 
-type Props = {
-  option: profileListType;
-};
-
-const WatchList: React.FC<Props> = ({ option }) => {
+const WatchList: React.FC<{}> = () => {
+  const [selectedOption, setSelectedOption] =
+    useState<profileListType>("movie");
   const isMobile = useMediaQuery("(max-width:600px)");
   const router = useRouter();
   const { user } = useContext(AppContext);
 
   const { data, isLoading, isFetching, isError } = useWatchList(
     user.id,
-    option
+    selectedOption
   );
 
   const handleChange = (event: any, value: number) => {
@@ -41,18 +40,30 @@ const WatchList: React.FC<Props> = ({ option }) => {
 
   return (
     <Stack direction={"column"}>
-      <Typography component="h1" fontSize={24} fontWeight="bold" pl={0}>
-        {option === "movie" ? "Movies" : "TV Series"} WatchList
-      </Typography>
-      <Grid container justifyContent="start" sx={{ pt: 1 }}>
-        {isLoading || isFetching ? (
-          <SkeletonLoader />
-        ) : (
-          data?.results?.map((movie: Movie) => {
-            return <MovieCard key={movie.id} movie={movie} />;
-          })
-        )}
+      <Grid container spacing={2} alignItems="center">
+        <Grid item sm={true} xs={12}>
+          <Typography component="h1" fontSize={24} fontWeight="bold" pl={0}>
+            {selectedOption === "movie" ? "Movies" : "TV Series"} WatchList
+          </Typography>
+        </Grid>
+        <Grid item sm={6} md={3} xs={12}>
+          <MovieTypeChooser
+            selectedOption={selectedOption}
+            setSelectedOption={setSelectedOption}
+          />
+        </Grid>
       </Grid>
+      <Box>
+        <Grid container sx={{ pt: 1 }} spacing={2}>
+          {isLoading || isFetching ? (
+            <SkeletonLoader />
+          ) : (
+            data?.results?.map((movie: Movie) => {
+              return <MovieCard key={movie.id} movie={movie} />;
+            })
+          )}
+        </Grid>
+      </Box>
       <Box display={"flex"} justifyContent={"center"}>
         <Pagination
           count={data?.total_pages || 1}

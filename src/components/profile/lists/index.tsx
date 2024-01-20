@@ -56,7 +56,7 @@ const Lists: React.FC = () => {
         </Typography>
         <CreateListModal />
       </Stack>
-      <Grid container justifyContent="start" sx={{ pt: 1 }}>
+      <Grid container justifyContent="start" sx={{ pt: 1 }} spacing={2}>
         {isLoading || isFetching ? (
           <SkeletonLoader />
         ) : (

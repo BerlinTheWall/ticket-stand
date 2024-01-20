@@ -134,22 +134,9 @@ const Navbar: React.FC = () => {
             >
               <NavbarSearch />
               <ThemeSwitch />
-              {!loggedIn && (
-                <Box display={"flex"} gap={2}>
-                  <Link href={LOGIN_PAGE}>
-                    <Button variant="outlined" fullWidth color="secondary">
-                      Sign up
-                    </Button>
-                  </Link>
-                  <Link href={LOGIN_PAGE}>
-                    <Button variant="contained" fullWidth color="primary">
-                      Login
-                    </Button>
-                  </Link>
-                </Box>
-              )}
-              {loggedIn && (
-                <Tooltip title={user.username}>
+
+              {loggedIn ? (
+                <Tooltip title={user?.username}>
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     {loggedIn && user?.avatar?.tmdb?.avatar_path ? (
                       <Image
@@ -167,6 +154,19 @@ const Navbar: React.FC = () => {
                     )}
                   </IconButton>
                 </Tooltip>
+              ) : (
+                <Box display={"flex"} gap={2}>
+                  <Link href={LOGIN_PAGE}>
+                    <Button variant="outlined" fullWidth color="secondary">
+                      Sign up
+                    </Button>
+                  </Link>
+                  <Link href={LOGIN_PAGE}>
+                    <Button variant="contained" fullWidth color="primary">
+                      Login
+                    </Button>
+                  </Link>
+                </Box>
               )}
             </Stack>
             {/* MD Profile */}
@@ -189,7 +189,7 @@ const Navbar: React.FC = () => {
               <ThemeSwitch />
               <MenuRoundedIcon
                 onClick={toggleDrawer}
-                sx={{ cursor: "pointer" }}
+                sx={{ cursor: "pointer", color: "text.primary" }}
                 fontSize="large"
               />
               <Drawer
