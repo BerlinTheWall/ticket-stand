@@ -19,7 +19,7 @@ const ListCardDetail: React.FC<Props> = ({
   favoriteCount,
   listType,
 }) => {
-  console.log(listType);
+  
   return (
     <Box
       sx={{

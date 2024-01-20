@@ -13,20 +13,19 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import MovieTypeChooser from "../profile-tab/movie-type-chooser";
 
-type Props = {
-  option: profileListType;
-};
-
-const Favorites: React.FC<Props> = ({ option }) => {
+const Favorites: React.FC<{}> = () => {
+  const [selectedOption, setSelectedOption] =
+    useState<profileListType>("movie");
   const isMobile = useMediaQuery("(max-width:600px)");
   const router = useRouter();
   const { user } = useContext(AppContext);
 
   const { data, isLoading, isFetching, isError } = useFavoritesList(
     user.id,
-    option
+    selectedOption
   );
 
   const handleChange = (event: any, value: number) => {
@@ -41,10 +40,20 @@ const Favorites: React.FC<Props> = ({ option }) => {
 
   return (
     <Stack direction={"column"}>
-      <Typography component="h1" fontSize={24} fontWeight="bold" pl={0}>
-        Favorite {option === "movie" ? "Movies" : "TV Series"}
-      </Typography>
-      <Grid container justifyContent="start" sx={{ pt: 1 }}>
+      <Grid container spacing={2} alignItems="center">
+        <Grid item sm={true} xs={12}>
+          <Typography component="h1" fontSize={24} fontWeight="bold" pl={0}>
+            Favorite {selectedOption === "movie" ? "Movies" : "TV Series"}
+          </Typography>
+        </Grid>
+        <Grid item sm={6} md={3} xs={12}>
+          <MovieTypeChooser
+            selectedOption={selectedOption}
+            setSelectedOption={setSelectedOption}
+          />
+        </Grid>
+      </Grid>
+      <Grid container justifyContent="start" sx={{ pt: 1 }} spacing={2}>
         {isLoading || isFetching ? (
           <SkeletonLoader />
         ) : (

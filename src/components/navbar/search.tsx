@@ -1,6 +1,13 @@
-import { styled, alpha, useTheme } from "@mui/material/styles";
-import InputBase from "@mui/material/InputBase";
-import { Box, Stack, TextField, Typography } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import {
+  Box,
+  ClickAwayListener,
+  Fade,
+  Grid,
+  OutlinedInput,
+  Stack,
+  Typography,
+} from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
@@ -11,208 +18,158 @@ import Image from "next/image";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import Link from "next/link";
 import { SINGLE_MOVIE_PAGE } from "@/constants/urls";
+import { THEME_VALUES } from "@/mui/theme";
 
 export const NavbarSearch = () => {
-  const theme = useTheme();
   const [searchResults, setSearchResults] = useState<Movie[]>([]);
-  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
 
   const handleChange = useDebounce(async (e: any) => {
-    // console.log(e.target.value);
-    console.log("Searching for:", e.target.value);
     try {
       const movies = await getSearchMovie(e.target.value);
       setSearchResults(movies.results);
-      console.log(movies);
     } catch (error) {
       console.log(error);
     }
   }, 1000);
 
+  const toggleOpen = () => {
+    setOpen((prev) => !prev);
+  };
+
   return (
-    <>
-      <TextField
-        fullWidth
-        autoComplete="false"
-        name="movie-search"
-        size="small"
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        sx={{
-          paddingLeft: 0,
-          width: "100%",
-          // border: "none",
-          // "&:hover": {
-          //   color: "red",
-          //   width: "100%",
-          // },
-          //   color: "inherit",
-          //   width: "10", // Set initial width to 0 to make it hidden
-          overflow: "hidden",
-          transition: theme.transitions.create("width"),
-          //   transition: theme.transitions.create("width"),
-
-          //   [theme.breakpoints.up("sm")]: {
-          // width: "10ch",
-          //   "&:hover": {
-          //     width: "50%",
-          //   },
-          //   "&:focus": {
-          //     width: "50%",
-          //   },
-          //   },
-          //   "&:hover": {
-          //     width: "100%",
-          //     // width: "20ch",
-          //     // Expand width to 100% on hover
-          //   },
-          //   "&:focus": {
-          //     // width: "100%",
-          //     // backgroundColor: "white",
-          //     width: "100%",
-          //     // Expand width to 100% on hover
-          //   },
-
-          "& .MuiInputBase-input": {
-            // padding: theme.spacing(1, 1, 1, 0),
-            //   paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-            width: "100%", // Set initial width to 100%
-            transition: theme.transitions.create("width"),
-
-            [theme.breakpoints.up("sm")]: {
-              width: "10ch",
-              "&:focus": {
-                width: "20ch",
-              },
-            },
-          },
-        }}
-        onChange={handleChange}
-        type={"text"}
-        variant="outlined"
-        placeholder="Movie, TV..."
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon />
-            </InputAdornment>
-          ),
-          sx: {
-            borderRadius: 10,
-            height: 45,
-            // width: "33%",
-          },
-        }}
-      />
-      {searchResults.length !== 0 && isFocused && (
-        <Stack
+    <ClickAwayListener
+      onClickAway={() => {
+        if (open) {
+          toggleOpen();
+        }
+      }}
+    >
+      <Box>
+        <OutlinedInput
+          placeholder="Movie, TV..."
+          onChange={handleChange}
           sx={{
-            position: "absolute",
-            top: 66,
-            maxWidth: 330,
-            whiteSpace: "nowrap",
-            maxHeight: 300,
-            overflowY: "scroll",
-            overflowX: "hidden",
-            borderRadius: 3,
-            bgcolor: theme.palette.background.default,
+            height: 40,
+            pl: 0,
+            width: open ? { sm: 300, xs: 120 } : 40,
+            transition: "all 0.5s ease-in-out",
+            border: "none",
+            borderRadius: 5,
+            display: "flex",
+            justifyContent: "center",
+            boxShadow: 1,
+            cursor: "pointer",
+            position: "relative",
+            fontSize: 14,
+            "& input": {
+              width: open ? "100%" : 0,
+              padding: open ? 1 : 0,
+              transition: `width ${open ? "0.3s" : "0.7s"} `,
+              border: "none",
+            },
           }}
-        >
-          {searchResults.map((searchResult, index: number) => {
-            return (
-              <Link
-                href={`${SINGLE_MOVIE_PAGE}/${searchResult.id}`}
-                key={searchResult.id}
+          startAdornment={
+            <InputAdornment
+              onClick={() => {
+                toggleOpen();
+              }}
+              sx={{ m: 0 }}
+              position="start"
+            >
+              <Box
+                sx={{
+                  p: 1.5,
+                  borderRadius: 1,
+                  bgcolor: "transparent",
+                  color: "text.primary",
+                  display: "flex",
+                  cursor: "pointer",
+                  position: "relative",
+                  width: 44,
+                  height: 44,
+                }}
               >
-                <Stack
-                  direction={"row"}
-                  gap={2}
-                  borderBottom={
-                    index !== searchResults.length - 1
-                      ? `1px solid ${theme.palette.primary.light}`
-                      : "none"
-                  }
-                  px={1}
-                  py={0.8}
-                >
-                  <Image
-                    src={
-                      "https://www.themoviedb.org/t/p/w500/" +
-                      searchResult.poster_path
-                    }
-                    alt={searchResult.original_title}
-                    width={35}
-                    height={50}
-                  />
-                  <Stack direction={"column"}>
-                    <Typography fontWeight="bold" pt={0.2}>
-                      {searchResult.original_title}
-                    </Typography>
-                    <Stack direction={"row"}>
-                      <StarRateRoundedIcon sx={{ color: "warning.light" }} />
-                      <Typography fontWeight="400" pt={0.2}>
-                        {searchResult.vote_average.toFixed(1)}
-                      </Typography>
+                <SearchIcon />
+              </Box>
+            </InputAdornment>
+          }
+        />
+
+        {searchResults.length !== 0 && (
+          <Fade in={open} timeout={open ? 1000 : 500}>
+            <Stack
+              sx={{
+                transition: "all 0.5s",
+                position: "absolute",
+                top: 66,
+                whiteSpace: "nowrap",
+                maxHeight: 300,
+                overflowY: "scroll",
+                overflowX: "hidden",
+                bgcolor: (theme) =>
+                  theme.palette.mode === THEME_VALUES.dark
+                    ? "grey.800"
+                    : "grey.500",
+                opacity: open ? 1 : 0,
+                color: "text.primary",
+                right: { sm: "auto", xs: 0 },
+                left: { sm: "auto", xs: 0 },
+                borderBottom: "2px solid",
+              }}
+            >
+              {searchResults.map((searchResult, index: number) => {
+                return (
+                  <Link
+                    href={`${SINGLE_MOVIE_PAGE}/${searchResult.id}`}
+                    key={searchResult.id}
+                  >
+                    <Stack
+                      direction={"row"}
+                      gap={2}
+                      borderBottom={(theme) =>
+                        index !== searchResults.length - 1
+                          ? `1px solid ${theme.palette.primary.light}`
+                          : "none"
+                      }
+                      px={1}
+                      py={0.8}
+                    >
+                      <Image
+                        src={
+                          "https://www.themoviedb.org/t/p/w500/" +
+                          searchResult.poster_path
+                        }
+                        alt={searchResult.original_title}
+                        width={35}
+                        height={50}
+                      />
+                      <Stack overflow="hidden" direction={"column"}>
+                        <Typography
+                          overflow="hidden"
+                          textOverflow="ellipsis"
+                          fontWeight="bold"
+                          pt={0.2}
+                        >
+                          {searchResult.original_title}
+                        </Typography>
+                        <Stack direction={"row"}>
+                          <StarRateRoundedIcon
+                            sx={{ color: "warning.light" }}
+                          />
+                          <Typography fontWeight="400" pt={0.2}>
+                            {searchResult.vote_average.toFixed(1)}
+                          </Typography>
+                        </Stack>
+                      </Stack>
                     </Stack>
-                  </Stack>
-                </Stack>
-              </Link>
-            );
-          })}
-        </Stack>
-      )}
-    </>
+                  </Link>
+                );
+              })}
+            </Stack>
+          </Fade>
+        )}
+      </Box>
+    </ClickAwayListener>
   );
 };
-
-export const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.primary.contrastText, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.primary.contrastText, 0.25),
-  },
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
-    width: "auto",
-  },
-}));
-
-export const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-export const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  //   width: "10", // Set initial width to 0 to make it hidden
-  overflow: "hidden",
-  transition: theme.transitions.create("width"),
-
-  "&:focus": {
-    // width: "100%",
-    width: "20ch",
-    // Expand width to 100% on hover
-  },
-
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    width: "100%", // Set initial width to 100%
-    transition: theme.transitions.create("width"),
-
-    [theme.breakpoints.up("sm")]: {
-      width: "10ch",
-      "&:focus": {
-        width: "20ch",
-      },
-    },
-  },
-}));
