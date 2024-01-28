@@ -60,23 +60,23 @@ export const getSingleTVSeries = async (
 };
 
 export const getTVSeriesSeasons = async (
-  tvSeriesId: string,
+  tvSeriesId: number,
   seasonNumber: number
 ): Promise<AxiosResponse<Season>> => {
   try {
     const res = await simpleAxiosApi({
       url: `/tv/${tvSeriesId}/season/${seasonNumber}`,
     });
-    return res.data;
+    return res;
   } catch (error) {
     throw error;
   }
 };
 
-export const getSingleMovieCredits = async (movieId: any): Promise<any> => {
+export const getSingleTVSerieCredits = async (seriesId: any): Promise<any> => {
   try {
     const res = await simpleAxiosApi({
-      url: `/movie/${movieId}/credits`,
+      url: `/tv/${seriesId}/credits`,
     });
     return res.data;
   } catch (error) {
@@ -84,37 +84,28 @@ export const getSingleMovieCredits = async (movieId: any): Promise<any> => {
   }
 };
 
-// export const getSearchMovie = async (movieName: string): Promise<any> => {
-//   try {
-//     const res = await simpleAxiosApi({
-//       url: `/search/multi?query=${movieName}`,
-//     });
-//     return res.data;
-//   } catch (error) {
-//     throw error;
-//   }
-// };
+export const getTVSerieRecommendations = async (
+  seriesId: any
+): Promise<any> => {
+  try {
+    const res = await simpleAxiosApi({
+      url: `/tv/${seriesId}/recommendations`,
+    });
+    return res;
+  } catch (error) {
+    throw error;
+  }
+};
 
-// export const getMovieRecommendations = async (movieId: any): Promise<any> => {
-//   try {
-//     const res = await simpleAxiosApi({
-//       url: `/movie/${movieId}/recommendations`,
-//     });
-//     return res;
-//   } catch (error) {
-//     throw error;
-//   }
-// };
-
-// export const getMovieComments = async (
-//   movieId: any
-// ): Promise<PaginatedList<Comment>> => {
-//   try {
-//     const res = await simpleAxiosApi({
-//       url: `/movie/${movieId}/reviews`,
-//     });
-//     return res.data;
-//   } catch (error) {
-//     throw error;
-//   }
-// };
+export const getTVSerieComments = async (
+  seriesId: any
+): Promise<PaginatedList<Comment>> => {
+  try {
+    const res = await simpleAxiosApi({
+      url: `/tv/${seriesId}/reviews`,
+    });
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};
