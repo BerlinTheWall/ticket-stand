@@ -1,3 +1,4 @@
+import { profileListType } from "./general";
 import { Genre } from "./genres";
 
 export type TVSeries = {
@@ -15,6 +16,7 @@ export type TVSeries = {
   seasons: Season[];
   number_of_seasons: number;
   number_of_episodes: number;
+  media_type: profileListType;
 };
 
 export type Season = {
