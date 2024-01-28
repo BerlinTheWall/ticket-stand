@@ -121,7 +121,7 @@ export const WARNING = {
 };
 export const INFO = {
   dark: {
-    main: "#29b6f6",
+    main: "#0288d1",
     light: "#4fc3f7",
     dark: "#0288d1",
     contrastText: "rgba(0, 0, 0, 0.87)",
