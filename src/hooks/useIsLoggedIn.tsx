@@ -9,6 +9,7 @@ export const useIsLoggedIn = () => {
 
   const isLoggedIn = useMemo(
     () => !!user && !!Cookies.get(SESSION_ID_COOKIE),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [user, sessionId]
   );
 
