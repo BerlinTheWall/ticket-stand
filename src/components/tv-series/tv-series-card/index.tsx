@@ -1,19 +1,10 @@
-import {
-  Box,
-  Button,
-  Divider,
-  Grid,
-  Stack,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
+import { Box, Divider, Stack, Typography, useMediaQuery } from "@mui/material";
 import { convertTVSeriesGenreIdArraysToNames } from "@/utils/genre-converter";
 import GenresList from "@/components/swiper-slides/genres-list";
 import Image from "next/image";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 import { TVSeries } from "@/types/tv-series";
+import ActionBar from "@/components/media/action-bar";
 
 interface Props {
   tvSerie: TVSeries;
@@ -163,35 +154,7 @@ const SingleTVSerie: React.FC<Props> = ({ tvSerie }) => {
               {tvSerie.overview}
             </Typography>
           </Box>
-          <Grid container spacing={2} mt={0.5}>
-            <Grid item sm={6} xs={6}>
-              <Button
-                variant="contained"
-                color="primary"
-                fullWidth
-                onClick={() => {}}
-                startIcon={<PlayCircleFilledIcon />}
-                sx={{
-                  whiteSpace: "nowrap",
-                }}
-              >
-                Watch Trailer
-              </Button>
-            </Grid>
-            <Grid item sm={6} xs={6}>
-              <Button
-                variant="outlined"
-                color="secondary"
-                fullWidth
-                startIcon={<BookmarkBorderIcon />}
-                sx={{
-                  whiteSpace: "nowrap",
-                }}
-              >
-                Add WatchList
-              </Button>
-            </Grid>
-          </Grid>
+          <ActionBar mediaId={tvSerie.id} isMovie={false} />
         </Box>
       </Box>
     </Box>
