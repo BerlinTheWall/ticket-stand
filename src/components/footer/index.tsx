@@ -1,4 +1,4 @@
-import { Box, Grid, Stack, Typography } from "@mui/material";
+import { Box, Grid, Stack, Typography, useMediaQuery } from "@mui/material";
 import Link from "next/link";
 import { Fragment } from "react";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -19,6 +19,8 @@ const FOOTER_LINKS_2 = [
 ];
 
 const Footer: React.FC = () => {
+  const isTablet = useMediaQuery("(max-width:1027px)");
+
   return (
     <Box
       position="relative"
@@ -50,19 +52,21 @@ const Footer: React.FC = () => {
             justifyContent={{ md: "end" }}
             display={"flex"}
           >
-            <Box display={"grid"} gap={3}>
+            <Box display={"grid"} gap={3} sx={{ mx: { xs: "auto", sm: 0 } }}>
               <Stack
                 flexWrap={"wrap"}
                 order={{ md: 1, xs: 2 }}
-                direction={"row"}
+                gap={1}
+                direction={{ xs: "column", sm: "row", md: "row" }}
+                alignItems={{ xs: "center", sm: "start" }}
                 justifyContent={{
                   md: "end",
                   sm: "center",
                   xs: "space-between",
                 }}
               >
-                <Typography fontSize={20}>
-                  Implemented by{" "}
+                <Typography fontSize={20}>Implemented by </Typography>
+                <Stack direction={"column"}>
                   <Typography
                     component={"span"}
                     sx={{
@@ -73,73 +77,108 @@ const Footer: React.FC = () => {
                   >
                     Hooman Shahidi
                   </Typography>{" "}
-                  &{" "}
+                  <Stack
+                    direction={"row"}
+                    gap={1}
+                    order={{ md: 2, xs: 1 }}
+                    display={"flex"}
+                    justifyContent={{ md: "end", xs: "start" }}
+                    alignSelf={"center"}
+                  >
+                    <Link
+                      href={
+                        "https://www.linkedin.com/in/hooman-shahidi-5927b4103/"
+                      }
+                      target="_blank"
+                    >
+                      <LinkedInIcon
+                        sx={{
+                          color: "primary.dark",
+                          fontSize: 36,
+                          cursor: "pointer",
+                        }}
+                      />
+                    </Link>
+                    <Link
+                      href={"https://github.com/BerlinTheWall"}
+                      target="_blank"
+                    >
+                      <GitHubIcon
+                        sx={{
+                          color: "primary.dark",
+                          fontSize: 34,
+                          cursor: "pointer",
+                        }}
+                      />
+                    </Link>
+                    <Link href={"https://t.me/TheWhoman"} target="_blank">
+                      <TelegramIcon
+                        sx={{
+                          color: "primary.dark",
+                          fontSize: 34,
+                          cursor: "pointer",
+                        }}
+                      />
+                    </Link>
+                  </Stack>
+                </Stack>
+                <Typography fontSize={20}>&</Typography>
+                <Stack direction={"column"}>
                   <Typography
                     component={"span"}
                     sx={{
-                      color: "primary.dark",
+                      color: "info.main",
                       fontWeight: "bold",
                       fontSize: 20,
                     }}
                   >
                     Farnood Lotfali
-                  </Typography>
-                </Typography>
-                {/* {FOOTER_LINKS.map((link, index) => {
-                  return (
-                    <Fragment key={link.title}>
-                      <Link
-                        href={link.link}
-                        prefetch={false}
-                        style={{ fontWeight: "inherit" }}
-                      >
-                        {link.title}
-                      </Link>
-                      {index !== FOOTER_LINKS.length - 1 && (
-                        <span style={{ padding: "0px 10px" }}>/</span>
-                      )}
-                    </Fragment>
-                  );
-                })} */}
-              </Stack>
-              <Stack
-                direction={"row"}
-                gap={1}
-                order={{ md: 2, xs: 1 }}
-                display={"flex"}
-                justifyContent={{ md: "end", xs: "start" }}
-                alignSelf={"end"}
-              >
-                <Link
-                  href={"https://www.linkedin.com/in/hooman-shahidi-5927b4103/"}
-                  target="_blank"
-                >
-                  <LinkedInIcon
-                    sx={{
-                      color: "primary.dark",
-                      fontSize: 36,
-                      cursor: "pointer",
-                    }}
-                  />
-                </Link>
-                <Link href={"https://github.com/BerlinTheWall"} target="_blank">
-                  <GitHubIcon
-                    sx={{
-                      color: "primary.dark",
-                      fontSize: 34,
-                      cursor: "pointer",
-                    }}
-                  />
-                </Link>
-                <Link href={"https://t.me/TheWhoman"} target="_blank">
-                  <TelegramIcon
-                    sx={{
-                      color: "primary.dark",
-                      fontSize: 34,
-                      cursor: "pointer",
-                    }}
-                  />
-                </Link>
+                  </Typography>{" "}
+                  <Stack
+                    direction={"row"}
+                    gap={1}
+                    order={{ md: 2, xs: 1 }}
+                    display={"flex"}
+                    justifyContent={{ md: "end", xs: "start" }}
+                    alignSelf={"center"}
+                  >
+                    <Link
+                      href={
+                        "https://www.linkedin.com/in/hooman-shahidi-5927b4103/"
+                      }
+                      target="_blank"
+                    >
+                      <LinkedInIcon
+                        sx={{
+                          color: "info.main",
+                          fontSize: 36,
+                          cursor: "pointer",
+                        }}
+                      />
+                    </Link>
+                    <Link
+                      href={"https://github.com/BerlinTheWall"}
+                      target="_blank"
+                    >
+                      <GitHubIcon
+                        sx={{
+                          color: "info.main",
+                          fontSize: 34,
+                          cursor: "pointer",
+                        }}
+                      />
+                    </Link>
+                    <Link href={"https://t.me/TheWhoman"} target="_blank">
+                      <TelegramIcon
+                        sx={{
+                          color: "info.main",
+                          fontSize: 34,
+                          cursor: "pointer",
+                        }}
+                      />
+                    </Link>
+                  </Stack>
+                </Stack>
               </Stack>
             </Box>
           </Grid>
