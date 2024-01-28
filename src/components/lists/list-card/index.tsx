@@ -1,12 +1,12 @@
 import { Box, Grid } from "@mui/material";
 import Image from "next/image";
-import { ListType } from "@/types/list";
+import { ListsType } from "@/types/list";
 import Link from "next/link";
-import { SINGLE_MOVIE_PAGE } from "@/constants/urls";
+import { SINGLE_LIST_PAGE } from "@/constants/urls";
 import ListCardDetail from "./list-card-detail";
 
 type Props = {
-  list: ListType;
+  list: ListsType;
   backgroundImage: any;
 };
 
@@ -22,7 +22,7 @@ const ListCard: React.FC<Props> = ({ list, backgroundImage }) => {
           overflow: "hidden",
         }}
       >
-        <Link href={`${SINGLE_MOVIE_PAGE}/${list.id}`}>
+        <Link href={`${SINGLE_LIST_PAGE}/${list.id}`}>
           <Image
             src={backgroundImage}
             alt={list.name}

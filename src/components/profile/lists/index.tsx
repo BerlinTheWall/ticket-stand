@@ -3,7 +3,7 @@ import CreateListModal from "@/components/lists/create-list-modal";
 import ListCard from "@/components/lists/list-card";
 import MovieCardSkeletonLoader from "@/components/movies/movie-card-skeleton-loader";
 import { AppContext } from "@/context/AppContext";
-import { ListType } from "@/types/list";
+import { ListsType } from "@/types/list";
 import Images from "@/utils/image-helper";
 import {
   Box,
@@ -50,17 +50,22 @@ const Lists: React.FC = () => {
 
   return (
     <Stack direction={"column"}>
-      <Stack direction={"row"} justifyContent={"space-between"}>
+      <Stack
+        direction={"row"}
+        justifyContent={"space-between"}
+        alignContent={"center"}
+        alignItems={"center"}
+      >
         <Typography component="h1" fontSize={24} fontWeight="bold" pl={0}>
           My Lists
         </Typography>
         <CreateListModal />
       </Stack>
-      <Grid container justifyContent="start" sx={{ pt: 1 }} spacing={2}>
+      <Grid container justifyContent="start" pt={3} spacing={2}>
         {isLoading || isFetching ? (
           <SkeletonLoader />
         ) : (
-          data?.results?.map((list: ListType, index: number) => {
+          data?.results?.map((list: ListsType, index: number) => {
             return (
               <ListCard
                 key={list.id}

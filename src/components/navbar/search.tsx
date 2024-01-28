@@ -1,9 +1,7 @@
-import { useTheme } from "@mui/material/styles";
 import {
   Box,
   ClickAwayListener,
   Fade,
-  Grid,
   OutlinedInput,
   Stack,
   Typography,
@@ -52,7 +50,7 @@ export const NavbarSearch = () => {
           sx={{
             height: 40,
             pl: 0,
-            width: open ? { sm: 300, xs: 120 } : 40,
+            width: open ? { lg: 300, md: 200, sm: 200, xs: 120 } : 40,
             transition: "all 0.5s ease-in-out",
             border: "none",
             borderRadius: 5,
@@ -79,7 +77,7 @@ export const NavbarSearch = () => {
             >
               <Box
                 sx={{
-                  p: 1.5,
+                  p: 1.35,
                   borderRadius: 1,
                   bgcolor: "transparent",
                   color: "text.primary",
@@ -100,6 +98,7 @@ export const NavbarSearch = () => {
           <Fade in={open} timeout={open ? 1000 : 500}>
             <Stack
               sx={{
+                width: "-webkit-fill-available",
                 transition: "all 0.5s",
                 position: "absolute",
                 top: 66,

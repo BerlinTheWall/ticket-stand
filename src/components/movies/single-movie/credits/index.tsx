@@ -98,7 +98,7 @@ const Credits: React.FC<Props> = ({ casts }) => {
                     paddingLeft: "20px",
                   }}
                 >
-                  <Stack direction="row" alignItems="center" gap={2}>
+                  <Stack direction="row" alignItems="start" gap={2}>
                     <Box sx={{ minWidth: 80, width: 80 }}>
                       <Image
                         src={

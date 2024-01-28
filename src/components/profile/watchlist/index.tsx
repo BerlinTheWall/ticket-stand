@@ -15,6 +15,8 @@ import {
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import MovieTypeChooser from "../profile-tab/movie-type-chooser";
+import MediaCard from "@/components/media/media-card";
+import { Media } from "@/types/media";
 
 const WatchList: React.FC<{}> = () => {
   const [selectedOption, setSelectedOption] =
@@ -58,8 +60,8 @@ const WatchList: React.FC<{}> = () => {
           {isLoading || isFetching ? (
             <SkeletonLoader />
           ) : (
-            data?.results?.map((movie: Movie) => {
-              return <MovieCard key={movie.id} movie={movie} />;
+            data?.results?.map((media: Media) => {
+              return <MediaCard key={media.id} media={media} />;
             })
           )}
         </Grid>

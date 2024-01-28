@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Button, Link, Stack, Typography, useTheme } from "@mui/material";
+import { Link, Stack, Typography, useTheme } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FormInputText } from "../forms/text-input";
 import Images from "@/utils/image-helper";

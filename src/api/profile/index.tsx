@@ -4,12 +4,13 @@ import { RequestToken, Session } from "@/types/authentication";
 import { Profile } from "@/types/profile";
 import Cookies from "js-cookie";
 import { SESSION_ID_COOKIE } from "@/constants/cookie";
+import { profileListType } from "@/types/general";
 
 const api_key = process.env.NEXT_PUBLIC_API_KEY;
 
 export const addToFavorites = async (
   accountId: string,
-  mediaType: string,
+  mediaType: profileListType,
   mediaId: number
 ): Promise<AxiosResponse<any>> => {
   try {

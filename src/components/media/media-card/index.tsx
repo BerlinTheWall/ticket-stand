@@ -12,15 +12,14 @@ type Props = {
 const MediaCard: React.FC<Props> = ({ media }) => {
   const isMobileXs = useMediaQuery("(max-width:380px)");
   const isMobile = useMediaQuery("(min-width:600px)");
-  const isLaptop = useMediaQuery("(max-width:1400px)");
 
   const linkHref =
-    media.media_type === "movie"
+    media.media_type === "movie" || media.original_title !== undefined
       ? `${SINGLE_MOVIE_PAGE}/${media.id}`
       : `${SINGLE_TVSERIES_PAGE}/${media.id}`;
 
   return (
-    <Grid item xs={12} sm={6} md={3} lg={2}>
+    <Grid item xs={12} sm={6} md={3} lg={2.4}>
       <Box
         sx={{
           height: !isMobile && !isMobileXs ? 550 : 350,
@@ -62,7 +61,7 @@ const MediaCard: React.FC<Props> = ({ media }) => {
           />
           <MediaCardDetail
             title={
-              media.media_type === "movie"
+              media.media_type === "movie" || media.original_title !== undefined
                 ? media.original_title!
                 : media.original_name!
             }
