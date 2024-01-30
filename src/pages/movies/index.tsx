@@ -16,7 +16,7 @@ import { MovieGenre } from "@/constants/movie-genre";
 import { useMemo } from "react";
 import SearchBar from "@/components/search-bar";
 
-const MovieList = () => {
+const MovieListPage = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
 
   const router = useRouter();
@@ -84,4 +84,4 @@ const SkeletonLoader = () => {
     });
 };
 
-export default MovieList;
+export default MovieListPage;
