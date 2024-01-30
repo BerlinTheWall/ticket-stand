@@ -5,6 +5,7 @@ import {
   Stack,
   Tooltip,
   useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import Image from "next/image";
 import { Movie } from "@/types/movie";
@@ -18,6 +19,9 @@ import { addToFavorites, addToWatchlist } from "@/api/profile";
 import { useContext } from "react";
 import { AppContext } from "@/context/AppContext";
 import { toast } from "react-toastify";
+import { useIsLoggedIn } from "@/hooks/useIsLoggedIn";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import MovieCardDrawer from "./movie-card-dropdown";
 
 type Props = {
   movie: Movie;
@@ -26,8 +30,10 @@ type Props = {
 const MovieCard: React.FC<Props> = ({ movie }) => {
   const isMobileXs = useMediaQuery("(max-width:380px)");
   const isMobile = useMediaQuery("(min-width:600px)");
+  const theme = useTheme();
 
-  const { user } = useContext(AppContext);
+  const { user } = useContext(AppContext)!;
+  const loggedIn = useIsLoggedIn();
 
   const handleLike = async () => {
     try {
@@ -41,13 +47,18 @@ const MovieCard: React.FC<Props> = ({ movie }) => {
   };
 
   const handleAddToWatchlist = async () => {
-    try {
-      const res = await addToWatchlist(user.id, "movie", movie.id);
-      toast.success("Added to Watchlist!");
-      return res;
-    } catch (error) {
-      toast.error("Error in adding to Watchlist!");
-      return error;
+    if (loggedIn) {
+      // setIsWatchlistLoading(true);
+      try {
+        const res = await addToWatchlist(user.id, "movie", movie.id);
+        toast.success("Added to Watchlist!");
+        // setIsWatchlistLoading(false);
+        return res;
+      } catch (error) {
+        toast.error("Error in adding to Watchlist!");
+        // setIsWatchlistLoading(false);
+        return error;
+      }
     }
   };
 
@@ -95,7 +106,10 @@ const MovieCard: React.FC<Props> = ({ movie }) => {
             genres={movie.genre_ids}
           />
         </Link>
-        <Box
+
+        <MovieCardDrawer mediaId={""} isMovie={false} />
+
+        {/* <Box
           sx={{
             position: "absolute",
             bottom: 0,
@@ -139,7 +153,7 @@ const MovieCard: React.FC<Props> = ({ movie }) => {
               />
             </Tooltip>
           </Stack>
-        </Box>
+        </Box> */}
       </Box>
     </Grid>
   );
