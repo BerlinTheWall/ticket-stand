@@ -1,6 +1,6 @@
 export type Profile = {
   avatar: any;
-  id: number;
+  id: string;
   include_adult: boolean;
   iso_639_1: string;
   iso_3166_1: string;
