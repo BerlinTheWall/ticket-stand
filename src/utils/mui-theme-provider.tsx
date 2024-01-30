@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { AppContext } from "@/context/AppContext";
 
 const MUIThemeProvider: React.FC<IChildren> = ({ children }) => {
-  const { appTheme } = useContext(AppContext);
+  const { appTheme } = useContext(AppContext)!;
 
   return (
     <ThemeProvider theme={responsiveFontSizes(appTheme)}>

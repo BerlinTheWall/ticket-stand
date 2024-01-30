@@ -6,7 +6,7 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { THEME_VALUES } from "@/mui/theme";
 
 export default function SwitchTheme() {
-  const { toggleTheme, mode } = useContext(AppContext);
+  const { toggleTheme, mode } = useContext(AppContext)!;
 
   return (
     <IconButton onClick={toggleTheme}>

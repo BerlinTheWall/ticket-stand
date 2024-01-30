@@ -40,7 +40,7 @@ const Navbar: React.FC = () => {
 
   const [drawerState, setDrawerState] = useState<boolean>(false);
   const loggedIn = useIsLoggedIn();
-  const { user } = useContext(AppContext);
+  const { user } = useContext(AppContext)!;
 
   const toggleDrawer = () => {
     setDrawerState((prev) => !prev);

@@ -22,7 +22,7 @@ const defaultValues = {
 
 const CreateListModal: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
-  const { user } = useContext(AppContext);
+  const { user } = useContext(AppContext)!;
 
   const {
     handleSubmit,
@@ -33,9 +33,6 @@ const CreateListModal: React.FC = () => {
   });
 
   const queryClient = new QueryClient();
-  //   const createNewListMutation = useMutation<any, any, any, any>(
-  //     (name: string, description: string) => createList(name, description)
-  //   );
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     try {

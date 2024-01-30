@@ -23,7 +23,7 @@ const WatchList: React.FC<{}> = () => {
     useState<profileListType>("movie");
   const isMobile = useMediaQuery("(max-width:600px)");
   const router = useRouter();
-  const { user } = useContext(AppContext);
+  const { user } = useContext(AppContext)!;
 
   const { data, isLoading, isFetching, isError } = useWatchList(
     user.id,

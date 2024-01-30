@@ -18,7 +18,7 @@ type Props = {
 
 const ActionBar: React.FC<Props> = ({ mediaId, isMovie }) => {
   const loggedIn = useIsLoggedIn();
-  const { user } = useContext(AppContext);
+  const { user } = useContext(AppContext)!;
   const [isLikeLoading, setIsLikeLoading] = useState<boolean>(false);
   const [isWatchlistLoading, setIsWatchlistLoading] = useState<boolean>(false);
 
@@ -49,7 +49,7 @@ const ActionBar: React.FC<Props> = ({ mediaId, isMovie }) => {
       setIsWatchlistLoading(true);
       try {
         const res = await addToWatchlist(
-          user.id,
+          user.id as unknown as string,
           isMovie ? "movie" : "tv",
           mediaId
         );

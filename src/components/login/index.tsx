@@ -28,7 +28,7 @@ const defaultValues = {
 };
 
 const LoginForm: React.FC = () => {
-  const { setUser } = useContext(AppContext);
+  const { setUser } = useContext(AppContext)!;
   const router = useRouter();
   const theme = useTheme();
 

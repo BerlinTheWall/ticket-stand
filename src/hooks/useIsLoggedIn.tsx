@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 import { useContext, useMemo } from "react";
 
 export const useIsLoggedIn = () => {
-  const { user } = useContext(AppContext);
+  const { user } = useContext(AppContext)!;
   const sessionId = Cookies.get(SESSION_ID_COOKIE);
 
   const isLoggedIn = useMemo(
