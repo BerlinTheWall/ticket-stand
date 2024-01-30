@@ -18,6 +18,10 @@ const AppState = ({ children }: IChildren) => {
       ? JSON.parse(Cookies.get(ACCOUNT_COOKIE)!)
       : null
   );
+  const [showListModal, setShowListModal] = useState<boolean>(false);
+  const toggleListModal = () => {
+    setShowListModal(!showListModal);
+  };
 
   useEffect(() => {
     setHasMounted(true);
@@ -47,6 +51,8 @@ const AppState = ({ children }: IChildren) => {
         mode,
         user,
         setUser,
+        showListModal,
+        toggleListModal,
       }}
     >
       {children}
