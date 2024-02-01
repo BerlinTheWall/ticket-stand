@@ -33,7 +33,6 @@ const AddToListDrawer: React.FC<Props> = ({ list, mediaId, isMovie }) => {
         await addMovieToList(list.id, mediaId);
         toast.success(`Added to ${list.name} list`);
       } else {
-        // await addTVSerieToList(list.id, mediaId);
         toast.error(`Sorry! Add TV Serie API to list isn't available :(`);
       }
     } catch (error: any) {

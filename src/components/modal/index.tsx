@@ -33,7 +33,7 @@ const CustomModal: React.FC<Props> = ({ open, onClose, width, children }) => {
         closeAfterTransition
       >
         <Fade in={open} timeout={400}>
-          <Box sx={style} width={width} borderRadius={BORDER_RADIUS}>
+          <Box sx={style} width={width} borderRadius={4}>
             {children}
           </Box>
         </Fade>

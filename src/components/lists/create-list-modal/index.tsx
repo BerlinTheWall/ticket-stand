@@ -21,6 +21,7 @@ const defaultValues = {
 };
 
 const CreateListModal: React.FC = () => {
+  const queryClient = new QueryClient();
   const [showModal, setShowModal] = useState<boolean>(false);
   const { user } = useContext(AppContext)!;
 
@@ -32,26 +33,21 @@ const CreateListModal: React.FC = () => {
     defaultValues: defaultValues,
   });
 
-  const queryClient = new QueryClient();
-
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     try {
       const createdList = await createList(data.name, data.description);
       queryClient.invalidateQueries(["lists", user.id]);
       toast.success("List created successfully!");
-
-      console.log(createdList);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleShow = () => setShowModal(true);
-  const handleHide = () => setShowModal(false);
+  const toggleModal = () => setShowModal((prev) => !prev);
 
   return (
     <>
-      <Button variant="contained" onClick={handleShow}>
+      <Button variant="contained" onClick={toggleModal}>
         Create List
       </Button>
       <CustomModal
@@ -85,7 +81,7 @@ const CreateListModal: React.FC = () => {
             rows={3}
           />
           <Stack direction={"row"} justifyContent={"end"} gap={2}>
-            <Button variant="outlined" onClick={handleHide}>
+            <Button variant="outlined" onClick={toggleModal}>
               Cancel
             </Button>
             <LoadingButton

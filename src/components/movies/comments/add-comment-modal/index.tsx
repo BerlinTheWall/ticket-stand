@@ -49,13 +49,12 @@ const AddCommentModal: React.FC = () => {
     );
   };
 
-  const handleShow = () => setShowModal(true);
-  const handleHide = () => setShowModal(false);
+  const toggleModal = () => setShowModal((prev) => !prev);
 
   return (
     <>
       {loggedIn ? (
-        <Button variant="contained" color="secondary" onClick={handleShow}>
+        <Button variant="contained" color="secondary" onClick={toggleModal}>
           Add Comment
         </Button>
       ) : (
@@ -102,7 +101,7 @@ const AddCommentModal: React.FC = () => {
             }}
           />
           <Stack direction={"row"} justifyContent={"end"} gap={2}>
-            <Button variant="outlined" onClick={handleHide}>
+            <Button variant="outlined" onClick={toggleModal}>
               Cancel
             </Button>
             <LoadingButton

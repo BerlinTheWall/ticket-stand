@@ -11,6 +11,7 @@ import NextPrevEl from "../next-prev-button";
 import Link from "next/link";
 import { SINGLE_MOVIE_PAGE, SINGLE_TVSERIES_PAGE } from "@/constants/urls";
 import { TVSeries } from "@/types/tv-series";
+import { isMovie } from "@/utils/check-is-movie";
 
 interface Props {
   title: string;
@@ -18,10 +19,6 @@ interface Props {
 }
 
 const MovieSwiperMd: React.FC<Props> = ({ title, items }) => {
-  const isMovie = (item: Movie | TVSeries): item is Movie => {
-    return (item as Movie).original_title !== undefined;
-  };
-
   return (
     <Box sx={{ paddingX: { sm: 5 } }}>
       <Typography

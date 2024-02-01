@@ -22,7 +22,7 @@ const AddToListModal: React.FC = () => {
   return (
     <>
       <CustomModal width={600} open={showListModal} onClose={toggleListModal}>
-        <Stack height={"100%"} width={"100%"} gap={3}>
+        <Stack height={"100%"} width={"100%"}>
           <Typography
             id="modal-modal-title"
             component="h2"

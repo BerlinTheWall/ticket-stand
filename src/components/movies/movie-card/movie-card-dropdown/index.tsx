@@ -67,20 +67,20 @@ const MovieCardDrawer: React.FC<Props> = ({ mediaId, isMovie }) => {
               <Tooltip title={"Add to Favorites"}>
                 <FavoriteIcon
                   color="error"
-                  style={{ fontSize: 28, cursor: "pointer" }}
+                  sx={{ fontSize: 28, cursor: "pointer" }}
                   // onClick={handleLike}
                 />
               </Tooltip>
               <Tooltip title={"Add to Watchlist"}>
                 <BookmarkAddIcon
-                  style={{ fontSize: 28, cursor: "pointer" }}
+                  sx={{ fontSize: 28, cursor: "pointer" }}
                   // onClick={handleAddToWatchlist}
                 />
               </Tooltip>
               <Tooltip title={"Add to List"}>
                 <FormatListBulletedIcon
                   color="primary"
-                  style={{ fontSize: 28, cursor: "pointer" }}
+                  sx={{ fontSize: 28, cursor: "pointer" }}
                   onClick={toggleListModal}
                 />
               </Tooltip>
