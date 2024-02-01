@@ -22,7 +22,7 @@ export const MovieGenre: Genre[] = [
   { id: 99, name: "Documentary" },
 ];
 
-export const SeriesGenre: Genre[] = [
+export const TVSeriesGenre: Genre[] = [
   {
     id: 10759,
     name: "Action",

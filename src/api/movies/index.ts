@@ -72,7 +72,7 @@ export const getSingleMovieCredits = async (movieId: any): Promise<any> => {
 export const getSearchMovie = async (movieName: string): Promise<any> => {
   try {
     const res = await simpleAxiosApi({
-      url: `/search/movie?query=${movieName}`,
+      url: `/search/multi?query=${movieName}`,
     });
     return res.data;
   } catch (error) {
@@ -105,16 +105,17 @@ export const getMovieComments = async (
 };
 
 export const createComment = async (
-  session_id: string,
+  // session_id: string,
   media_id: string,
   media_type: string,
   comment: string
 ): Promise<AxiosResponse<any>> => {
   try {
     const res = await simpleAxiosApi({
+      method: "POST",
       url: "/review/new",
       data: {
-        session_id: session_id,
+        // session_id: session_id,
         media_id: media_id,
         media_type: media_type,
         content: comment,

@@ -1,18 +1,7 @@
-import {
-  Box,
-  Button,
-  Divider,
-  Grid,
-  Stack,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Box, Divider, Stack, Typography, useMediaQuery } from "@mui/material";
 import { Autoplay, Pagination, EffectFade } from "swiper/modules";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Movie } from "@/types/movie";
@@ -25,7 +14,6 @@ type Props = {
 };
 
 const SwiperBanner: React.FC<Props> = ({ movies }) => {
-  const theme = useTheme();
   const isMobile = useMediaQuery("(min-width:600px)");
 
   return (
@@ -55,7 +43,7 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
                 width={"100%"}
                 height={600}
                 position={"relative"}
-                bgcolor={"Background.default"}
+                bgcolor={"background.default"}
               >
                 <Image
                   src={
@@ -118,36 +106,6 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
                       {movie.overview}
                     </Typography>
                   )}
-
-                  <Grid container spacing={2} mt={0.5}>
-                    <Grid item sm={6} xs={6}>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        fullWidth
-                        onClick={() => {}}
-                        startIcon={<PlayCircleFilledIcon />}
-                        sx={{
-                          whiteSpace: "nowrap",
-                        }}
-                      >
-                        Watch Trailer
-                      </Button>
-                    </Grid>
-                    <Grid item sm={6} xs={6}>
-                      <Button
-                        variant="outlined"
-                        color="secondary"
-                        fullWidth
-                        startIcon={<BookmarkBorderIcon />}
-                        sx={{
-                          whiteSpace: "nowrap",
-                        }}
-                      >
-                        Add WatchList
-                      </Button>
-                    </Grid>
-                  </Grid>
                 </Box>
                 <Box
                   sx={{

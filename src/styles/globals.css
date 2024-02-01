@@ -12,6 +12,7 @@ body {
 
 body {
   padding-right: 0px !important;
+  overflow-y: scroll !important;
 }
 
 a {
@@ -33,6 +34,15 @@ a {
   border: 3px solid #fff;
 }
 
+.mui-style-1pc7mbl-MuiSlider-valueLabel {
+  line-height: 1;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
 /* truncates */
 .truncate-1 {

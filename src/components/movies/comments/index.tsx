@@ -1,17 +1,13 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
 import Comment from "@/components/movies/comments/comment";
 import { Comment as CommentType } from "@/types/comment";
-import { useIsLoggedIn } from "@/hooks/useIsLoggedIn";
-import { LOGIN_PAGE } from "@/constants/urls";
-import Link from "next/link";
+import AddCommentModal from "./add-comment-modal";
 
 type Props = {
   comments: CommentType[];
 };
 
 const Comments: React.FC<Props> = ({ comments }) => {
-  const loggedIn = useIsLoggedIn();
-
   return (
     <Box sx={{ paddingX: { sm: 5 } }}>
       <Stack
@@ -28,17 +24,7 @@ const Comments: React.FC<Props> = ({ comments }) => {
         >
           Comments
         </Typography>
-        {loggedIn ? (
-          <Button variant="contained" color="secondary">
-            Add Comment
-          </Button>
-        ) : (
-          <Link href={LOGIN_PAGE}>
-            <Button variant="contained" color="primary">
-              Login to Add Comment
-            </Button>
-          </Link>
-        )}
+        <AddCommentModal />
       </Stack>
       <Stack direction={"column"} gap={2}>
         {comments.map((comment) => {

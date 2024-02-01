@@ -3,6 +3,7 @@ import Footer from "@/components/footer";
 import { IChildren } from "@/types/component-type/IChildren";
 import { Box } from "@mui/material";
 import { NEED_MARGIN_TOP_VALUE } from "@/components/navbar/var";
+import AddToListModal from "@/components/media/add-to-list-modal";
 
 export type Props = {
   children: IChildren["children"];
@@ -23,6 +24,7 @@ const MainLayout: React.FC<Props> = ({ children, needMargin = false }) => {
         {children}
       </Box>
       <Footer />
+      <AddToListModal />
     </Box>
   );
 };

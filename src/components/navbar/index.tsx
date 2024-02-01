@@ -40,7 +40,7 @@ const Navbar: React.FC = () => {
 
   const [drawerState, setDrawerState] = useState<boolean>(false);
   const loggedIn = useIsLoggedIn();
-  const { user } = useContext(AppContext);
+  const { user } = useContext(AppContext)!;
 
   const toggleDrawer = () => {
     setDrawerState((prev) => !prev);
@@ -97,8 +97,8 @@ const Navbar: React.FC = () => {
                       : Images.LogoBlack
                   }
                   alt={"Logo"}
-                  width={!isMobile ? 50 : 150}
-                  height={!isMobile ? 50 : 70}
+                  width={!isMobile ? 70 : 150}
+                  height={!isMobile ? 70 : 70}
                   style={{ cursor: "pointer" }}
                   priority
                   loading="eager"
@@ -183,9 +183,7 @@ const Navbar: React.FC = () => {
                 justifyContent: "end",
               }}
             >
-              <Box width={"50%"}>
-                <NavbarSearch />
-              </Box>
+              <NavbarSearch />
               <ThemeSwitch />
               <MenuRoundedIcon
                 onClick={toggleDrawer}

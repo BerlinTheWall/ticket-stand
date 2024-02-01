@@ -8,6 +8,7 @@ import { FormInputSlider } from "../forms/slider-input";
 import { useRouter } from "next/router";
 import { filterObject, filteringMethod } from "@/utils/utils";
 import { MOVIES_PAGE } from "@/constants/urls";
+import { useEffect } from "react";
 
 interface IFormInput {
   primary_release_year: string;
@@ -23,7 +24,11 @@ const defaultValues = {
   score: [0, 10],
 };
 
-const SearchBar: React.FC = () => {
+type Props = {
+  readUrl?: boolean;
+};
+
+const SearchBar: React.FC<Props> = ({ readUrl = false }) => {
   const router = useRouter();
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
@@ -47,41 +52,59 @@ const SearchBar: React.FC = () => {
     defaultValues: defaultValues,
   });
 
+  useEffect(() => {
+    if (readUrl) {
+      const year = router.query.primary_release_year as string;
+      const genre = router.query.with_genres as string;
+      const scoreGte = router.query["vote_average.gte"] as unknown as number;
+      const scoreLte = router.query["vote_average.lte"] as unknown as number;
+      const isAdult = router.query.isAdult as unknown as boolean;
+      const score =
+        scoreGte !== undefined && scoreLte !== undefined
+          ? [scoreGte, scoreLte]
+          : [0, 10];
+
+      reset({
+        primary_release_year: year,
+        with_genres: genre,
+        isAdult: isAdult,
+        score: score,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.query, readUrl]);
+
   const theme = useTheme();
 
   return (
     <Box
       sx={{
-        marginX: { sm: 5 },
-        paddingX: 5,
+        marginX: { xs: 2, sm: 5 },
+        paddingX: { xs: 2, sm: 5 },
         border: `2px solid ${theme.palette.primary.main}`,
         borderRadius: 5,
         boxShadow: 5,
         bgcolor: `${theme.palette.primary.main}15`,
       }}
     >
-      <Grid container spacing={2} py={3}>
-        <Grid item md={2} xs={6}>
-          {/* <FormInputText
-            name={"movieName"}
-            control={control}
-            label={"Movie name"}
-            inputType="text"
-            // rules={{
-            //   required: "This field is required",
-            //   minLength: { value: 5, message: "Please enter more than 5 char" },
-            // }}
-          /> */}
+      <Grid
+        container
+        spacing={2}
+        py={3}
+        alignItems={"center"}
+        display={"flex"}
+        justifyContent={"space-between"}
+      >
+        <Grid item lg={1.35} md={1.9} xs={6}>
           <FormInputText
             name={"primary_release_year"}
             control={control}
             label={"Movie year"}
             inputType="number"
             maxLength={4}
-            // rules={{
-            //   required: "This field is required",
-            //   minLength: { value: 5, message: "Please enter more than 5 char" },
-            // }}
+            rules={{
+              minLength: { value: 4 },
+            }}
           />
         </Grid>
         <Grid item md={2} xs={6}>
@@ -97,7 +120,7 @@ const SearchBar: React.FC = () => {
             // }}
           />
         </Grid>
-        <Grid item xl={3} lg={4} md={6} xs={12} alignSelf={"center"}>
+        <Grid item xl={true} lg={4} md={6} xs={12}>
           <FormInputSlider
             name={"score"}
             control={control}
@@ -105,9 +128,10 @@ const SearchBar: React.FC = () => {
             step={1}
             min={0}
             max={10}
+            isDouble
           />
         </Grid>
-        <Grid item lg={true} md={2} xs={12} alignSelf={"center"}>
+        <Grid item lg={2} md={2} xs={12}>
           <Box display="flex" justifyContent={{ xs: "start", md: "center" }}>
             <FormInputSwitch
               name={"isAdult"}
@@ -116,7 +140,7 @@ const SearchBar: React.FC = () => {
             />
           </Box>
         </Grid>
-        <Grid item md={true} xs={12}>
+        <Grid item xl={2} lg={true} md={true} xs={12}>
           <Stack
             direction={{ xs: "column", md: "row" }}
             justifyContent={{ xs: "end", lg: "end" }}

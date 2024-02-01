@@ -1,20 +1,11 @@
-import {
-  Box,
-  Button,
-  Divider,
-  Grid,
-  Stack,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
+import { Box, Divider, Stack, Typography, useMediaQuery } from "@mui/material";
 import { convertMovieGenreIdArraysToNames } from "@/utils/genre-converter";
 import GenresList from "@/components/swiper-slides/genres-list";
 import { Movie } from "@/types/movie";
 import Image from "next/image";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 import { convertMinuteToHour } from "@/utils/movie-length-converter";
+import ActionBar from "@/components/media/action-bar";
 
 interface Props {
   movie: Movie;
@@ -163,35 +154,7 @@ const SingleMovie: React.FC<Props> = ({ movie }) => {
               {movie.overview}
             </Typography>
           </Box>
-          <Grid container spacing={2} mt={0.5}>
-            <Grid item sm={6} xs={6}>
-              <Button
-                variant="contained"
-                color="primary"
-                fullWidth
-                onClick={() => {}}
-                startIcon={<PlayCircleFilledIcon />}
-                sx={{
-                  whiteSpace: "nowrap",
-                }}
-              >
-                Watch Trailer
-              </Button>
-            </Grid>
-            <Grid item sm={6} xs={6}>
-              <Button
-                variant="outlined"
-                color="secondary"
-                fullWidth
-                startIcon={<BookmarkBorderIcon />}
-                sx={{
-                  whiteSpace: "nowrap",
-                }}
-              >
-                Add WatchList
-              </Button>
-            </Grid>
-          </Grid>
+          <ActionBar mediaId={movie.id} isMovie />
         </Box>
       </Box>
     </Box>

@@ -1,6 +1,6 @@
 import Router from "next/router";
-import { useIsLoggedIn } from "./hooks/useIsLoggedIn";
-import { LOGIN_PAGE } from "./constants/urls";
+import { useIsLoggedIn } from "../hooks/useIsLoggedIn";
+import { LOGIN_PAGE } from "../constants/urls";
 
 const withAuth = (WrappedComponent: any) => {
   const WithAuth = (props: any) => {
