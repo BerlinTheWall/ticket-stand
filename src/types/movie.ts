@@ -1,3 +1,4 @@
+import { profileListType } from "./general";
 import { Genre } from "./genres";
 
 export type Movie = {
@@ -13,4 +14,5 @@ export type Movie = {
   adult: boolean;
   genres: Genre[];
   runtime: number;
+  media_type: profileListType;
 };

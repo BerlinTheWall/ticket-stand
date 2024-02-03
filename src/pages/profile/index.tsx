@@ -6,13 +6,12 @@ import { useContext, useState } from "react";
 import { AppContext } from "@/context/AppContext";
 import Image from "next/image";
 import TabComponent from "@/components/profile/profile-tab";
-import withAuth from "@/withAuth";
+import withAuth from "@/helper/withAuth";
 
 const ProfilePage: NextPage = () => {
   const theme = useTheme();
   const loggedIn = useIsLoggedIn();
-  const { user } = useContext(AppContext);
-  // console.log(user);
+  const { user } = useContext(AppContext)!;
   const [value, setValue] = useState("one");
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {

@@ -9,14 +9,16 @@ import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 import { Movie } from "@/types/movie";
 import NextPrevEl from "../next-prev-button";
 import Link from "next/link";
-import { SINGLE_MOVIE_PAGE } from "@/constants/urls";
+import { SINGLE_MOVIE_PAGE, SINGLE_TVSERIES_PAGE } from "@/constants/urls";
+import { TVSeries } from "@/types/tv-series";
+import { isMovie } from "@/utils/check-is-movie";
 
 interface Props {
   title: string;
-  movies: Movie[];
+  items: (Movie | TVSeries)[];
 }
 
-const MovieSwiperMd: React.FC<Props> = ({ title, movies }) => {
+const MovieSwiperMd: React.FC<Props> = ({ title, items }) => {
   return (
     <Box sx={{ paddingX: { sm: 5 } }}>
       <Typography
@@ -86,17 +88,25 @@ const MovieSwiperMd: React.FC<Props> = ({ title, movies }) => {
             },
           }}
         >
-          {movies?.map((movie: Movie) => {
+          {items?.map((item: Movie | TVSeries) => {
             return (
-              <SwiperSlide key={movie.id} style={{ width: "100%" }}>
-                <Link href={`${SINGLE_MOVIE_PAGE}/${movie.id}`}>
+              <SwiperSlide key={item.id} style={{ width: "100%" }}>
+                <Link
+                  href={
+                    isMovie(item)
+                      ? `${SINGLE_MOVIE_PAGE}/${item.id}`
+                      : `${SINGLE_TVSERIES_PAGE}/${item.id}`
+                  }
+                >
                   <Box width="100%" height={250} position="relative">
                     <Image
                       src={
                         "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
-                        movie.backdrop_path
+                        item.backdrop_path
                       }
-                      alt={movie.original_title}
+                      alt={
+                        isMovie(item) ? item.original_title : item.original_name
+                      }
                       width={1000}
                       height={100}
                       style={{
@@ -123,9 +133,11 @@ const MovieSwiperMd: React.FC<Props> = ({ title, movies }) => {
                     />
                     <MovieCardDetail
                       isMd
-                      title={movie.original_title}
-                      rating={movie.vote_average}
-                      genres={movie.genre_ids}
+                      title={
+                        isMovie(item) ? item.original_title : item.original_name
+                      }
+                      rating={item.vote_average}
+                      genres={item.genre_ids}
                     />
                   </Box>
                 </Link>

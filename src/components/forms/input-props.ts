@@ -1,4 +1,3 @@
-import { Genre } from "@/types/genres";
 import { SxProps, Theme } from "@mui/material";
 
 export interface FormInputProps {

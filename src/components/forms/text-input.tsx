@@ -1,8 +1,6 @@
 import { useController } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import { FormInputProps } from "./input-props";
-import InputAdornment from "@mui/material/InputAdornment";
-import SearchIcon from "@mui/icons-material/Search";
 
 interface Props extends FormInputProps {
   inputType: string;

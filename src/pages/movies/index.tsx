@@ -14,8 +14,9 @@ import { useDiscoverMovie } from "@/api/movies/hook/useDiscoverMovie";
 import MovieCardSkeletonLoader from "@/components/movies/movie-card-skeleton-loader";
 import { MovieGenre } from "@/constants/movie-genre";
 import { useMemo } from "react";
+import SearchBar from "@/components/search-bar";
 
-const MovieList = () => {
+const MovieListPage = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
 
   const router = useRouter();
@@ -45,7 +46,8 @@ const MovieList = () => {
 
   return (
     <MainLayout needMargin>
-      <Box mx={5}>
+      <SearchBar readUrl />
+      <Box mx={5} pt={2}>
         <Typography mb={2} component="h1" fontSize={24} fontWeight="bold">
           {categoryName} Movies
         </Typography>
@@ -82,4 +84,4 @@ const SkeletonLoader = () => {
     });
 };
 
-export default MovieList;
+export default MovieListPage;

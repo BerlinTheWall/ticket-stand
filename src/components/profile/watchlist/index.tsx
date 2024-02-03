@@ -15,13 +15,15 @@ import {
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import MovieTypeChooser from "../profile-tab/movie-type-chooser";
+import MediaCard from "@/components/media/media-card";
+import { Media } from "@/types/media";
 
 const WatchList: React.FC<{}> = () => {
   const [selectedOption, setSelectedOption] =
     useState<profileListType>("movie");
   const isMobile = useMediaQuery("(max-width:600px)");
   const router = useRouter();
-  const { user } = useContext(AppContext);
+  const { user } = useContext(AppContext)!;
 
   const { data, isLoading, isFetching, isError } = useWatchList(
     user.id,
@@ -58,8 +60,8 @@ const WatchList: React.FC<{}> = () => {
           {isLoading || isFetching ? (
             <SkeletonLoader />
           ) : (
-            data?.results?.map((movie: Movie) => {
-              return <MovieCard key={movie.id} movie={movie} />;
+            data?.results?.map((media: Media) => {
+              return <MediaCard key={media.id} media={media} />;
             })
           )}
         </Grid>

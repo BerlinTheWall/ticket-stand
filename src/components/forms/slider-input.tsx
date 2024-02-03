@@ -1,11 +1,15 @@
 import { useController } from "react-hook-form";
 import { FormInputProps } from "./input-props";
-import { Box, Slider, Typography } from "@mui/material";
+import { Box, Slider, Stack, Typography } from "@mui/material";
+import { useState } from "react";
 
 interface Props extends FormInputProps {
   step: number;
   min: number;
   max: number;
+  marks?: any[];
+  isDouble?: boolean;
+  showValue?: boolean;
 }
 
 export const FormInputSlider = ({
@@ -16,6 +20,10 @@ export const FormInputSlider = ({
   step,
   min,
   max,
+  marks,
+  sx,
+  isDouble = false,
+  showValue = false,
 }: Props) => {
   const {
     field: { onChange, value },
@@ -24,8 +32,13 @@ export const FormInputSlider = ({
     name,
     control,
     rules,
-    defaultValue: [min, max],
+    defaultValue: !isDouble ? min : [min, max],
   });
+
+  const [showDigits, setShowDigits] = useState<boolean>(showValue);
+  const handleShowDigits = (value: boolean) => {
+    setShowDigits(value);
+  };
 
   return (
     <Box
@@ -36,14 +49,27 @@ export const FormInputSlider = ({
         width: "100%",
         pr: 2,
       }}
+      onMouseEnter={() => handleShowDigits(true)}
+      onMouseLeave={() => handleShowDigits(false)}
     >
-      <Typography whiteSpace={"nowrap"}>{label}</Typography>
+      <Stack direction={"row"} gap={1} alignItems={"center"}>
+        <Typography sx={sx} whiteSpace={"nowrap"}>
+          {label}:
+        </Typography>
+        <Typography fontWeight={"bold"} color={"primary.dark"}>
+          {value[0]}
+        </Typography>
+        -
+        <Typography fontWeight={"bold"} color={"primary.dark"}>
+          {value[1]}
+        </Typography>
+      </Stack>
       <Slider
         value={value}
         onChange={onChange}
-        valueLabelDisplay="auto"
+        valueLabelDisplay={showDigits ? "on" : "auto"}
         step={step}
-        marks
+        marks={marks}
         min={min}
         max={max}
       />

@@ -3,18 +3,16 @@ import { simpleAxiosApi } from "../new-api";
 import { RequestToken, Session } from "@/types/authentication";
 import { Profile } from "@/types/profile";
 import Cookies from "js-cookie";
-import { ACCOUNT_COOKIE, SESSION_ID_COOKIE } from "@/constants/cookie";
-import { Movie } from "@/types/movie";
-import { PaginatedList } from "@/types/paginated-list";
+import { SESSION_ID_COOKIE } from "@/constants/cookie";
+import { profileListType } from "@/types/general";
 
 const api_key = process.env.NEXT_PUBLIC_API_KEY;
 
 export const addToFavorites = async (
   accountId: string,
-  mediaType: string,
-  mediaId: string,
-  sessionId: string
-): Promise<AxiosResponse<RequestToken>> => {
+  mediaType: profileListType,
+  mediaId: number
+): Promise<AxiosResponse<any>> => {
   try {
     const res = await simpleAxiosApi({
       url: `account/${accountId}/favorite`,
@@ -34,9 +32,8 @@ export const addToFavorites = async (
 export const addToWatchlist = async (
   accountId: string,
   mediaType: string,
-  mediaId: string,
-  sessionId: string
-): Promise<AxiosResponse<RequestToken>> => {
+  mediaId: number
+): Promise<AxiosResponse<any>> => {
   try {
     const res = await simpleAxiosApi({
       url: `account/${accountId}/watchlist`,

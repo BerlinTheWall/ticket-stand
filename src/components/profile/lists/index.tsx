@@ -1,8 +1,9 @@
 import { useLists } from "@/api/profile/hooks/useLists";
+import CreateListModal from "@/components/lists/create-list-modal";
 import ListCard from "@/components/lists/list-card";
 import MovieCardSkeletonLoader from "@/components/movies/movie-card-skeleton-loader";
 import { AppContext } from "@/context/AppContext";
-import { ListType } from "@/types/list";
+import { ListsType } from "@/types/list";
 import Images from "@/utils/image-helper";
 import {
   Box,
@@ -33,7 +34,7 @@ const listCardImages = [
 const Lists: React.FC = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
   const router = useRouter();
-  const { user } = useContext(AppContext);
+  const { user } = useContext(AppContext)!;
 
   const { data, isLoading, isFetching, isError } = useLists(user.id);
 
@@ -44,19 +45,27 @@ const Lists: React.FC = () => {
   };
 
   if (isError) {
-    return <div className="">isError </div>;
+    return <div className="">isError</div>;
   }
 
   return (
     <Stack direction={"column"}>
-      <Typography component="h1" fontSize={24} fontWeight="bold" pl={0}>
-        My Lists
-      </Typography>
-      <Grid container justifyContent="start" sx={{ pt: 1 }} spacing={2}>
+      <Stack
+        direction={"row"}
+        justifyContent={"space-between"}
+        alignContent={"center"}
+        alignItems={"center"}
+      >
+        <Typography component="h1" fontSize={24} fontWeight="bold" pl={0}>
+          My Lists
+        </Typography>
+        <CreateListModal />
+      </Stack>
+      <Grid container justifyContent="start" pt={3} spacing={2}>
         {isLoading || isFetching ? (
           <SkeletonLoader />
         ) : (
-          data?.results?.map((list: ListType, index: number) => {
+          data?.results?.map((list: ListsType, index: number) => {
             return (
               <ListCard
                 key={list.id}

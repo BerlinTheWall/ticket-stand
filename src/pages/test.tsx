@@ -16,7 +16,7 @@ import {
 import { useContext } from "react";
 
 const DisplayTest = () => {
-  const { toggleTheme, mode } = useContext(AppContext);
+  const { toggleTheme, mode } = useContext(AppContext)!;
   return (
     <Box>
       <Button
