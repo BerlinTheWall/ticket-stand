@@ -16,38 +16,25 @@ const LoginPage: NextPage = () => {
           alignItems: "center",
         }}
       >
-        <Box
-          component="section"
+        <Box className={classes.square2} bgcolor={theme.palette.primary.main} />
+        <Box className={classes.square1} />
+        <Box className={classes.square3} />
+        <Box className={classes.square4} />
+        <Container
           sx={{
+            position: "relative",
+            width: "340px",
+            height: "auto",
+            backgroundColor: "background.default",
             display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            minWidth: "100vh",
+            borderRadius: "10px",
+            paddingY: "30px",
+            boxShadow: `0 7px 20px ${theme.palette.common.black}`,
+            border: `1px solid ${theme.palette.primary.main}`,
           }}
         >
-          <Box
-            className={classes.square2}
-            bgcolor={theme.palette.primary.main}
-          />
-          <Box className={classes.square1} />
-          <Box className={classes.square3} />
-          <Box className={classes.square4} />
-          <Container
-            sx={{
-              position: "relative",
-              width: "340px",
-              height: "auto",
-              backgroundColor: "background.default",
-              display: "flex",
-              borderRadius: "10px",
-              paddingY: "30px",
-              boxShadow: `0 7px 20px ${theme.palette.common.black}`,
-              border: `1px solid ${theme.palette.primary.main}`,
-            }}
-          >
-            <LoginForm />
-          </Container>
-        </Box>
+          <LoginForm />
+        </Container>
       </Box>
     </MainLayout>
   );

@@ -13,6 +13,16 @@
   animation-delay: calc(-1s * var(--i));
 }
 
+@media (max-width: 768px) {
+  .square1 {
+    filter: blur(100px);
+    bottom: 100px;
+    width: 10.75rem;
+    height: 300px;
+    animation: none;
+  }
+}
+
 .square3 {
   filter: blur(150px);
   bottom: 100px;
@@ -28,6 +38,16 @@
   animation-delay: calc(-1s * var(--i));
 }
 
+@media (max-width: 768px) {
+  .square3 {
+    filter: blur(100px);
+    bottom: 100px;
+    width: 10.75rem;
+    height: 300px;
+    animation: none;
+  }
+}
+
 .square2 {
   filter: blur(150px);
   top: -150px;
@@ -39,6 +59,16 @@
   align-items: center;
   animation: animateX 15s linear infinite;
   animation-delay: calc(-1s * var(--i));
+}
+
+@media (max-width: 768px) {
+  .square2 {
+    filter: blur(100px);
+    top: 150px;
+    width: 10.75rem;
+    height: 300px;
+    animation: none;
+  }
 }
 
 .square4 {
@@ -53,6 +83,16 @@
   align-items: center;
   animation: animateX2 12s linear infinite;
   animation-delay: calc(-1s * var(--i));
+}
+
+@media (max-width: 768px) {
+  .square4 {
+    filter: blur(100px);
+    bottom: -150px;
+    width: 10.75rem;
+    height: 300px;
+    animation: none;
+  }
 }
 
 @keyframes animateY {
