@@ -3,6 +3,7 @@ import CreateListModal from "@/components/lists/create-list-modal";
 import ListCard from "@/components/lists/list-card";
 import MovieCardSkeletonLoader from "@/components/movies/movie-card-skeleton-loader";
 import { AppContext } from "@/context/AppContext";
+import { ContextValue } from "@/types/general";
 import { ListsType } from "@/types/list";
 import Images from "@/utils/image-helper";
 import {
@@ -34,9 +35,9 @@ const listCardImages = [
 const Lists: React.FC = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
   const router = useRouter();
-  const { user } = useContext(AppContext)!;
+  const { user } = useContext(AppContext) as ContextValue;
 
-  const { data, isLoading, isFetching, isError } = useLists(user.id);
+  const { data, isLoading, isFetching, isError } = useLists(user!.id);
 
   const handleChange = (event: any, value: number) => {
     router.replace({
@@ -63,7 +64,7 @@ const Lists: React.FC = () => {
       </Stack>
       <Grid container justifyContent="start" pt={3} spacing={2}>
         {isLoading || isFetching ? (
-          <SkeletonLoader />
+          <MovieCardSkeletonLoader />
         ) : (
           data?.results?.map((list: ListsType, index: number) => {
             return (
@@ -92,11 +93,3 @@ const Lists: React.FC = () => {
 };
 
 export default Lists;
-
-const SkeletonLoader = () => {
-  return Array(20)
-    .fill(0)
-    .map((_, i) => {
-      return <MovieCardSkeletonLoader key={i} />;
-    });
-};

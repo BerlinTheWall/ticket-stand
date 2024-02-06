@@ -2,6 +2,7 @@ import { AxiosResponse } from "axios";
 import { simpleAxiosApi } from "../new-api";
 import { SingleListType } from "@/types/list";
 import { filteringMethod } from "@/utils/utils";
+import { useMutation } from "@tanstack/react-query";
 
 export const getLists = async (
   accountId: number,
@@ -69,6 +70,24 @@ export const addMovieToList = async (
   } catch (error) {
     throw error;
   }
+};
+
+export const useAddMovieToList = () => {
+  return useMutation<any, Error, any, any>(
+    (formData: {
+      listId: number;
+      data: {
+        media_id: string;
+      };
+    }): Promise<any> => {
+      
+      return simpleAxiosApi({
+        url: `list/${formData.listId}/add_item`,
+        method: "POST",
+        data: formData.data,
+      });
+    }
+  );
 };
 
 export const addTVSerieToList = async (

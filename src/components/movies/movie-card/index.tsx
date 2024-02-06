@@ -21,7 +21,8 @@ import { AppContext } from "@/context/AppContext";
 import { toast } from "react-toastify";
 import { useIsLoggedIn } from "@/hooks/useIsLoggedIn";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import MovieCardDrawer from "./movie-card-dropdown";
+import MovieCardToolTipAction from "./movie-card-dropdown";
+import { ContextValue } from "@/types/general";
 
 type Props = {
   movie: Movie;
@@ -32,12 +33,12 @@ const MovieCard: React.FC<Props> = ({ movie }) => {
   const isMobile = useMediaQuery("(min-width:600px)");
   const theme = useTheme();
 
-  const { user } = useContext(AppContext)!;
+  const { user } = useContext(AppContext) as ContextValue;
   const loggedIn = useIsLoggedIn();
 
   const handleLike = async () => {
     try {
-      const res = await addToFavorites(user.id, "movie", movie.id);
+      const res = await addToFavorites(user!.id, "movie", movie.id);
       toast.success("Added to Favorites!");
       return res;
     } catch (error) {
@@ -50,7 +51,7 @@ const MovieCard: React.FC<Props> = ({ movie }) => {
     if (loggedIn) {
       // setIsWatchlistLoading(true);
       try {
-        const res = await addToWatchlist(user.id, "movie", movie.id);
+        const res = await addToWatchlist(user!.id, "movie", movie.id);
         toast.success("Added to Watchlist!");
         // setIsWatchlistLoading(false);
         return res;
@@ -107,53 +108,10 @@ const MovieCard: React.FC<Props> = ({ movie }) => {
           />
         </Link>
 
-        <MovieCardDrawer mediaId={""} isMovie={false} />
-
-        {/* <Box
-          sx={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: "100%",
-            borderRadius: "12px",
-            opacity: "0",
-            ":hover": { opacity: "0.8" },
-            transition: "all 0.5s",
-            background: (theme) =>
-              `linear-gradient(to bottom, transparent 0%, ${theme.palette.background.paper} 0%)`,
-          }}
-          display={"flex"}
-          justifyContent={"center"}
-          alignItems={"center"}
-        >
-          <Stack
-            direction={"row"}
-            gap={1}
-            justifyContent={"center"}
-            alignItems={"center"}
-          >
-            <Tooltip title={"Add to Favorites"}>
-              <FavoriteIcon
-                color="error"
-                style={{ fontSize: 28 }}
-                onClick={handleLike}
-              />
-            </Tooltip>
-            <Tooltip title={"Add to Watchlist"}>
-              <BookmarkAddIcon
-                style={{ fontSize: 28 }}
-                onClick={handleAddToWatchlist}
-              />
-            </Tooltip>
-            <Tooltip title={"Add to List"}>
-              <FormatListBulletedIcon
-                color="primary"
-                style={{ fontSize: 28 }}
-              />
-            </Tooltip>
-          </Stack>
-        </Box> */}
+        <MovieCardToolTipAction
+          mediaId={movie.id}
+          isMovie={true}
+        />
       </Box>
     </Grid>
   );
