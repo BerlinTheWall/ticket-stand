@@ -27,7 +27,7 @@ const AddToListModal: React.FC = () => {
     data,
     isLoading,
     isFetching,
-  }: UseQueryResult<PaginatedList<ListsType>, Error> = useLists(user?.id, {
+  }: UseQueryResult<PaginatedList<ListsType>, Error> = useLists(user!?.id, {
     enabled: showListModal && !!user?.id,
   });
   const addCarMutation: UseMutationResult<any, Error, any> =
