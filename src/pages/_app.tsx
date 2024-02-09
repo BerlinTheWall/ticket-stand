@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import { AppProps } from "next/app";
 import NextNProgress from "nextjs-progressbar";
@@ -46,6 +46,15 @@ export default function MyApp(props: MyAppProps) {
         },
       })
   );
+
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("/service-worker.js")
+        .then((registration) => console.log("scope is: ", registration.scope));
+    }
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
@@ -57,6 +66,30 @@ export default function MyApp(props: MyAppProps) {
                 content="initial-scale=1, width=device-width"
               />
               <meta name="color-scheme" content="dark light" />
+              <link rel="shortcut icon" href="/favicon.ico" />
+              <meta name="emotion-insertion-point" content="" />
+              <meta
+                name="viewport"
+                content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
+              />
+
+              <meta name="pwa-demo" content="pwa-demo" />
+              <meta name="apple-mobile-web-app-capable" content="yes" />
+              <meta
+                name="apple-mobile-web-app-status-bar-style"
+                content="default"
+              />
+              <meta name="apple-mobile-web-app-title" content="pwa-demo" />
+              <meta name="description" content="pwa-demo" />
+              <meta name="format-detection" content="telephone=no" />
+              <meta name="mobile-web-app-capable" content="yes" />
+              <meta name="msapplication-TileColor" content="#00925D" />
+              <meta name="msapplication-tap-highlight" content="no" />
+              <meta name="theme-color" content="#00925D" />
+
+              <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+              <link rel="manifest" href="/manifest.json" />
+              <link rel="shortcut icon" href="/favicon.ico" />
             </Head>
 
             <MUIThemeProvider>
