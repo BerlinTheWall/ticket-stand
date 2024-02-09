@@ -18,6 +18,7 @@ import TelegramIcon from "@mui/icons-material/Telegram";
 import { IMPLEMENTER } from "@/constants/implementers";
 import Link from "next/link";
 import { MouseEventHandler, useState } from "react";
+import { NextPage } from "next";
 
 const SOCIAL_STYLE = {
   borderRadius: "50%",
@@ -29,7 +30,7 @@ const SOCIAL_STYLE = {
   },
 };
 
-const AboutUs = () => {
+const AboutUs: NextPage = () => {
   return (
     <MainLayout>
       <Typography pt={5} textAlign="center" variant="h3">

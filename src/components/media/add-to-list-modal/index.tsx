@@ -15,7 +15,7 @@ import {
 import { useContext } from "react";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { toast } from "react-toastify";
-import { useAddMovieToList } from "@/api/lists";
+import { useAddMovieToList } from "@/hooks/useAddMovieToList";
 
 const AddToListModal: React.FC = () => {
   const { user, showListModal, closeListModal } = useContext(

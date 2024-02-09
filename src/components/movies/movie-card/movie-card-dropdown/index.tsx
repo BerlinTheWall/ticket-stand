@@ -53,6 +53,12 @@ const MovieCardToolTipAction: React.FC<Props> = ({ mediaId, isMovie }) => {
   const closeTooltip = () => {
     setIsHover(false);
   };
+  const handleOnClick = (item: (typeof BUTTON_ACTION_ITEMS)[0]) => {
+    if (item.onClick) {
+      item.onClick();
+      closeTooltip();
+    }
+  };
 
   return (
     loggedIn && (
@@ -72,10 +78,7 @@ const MovieCardToolTipAction: React.FC<Props> = ({ mediaId, isMovie }) => {
                       color={item.color as keyof PaletteColorOptions}
                       sx={{ fontSize: 28, cursor: "pointer" }}
                       onClick={() => {
-                        if (item.onClick) {
-                          item.onClick();
-                          closeTooltip();
-                        }
+                        handleOnClick(item);
                       }}
                     />
                   </Tooltip>
