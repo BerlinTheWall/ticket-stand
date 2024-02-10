@@ -1,4 +1,4 @@
-import { Movie } from "@/types/movie";
+import { Movie, MovieVideo } from "@/types/movie";
 import { simpleAxiosApi } from "../new-api";
 import { AxiosResponse } from "axios";
 import { filteringMethod } from "@/utils/utils";
@@ -103,6 +103,19 @@ export const getTVSerieComments = async (
   try {
     const res = await simpleAxiosApi({
       url: `/tv/${seriesId}/reviews`,
+    });
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getTvSeriesVideos = async (
+  seriesId: any
+): Promise<PaginatedList<MovieVideo>> => {
+  try {
+    const res = await simpleAxiosApi({
+      url: `/tv/${seriesId}/season/1/videos`,
     });
     return res.data;
   } catch (error) {

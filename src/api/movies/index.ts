@@ -1,4 +1,4 @@
-import { Movie } from "@/types/movie";
+import { Movie, MovieVideo } from "@/types/movie";
 import { simpleAxiosApi } from "../new-api";
 import { AxiosResponse } from "axios";
 import { filteringMethod } from "@/utils/utils";
@@ -122,6 +122,19 @@ export const createComment = async (
       },
     });
     return res;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getMovieVideos = async (
+  movieId: any
+): Promise<PaginatedList<MovieVideo>> => {
+  try {
+    const res = await simpleAxiosApi({
+      url: `/movie/${movieId}/videos`,
+    });
+    return res.data;
   } catch (error) {
     throw error;
   }
