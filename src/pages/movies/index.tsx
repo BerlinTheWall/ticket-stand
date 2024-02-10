@@ -53,7 +53,7 @@ const MovieListPage = () => {
         </Typography>
         <Grid container justifyContent="center" spacing={2}>
           {isLoading || isFetching ? (
-            <SkeletonLoader />
+            <MovieCardSkeletonLoader />
           ) : (
             data?.results?.map((movie: Movie) => {
               return <MovieCard key={movie.id} movie={movie} />;
@@ -74,14 +74,6 @@ const MovieListPage = () => {
       </Box>
     </MainLayout>
   );
-};
-
-const SkeletonLoader = () => {
-  return Array(20)
-    .fill(0)
-    .map((_, i) => {
-      return <MovieCardSkeletonLoader key={i} />;
-    });
 };
 
 export default MovieListPage;

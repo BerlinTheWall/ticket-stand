@@ -2,7 +2,7 @@ import { useFavoritesList } from "@/api/profile/hooks/useGetFavoritesList";
 import MovieCard from "@/components/movies/movie-card";
 import MovieCardSkeletonLoader from "@/components/movies/movie-card-skeleton-loader";
 import { AppContext } from "@/context/AppContext";
-import { profileListType } from "@/types/general";
+import { ContextValue, profileListType } from "@/types/general";
 import { Movie } from "@/types/movie";
 import {
   Box,
@@ -21,10 +21,10 @@ const Favorites: React.FC<{}> = () => {
     useState<profileListType>("movie");
   const isMobile = useMediaQuery("(max-width:600px)");
   const router = useRouter();
-  const { user } = useContext(AppContext)!;
+  const { user } = useContext(AppContext) as ContextValue;
 
   const { data, isLoading, isFetching, isError } = useFavoritesList(
-    user.id,
+    user!.id,
     selectedOption
   );
 
@@ -55,7 +55,7 @@ const Favorites: React.FC<{}> = () => {
       </Grid>
       <Grid container justifyContent="start" sx={{ pt: 1 }} spacing={2}>
         {isLoading || isFetching ? (
-          <SkeletonLoader />
+          <MovieCardSkeletonLoader />
         ) : (
           data?.results?.map((movie: Movie) => {
             return <MovieCard key={movie.id} movie={movie} />;
@@ -78,11 +78,3 @@ const Favorites: React.FC<{}> = () => {
 };
 
 export default Favorites;
-
-const SkeletonLoader = () => {
-  return Array(20)
-    .fill(0)
-    .map((_, i) => {
-      return <MovieCardSkeletonLoader key={i} />;
-    });
-};

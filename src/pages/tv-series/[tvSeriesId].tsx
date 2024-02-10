@@ -92,7 +92,7 @@ const TVSeriesPage: NextPage<Props> = ({
           />
           {isLoading || isFetching ? (
             <Grid container spacing={3} px={7} mt={1}>
-              <SkeletonLoader />
+              <MovieCardSkeletonLoader />
             </Grid>
           ) : (
             data && <EpisodeSwiper items={data?.episodes} title="Episodes" />
@@ -137,12 +137,4 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       trailer,
     },
   };
-};
-
-const SkeletonLoader = () => {
-  return Array(5)
-    .fill(0)
-    .map((_, i) => {
-      return <MovieCardSkeletonLoader key={i} />;
-    });
 };

@@ -3,9 +3,9 @@ import { AppContext } from "./AppContext";
 import Cookies from "js-cookie";
 import { IChildren } from "@/types/component-type/IChildren";
 import { darkTheme, lightTheme } from "@/mui/theme";
-import { useIsLoggedIn } from "@/hooks/useIsLoggedIn";
-import { ACCOUNT_COOKIE } from "@/constants/cookie";
+import { ACCOUNT_COOKIE, SESSION_ID_COOKIE } from "@/constants/cookie";
 import { Profile } from "@/types/profile";
+import { signOut } from "@/api/login";
 
 const AppState = ({ children }: IChildren) => {
   const [mode, setMode] = useState(Cookies.get("mode") ?? "dark");
@@ -13,14 +13,33 @@ const AppState = ({ children }: IChildren) => {
     Cookies && Cookies.get("mode") === "light" ? lightTheme : darkTheme
   );
   const [hasMounted, setHasMounted] = useState(false);
-  const [user, setUser] = useState<Profile>(
+  const [user, setUser] = useState<Profile | null>(
     Cookies && Cookies.get(ACCOUNT_COOKIE)
       ? JSON.parse(Cookies.get(ACCOUNT_COOKIE)!)
       : null
   );
-  const [showListModal, setShowListModal] = useState<boolean>(false);
-  const toggleListModal = () => {
-    setShowListModal(!showListModal);
+  const [showListModal, setShowListModal] = useState<{
+    id: number | string;
+    isMovie: boolean;
+    open: boolean;
+  }>({
+    id: -1,
+    isMovie: false,
+    open: false,
+  });
+
+  const openListModal = (id: number | string, isMovie: boolean) => {
+    setShowListModal({
+      id: id,
+      isMovie: isMovie,
+      open: true,
+    });
+  };
+  const closeListModal = () => {
+    setShowListModal((prev) => ({
+      ...prev,
+      open: false,
+    }));
   };
 
   useEffect(() => {
@@ -41,6 +60,17 @@ const AppState = ({ children }: IChildren) => {
     }
   };
 
+  const logout = async () => {
+    try {
+      await signOut();
+      setUser(null);
+      Cookies.remove(SESSION_ID_COOKIE);
+      Cookies.remove(ACCOUNT_COOKIE);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   if (!hasMounted) return null;
 
   return (
@@ -52,7 +82,9 @@ const AppState = ({ children }: IChildren) => {
         user,
         setUser,
         showListModal,
-        toggleListModal,
+        openListModal,
+        closeListModal,
+        logout,
       }}
     >
       {children}

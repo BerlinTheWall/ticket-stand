@@ -16,6 +16,7 @@ import Cookies from "js-cookie";
 import { ACCOUNT_COOKIE, SESSION_ID_COOKIE } from "@/constants/cookie";
 import { useContext } from "react";
 import { AppContext } from "@/context/AppContext";
+import { ContextValue } from "@/types/general";
 
 interface IFormInput {
   username: string;
@@ -28,7 +29,7 @@ const defaultValues = {
 };
 
 const LoginForm: React.FC = () => {
-  const { setUser } = useContext(AppContext)!;
+  const { setUser } = useContext(AppContext) as ContextValue;
   const router = useRouter();
   const theme = useTheme();
 

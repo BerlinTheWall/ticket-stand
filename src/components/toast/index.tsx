@@ -1,9 +1,10 @@
 import { AppContext } from "@/context/AppContext";
+import { ContextValue } from "@/types/general";
 import { useContext } from "react";
 import { ToastContainer } from "react-toastify";
 
 const Toast = () => {
-  const { appTheme } = useContext(AppContext)!;
+  const { appTheme } = useContext(AppContext) as ContextValue;
 
   return (
     <ToastContainer

@@ -1,44 +1,54 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 
 type Props = {
-  title: string;
-  isLink: boolean;
-  href?: string;
-  onClick?: () => void;
+  item: {
+    title: string;
+    href?: string;
+    onClick?: () => void;
+    icon: any;
+  };
 };
 
-const ProfileDropdownItem: React.FC<Props> = ({
-  title,
-  isLink,
-  href,
-  onClick,
-}) => {
-  const theme = useTheme();
-
-  const boxContent = (
-    <Box onClick={onClick} sx={{ px: 2.5, py: 1.25, cursor: "pointer" }}>
+const ProfileDropdownItem: React.FC<Props> = ({ item }) => {
+  const button = (
+    <Stack
+      direction="row"
+      spacing={1}
+      sx={{
+        cursor: "pointer",
+        transition: "all 0.2s ease-in-out",
+        ":hover": {
+          color: "primary.main",pl:0.2
+        },
+      }}
+    >
+      <item.icon fontSize="small" />
       <Typography
-        textAlign="left"
-        fontWeight={700}
         component="h3"
         sx={{
+          fontSize: 14,
+          textAlign: "left",
           pl: 1,
-          cursor: "pointer",
-          borderLeft: `2px solid ${theme.palette.primary.main}`,
-          transition: "padding-left 0.2s ease-in-out",
-          ":hover": {
-            pl: 1.5,
-            color: theme.palette.primary.main,
-          },
         }}
       >
-        {title}
+        {item.title}
       </Typography>
+    </Stack>
+  );
+  return !!item.href ? (
+    <Link href={item.href}>{button}</Link>
+  ) : (
+    <Box
+      onClick={() => {
+        if (item.onClick) {
+          item.onClick();
+        }
+      }}
+    >
+      {button}
     </Box>
   );
-
-  return isLink && href ? <Link href={href}>{boxContent}</Link> : boxContent;
 };
 
 export default ProfileDropdownItem;

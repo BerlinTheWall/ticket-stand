@@ -7,11 +7,12 @@ import { AppContext } from "@/context/AppContext";
 import Image from "next/image";
 import TabComponent from "@/components/profile/profile-tab";
 import withAuth from "@/helper/withAuth";
+import { ContextValue } from "@/types/general";
 
 const ProfilePage: NextPage = () => {
   const theme = useTheme();
   const loggedIn = useIsLoggedIn();
-  const { user } = useContext(AppContext)!;
+  const { user } = useContext(AppContext) as ContextValue;
   const [value, setValue] = useState("one");
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -52,7 +53,7 @@ const ProfilePage: NextPage = () => {
                   color: theme.palette.primary.dark,
                 }}
               >
-                {user.username}
+                {user?.username}
               </Typography>
               <Typography
                 component={"h1"}
@@ -61,7 +62,7 @@ const ProfilePage: NextPage = () => {
                   fontWeight: "300",
                 }}
               >
-                {user.name}
+                {user?.name}
               </Typography>
             </Stack>
           </Stack>
