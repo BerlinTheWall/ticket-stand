@@ -3,9 +3,10 @@ import { IChildren } from "@/types/component-type/IChildren";
 import { responsiveFontSizes } from "@mui/material/styles";
 import { useContext } from "react";
 import { AppContext } from "@/context/AppContext";
+import { ContextValue } from "@/types/general";
 
 const MUIThemeProvider: React.FC<IChildren> = ({ children }) => {
-  const { appTheme } = useContext(AppContext)!;
+  const { appTheme } = useContext(AppContext) as ContextValue;
 
   return (
     <ThemeProvider theme={responsiveFontSizes(appTheme)}>

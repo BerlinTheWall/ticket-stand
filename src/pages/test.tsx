@@ -1,4 +1,5 @@
 import { AppContext } from "@/context/AppContext";
+import { ContextValue } from "@/types/general";
 import {
   Box,
   Button,
@@ -16,7 +17,7 @@ import {
 import { useContext } from "react";
 
 const DisplayTest = () => {
-  const { toggleTheme, mode } = useContext(AppContext)!;
+  const { toggleTheme, mode } = useContext(AppContext) as ContextValue;
   return (
     <Box>
       <Button

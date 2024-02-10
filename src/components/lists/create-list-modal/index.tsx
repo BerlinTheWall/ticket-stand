@@ -3,6 +3,7 @@ import { FormInputTextArea } from "@/components/forms/text-area-input";
 import { FormInputText } from "@/components/forms/text-input";
 import CustomModal from "@/components/modal";
 import { AppContext } from "@/context/AppContext";
+import { ContextValue } from "@/types/general";
 import { LoadingButton } from "@mui/lab";
 import { Button, Stack, Typography } from "@mui/material";
 import { QueryClient, useMutation } from "@tanstack/react-query";
@@ -23,7 +24,7 @@ const defaultValues = {
 const CreateListModal: React.FC = () => {
   const queryClient = new QueryClient();
   const [showModal, setShowModal] = useState<boolean>(false);
-  const { user } = useContext(AppContext)!;
+  const { user } = useContext(AppContext) as ContextValue;
 
   const {
     handleSubmit,
@@ -36,7 +37,7 @@ const CreateListModal: React.FC = () => {
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     try {
       const createdList = await createList(data.name, data.description);
-      queryClient.invalidateQueries(["lists", user.id]);
+      queryClient.invalidateQueries(["lists", user?.id]);
       toast.success("List created successfully!");
     } catch (error) {
       console.log(error);

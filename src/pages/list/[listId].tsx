@@ -118,7 +118,7 @@ const ListPage: NextPage = () => {
         <Box>
           <Grid container spacing={2}>
             {isLoading || isFetching ? (
-              <SkeletonLoader />
+              <MovieCardSkeletonLoader />
             ) : (
               <>
                 {data?.items?.map((media: Media) => {
@@ -167,10 +167,3 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   };
 };
 
-const SkeletonLoader = () => {
-  return Array(20)
-    .fill(0)
-    .map((_, i) => {
-      return <MovieCardSkeletonLoader key={i} />;
-    });
-};

@@ -2,7 +2,7 @@ import { useWatchList } from "@/api/profile/hooks/useGetWatchList";
 import MovieCard from "@/components/movies/movie-card";
 import MovieCardSkeletonLoader from "@/components/movies/movie-card-skeleton-loader";
 import { AppContext } from "@/context/AppContext";
-import { profileListType } from "@/types/general";
+import { ContextValue, profileListType } from "@/types/general";
 import { Movie } from "@/types/movie";
 import {
   Box,
@@ -23,10 +23,10 @@ const WatchList: React.FC<{}> = () => {
     useState<profileListType>("movie");
   const isMobile = useMediaQuery("(max-width:600px)");
   const router = useRouter();
-  const { user } = useContext(AppContext)!;
+  const { user } = useContext(AppContext) as ContextValue;
 
   const { data, isLoading, isFetching, isError } = useWatchList(
-    user.id,
+    user!.id,
     selectedOption
   );
 

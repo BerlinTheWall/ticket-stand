@@ -10,6 +10,10 @@ import { toast } from "react-toastify";
 import { useLists } from "@/api/profile/hooks/useLists";
 import { Button, Grid, Tooltip } from "@mui/material";
 import AddToListDrawer from "@/components/movies/single-movie/add-to-list-dropdown";
+import { ContextValue } from "@/types/general";
+import { UseQueryResult } from "@tanstack/react-query";
+import { PaginatedList } from "@/types/paginated-list";
+import { ListsType } from "@/types/list";
 
 type Props = {
   mediaId: number;
@@ -18,18 +22,24 @@ type Props = {
 
 const ActionBar: React.FC<Props> = ({ mediaId, isMovie }) => {
   const loggedIn = useIsLoggedIn();
-  const { user } = useContext(AppContext)!;
+  const { user } = useContext(AppContext) as ContextValue;
   const [isLikeLoading, setIsLikeLoading] = useState<boolean>(false);
   const [isWatchlistLoading, setIsWatchlistLoading] = useState<boolean>(false);
 
-  const { data, isLoading, isFetching, isError, isSuccess } = useLists(user.id);
+  const {
+    data,
+    isLoading,
+    isFetching,
+    isError,
+    isSuccess,
+  }: UseQueryResult<PaginatedList<ListsType>, Error> = useLists(user!?.id);
 
   const handleLike = async () => {
     if (loggedIn) {
       setIsLikeLoading(true);
       try {
         const res = await addToFavorites(
-          user.id,
+          user!.id,
           isMovie ? "movie" : "tv",
           mediaId
         );
@@ -49,7 +59,7 @@ const ActionBar: React.FC<Props> = ({ mediaId, isMovie }) => {
       setIsWatchlistLoading(true);
       try {
         const res = await addToWatchlist(
-          user.id as unknown as string,
+          user?.id as unknown as string,
           isMovie ? "movie" : "tv",
           mediaId
         );

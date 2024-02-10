@@ -1,142 +1,134 @@
-import {
-  Box,
-  Button,
-  Grid,
-  Stack,
-  Tooltip,
-  Typography,
-  useTheme,
-} from "@mui/material";
-import { useContext, useState } from "react";
+import { Box, PaletteColorOptions, Stack, Tooltip } from "@mui/material";
+import { useContext, useMemo, useState } from "react";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import { useIsLoggedIn } from "@/hooks/useIsLoggedIn";
-import { ListsType } from "@/types/list";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { addMovieToList } from "@/api/lists";
-import { toast } from "react-toastify";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
-import AddToListDrawer from "@/components/movies/single-movie/add-to-list-dropdown";
 import { AppContext } from "@/context/AppContext";
+import { ContextValue } from "@/types/general";
 
 type Props = {
-  mediaId: string;
+  mediaId: string | number;
   isMovie: boolean;
 };
 
-const MovieCardDrawer: React.FC<Props> = ({ mediaId, isMovie }) => {
-  const theme = useTheme();
+const MovieCardToolTipAction: React.FC<Props> = ({ mediaId, isMovie }) => {
   const [isHover, setIsHover] = useState(false);
-  const { toggleListModal } = useContext(AppContext)!;
+  const { openListModal } = useContext(AppContext) as ContextValue;
 
   const loggedIn = useIsLoggedIn();
 
-  const handleAddToList = async (list: ListsType) => {
-    try {
-      if (isMovie) {
-        await addMovieToList(list.id, mediaId);
-        toast.success(`Added to ${list.name} list`);
-      } else {
-        // await addTVSerieToList(list.id, mediaId);
-        toast.error(`Sorry! Add TV Serie API to list isn't available :(`);
-      }
-    } catch (error: any) {
-      if (error.response.status === 403) {
-        toast.error(error.response.data.status_message);
-      } else toast.error("Failed to add to list");
+  const handleListModal = () => {
+    openListModal(mediaId, isMovie);
+  };
+
+  const BUTTON_ACTION_ITEMS = useMemo(
+    () => [
+      {
+        title: "Add to Favorites",
+        color: "error",
+        icon: FavoriteIcon,
+        onClick: null,
+      },
+      {
+        title: "Add to Watchlist",
+        color: "inherit",
+        icon: BookmarkAddIcon,
+        onClick: null,
+      },
+      {
+        title: "Add to List",
+        color: "primary",
+        icon: FormatListBulletedIcon,
+        onClick: handleListModal,
+      },
+    ],
+    []
+  );
+
+  const openTooltip = () => {
+    setIsHover(true);
+  };
+  const closeTooltip = () => {
+    setIsHover(false);
+  };
+  const handleOnClick = (item: (typeof BUTTON_ACTION_ITEMS)[0]) => {
+    if (item.onClick) {
+      item.onClick();
+      closeTooltip();
     }
   };
 
   return (
-    <Box
-      onMouseOver={() => {
-        setIsHover(true);
-      }}
-      onMouseLeave={() => setIsHover(false)}
-    >
-      <Tooltip
-        title={
-          <Box>
+    loggedIn && (
+      <Box onMouseOver={openTooltip} onMouseLeave={closeTooltip}>
+        <Tooltip
+          title={
             <Stack
-              direction={"row"}
-              gap={1}
-              justifyContent={"space-between"}
-              alignItems={"center"}
+              direction="row"
+              spacing={1}
+              justifyContent="space-between"
+              alignItems="center"
             >
-              <Tooltip title={"Add to Favorites"}>
-                <FavoriteIcon
-                  color="error"
-                  sx={{ fontSize: 28, cursor: "pointer" }}
-                  // onClick={handleLike}
-                />
-              </Tooltip>
-              <Tooltip title={"Add to Watchlist"}>
-                <BookmarkAddIcon
-                  sx={{ fontSize: 28, cursor: "pointer" }}
-                  // onClick={handleAddToWatchlist}
-                />
-              </Tooltip>
-              <Tooltip title={"Add to List"}>
-                <FormatListBulletedIcon
-                  color="primary"
-                  sx={{ fontSize: 28, cursor: "pointer" }}
-                  onClick={toggleListModal}
-                />
-              </Tooltip>
-              {/* <AddToListDrawer list={[]} mediaId={mediaId} isMovie /> */}
+              {BUTTON_ACTION_ITEMS.map((item) => {
+                return (
+                  <Tooltip title={item.title} key={item.title}>
+                    <item.icon
+                      color={item.color as keyof PaletteColorOptions}
+                      sx={{ fontSize: 28, cursor: "pointer" }}
+                      onClick={() => {
+                        handleOnClick(item);
+                      }}
+                    />
+                  </Tooltip>
+                );
+              })}
             </Stack>
-          </Box>
-        }
-        placement="left"
-        componentsProps={{
-          transition: "ease-in-out",
-          tooltip: {
-            sx: {
-              background: `${theme.palette.background.paper}`,
-              color: theme.palette.text.primary,
-              boxShadow: 2,
-              px: 2.5,
-              py: 1.5,
-              minWidth: 160,
-              borderRadius: 5,
+          }
+          placement="left"
+          componentsProps={{
+            transition: "ease-in-out",
+            tooltip: {
+              sx: {
+                bgcolor: "background.paper",
+                color: "text.primary",
+                boxShadow: 2,
+                px: 2.5,
+                py: 1.5,
+                minWidth: 160,
+                borderRadius: 2,
+                filter: (theme) =>
+                  `drop-shadow(0px 2px 8px ${theme.palette.primary.main} )`,
+              },
             },
-          },
-          arrow: {
-            sx: {
-              color: theme.palette.background.paper,
+            arrow: {
+              sx: {
+                color: "background.paper",
+              },
             },
-          },
-        }}
-        arrow
-        open={isHover}
-      >
-        <Box
-          sx={{
-            position: "absolute",
-            top: 6,
-            right: 6,
-            width: 16,
-            height: "auto",
-            borderRadius: "13px",
-            background: `${theme.palette.background.paper}`,
-            px: 0,
-            py: 0.5,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
           }}
+          arrow
+          open={isHover}
         >
-          <MoreVertIcon
-            color="primary"
+          <Box
             sx={{
-              fontSize: 32,
+              position: "absolute",
+              top: 6,
+              right: 6,
+              borderRadius: 2,
+              bgcolor: "background.paper",
+              display: "flex",
+              justifyContent: "center",
+              width: 16,
               cursor: "pointer",
             }}
-          />
-        </Box>
-      </Tooltip>
-    </Box>
+          >
+            <MoreVertIcon color="primary" fontSize="large" />
+          </Box>
+        </Tooltip>
+      </Box>
+    )
   );
 };
-export default MovieCardDrawer;
+export default MovieCardToolTipAction;

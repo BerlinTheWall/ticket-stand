@@ -3,6 +3,7 @@ import { simpleAxiosApi } from "../new-api";
 import { SingleListType } from "@/types/list";
 import { filteringMethod } from "@/utils/utils";
 
+
 export const getLists = async (
   accountId: number,
   page?: number
@@ -70,6 +71,7 @@ export const addMovieToList = async (
     throw error;
   }
 };
+
 
 export const addTVSerieToList = async (
   listId: number,

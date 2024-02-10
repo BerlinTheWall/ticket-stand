@@ -81,15 +81,13 @@ const GenresDrawer: React.FC = () => {
         arrow
         open={isHover}
       >
-        <span>
-          <Button
-            aria-haspopup="true"
-            sx={{ my: 2, display: "block", fontSize: "14px" }}
-            color="secondary"
-          >
-            DISCOVER
-          </Button>
-        </span>
+        <Button
+          aria-haspopup="true"
+          sx={{ my: 2, display: "block", fontSize: "14px" }}
+          color="secondary"
+        >
+          DISCOVER
+        </Button>
       </Tooltip>
     </Box>
   );
