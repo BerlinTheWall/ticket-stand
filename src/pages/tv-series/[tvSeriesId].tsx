@@ -12,6 +12,7 @@ import {
   getTVSerieComments,
   getTVSerieRecommendations,
   getTVSeriesSeasons,
+  getTvSeriesVideos,
 } from "@/api/tv-series";
 import SingleTVSerie from "@/components/tv-series/tv-series-card";
 import MovieSwiperMd from "@/components/swiper-slides/movie-swiper-md";
@@ -24,12 +25,14 @@ import makeQueryKey from "@/utils/make-query";
 import queryKeys from "@/constants/query-keys";
 import { useRouter } from "next/router";
 import { Grid } from "@mui/material";
+import { MovieVideo } from "@/types/movie";
 
 interface Props {
   tvSerie: TVSeries;
   credits: Credit;
   series: TVSeries[];
   comments: CommentType[];
+  trailer: MovieVideo;
 }
 
 interface QueryResult {
@@ -44,16 +47,18 @@ const TVSeriesPage: NextPage<Props> = ({
   credits,
   series,
   comments,
+  trailer,
 }) => {
+  const router = useRouter();
+
   const [selectedSeason, setSelectedSeason] = useState<number>(
     tvSerie.seasons[0].season_number
   );
-  const router = useRouter();
-
   const { data, isError, isLoading, isFetching }: QueryResult = useQuery({
     queryKey: [
       makeQueryKey(queryKeys.tvSeries, {
         id: router.query.tvSeriesId,
+        selectedSeason,
       }),
     ],
 
@@ -77,7 +82,7 @@ const TVSeriesPage: NextPage<Props> = ({
         flexDirection={"column"}
         gap={5}
       >
-        <SingleTVSerie tvSerie={tvSerie} />
+        <SingleTVSerie tvSerie={tvSerie} trailer={trailer} />
         <Credits casts={credits.cast} />
         <Box>
           <SeasonSwiper
@@ -109,9 +114,15 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const tvSerie = await getSingleTVSeries(tvSeriesId);
   const credits = await getSingleTVSerieCredits(tvSeriesId);
   const comments = await getTVSerieComments(tvSeriesId);
+  const videos = await getTvSeriesVideos(tvSeriesId);
+  let trailer;
+  videos.results.map((video) => {
+    if (video.type === "Trailer") trailer = video;
+  });
+  if (trailer === null || trailer === undefined) trailer = videos.results[0];
 
   await queryClient.prefetchQuery({
-    queryKey: makeQueryKey(queryKeys.list, {}),
+    queryKey: makeQueryKey(queryKeys.tvSeries, {}),
     queryFn: async () =>
       getTVSeriesSeasons(Number(tvSeriesId), 0).then(({ data }) => data),
   });
@@ -123,6 +134,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       credits,
       series: series.results,
       comments: comments.results,
+      trailer,
     },
   };
 };
