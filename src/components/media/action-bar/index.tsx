@@ -32,7 +32,7 @@ const ActionBar: React.FC<Props> = ({ mediaId, isMovie }) => {
     isFetching,
     isError,
     isSuccess,
-  }: UseQueryResult<PaginatedList<ListsType>, Error> = useLists(user!.id);
+  }: UseQueryResult<PaginatedList<ListsType>, Error> = useLists(user!?.id);
 
   const handleLike = async () => {
     if (loggedIn) {

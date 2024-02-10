@@ -37,7 +37,7 @@ const Lists: React.FC = () => {
   const router = useRouter();
   const { user } = useContext(AppContext) as ContextValue;
 
-  const { data, isLoading, isFetching, isError } = useLists(user!.id);
+  const { data, isLoading, isFetching, isError } = useLists(user!?.id);
 
   const handleChange = (event: any, value: number) => {
     router.replace({
