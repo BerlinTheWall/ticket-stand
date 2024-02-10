@@ -2,6 +2,7 @@ import { signOut } from "@/api/login";
 import { ACCOUNT_COOKIE, SESSION_ID_COOKIE } from "@/constants/cookie";
 import { LOGIN_PAGE, PROFILE_PAGE } from "@/constants/urls";
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 
 export const NAVBAR_HEIGHT = 85;
 export const NAVBAR_HEIGHT_MOBILE = 65;
@@ -20,7 +21,8 @@ export const PROFILE_ITEMS = [
     onClick: async () => {
       try {
         await signOut();
-        console.log("Sign out");
+        toast.success("Sign out");
+        // console.log("Sign out");
         Cookies.remove(SESSION_ID_COOKIE);
         Cookies.remove(ACCOUNT_COOKIE);
 
