@@ -33,22 +33,22 @@ export const PROFILE_ITEMS = [
     icon: PersonRoundedIcon,
     href: PROFILE_PAGE,
   },
-  {
-    title: "Logout",
-    icon: "",
-    isLink: false,
-    onClick: async () => {
-      try {
-        await signOut();
-        toast.success("Sign out");
-        // console.log("Sign out");
-        Cookies.remove(SESSION_ID_COOKIE);
-        Cookies.remove(ACCOUNT_COOKIE);
+  // {
+  //   title: "Logout",
+  //   icon: "",
+  //   isLink: false,
+  //   onClick: async () => {
+  //     try {
+  //       await signOut();
+  //       toast.success("Sign out");
+  //       // console.log("Sign out");
+  //       Cookies.remove(SESSION_ID_COOKIE);
+  //       Cookies.remove(ACCOUNT_COOKIE);
 
-        // setUser(null);
-      } catch (error) {
-        console.log(error);
-      }
-    },
-  },
+  //       // setUser(null);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   },
+  // },
 ];
