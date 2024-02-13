@@ -69,7 +69,6 @@ const Navbar: React.FC = () => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              pt: 1,
             }}
           >
             {/* Logo */}
@@ -82,8 +81,9 @@ const Navbar: React.FC = () => {
                 }
                 alt="Logo"
                 width={isMobile ? 70 : 150}
-                height={70}
+                height={isMobile ? 70 : 75}
                 priority
+                style={{ paddingTop: 5 }}
                 loading="eager"
               />
             </Link>
