@@ -37,7 +37,6 @@ const TrailerModal: React.FC<Props> = ({ url }) => {
         onClose={toggleModal}
       >
         <ReactPlayer
-          //   className="react-player"
           url={url}
           width="100%"
           height={"100%"}

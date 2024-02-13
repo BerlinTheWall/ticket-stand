@@ -46,7 +46,7 @@ export const getMoviesByGenre = async (
 };
 
 export const getSingleMovie = async (
-  movieId: any
+  movieId: string
 ): Promise<AxiosResponse<Movie>> => {
   try {
     const res = await simpleAxiosApi({
@@ -92,7 +92,7 @@ export const getMovieRecommendations = async (movieId: any): Promise<any> => {
 };
 
 export const getMovieComments = async (
-  movieId: any
+  movieId: string
 ): Promise<PaginatedList<Comment>> => {
   try {
     const res = await simpleAxiosApi({
@@ -128,7 +128,7 @@ export const createComment = async (
 };
 
 export const getMovieVideos = async (
-  movieId: any
+  movieId: string
 ): Promise<PaginatedList<MovieVideo>> => {
   try {
     const res = await simpleAxiosApi({
