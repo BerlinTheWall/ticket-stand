@@ -2,7 +2,7 @@ import { Palette } from "@mui/material";
 
 const primary: keyof Palette = "primary";
 const info: keyof Palette = "info";
-export const IMPLEMENTER = [
+export const IMPLEMENTERS = [
   {
     name: "Hooman Shahidi",
     linkedin: "https://www.linkedin.com/in/hooman-shahidi-5927b4103/",
