@@ -54,7 +54,7 @@ const MoviePage: NextPage<Props> = ({
 export default MoviePage;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const movieId = ctx.params!.movieId;
+  const movieId = ctx.params!.movieId as string;
   const { data: movies } = await getMovieRecommendations(movieId);
   const movie = await getSingleMovie(movieId);
   const credits = await getSingleMovieCredits(movieId);
