@@ -5,12 +5,14 @@ import Image from "next/image";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import { TVSeries } from "@/types/tv-series";
 import ActionBar from "@/components/media/action-bar";
+import { MovieVideo } from "@/types/movie";
 
 interface Props {
   tvSerie: TVSeries;
+  trailer: MovieVideo;
 }
 
-const SingleTVSerie: React.FC<Props> = ({ tvSerie }) => {
+const SingleTVSerie: React.FC<Props> = ({ tvSerie, trailer }) => {
   const isMobile = useMediaQuery("(min-width:600px)");
   const isTablet = useMediaQuery("(min-width:900px)");
 
@@ -154,7 +156,11 @@ const SingleTVSerie: React.FC<Props> = ({ tvSerie }) => {
               {tvSerie.overview}
             </Typography>
           </Box>
-          <ActionBar mediaId={tvSerie.id} isMovie={false} />
+          <ActionBar
+            mediaId={tvSerie.id}
+            isMovie={false}
+            url={`https://www.youtube.com/watch?v=${trailer.key}`}
+          />
         </Box>
       </Box>
     </Box>

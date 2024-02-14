@@ -1,6 +1,7 @@
 import { LOGIN_PAGE, PROFILE_PAGE } from "@/constants/urls";
 import { ButtonOwnProps } from "@mui/material";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
+import { toast } from "react-toastify";
 export const NAVBAR_HEIGHT = 85;
 export const NAVBAR_HEIGHT_MOBILE = 65;
 export const NEED_MARGIN_TOP_VALUE = "115px";
@@ -32,4 +33,22 @@ export const PROFILE_ITEMS = [
     icon: PersonRoundedIcon,
     href: PROFILE_PAGE,
   },
+  // {
+  //   title: "Logout",
+  //   icon: "",
+  //   isLink: false,
+  //   onClick: async () => {
+  //     try {
+  //       await signOut();
+  //       toast.success("Sign out");
+  //       // console.log("Sign out");
+  //       Cookies.remove(SESSION_ID_COOKIE);
+  //       Cookies.remove(ACCOUNT_COOKIE);
+
+  //       // setUser(null);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   },
+  // },
 ];

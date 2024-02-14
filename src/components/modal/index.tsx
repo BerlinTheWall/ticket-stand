@@ -9,9 +9,16 @@ type Props = {
   onClose: (value: boolean) => void;
   children: React.ReactNode;
   width?: number;
+  height?: number;
 };
 
-const CustomModal: React.FC<Props> = ({ open, onClose, width, children }) => {
+const CustomModal: React.FC<Props> = ({
+  open,
+  onClose,
+  width,
+  height,
+  children,
+}) => {
   const style = {
     position: "absolute",
     top: "50%",
@@ -33,7 +40,7 @@ const CustomModal: React.FC<Props> = ({ open, onClose, width, children }) => {
         closeAfterTransition
       >
         <Fade in={open} timeout={400}>
-          <Box sx={style} width={width} borderRadius={4}>
+          <Box sx={style} width={width} height={height} borderRadius={4}>
             {children}
           </Box>
         </Fade>

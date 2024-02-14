@@ -14,13 +14,15 @@ import { ContextValue } from "@/types/general";
 import { UseQueryResult } from "@tanstack/react-query";
 import { PaginatedList } from "@/types/paginated-list";
 import { ListsType } from "@/types/list";
+import TrailerModal from "@/components/movies/trailer-modal";
 
 type Props = {
   mediaId: number;
   isMovie: boolean;
+  url: string;
 };
 
-const ActionBar: React.FC<Props> = ({ mediaId, isMovie }) => {
+const ActionBar: React.FC<Props> = ({ mediaId, isMovie, url }) => {
   const loggedIn = useIsLoggedIn();
   const { user } = useContext(AppContext) as ContextValue;
   const [isLikeLoading, setIsLikeLoading] = useState<boolean>(false);
@@ -77,18 +79,7 @@ const ActionBar: React.FC<Props> = ({ mediaId, isMovie }) => {
   return (
     <Grid container spacing={2} mt={0.5}>
       <Grid item lg={3} md={4} sm={5.5} xs={6}>
-        <Button
-          variant="contained"
-          color="primary"
-          fullWidth
-          onClick={() => {}}
-          startIcon={<PlayCircleFilledIcon />}
-          sx={{
-            whiteSpace: "nowrap",
-          }}
-        >
-          Watch Trailer
-        </Button>
+        <TrailerModal url={url} />
       </Grid>
       <Grid item lg={3} md={4} sm={5.5} xs={6}>
         <Tooltip title={loggedIn ? "Add to Favorites" : "Login to proceed"}>

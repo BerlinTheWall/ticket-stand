@@ -150,7 +150,9 @@ export const NavbarSidebar: React.FC<NavbarSidebarProps> = ({
             ) : (
               <DarkModeIcon fontSize="small" />
             )}
-            <Typography>{mode} mode </Typography>
+            <Typography sx={{ textTransform: "capitalize" }}>
+              {mode} mode
+            </Typography>
           </Stack>
         </Stack>
       </Box>
