@@ -121,7 +121,7 @@ const SingleMovie: React.FC<Props> = ({ movie }) => {
               gap={1}
               mt={1}
               whiteSpace="nowrap"
-              sx={{ display: { xs: "none", md: "flex" } }}
+              display={"flex"}
             >
               <StarRateRoundedIcon sx={{ color: "warning.light", mb: 0.3 }} />
               <Typography fontWeight="bold">
@@ -150,7 +150,7 @@ const SingleMovie: React.FC<Props> = ({ movie }) => {
                 genres={convertMovieGenreIdArraysToNames(movie.genres)}
               />
             </Stack>
-            <Typography marginTop={1} fontSize="1rem">
+            <Typography marginTop={1} fontSize="1rem" className="truncate-2-4">
               {movie.overview}
             </Typography>
           </Box>

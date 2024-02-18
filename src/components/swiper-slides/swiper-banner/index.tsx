@@ -67,6 +67,7 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
                     left: { xs: 0, sm: 50 },
                     px: { xs: "10px", sm: "20px" },
                     py: { xs: "10px", sm: "10px" },
+                    pb: { sm: "20px" },
                     borderRadius: { sm: 2, xs: 0 },
                     bgcolor: (theme) => `${theme.palette.background.paper}d6`,
                     position: "absolute",

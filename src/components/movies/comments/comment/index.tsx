@@ -30,21 +30,32 @@ const Comment: React.FC<Props> = ({
         boxShadow: 5,
       }}
     >
-      <Stack direction={"row"} gap={2} alignItems={"center"}>
-        {avatarPath ? (
-          <Image
-            src={`https://image.tmdb.org/t/p/w45_and_h45_face${avatarPath}`}
-            alt={"profile image"}
-            width={40}
-            height={40}
-            style={{ borderRadius: 25 }}
-          />
-        ) : (
-          <Avatar alt="Profile Icon" />
-        )}
-        <Typography component={"h2"} sx={{ fontSize: 24, fontWeight: 800 }}>
-          {author}
-        </Typography>
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        gap={2}
+        alignItems={{ xs: "start", sm: "center" }}
+        px={{ xs: 3, sm: 0 }}
+      >
+        <Stack direction={"row"} gap={1}>
+          {avatarPath ? (
+            <Image
+              src={`https://image.tmdb.org/t/p/w45_and_h45_face${avatarPath}`}
+              alt={"profile image"}
+              width={40}
+              height={40}
+              style={{ borderRadius: 25 }}
+            />
+          ) : (
+            <Avatar alt="Profile Icon" />
+          )}
+          <Typography
+            component={"h2"}
+            sx={{ fontSize: 24, fontWeight: 800 }}
+            className="truncate-1"
+          >
+            {author}
+          </Typography>
+        </Stack>
         <Stack direction={"row"} alignItems={"end"} gap={1} height={30}>
           {rating && (
             <Stack direction={"row"}>

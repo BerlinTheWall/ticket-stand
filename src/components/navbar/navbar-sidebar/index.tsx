@@ -80,7 +80,7 @@ export const NavbarSidebar: React.FC<NavbarSidebarProps> = ({
   return (
     <Drawer elevation={0} anchor="left" open={open} onClose={onClose}>
       <Box role="menubar" width={200} p={1}>
-        <Stack spacing={1}>
+        <Stack spacing={0.6}>
           {DRAWER_ITEMS.map((item, i) => (
             <DrawerListItem key={i} item={item} />
           ))}
@@ -88,23 +88,24 @@ export const NavbarSidebar: React.FC<NavbarSidebarProps> = ({
           <Divider />
 
           {loggedIn ? (
-            PROFILE_ITEMS.map((item) => (
-              <Stack
-                key={item.title}
-                component={ButtonBase}
-                direction="row"
-                spacing={1}
-                sx={{
-                  ...DRAWER_ITEM_STYLE,
-                  justifyContent: "start",
-                }}
-              >
-                <item.icon fontSize="small" />
-                <Typography>{item.title} </Typography>
-              </Stack>
-            ))
+            <></>
           ) : (
-            <Stack direction="column-reverse" spacing={2}>
+            // PROFILE_ITEMS.map((item) => (
+            //   <Stack
+            //     key={item.title}
+            //     component={ButtonBase}
+            //     direction="row"
+            //     spacing={1}
+            //     sx={{
+            //       ...DRAWER_ITEM_STYLE,
+            //       justifyContent: "start",
+            //     }}
+            //   >
+            //     <item.icon fontSize="small" />
+            //     <Typography>{item.title} </Typography>
+            //   </Stack>
+            // ))
+            <Stack direction="column-reverse" spacing={1} py={0.5}>
               {AUTH_BUTTONS.map((btn) => {
                 return (
                   <Link href={btn.href} key={btn.title}>
@@ -117,23 +118,25 @@ export const NavbarSidebar: React.FC<NavbarSidebarProps> = ({
             </Stack>
           )}
 
-          {loggedIn && (
-            <Stack
-              onClick={logout}
-              component={ButtonBase}
-              direction="row"
-              spacing={1}
-              sx={{
-                ...DRAWER_ITEM_STYLE,
-                justifyContent: "start",
-              }}
-            >
-              <LogoutRoundedIcon fontSize="small" />
+          {/* {loggedIn && (
+            <>
+              <Stack
+                onClick={logout}
+                component={ButtonBase}
+                direction="row"
+                spacing={1}
+                sx={{
+                  ...DRAWER_ITEM_STYLE,
+                  justifyContent: "start",
+                }}
+              >
+                <LogoutRoundedIcon fontSize="small" />
 
-              <Typography>Logout</Typography>
-            </Stack>
-          )}
-          <Divider />
+                <Typography>Logout</Typography>
+              </Stack>
+              <Divider />
+            </>
+          )} */}
 
           <Stack
             onClick={toggleTheme}
@@ -150,7 +153,9 @@ export const NavbarSidebar: React.FC<NavbarSidebarProps> = ({
             ) : (
               <DarkModeIcon fontSize="small" />
             )}
-            <Typography>{mode} mode </Typography>
+            <Typography sx={{ textTransform: "capitalize" }}>
+              {mode} mode
+            </Typography>
           </Stack>
         </Stack>
       </Box>
@@ -173,7 +178,7 @@ const DrawerListItem: React.FC<{ item: DrawerListItemProps }> = ({ item }) => {
       >
         <Stack direction="row" alignItems="center" spacing={1}>
           {item.icon}
-          <Typography>{item.name} </Typography>
+          <Typography>{item.name}</Typography>
         </Stack>
         {item?.items && (
           <ChevronRightIcon
@@ -185,7 +190,7 @@ const DrawerListItem: React.FC<{ item: DrawerListItemProps }> = ({ item }) => {
         )}
       </Stack>
       {item?.items && (
-        <Collapse in={openCollapse} sx={{ mt: 0 }}>
+        <Collapse in={openCollapse}>
           <Stack spacing={1} m={1} ml={2}>
             {item.items?.map((item: any) => {
               return (
@@ -199,7 +204,7 @@ const DrawerListItem: React.FC<{ item: DrawerListItemProps }> = ({ item }) => {
                       transition: "all 0.3s",
                       borderTopRightRadius: 5,
                       borderBottomRightRadius: 5,
-                      fontWeight: 100,
+                      fontWeight: 400,
                       ":hover": {
                         bgcolor: "primary.main",
                         borderLeftColor: "warning.main",
