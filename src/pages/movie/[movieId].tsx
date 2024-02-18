@@ -1,10 +1,11 @@
 import Box from "@mui/material/Box";
 import MainLayout from "@/layout/main-layout";
 import { GetServerSideProps, NextPage } from "next";
-import { Movie } from "@/types/movie";
+import { Movie, MovieVideo } from "@/types/movie";
 import {
   getMovieComments,
   getMovieRecommendations,
+  getMovieVideos,
   getSingleMovie,
   getSingleMovieCredits,
 } from "@/api/movies";
@@ -20,9 +21,16 @@ interface Props {
   credits: Credit;
   movies: Movie[];
   comments: CommentType[];
+  trailer: MovieVideo;
 }
 
-const MoviePage: NextPage<Props> = ({ movie, credits, movies, comments }) => {
+const MoviePage: NextPage<Props> = ({
+  movie,
+  credits,
+  movies,
+  comments,
+  trailer,
+}) => {
   return (
     <MainLayout>
       <Box
@@ -33,7 +41,7 @@ const MoviePage: NextPage<Props> = ({ movie, credits, movies, comments }) => {
         flexDirection={"column"}
         gap={5}
       >
-        <SingleMovie movie={movie} />
+        <SingleMovie movie={movie} trailer={trailer} />
         <Credits casts={credits.cast} />
         <MovieSwiperSm movies={movies} title="Recommended for you" />
         <Comments comments={comments} />
@@ -44,17 +52,23 @@ const MoviePage: NextPage<Props> = ({ movie, credits, movies, comments }) => {
 export default MoviePage;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const movieId = ctx.params!.movieId;
+  const movieId = ctx.params!.movieId as string;
   const { data: movies } = await getMovieRecommendations(movieId);
   const movie = await getSingleMovie(movieId);
   const credits = await getSingleMovieCredits(movieId);
   const comments = await getMovieComments(movieId);
+  const videos = await getMovieVideos(movieId);
+  let trailer;
+  videos.results.map((video) => {
+    if (video.type === "Trailer") trailer = video;
+  });
   return {
     props: {
       movie,
       credits,
       movies: movies.results,
       comments: comments.results,
+      trailer,
     },
   };
 };

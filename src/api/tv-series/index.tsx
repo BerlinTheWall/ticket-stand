@@ -1,4 +1,4 @@
-import { Movie } from "@/types/movie";
+import { MovieVideo } from "@/types/movie";
 import { simpleAxiosApi } from "../new-api";
 import { AxiosResponse } from "axios";
 import { filteringMethod } from "@/utils/utils";
@@ -85,7 +85,7 @@ export const getSingleTVSerieCredits = async (seriesId: any): Promise<any> => {
 };
 
 export const getTVSerieRecommendations = async (
-  seriesId: any
+  seriesId: string
 ): Promise<any> => {
   try {
     const res = await simpleAxiosApi({
@@ -98,11 +98,24 @@ export const getTVSerieRecommendations = async (
 };
 
 export const getTVSerieComments = async (
-  seriesId: any
+  seriesId: string
 ): Promise<PaginatedList<Comment>> => {
   try {
     const res = await simpleAxiosApi({
       url: `/tv/${seriesId}/reviews`,
+    });
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getTvSeriesVideos = async (
+  seriesId: string
+): Promise<PaginatedList<MovieVideo>> => {
+  try {
+    const res = await simpleAxiosApi({
+      url: `/tv/${seriesId}/season/1/videos`,
     });
     return res.data;
   } catch (error) {

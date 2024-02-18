@@ -16,3 +16,13 @@ export type Movie = {
   runtime: number;
   media_type: profileListType;
 };
+
+export type MovieVideo = {
+  name: string;
+  key: string;
+  site: string;
+  type: string;
+  official: boolean;
+  published_at: string;
+  id: string;
+};

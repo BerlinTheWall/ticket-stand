@@ -1,7 +1,7 @@
 import { Box, Divider, Stack, Typography, useMediaQuery } from "@mui/material";
 import { convertMovieGenreIdArraysToNames } from "@/utils/genre-converter";
 import GenresList from "@/components/swiper-slides/genres-list";
-import { Movie } from "@/types/movie";
+import { Movie, MovieVideo } from "@/types/movie";
 import Image from "next/image";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import { convertMinuteToHour } from "@/utils/movie-length-converter";
@@ -9,12 +9,12 @@ import ActionBar from "@/components/media/action-bar";
 
 interface Props {
   movie: Movie;
+  trailer: MovieVideo;
 }
 
-const SingleMovie: React.FC<Props> = ({ movie }) => {
+const SingleMovie: React.FC<Props> = ({ movie, trailer }) => {
   const isMobile = useMediaQuery("(min-width:600px)");
   const isTablet = useMediaQuery("(min-width:900px)");
-
   return (
     <Box position="relative" height={isTablet ? 620 : 480}>
       <Box
@@ -154,7 +154,11 @@ const SingleMovie: React.FC<Props> = ({ movie }) => {
               {movie.overview}
             </Typography>
           </Box>
-          <ActionBar mediaId={movie.id} isMovie />
+          <ActionBar
+            mediaId={movie.id}
+            url={`https://www.youtube.com/watch?v=${trailer.key}`}
+            isMovie
+          />
         </Box>
       </Box>
     </Box>

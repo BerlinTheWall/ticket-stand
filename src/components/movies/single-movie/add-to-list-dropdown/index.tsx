@@ -52,7 +52,7 @@ const AddToListDrawer: React.FC<Props> = ({ list, mediaId, isMovie }) => {
       <Tooltip
         title={
           <Box>
-            <Grid spacing={0}>
+            <Grid>
               <Typography
                 component={"h2"}
                 fontSize={20}
