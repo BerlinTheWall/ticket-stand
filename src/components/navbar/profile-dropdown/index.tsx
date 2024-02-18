@@ -61,13 +61,14 @@ const ProfileDropdown: React.FC = () => {
         PaperProps={{
           elevation: 0,
           sx: {
+            borderRadius: 2,
             minWidth: 120,
             px: 2,
             display: "grid",
             overflow: "visible",
             filter: (theme) =>
-              `drop-shadow(0px 2px 8px ${theme.palette.primary.main})`,
-            mt: 1.5,
+              `drop-shadow(0px 2px 6px ${theme.palette.primary.main})`,
+            mt: 2,
             "& .MuiAvatar-root": {
               width: 32,
               height: 32,
