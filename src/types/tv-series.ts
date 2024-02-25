@@ -2,6 +2,7 @@ import { profileListType } from "./general";
 import { Genre } from "./genres";
 
 export type TVSeries = {
+  release_date: any;
   id: number;
   name: string;
   original_name: string;
