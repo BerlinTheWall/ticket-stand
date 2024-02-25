@@ -7,29 +7,46 @@ import { Comment } from "@/types/comment";
 
 export const getPopularMovies = async (
   filters = {}
-): Promise<AxiosResponse<PaginatedList<Movie>>> => {
+): Promise<PaginatedList<Movie>> => {
   const queryParams = filteringMethod(filters);
   try {
     const res = await simpleAxiosApi({
       url: `/movie/popular${queryParams}`,
     });
-    return res;
+    return res.data;
   } catch (error) {
     throw error;
   }
 };
 
-// export const getTrendingMovies = async (): Promise<AxiosResponse<Movie>> => {
-//   const queryParams = filteringMethod(filters);
-//   try {
-//     const res = await simpleAxiosApi({
-//       url: `/movie/popular${queryParams}`,
-//     });
-//     return res.data.results;
-//   } catch (error) {
-//     throw error;
-//   }
-// };
+export const getTrendingMovies = async (
+  filters = {}
+): Promise<PaginatedList<Movie>> => {
+  const queryParams = filteringMethod(filters);
+  try {
+    const res = await simpleAxiosApi({
+      url: `trending/movie/week${queryParams}`,
+    });
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getTopRatedMovies = async (
+  filters = {}
+): Promise<PaginatedList<Movie>> => {
+  const queryParams = filteringMethod(filters);
+  try {
+    const res = await simpleAxiosApi({
+      url: `/movie/top_rated${queryParams}`,
+    });
+    console.log(res.data);
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const getMoviesByGenre = async (
   genre = {}

@@ -8,29 +8,45 @@ import { Season, TVSeries } from "@/types/tv-series";
 
 export const getPopularTVSeries = async (
   filters = {}
-): Promise<AxiosResponse<PaginatedList<TVSeries>>> => {
+): Promise<PaginatedList<TVSeries>> => {
   const queryParams = filteringMethod(filters);
   try {
     const res = await simpleAxiosApi({
       url: `/tv/popular${queryParams}`,
     });
-    return res;
+    return res.data;
   } catch (error) {
     throw error;
   }
 };
 
-// export const getTrendingMovies = async (): Promise<AxiosResponse<Movie>> => {
-//   const queryParams = filteringMethod(filters);
-//   try {
-//     const res = await simpleAxiosApi({
-//       url: `/movie/popular${queryParams}`,
-//     });
-//     return res.data.results;
-//   } catch (error) {
-//     throw error;
-//   }
-// };
+export const getTrendingTVSeries = async (
+  filters = {}
+): Promise<PaginatedList<TVSeries>> => {
+  const queryParams = filteringMethod(filters);
+  try {
+    const res = await simpleAxiosApi({
+      url: `trending/tv/week${queryParams}`,
+    });
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getTopRatedTVSeries = async (
+  filters = {}
+): Promise<PaginatedList<TVSeries>> => {
+  const queryParams = filteringMethod(filters);
+  try {
+    const res = await simpleAxiosApi({
+      url: `/tv/top_rated${queryParams}`,
+    });
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const getTVSeriesByGenre = async (
   genre = {}
