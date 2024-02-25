@@ -26,29 +26,22 @@ export const convertMovieGenreIdArraysToNames = (genres: Genre[]): string[] => {
       }
     }
   });
-  // for (const key in MovieGenre) {
-  //   if (MovieGenre[key].id === genreIds.) {
-  //     genreNames.push(MovieGenre[key].name);
-  //     break;
-
-  // }
-  // }
   return genreNames.slice(0, 2);
 };
 
 // convert array of genre ids (Series - TV Shows) to their genre name and return the fist two item
-// export const convertSeriesGenreIdsToNames = (genreIds: number[]): string[] => {
-//   const genreNames: string[] = [];
-//   for (const id of genreIds) {
-//     for (const key in SeriesGenre) {
-//       if (SeriesGenre[key].id === id) {
-//         genreNames.push(key);
-//         break;
-//       }
-//     }
-//   }
-//   return genreNames.slice(0, 2);
-// };
+export const convertSeriesGenreIdsToNames = (genreIds: number[]): string[] => {
+  const genreNames: string[] = [];
+  for (const id of genreIds) {
+    for (const key in TVSeriesGenre) {
+      if (TVSeriesGenre[key].id === id) {
+        genreNames.push(TVSeriesGenre[key].name);
+        break;
+      }
+    }
+  }
+  return genreNames.slice(0, 2);
+};
 
 export const convertTVSeriesGenreIdArraysToNames = (
   genres: Genre[]
