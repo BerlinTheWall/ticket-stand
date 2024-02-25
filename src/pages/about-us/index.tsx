@@ -1,21 +1,10 @@
 import MainLayout from "@/layout/main-layout";
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Palette,
-  PaletteColor,
-  Paper,
-  Stack,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Box, Paper, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import TelegramIcon from "@mui/icons-material/Telegram";
-import { IMPLEMENTER } from "@/constants/implementers";
+import { IMPLEMENTERS } from "@/constants/implementers";
 import Link from "next/link";
 import { MouseEventHandler, useState } from "react";
 import { NextPage } from "next";
@@ -33,17 +22,17 @@ const SOCIAL_STYLE = {
 const AboutUs: NextPage = () => {
   return (
     <MainLayout>
-      <Typography pt={5} textAlign="center" variant="h3">
+      <Typography pt={5} textAlign="center" variant="h2" fontWeight={"bold"}>
         About Us
       </Typography>
       <Stack
         direction="row"
         flexWrap="wrap"
         gap={5}
-        justifyContent={{ sm: "start", xs: "center" }}
-        p={10}
+        justifyContent={"center"}
+        p={5}
       >
-        {IMPLEMENTER.map((item) => {
+        {IMPLEMENTERS.map((item) => {
           return <ImplementerCard key={item.name} item={item} />;
         })}
       </Stack>
@@ -52,7 +41,7 @@ const AboutUs: NextPage = () => {
 };
 
 type ImplementerCardProps = {
-  item: (typeof IMPLEMENTER)[0];
+  item: (typeof IMPLEMENTERS)[0];
 };
 
 const ImplementerCard = ({ item }: ImplementerCardProps) => {
@@ -73,6 +62,7 @@ const ImplementerCard = ({ item }: ImplementerCardProps) => {
         width: 200,
         height: 280,
         perspective: 1000,
+        cursor: "pointer",
       }}
       onClick={toggleShowDesc}
     >
@@ -120,8 +110,8 @@ const ImplementerCard = ({ item }: ImplementerCardProps) => {
           >
             <Image fill src={item.img} alt={item.name} />
           </Box>
-          <Box mt={7} p={2} textAlign="center">
-            <Typography component="h1" fontSize={20} fontWeight={700}>
+          <Box mt={6.5} p={2} textAlign="center">
+            <Typography component="h1" fontSize={22} fontWeight={700}>
               {item.name}
             </Typography>
             <Typography

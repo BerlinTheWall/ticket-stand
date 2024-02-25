@@ -14,6 +14,9 @@ const MainLayout: React.FC<Props> = ({ children, needMargin = false }) => {
   return (
     <Box
       sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
         bgcolor: "background.default",
         minHeight: "100vh",
         color: "text.primary",
@@ -23,7 +26,9 @@ const MainLayout: React.FC<Props> = ({ children, needMargin = false }) => {
       <Box component={"main"} mt={needMargin ? NEED_MARGIN_TOP_VALUE : 0}>
         {children}
       </Box>
-      <Footer />
+      <Box>
+        <Footer />
+      </Box>
       <AddToListModal />
     </Box>
   );
