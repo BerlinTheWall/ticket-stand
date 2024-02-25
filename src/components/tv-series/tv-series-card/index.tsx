@@ -9,7 +9,7 @@ import { MovieVideo } from "@/types/movie";
 
 interface Props {
   tvSerie: TVSeries;
-  trailer: MovieVideo;
+  trailer?: MovieVideo;
 }
 
 const SingleTVSerie: React.FC<Props> = ({ tvSerie, trailer }) => {
@@ -90,7 +90,7 @@ const SingleTVSerie: React.FC<Props> = ({ tvSerie, trailer }) => {
           >
             <Image
               src={"https://www.themoviedb.org/t/p/w500/" + tvSerie.poster_path}
-              alt={tvSerie.original_name}
+              alt={tvSerie.name}
               width={100}
               height={100}
               style={{
@@ -115,7 +115,7 @@ const SingleTVSerie: React.FC<Props> = ({ tvSerie, trailer }) => {
               className="truncate-2-4"
               component="h1"
             >
-              {tvSerie.original_name}
+              {tvSerie.name}
             </Typography>
             <Stack
               direction="row"
@@ -159,7 +159,9 @@ const SingleTVSerie: React.FC<Props> = ({ tvSerie, trailer }) => {
           <ActionBar
             mediaId={tvSerie.id}
             isMovie={false}
-            url={`https://www.youtube.com/watch?v=${trailer.key}`}
+            url={
+              trailer ? `https://www.youtube.com/watch?v=${trailer.key}` : ""
+            }
           />
         </Box>
       </Box>

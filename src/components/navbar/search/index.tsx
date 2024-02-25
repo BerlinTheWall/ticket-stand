@@ -164,10 +164,10 @@ export const NavbarSearch = () => {
                                 searchResult.poster_path
                               }
                               alt={
-                                searchResult.original_title
-                                  ? searchResult.original_title
-                                  : searchResult.original_name
-                                  ? searchResult.original_name
+                                searchResult.title
+                                  ? searchResult.title
+                                  : searchResult.name
+                                  ? searchResult.name
                                   : "unknown"
                               }
                               fill
@@ -180,8 +180,7 @@ export const NavbarSearch = () => {
                               fontWeight="bold"
                               variant="body2"
                             >
-                              {searchResult.original_title ??
-                                searchResult.original_name}
+                              {searchResult.title ?? searchResult.name}
                             </Typography>
                             <Stack
                               fontSize={14}

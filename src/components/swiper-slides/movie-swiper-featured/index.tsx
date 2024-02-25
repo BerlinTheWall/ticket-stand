@@ -42,7 +42,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
             "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
             selectedMovie.backdrop_path
           }
-          alt={selectedMovie.original_title}
+          alt={selectedMovie.title}
           width={10000}
           height={100}
           className="swiper-featured-image"
@@ -90,7 +90,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
           className="truncate-2-4"
           component="h1"
         >
-          {selectedMovie.original_title}
+          {selectedMovie.title}
         </Typography>
         <Stack
           direction="row"
@@ -126,7 +126,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
             {selectedMovie.overview}
           </Typography>
         )}
-        <Stack
+        {/* <Stack
           direction="row"
           alignItems="center"
           gap={2}
@@ -154,7 +154,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
           >
             <BookmarkBorderIcon style={{ marginRight: "8px" }} /> Add Watchlist
           </Button>
-        </Stack>
+        </Stack> */}
       </Box>
       <Box
         sx={{
@@ -245,7 +245,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
                     src={
                       "https://www.themoviedb.org/t/p/w500/" + movie.poster_path
                     }
-                    alt={movie.original_title}
+                    alt={movie.title}
                     width={100}
                     height={100}
                     style={{
@@ -270,9 +270,10 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
                     }}
                   />
                   <MovieCardDetail
-                    title={movie.original_title}
+                    title={movie.title}
                     rating={movie.vote_average}
                     genres={movie.genre_ids}
+                    isMovie={false}
                   />
                 </Box>
               </SwiperSlide>

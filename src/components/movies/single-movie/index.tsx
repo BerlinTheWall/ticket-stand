@@ -88,7 +88,7 @@ const SingleMovie: React.FC<Props> = ({ movie, trailer }) => {
           >
             <Image
               src={"https://www.themoviedb.org/t/p/w500/" + movie.poster_path}
-              alt={movie.original_title}
+              alt={movie.title}
               width={100}
               height={100}
               style={{
@@ -113,7 +113,7 @@ const SingleMovie: React.FC<Props> = ({ movie, trailer }) => {
               className="truncate-2-4"
               component="h1"
             >
-              {movie.original_title}
+              {movie.title}
             </Typography>
             <Stack
               direction="row"

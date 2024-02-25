@@ -50,7 +50,7 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
                     "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
                     movie.backdrop_path
                   }
-                  alt={movie.original_title}
+                  alt={movie.title}
                   width={10000}
                   height={100}
                   priority={true}
