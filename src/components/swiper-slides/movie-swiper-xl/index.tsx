@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css/navigation";
 import Image from "next/image";
@@ -11,13 +11,18 @@ import GenresList from "../genres-list";
 import { convertMovieGenreIdsToNames } from "@/utils/genre-converter";
 import Link from "next/link";
 import { SINGLE_MOVIE_PAGE } from "@/constants/urls";
+import SeeMoreSlide from "../see-more-slide";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 interface Props {
   title: string;
   movies: Movie[];
+  href: string;
 }
 
-const MovieSwiperXl: React.FC<Props> = ({ title, movies }) => {
+const MovieSwiperXl: React.FC<Props> = ({ title, movies, href }) => {
+  const theme = useTheme();
+
   return (
     <Box sx={{ paddingX: { sm: 5 } }}>
       <Typography
@@ -114,7 +119,7 @@ const MovieSwiperXl: React.FC<Props> = ({ title, movies }) => {
                         "https://www.themoviedb.org/t/p/w500/" +
                         movie.poster_path
                       }
-                      alt={movie.original_title}
+                      alt={movie.title}
                       width={100}
                       height={100}
                       style={{
@@ -154,7 +159,7 @@ const MovieSwiperXl: React.FC<Props> = ({ title, movies }) => {
                         component="h3"
                         className="truncate-2"
                       >
-                        {movie.original_title}
+                        {movie.title}
                       </Typography>
                       <GenresList
                         genres={convertMovieGenreIdsToNames(movie.genre_ids)}
@@ -165,6 +170,51 @@ const MovieSwiperXl: React.FC<Props> = ({ title, movies }) => {
               </SwiperSlide>
             );
           })}
+          {/* <SeeMoreSlide href={href} /> */}
+          <SwiperSlide
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              height: "100%",
+              alignSelf: "center",
+            }}
+          >
+            <Link
+              href={href}
+              style={{
+                width: "100%",
+              }}
+            >
+              <Box
+                width={"65%"}
+                py={0.5}
+                px={1}
+                position={"relative"}
+                color="text.primary"
+                border="1px solid"
+                borderColor="primary.dark"
+                borderRadius={4}
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                gap={0}
+                sx={{
+                  bgcolor: `${theme.palette.primary.dark}15`,
+                  transition: "background-color 0.3s",
+                  "&:hover": {
+                    bgcolor: `${theme.palette.primary.dark}50`,
+                  },
+                }}
+              >
+                <Typography sx={{ fontSize: 16, color: "primary.dark" }}>
+                  See More
+                </Typography>
+                <ArrowForwardIosIcon
+                  sx={{ color: "primary.dark", fontSize: 18 }}
+                />
+              </Box>
+            </Link>
+          </SwiperSlide>
         </Swiper>
       </Box>
     </Box>

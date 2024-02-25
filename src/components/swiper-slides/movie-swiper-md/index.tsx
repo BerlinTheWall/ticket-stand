@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css/navigation";
 import Image from "next/image";
@@ -12,13 +12,16 @@ import Link from "next/link";
 import { SINGLE_MOVIE_PAGE, SINGLE_TVSERIES_PAGE } from "@/constants/urls";
 import { TVSeries } from "@/types/tv-series";
 import { isMovie } from "@/utils/check-is-movie";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 interface Props {
   title: string;
   items: (Movie | TVSeries)[];
+  href?: string;
 }
 
-const MovieSwiperMd: React.FC<Props> = ({ title, items }) => {
+const MovieSwiperMd: React.FC<Props> = ({ title, items, href }) => {
+  const theme = useTheme();
   return (
     <Box sx={{ paddingX: { sm: 5 } }}>
       <Typography
@@ -104,9 +107,7 @@ const MovieSwiperMd: React.FC<Props> = ({ title, items }) => {
                         "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
                         item.backdrop_path
                       }
-                      alt={
-                        isMovie(item) ? item.original_title : item.original_name
-                      }
+                      alt={isMovie(item) ? item.title : item.name}
                       width={1000}
                       height={100}
                       style={{
@@ -132,10 +133,9 @@ const MovieSwiperMd: React.FC<Props> = ({ title, items }) => {
                       }}
                     />
                     <MovieCardDetail
+                      isMovie={isMovie(item)}
                       isMd
-                      title={
-                        isMovie(item) ? item.original_title : item.original_name
-                      }
+                      title={isMovie(item) ? item.title : item.name}
                       rating={item.vote_average}
                       genres={item.genre_ids}
                     />
@@ -144,6 +144,52 @@ const MovieSwiperMd: React.FC<Props> = ({ title, items }) => {
               </SwiperSlide>
             );
           })}
+          {href && (
+            <SwiperSlide
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                height: "100%",
+                alignSelf: "center",
+              }}
+            >
+              <Link
+                href={href}
+                style={{
+                  width: "100%",
+                }}
+              >
+                <Box
+                  width={"65%"}
+                  py={0.5}
+                  px={1}
+                  position={"relative"}
+                  color="text.primary"
+                  border="1px solid"
+                  borderColor="primary.dark"
+                  borderRadius={4}
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  gap={0}
+                  sx={{
+                    bgcolor: `${theme.palette.primary.dark}15`,
+                    transition: "background-color 0.3s",
+                    "&:hover": {
+                      bgcolor: `${theme.palette.primary.dark}50`,
+                    },
+                  }}
+                >
+                  <Typography sx={{ fontSize: 16, color: "primary.dark" }}>
+                    See More
+                  </Typography>
+                  <ArrowForwardIosIcon
+                    sx={{ color: "primary.dark", fontSize: 18 }}
+                  />
+                </Box>
+              </Link>
+            </SwiperSlide>
+          )}
         </Swiper>
       </Box>
     </Box>
