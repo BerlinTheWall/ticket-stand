@@ -41,7 +41,6 @@ export const getTopRatedMovies = async (
     const res = await simpleAxiosApi({
       url: `/movie/top_rated${queryParams}`,
     });
-    console.log(res.data);
     return res.data;
   } catch (error) {
     throw error;
