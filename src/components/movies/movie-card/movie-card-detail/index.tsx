@@ -1,15 +1,24 @@
 import { Box, Divider, Stack, Typography } from "@mui/material";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
-import { convertMovieGenreIdsToNames } from "@/utils/genre-converter";
+import {
+  convertMovieGenreIdsToNames,
+  convertSeriesGenreIdsToNames,
+} from "@/utils/genre-converter";
 import GenresList from "@/components/swiper-slides/genres-list";
 
 type Props = {
   title: string;
   rating: number;
   genres: number[];
+  isMovie: boolean;
 };
 
-const MovieCardDetail: React.FC<Props> = ({ title, rating, genres }) => {
+const MovieCardDetail: React.FC<Props> = ({
+  title,
+  rating,
+  genres,
+  isMovie,
+}) => {
   return (
     <Box
       sx={{
@@ -41,7 +50,13 @@ const MovieCardDetail: React.FC<Props> = ({ title, rating, genres }) => {
           flexItem
           sx={{ borderRightWidth: "2px", color: "gray" }}
         />
-        <GenresList genres={convertMovieGenreIdsToNames(genres)} />
+        <GenresList
+          genres={
+            isMovie
+              ? convertMovieGenreIdsToNames(genres)
+              : convertSeriesGenreIdsToNames(genres)
+          }
+        />
       </Stack>
     </Box>
   );

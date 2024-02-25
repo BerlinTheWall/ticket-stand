@@ -56,7 +56,7 @@ const MovieListPage = () => {
             <MovieCardSkeletonLoader />
           ) : (
             data?.results?.map((movie: Movie) => {
-              return <MovieCard key={movie.id} movie={movie} />;
+              return <MovieCard key={movie.id} media={movie} />;
             })
           )}
         </Grid>

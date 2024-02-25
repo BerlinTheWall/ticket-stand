@@ -4,6 +4,8 @@ import Link from "next/link";
 import { SINGLE_MOVIE_PAGE, SINGLE_TVSERIES_PAGE } from "@/constants/urls";
 import { Media } from "@/types/media";
 import MediaCardDetail from "@/components/media/media-card/media-card-detail";
+import MovieCardToolTipAction from "@/components/movies/movie-card/movie-card-dropdown";
+import { isMovie } from "@/utils/check-is-movie";
 
 type Props = {
   media: Media;
@@ -14,7 +16,7 @@ const MediaCard: React.FC<Props> = ({ media }) => {
   const isMobile = useMediaQuery("(min-width:600px)");
 
   const linkHref =
-    media.media_type === "movie" || media.original_title !== undefined
+    media.media_type === "movie" || media.title !== undefined
       ? `${SINGLE_MOVIE_PAGE}/${media.id}`
       : `${SINGLE_TVSERIES_PAGE}/${media.id}`;
 
@@ -30,11 +32,7 @@ const MediaCard: React.FC<Props> = ({ media }) => {
         <Link href={linkHref}>
           <Image
             src={"https://www.themoviedb.org/t/p/w500/" + media.poster_path}
-            alt={
-              media.media_type === "movie"
-                ? media.original_title!
-                : media.original_name!
-            }
+            alt={media.media_type === "movie" ? media.title! : media.name!}
             width={1000}
             height={100}
             style={{
@@ -61,14 +59,15 @@ const MediaCard: React.FC<Props> = ({ media }) => {
           />
           <MediaCardDetail
             title={
-              media.media_type === "movie" || media.original_title !== undefined
-                ? media.original_title!
-                : media.original_name!
+              media.media_type === "movie" || media.title !== undefined
+                ? media.title!
+                : media.name!
             }
             rating={media.vote_average}
             genres={media.genre_ids}
           />
         </Link>
+        <MovieCardToolTipAction mediaId={media.id} isMovie={isMovie(media)} />
       </Box>
     </Grid>
   );

@@ -1,68 +1,20 @@
-import {
-  Box,
-  Button,
-  Grid,
-  Stack,
-  Tooltip,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Box, Grid, useMediaQuery } from "@mui/material";
 import Image from "next/image";
 import { Movie } from "@/types/movie";
 import MovieCardDetail from "./movie-card-detail";
 import Link from "next/link";
-import { SINGLE_MOVIE_PAGE } from "@/constants/urls";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
-import { addToFavorites, addToWatchlist } from "@/api/profile";
-import { useContext } from "react";
-import { AppContext } from "@/context/AppContext";
-import { toast } from "react-toastify";
-import { useIsLoggedIn } from "@/hooks/useIsLoggedIn";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { SINGLE_MOVIE_PAGE, SINGLE_TVSERIES_PAGE } from "@/constants/urls";
 import MovieCardToolTipAction from "./movie-card-dropdown";
-import { ContextValue } from "@/types/general";
+import { isMovie } from "@/utils/check-is-movie";
+import { TVSeries } from "@/types/tv-series";
 
 type Props = {
-  movie: Movie;
+  media: Movie | TVSeries;
 };
 
-const MovieCard: React.FC<Props> = ({ movie }) => {
+const MovieCard: React.FC<Props> = ({ media }) => {
   const isMobileXs = useMediaQuery("(max-width:380px)");
   const isMobile = useMediaQuery("(min-width:600px)");
-  const theme = useTheme();
-
-  const { user } = useContext(AppContext) as ContextValue;
-  const loggedIn = useIsLoggedIn();
-
-  const handleLike = async () => {
-    try {
-      const res = await addToFavorites(user!.id, "movie", movie.id);
-      toast.success("Added to Favorites!");
-      return res;
-    } catch (error) {
-      toast.error("Error in adding to Favorites!");
-      return error;
-    }
-  };
-
-  const handleAddToWatchlist = async () => {
-    if (loggedIn) {
-      // setIsWatchlistLoading(true);
-      try {
-        const res = await addToWatchlist(user!.id, "movie", movie.id);
-        toast.success("Added to Watchlist!");
-        // setIsWatchlistLoading(false);
-        return res;
-      } catch (error) {
-        toast.error("Error in adding to Watchlist!");
-        // setIsWatchlistLoading(false);
-        return error;
-      }
-    }
-  };
-
   return (
     <Grid item xs={12} sm={6} md={3} lg={2.4}>
       <Box
@@ -72,10 +24,16 @@ const MovieCard: React.FC<Props> = ({ movie }) => {
           position: "relative",
         }}
       >
-        <Link href={`${SINGLE_MOVIE_PAGE}/${movie.id}`}>
+        <Link
+          href={
+            isMovie(media)
+              ? `${SINGLE_MOVIE_PAGE}/${media.id}`
+              : `${SINGLE_TVSERIES_PAGE}/${media.id}`
+          }
+        >
           <Image
-            src={"https://www.themoviedb.org/t/p/w500/" + movie.poster_path}
-            alt={movie.original_title}
+            src={"https://www.themoviedb.org/t/p/w500/" + media.poster_path}
+            alt={isMovie(media) ? media.title : media.name}
             width={1000}
             height={100}
             style={{
@@ -100,18 +58,14 @@ const MovieCard: React.FC<Props> = ({ movie }) => {
                 `linear-gradient(to bottom, transparent 0%, ${theme.palette.background.paper} 50%)`,
             }}
           />
-
           <MovieCardDetail
-            title={movie.original_title}
-            rating={movie.vote_average}
-            genres={movie.genre_ids}
+            title={isMovie(media) ? media.title : media.name}
+            rating={media.vote_average}
+            genres={media.genre_ids}
+            isMovie={isMovie(media)}
           />
         </Link>
-
-        <MovieCardToolTipAction
-          mediaId={movie.id}
-          isMovie={true}
-        />
+        <MovieCardToolTipAction mediaId={media.id} isMovie={isMovie(media)} />
       </Box>
     </Grid>
   );
