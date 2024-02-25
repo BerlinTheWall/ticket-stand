@@ -9,6 +9,7 @@ import {
   Stack,
   useMediaQuery,
   useTheme,
+  Tooltip,
 } from "@mui/material";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import ThemeSwitch from "../../components/switch-theme";
@@ -23,7 +24,7 @@ import {
 } from "./var";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { LANDING_PAGE } from "@/constants/urls";
+import { ABOUT_US_PAGE, LANDING_PAGE } from "@/constants/urls";
 import { NavbarSearch } from "@/components/navbar/search";
 import GenresDrawer from "@/layout/main-layout/genres-drawer";
 import { NavbarSidebar } from "./navbar-sidebar";
@@ -100,12 +101,14 @@ const Navbar: React.FC = () => {
                   </Button>
                 </Link>
                 <GenresDrawer />
-                <Button
-                  sx={{ my: 2, display: "block", fontSize: "14px" }}
-                  color="secondary"
-                >
-                  MOVIE RELEASE
-                </Button>
+                <Link href={ABOUT_US_PAGE}>
+                  <Button
+                    sx={{ my: 2, display: "block", fontSize: "14px" }}
+                    color="secondary"
+                  >
+                    ABOUT US
+                  </Button>
+                </Link>
               </Stack>
             )}
 
@@ -121,13 +124,29 @@ const Navbar: React.FC = () => {
                   {AUTH_BUTTONS.map((btn) => {
                     return (
                       <Link href={btn.href} key={btn.title}>
-                        <Button
-                          variant={btn.variant}
-                          fullWidth
-                          color={btn.color}
-                        >
-                          {btn.title}
-                        </Button>
+                        {btn.title === "Sign up" ? (
+                          <Tooltip
+                            title={
+                              "Sign up API was not provided! You have to sign up in the TMDB website to continue."
+                            }
+                          >
+                            <Button
+                              variant={btn.variant}
+                              fullWidth
+                              color={btn.color}
+                            >
+                              {btn.title}
+                            </Button>
+                          </Tooltip>
+                        ) : (
+                          <Button
+                            variant={btn.variant}
+                            fullWidth
+                            color={btn.color}
+                          >
+                            {btn.title}
+                          </Button>
+                        )}
                       </Link>
                     );
                   })}

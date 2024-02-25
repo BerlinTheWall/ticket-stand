@@ -1,10 +1,9 @@
-import { LOGIN_PAGE, PROFILE_PAGE } from "@/constants/urls";
+import { LOGIN_PAGE, PROFILE_PAGE, SIGN_UP_PAGE } from "@/constants/urls";
 import { ButtonOwnProps } from "@mui/material";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
-import { toast } from "react-toastify";
 export const NAVBAR_HEIGHT = "auto";
 export const NAVBAR_HEIGHT_MOBILE = 65;
-export const NEED_MARGIN_TOP_VALUE = "115px";
+export const NEED_MARGIN_TOP_VALUE = "45px";
 export const PAGE_NOT_MARGIN_NAVBAR = ["/"];
 export const AUTH_BUTTONS: {
   title: string;
@@ -14,7 +13,7 @@ export const AUTH_BUTTONS: {
 }[] = [
   {
     title: "Sign up",
-    href: LOGIN_PAGE,
+    href: SIGN_UP_PAGE,
     color: "secondary",
     variant: "outlined",
   },
@@ -26,7 +25,7 @@ export const AUTH_BUTTONS: {
   },
 ];
 
-export const PAGES = ["Home", "Discover", "Movie Release"];
+export const PAGES = ["Home", "Discover", "About us"];
 export const PROFILE_ITEMS = [
   {
     title: "Profile",
