@@ -13,6 +13,7 @@ import { SINGLE_MOVIE_PAGE, SINGLE_TVSERIES_PAGE } from "@/constants/urls";
 import { TVSeries } from "@/types/tv-series";
 import { isMovie } from "@/utils/check-is-movie";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { W1920_IMAGE_URL } from "@/constants/image-urls";
 
 interface Props {
   title: string;
@@ -103,10 +104,7 @@ const MovieSwiperMd: React.FC<Props> = ({ title, items, href }) => {
                 >
                   <Box width="100%" height={250} position="relative">
                     <Image
-                      src={
-                        "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
-                        item.backdrop_path
-                      }
+                      src={W1920_IMAGE_URL + item.backdrop_path}
                       alt={isMovie(item) ? item.title : item.name}
                       width={1000}
                       height={100}

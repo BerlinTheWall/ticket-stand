@@ -7,6 +7,7 @@ import { SINGLE_MOVIE_PAGE, SINGLE_TVSERIES_PAGE } from "@/constants/urls";
 import MovieCardToolTipAction from "./movie-card-dropdown";
 import { isMovie } from "@/utils/check-is-movie";
 import { TVSeries } from "@/types/tv-series";
+import { W500_IMAGE_URL } from "@/constants/image-urls";
 
 type Props = {
   media: Movie | TVSeries;
@@ -32,7 +33,7 @@ const MovieCard: React.FC<Props> = ({ media }) => {
           }
         >
           <Image
-            src={"https://www.themoviedb.org/t/p/w500/" + media.poster_path}
+            src={W500_IMAGE_URL + media.poster_path}
             alt={isMovie(media) ? media.title : media.name}
             width={1000}
             height={100}

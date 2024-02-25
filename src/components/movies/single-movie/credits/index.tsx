@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import { Cast } from "@/types/credits";
 import Image from "next/image";
+import { W276_IMAGE_URL } from "@/constants/image-urls";
 
 interface Props {
   casts: Cast[];
@@ -100,10 +101,7 @@ const Credits: React.FC<Props> = ({ casts }) => {
                 <Stack direction="row" alignItems="start" gap={2}>
                   <Box sx={{ minWidth: 80, width: 80 }}>
                     <Image
-                      src={
-                        "https://www.themoviedb.org/t/p/w276_and_h350_face" +
-                        cast.profile_path
-                      }
+                      src={W276_IMAGE_URL + cast.profile_path}
                       alt={cast.name}
                       width={100}
                       height={80}

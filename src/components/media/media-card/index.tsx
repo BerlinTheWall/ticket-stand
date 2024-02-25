@@ -6,6 +6,7 @@ import { Media } from "@/types/media";
 import MediaCardDetail from "@/components/media/media-card/media-card-detail";
 import MovieCardToolTipAction from "@/components/movies/movie-card/movie-card-dropdown";
 import { isMovie } from "@/utils/check-is-movie";
+import { W500_IMAGE_URL } from "@/constants/image-urls";
 
 type Props = {
   media: Media;
@@ -31,7 +32,7 @@ const MediaCard: React.FC<Props> = ({ media }) => {
       >
         <Link href={linkHref}>
           <Image
-            src={"https://www.themoviedb.org/t/p/w500/" + media.poster_path}
+            src={W500_IMAGE_URL + media.poster_path}
             alt={media.media_type === "movie" ? media.title! : media.name!}
             width={1000}
             height={100}

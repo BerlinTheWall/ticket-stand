@@ -6,6 +6,7 @@ import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import { TVSeries } from "@/types/tv-series";
 import ActionBar from "@/components/media/action-bar";
 import { MovieVideo } from "@/types/movie";
+import { W1920_IMAGE_URL, W500_IMAGE_URL } from "@/constants/image-urls";
 
 interface Props {
   tvSerie: TVSeries;
@@ -20,10 +21,7 @@ const SingleTVSerie: React.FC<Props> = ({ tvSerie, trailer }) => {
     <Box position="relative" height={isTablet ? 620 : 480}>
       <Box
         sx={{
-          backgroundImage: `url(${
-            "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
-            tvSerie.backdrop_path
-          })`,
+          backgroundImage: `url(${W1920_IMAGE_URL + tvSerie.backdrop_path})`,
           height: "100%",
           backgroundPosition: "center center",
           objectFit: "cover",
@@ -89,7 +87,7 @@ const SingleTVSerie: React.FC<Props> = ({ tvSerie, trailer }) => {
             sx={{ height: { xs: "70%", md: "90%" } }}
           >
             <Image
-              src={"https://www.themoviedb.org/t/p/w500/" + tvSerie.poster_path}
+              src={W500_IMAGE_URL + tvSerie.poster_path}
               alt={tvSerie.name}
               width={100}
               height={100}

@@ -6,6 +6,7 @@ import Image from "next/image";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import { convertMinuteToHour } from "@/utils/movie-length-converter";
 import ActionBar from "@/components/media/action-bar";
+import { W1920_IMAGE_URL, W500_IMAGE_URL } from "@/constants/image-urls";
 
 interface Props {
   movie: Movie;
@@ -19,10 +20,7 @@ const SingleMovie: React.FC<Props> = ({ movie, trailer }) => {
     <Box position="relative" height={isTablet ? 620 : 480}>
       <Box
         sx={{
-          backgroundImage: `url(${
-            "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
-            movie.backdrop_path
-          })`,
+          backgroundImage: `url(${W1920_IMAGE_URL + movie.backdrop_path})`,
           height: "100%",
           backgroundPosition: "center center",
           objectFit: "cover",
@@ -87,7 +85,7 @@ const SingleMovie: React.FC<Props> = ({ movie, trailer }) => {
             sx={{ height: { xs: "70%", md: "90%" } }}
           >
             <Image
-              src={"https://www.themoviedb.org/t/p/w500/" + movie.poster_path}
+              src={W500_IMAGE_URL + movie.poster_path}
               alt={movie.title}
               width={100}
               height={100}

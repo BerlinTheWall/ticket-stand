@@ -3,6 +3,7 @@ import Image from "next/image";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import ReadMoreCollapse from "../read-more";
 import { convertDate } from "@/utils/date-converter";
+import { W45_IMAGE_URL } from "@/constants/image-urls";
 
 type Props = {
   author: string;
@@ -39,7 +40,7 @@ const Comment: React.FC<Props> = ({
         <Stack direction={"row"} gap={1}>
           {avatarPath ? (
             <Image
-              src={`https://image.tmdb.org/t/p/w45_and_h45_face${avatarPath}`}
+              src={W45_IMAGE_URL + avatarPath}
               alt={"profile image"}
               width={40}
               height={40}

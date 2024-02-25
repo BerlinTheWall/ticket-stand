@@ -18,6 +18,7 @@ import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import Link from "next/link";
 import { SINGLE_MOVIE_PAGE, SINGLE_TVSERIES_PAGE } from "@/constants/urls";
 import { Media } from "@/types/media";
+import { W500_IMAGE_URL } from "@/constants/image-urls";
 
 export const NavbarSearch = () => {
   const [searchResults, setSearchResults] = useState<Media[]>([]);
@@ -159,10 +160,7 @@ export const NavbarSearch = () => {
                             boxShadow={2}
                           >
                             <Image
-                              src={
-                                "https://www.themoviedb.org/t/p/w500/" +
-                                searchResult.poster_path
-                              }
+                              src={W500_IMAGE_URL + searchResult.poster_path}
                               alt={
                                 searchResult.title
                                   ? searchResult.title

@@ -16,11 +16,12 @@ import { SINGLE_MOVIE_PAGE, SINGLE_TVSERIES_PAGE } from "@/constants/urls";
 import { TVSeries } from "@/types/tv-series";
 import { isMovie } from "@/utils/check-is-movie";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { W500_IMAGE_URL } from "@/constants/image-urls";
 
 interface Props {
   title?: string;
   items: (Movie | TVSeries)[];
-  href: string;
+  href?: string;
 }
 
 const MovieSwiperSm: React.FC<Props> = ({ title, items, href }) => {
@@ -157,10 +158,7 @@ const MovieSwiperSm: React.FC<Props> = ({ title, items, href }) => {
                     px={0}
                   >
                     <Image
-                      src={
-                        "https://www.themoviedb.org/t/p/w500/" +
-                        item.poster_path
-                      }
+                      src={W500_IMAGE_URL + item.poster_path}
                       alt={isMovie(item) ? item.title : item.name}
                       width={100}
                       height={100}
@@ -230,50 +228,52 @@ const MovieSwiperSm: React.FC<Props> = ({ title, items, href }) => {
               </SwiperSlide>
             );
           })}
-          <SwiperSlide
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              height: "100%",
-              alignSelf: "center",
-            }}
-          >
-            <Link
-              href={href}
+          {href && (
+            <SwiperSlide
               style={{
-                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+                height: "100%",
+                alignSelf: "center",
               }}
             >
-              <Box
-                width={"65%"}
-                py={0.5}
-                px={1}
-                position={"relative"}
-                color="text.primary"
-                border="1px solid"
-                borderColor="primary.dark"
-                borderRadius={4}
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                gap={0}
-                sx={{
-                  bgcolor: `${theme.palette.primary.dark}15`,
-                  transition: "background-color 0.3s",
-                  "&:hover": {
-                    bgcolor: `${theme.palette.primary.dark}50`,
-                  },
+              <Link
+                href={href}
+                style={{
+                  width: "100%",
                 }}
               >
-                <Typography sx={{ fontSize: 16, color: "primary.dark" }}>
-                  See More
-                </Typography>
-                <ArrowForwardIosIcon
-                  sx={{ color: "primary.dark", fontSize: 18 }}
-                />
-              </Box>
-            </Link>
-          </SwiperSlide>
+                <Box
+                  width={"65%"}
+                  py={0.5}
+                  px={1}
+                  position={"relative"}
+                  color="text.primary"
+                  border="1px solid"
+                  borderColor="primary.dark"
+                  borderRadius={4}
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  gap={0}
+                  sx={{
+                    bgcolor: `${theme.palette.primary.dark}15`,
+                    transition: "background-color 0.3s",
+                    "&:hover": {
+                      bgcolor: `${theme.palette.primary.dark}50`,
+                    },
+                  }}
+                >
+                  <Typography sx={{ fontSize: 16, color: "primary.dark" }}>
+                    See More
+                  </Typography>
+                  <ArrowForwardIosIcon
+                    sx={{ color: "primary.dark", fontSize: 18 }}
+                  />
+                </Box>
+              </Link>
+            </SwiperSlide>
+          )}
         </Swiper>
       </Box>
     </Box>

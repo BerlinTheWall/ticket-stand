@@ -9,6 +9,7 @@ import { Episode } from "@/types/tv-series";
 import NextPrevEl from "@/components/swiper-slides/next-prev-button";
 import { useEffect, useState } from "react";
 import SeasonCardDetail from "../season-slider/season-slider-detail";
+import { W500_IMAGE_URL } from "@/constants/image-urls";
 
 interface Props {
   title: string;
@@ -112,9 +113,7 @@ const EpisodeSwiper: React.FC<Props> = ({ title, items }) => {
                   }
                 >
                   <Image
-                    src={
-                      "https://www.themoviedb.org/t/p/w500/" + item.still_path
-                    }
+                    src={W500_IMAGE_URL + item.still_path}
                     alt={item.name}
                     width={1000}
                     height={100}

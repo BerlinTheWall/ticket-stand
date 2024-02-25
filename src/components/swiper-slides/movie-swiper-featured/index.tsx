@@ -19,6 +19,7 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 import { convertMovieGenreIdsToNames } from "@/utils/genre-converter";
 import GenresList from "../genres-list";
+import { W1920_IMAGE_URL, W500_IMAGE_URL } from "@/constants/image-urls";
 
 interface Props {
   movies: Movie[];
@@ -38,10 +39,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
     <Box position="relative" marginTop="5rem" height={620}>
       <Box>
         <Image
-          src={
-            "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
-            selectedMovie.backdrop_path
-          }
+          src={W1920_IMAGE_URL + selectedMovie.backdrop_path}
           alt={selectedMovie.title}
           width={10000}
           height={100}
@@ -242,9 +240,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
                   }
                 >
                   <Image
-                    src={
-                      "https://www.themoviedb.org/t/p/w500/" + movie.poster_path
-                    }
+                    src={W500_IMAGE_URL + movie.poster_path}
                     alt={movie.title}
                     width={100}
                     height={100}

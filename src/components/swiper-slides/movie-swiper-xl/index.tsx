@@ -13,6 +13,7 @@ import Link from "next/link";
 import { SINGLE_MOVIE_PAGE } from "@/constants/urls";
 import SeeMoreSlide from "../see-more-slide";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { W500_IMAGE_URL } from "@/constants/image-urls";
 
 interface Props {
   title: string;
@@ -115,10 +116,7 @@ const MovieSwiperXl: React.FC<Props> = ({ title, movies, href }) => {
                     color="text.primary"
                   >
                     <Image
-                      src={
-                        "https://www.themoviedb.org/t/p/w500/" +
-                        movie.poster_path
-                      }
+                      src={W500_IMAGE_URL + movie.poster_path}
                       alt={movie.title}
                       width={100}
                       height={100}
