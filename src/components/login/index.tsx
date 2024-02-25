@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Link, Stack, Typography, useTheme } from "@mui/material";
+import { Stack, Tooltip, Typography, useTheme } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FormInputText } from "../forms/text-input";
 import Images from "@/utils/image-helper";
@@ -17,6 +17,8 @@ import { ACCOUNT_COOKIE, SESSION_ID_COOKIE } from "@/constants/cookie";
 import { useContext } from "react";
 import { AppContext } from "@/context/AppContext";
 import { ContextValue } from "@/types/general";
+import Link from "next/link";
+import { SIGN_UP_PAGE } from "@/constants/urls";
 
 interface IFormInput {
   username: string;
@@ -35,10 +37,8 @@ const LoginForm: React.FC = () => {
 
   const {
     handleSubmit,
-    reset,
     control,
-    formState: { errors, isSubmitting },
-    register,
+    formState: { isSubmitting },
   } = useForm<IFormInput>({
     defaultValues: defaultValues,
   });
@@ -108,9 +108,27 @@ const LoginForm: React.FC = () => {
       >
         Login
       </LoadingButton>
-      <Typography sx={{ textAlign: "center", fontSize: 15 }}>
-        Don&apos;t have an account? <Link>Sign up</Link>
-      </Typography>
+      <Stack direction={"row"} justifyContent={"center"} gap={1}>
+        <Typography sx={{ textAlign: "center", fontSize: 15 }}>
+          Don&apos;t have an account?
+        </Typography>
+        <Link href={SIGN_UP_PAGE} target="_blank">
+          <Tooltip
+            title={
+              "Sign up API was not provided! You have to sign up in the TMDB website to continue."
+            }
+          >
+            <Typography
+              sx={{
+                textDecoration: "underline",
+                color: theme.palette.primary.dark,
+              }}
+            >
+              Sign up
+            </Typography>
+          </Tooltip>
+        </Link>
+      </Stack>
     </Stack>
   );
 };
