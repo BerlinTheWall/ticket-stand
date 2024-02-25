@@ -90,7 +90,7 @@ const AddCommentModal: React.FC = () => {
             min={0}
             max={10}
             marks={marks}
-            sx={{ pb: 2 }}
+            sx={{ pb: 2, minWidth: 30 }}
             showValue
           />
           <FormInputTextArea
