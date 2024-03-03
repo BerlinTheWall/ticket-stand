@@ -115,7 +115,10 @@ const LoginForm: React.FC = () => {
         <Link href={SIGN_UP_PAGE} target="_blank">
           <Tooltip
             title={
-              "Sign up API was not provided! You have to sign up in the TMDB website to continue."
+              <Typography variant="body2" textAlign="justify">
+                Sign up API was not provided! You have to sign up in the TMDB
+                website to continue.
+              </Typography>
             }
           >
             <Typography
