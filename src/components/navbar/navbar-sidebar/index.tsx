@@ -8,7 +8,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { AUTH_BUTTONS, PROFILE_ITEMS } from "../var";
+import { AUTH_BUTTONS } from "../var";
 import { useIsLoggedIn } from "@/hooks/useIsLoggedIn";
 import Link from "next/link";
 import { LANDING_PAGE, ABOUT_US_PAGE } from "@/constants/urls";
@@ -44,7 +44,7 @@ interface DrawerListItemProps {
   items?: {
     name: string;
     href: string;
-    icon?: string;
+    icon?: JSX.Element;
   }[];
   icon: JSX.Element;
   href?: string;
@@ -88,24 +88,7 @@ export const NavbarSidebar: React.FC<NavbarSidebarProps> = ({
 
           <Divider />
 
-          {loggedIn ? (
-            <></>
-          ) : (
-            // PROFILE_ITEMS.map((item) => (
-            //   <Stack
-            //     key={item.title}
-            //     component={ButtonBase}
-            //     direction="row"
-            //     spacing={1}
-            //     sx={{
-            //       ...DRAWER_ITEM_STYLE,
-            //       justifyContent: "start",
-            //     }}
-            //   >
-            //     <item.icon fontSize="small" />
-            //     <Typography>{item.title} </Typography>
-            //   </Stack>
-            // ))
+          {!loggedIn && (
             <Stack direction="column-reverse" spacing={1} py={0.5}>
               {AUTH_BUTTONS.map((btn) => {
                 return (
@@ -118,26 +101,6 @@ export const NavbarSidebar: React.FC<NavbarSidebarProps> = ({
               })}
             </Stack>
           )}
-
-          {/* {loggedIn && (
-            <>
-              <Stack
-                onClick={logout}
-                component={ButtonBase}
-                direction="row"
-                spacing={1}
-                sx={{
-                  ...DRAWER_ITEM_STYLE,
-                  justifyContent: "start",
-                }}
-              >
-                <LogoutRoundedIcon fontSize="small" />
-
-                <Typography>Logout</Typography>
-              </Stack>
-              <Divider />
-            </>
-          )} */}
 
           <Stack
             onClick={toggleTheme}
@@ -200,8 +163,6 @@ const DrawerListItem: React.FC<{ item: DrawerListItemProps }> = ({ item }) => {
                     {item.icon}
                     <Typography
                       sx={{
-                        // borderLeft: "3px solid",
-                        // borderLeftColor: "primary.main",
                         p: 1,
                         fontSize: 14,
                         transition: "all 0.3s",

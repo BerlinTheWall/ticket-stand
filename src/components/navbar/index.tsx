@@ -124,7 +124,15 @@ const Navbar: React.FC = () => {
                   {AUTH_BUTTONS.map((btn) => {
                     return (
                       <Link href={btn.href} key={btn.title}>
-                        {btn.title === "Sign up" ? (
+                        {btn.provided ? (
+                          <Button
+                            variant={btn.variant}
+                            fullWidth
+                            color={btn.color}
+                          >
+                            {btn.title}
+                          </Button>
+                        ) : (
                           <Tooltip
                             title={
                               "Sign up API was not provided! You have to sign up in the TMDB website to continue."
@@ -138,14 +146,6 @@ const Navbar: React.FC = () => {
                               {btn.title}
                             </Button>
                           </Tooltip>
-                        ) : (
-                          <Button
-                            variant={btn.variant}
-                            fullWidth
-                            color={btn.color}
-                          >
-                            {btn.title}
-                          </Button>
                         )}
                       </Link>
                     );

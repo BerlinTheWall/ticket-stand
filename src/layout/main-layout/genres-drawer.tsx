@@ -22,13 +22,12 @@ import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 
-export const DISCOVERITEMS = [
+export const DISCOVERITEMS= [
   {
     href: TOP_RATED_MOVIES_PAGE,
     name: "Top Rated Movies",
     icon: <MilitaryTechIcon sx={{ color: "warning.dark" }} />,
   },
-  ,
   {
     href: TRENDING_MOVIES_PAGE,
     name: "Trending Movies",
@@ -62,7 +61,6 @@ export const DISCOVER_MOVIES_MENU = [
     name: "Top Rated Movies",
     icon: <MilitaryTechIcon sx={{ color: "warning.dark" }} />,
   },
-  ,
   {
     href: TRENDING_MOVIES_PAGE,
     name: "Trending Movies",
@@ -105,7 +103,7 @@ const GenresDrawer: React.FC = () => {
       <Tooltip
         title={
           <Box>
-            {/* <Grid container spacing={0}> */}
+    {/* <Grid container spacing={0}> */}
             {/* {MovieGenre.map((genre) => {
                 return (
                   <Grid item md={4} key={genre.id} sx={{ px: 2, my: 1.2 }}>

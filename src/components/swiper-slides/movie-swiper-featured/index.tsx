@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Divider,
   Stack,
   Typography,
@@ -15,8 +14,6 @@ import MovieCardDetail from "../movie-card-detail";
 import { Movie } from "@/types/movie";
 import { useState } from "react";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 import { convertMovieGenreIdsToNames } from "@/utils/genre-converter";
 import GenresList from "../genres-list";
 import { W1920_IMAGE_URL, W500_IMAGE_URL } from "@/constants/image-urls";
@@ -124,35 +121,6 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
             {selectedMovie.overview}
           </Typography>
         )}
-        {/* <Stack
-          direction="row"
-          alignItems="center"
-          gap={2}
-          mt={2}
-          width="100%"
-          whiteSpace="nowrap"
-        >
-          <Button
-            variant="contained"
-            fullWidth
-            color="primary"
-            sx={{
-              fontSize: { xs: "0.7rem", sm: "0.8rem" },
-            }}
-            onClick={() => {}}
-          >
-            <PlayCircleFilledIcon style={{ marginRight: "8px" }} />
-            Watch Trailer
-          </Button>
-          <Button
-            variant="outlined"
-            fullWidth
-            color="secondary"
-            sx={{ fontSize: { xs: "0.7rem", sm: "0.8rem" } }}
-          >
-            <BookmarkBorderIcon style={{ marginRight: "8px" }} /> Add Watchlist
-          </Button>
-        </Stack> */}
       </Box>
       <Box
         sx={{

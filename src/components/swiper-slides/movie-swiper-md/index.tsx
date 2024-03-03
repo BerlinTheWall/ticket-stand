@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography,  } from "@mui/material";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css/navigation";
 import Image from "next/image";
@@ -12,17 +12,17 @@ import Link from "next/link";
 import { SINGLE_MOVIE_PAGE, SINGLE_TVSERIES_PAGE } from "@/constants/urls";
 import { TVSeries } from "@/types/tv-series";
 import { isMovie } from "@/utils/check-is-movie";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { W1920_IMAGE_URL } from "@/constants/image-urls";
+import SeeMoreBox from "../see-more-box";
 
 interface Props {
   title: string;
   items: (Movie | TVSeries)[];
   href?: string;
+  name: string;
 }
 
-const MovieSwiperMd: React.FC<Props> = ({ title, items, href }) => {
-  const theme = useTheme();
+const MovieSwiperMd: React.FC<Props> = ({ title, items, href, name }) => {
   return (
     <Box sx={{ paddingX: { sm: 5 } }}>
       <Typography
@@ -41,12 +41,12 @@ const MovieSwiperMd: React.FC<Props> = ({ title, items, href }) => {
         }}
       >
         <NextPrevEl
-          className="mdNextElSwiper"
+          className={`${name}-mdNextElSwiper`}
           sx={{ right: 0 }}
           Icon={<ChevronRightRoundedIcon color="inherit" />}
         />
         <NextPrevEl
-          className="mdPrevElSwiper"
+          className={`${name}-mdPrevElSwiper`}
           sx={{ left: 0 }}
           Icon={<ChevronLeftRoundedIcon color="inherit" />}
         />
@@ -56,8 +56,8 @@ const MovieSwiperMd: React.FC<Props> = ({ title, items, href }) => {
           spaceBetween={15}
           navigation={{
             enabled: true,
-            nextEl: ".mdNextElSwiper",
-            prevEl: ".mdPrevElSwiper",
+            nextEl: `.${name}-mdNextElSwiper`,
+            prevEl: `.${name}-mdPrevElSwiper`,
           }}
           modules={[Autoplay, Navigation]}
           grabCursor={true}
@@ -145,47 +145,10 @@ const MovieSwiperMd: React.FC<Props> = ({ title, items, href }) => {
           {href && (
             <SwiperSlide
               style={{
-                display: "flex",
-                justifyContent: "center",
-                height: "100%",
                 alignSelf: "center",
               }}
             >
-              <Link
-                href={href}
-                style={{
-                  width: "100%",
-                }}
-              >
-                <Box
-                  width={"65%"}
-                  py={0.5}
-                  px={1}
-                  position={"relative"}
-                  color="text.primary"
-                  border="1px solid"
-                  borderColor="primary.dark"
-                  borderRadius={4}
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                  gap={0}
-                  sx={{
-                    bgcolor: `${theme.palette.primary.dark}15`,
-                    transition: "background-color 0.3s",
-                    "&:hover": {
-                      bgcolor: `${theme.palette.primary.dark}50`,
-                    },
-                  }}
-                >
-                  <Typography sx={{ fontSize: 16, color: "primary.dark" }}>
-                    See More
-                  </Typography>
-                  <ArrowForwardIosIcon
-                    sx={{ color: "primary.dark", fontSize: 18 }}
-                  />
-                </Box>
-              </Link>
+              <SeeMoreBox href={href} sx={{ mx: "auto" }} />
             </SwiperSlide>
           )}
         </Swiper>

@@ -56,27 +56,33 @@ export default function Home({
           title="Just Release"
           movies={movies}
           href={POPULAR_MOVIES_PAGE}
+          name="justRelease"
         />
+
         <MovieSwiperMd
           title="TV Series"
           items={tvSeries}
           href={POPULAR_TVSERIES_PAGE}
+          name="popularTv"
         />
         <MovieSwiperSm
           title="Top Rated Movies"
           items={topRatedMovies}
           href={TOP_RATED_MOVIES_PAGE}
+          name="topRatedMovies"
         />
         <MovieSwiperFeatured movies={trendingMovies} />
         <MovieSwiperSm
           title="Top Rated TV Series"
           items={topRatedTVSeries}
           href={TOP_RATED_TVSERIES_PAGE}
+          name="topRatedTv"
         />
         <MovieSwiperMd
           title="Trending TV Series"
           items={trendingTVSeries}
           href={TRENDING_TVSERIES_PAGE}
+          name="trendingTv"
         />
       </Box>
     </MainLayout>

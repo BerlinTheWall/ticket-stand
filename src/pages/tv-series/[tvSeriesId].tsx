@@ -98,7 +98,7 @@ const TVSeriesPage: NextPage<Props> = ({
             data && <EpisodeSwiper items={data?.episodes} title="Episodes" />
           )}
         </Box>
-        <MovieSwiperMd items={series} title="Recommendations" />
+        <MovieSwiperMd items={series} title="Recommendations" name="recommendations" />
         <Comments comments={comments} />
       </Box>
     </MainLayout>

@@ -1,4 +1,4 @@
-import { Box, Divider, Stack, Typography, useTheme } from "@mui/material";
+import { Box, Divider, Stack, Typography,  } from "@mui/material";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css/navigation";
 import Image from "next/image";
@@ -15,31 +15,22 @@ import Link from "next/link";
 import { SINGLE_MOVIE_PAGE, SINGLE_TVSERIES_PAGE } from "@/constants/urls";
 import { TVSeries } from "@/types/tv-series";
 import { isMovie } from "@/utils/check-is-movie";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { W500_IMAGE_URL } from "@/constants/image-urls";
+import SeeMoreBox from "../see-more-box";
 
 interface Props {
   title?: string;
   items: (Movie | TVSeries)[];
   href?: string;
+  name: string;
 }
 
-const MovieSwiperSm: React.FC<Props> = ({ title, items, href }) => {
-  const theme = useTheme();
+const MovieSwiperSm: React.FC<Props> = ({ title, items, href, name }) => {
   const [updatedMedias, setUpdatedMedias] = useState(items);
-  const [page, setPages] = useState<number>(1);
 
   useEffect(() => {
     setUpdatedMedias(items);
   }, [items]);
-
-  // const handleShow = async () => {
-  //   setPages(page + 1);
-  //   const movies = await getPopularMovies({
-  //     page: page + 1,
-  //   });
-  //   setUpdatedMedias((prevMovies) => [...prevMovies, ...movies.results]);
-  // };
 
   return (
     <Box sx={{ paddingX: { sm: 5 } }}>
@@ -59,12 +50,12 @@ const MovieSwiperSm: React.FC<Props> = ({ title, items, href }) => {
         }}
       >
         <NextPrevEl
-          className={"SmNextElSwiper"}
+          className={`${name}-SmNextElSwiper`}
           sx={{ right: 0 }}
           Icon={<ChevronRightRoundedIcon color="inherit" />}
         />
         <NextPrevEl
-          className={"SmPrevElSwiper"}
+          className={`${name}-SmPrevElSwiper`}
           sx={{ left: 0 }}
           Icon={<ChevronLeftRoundedIcon color="inherit" />}
         />
@@ -74,10 +65,9 @@ const MovieSwiperSm: React.FC<Props> = ({ title, items, href }) => {
           spaceBetween={15}
           navigation={{
             enabled: true,
-            nextEl: ".SmNextElSwiper",
-            prevEl: ".SmPrevElSwiper",
+            nextEl: `.${name}-SmNextElSwiper`,
+            prevEl: `.${name}-SmPrevElSwiper`,
           }}
-          // onReachEnd={handleShow}
           modules={[Autoplay, Navigation]}
           grabCursor={true}
           style={{ position: "relative" }}
@@ -231,47 +221,10 @@ const MovieSwiperSm: React.FC<Props> = ({ title, items, href }) => {
           {href && (
             <SwiperSlide
               style={{
-                display: "flex",
-                justifyContent: "center",
-                height: "100%",
                 alignSelf: "center",
               }}
             >
-              <Link
-                href={href}
-                style={{
-                  width: "100%",
-                }}
-              >
-                <Box
-                  width={"65%"}
-                  py={0.5}
-                  px={1}
-                  position={"relative"}
-                  color="text.primary"
-                  border="1px solid"
-                  borderColor="primary.dark"
-                  borderRadius={4}
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                  gap={0}
-                  sx={{
-                    bgcolor: `${theme.palette.primary.dark}15`,
-                    transition: "background-color 0.3s",
-                    "&:hover": {
-                      bgcolor: `${theme.palette.primary.dark}50`,
-                    },
-                  }}
-                >
-                  <Typography sx={{ fontSize: 16, color: "primary.dark" }}>
-                    See More
-                  </Typography>
-                  <ArrowForwardIosIcon
-                    sx={{ color: "primary.dark", fontSize: 18 }}
-                  />
-                </Box>
-              </Link>
+              <SeeMoreBox href={href} sx={{ mx: "auto" }} />
             </SwiperSlide>
           )}
         </Swiper>

@@ -10,18 +10,21 @@ export const AUTH_BUTTONS: {
   href: string;
   color: ButtonOwnProps["color"];
   variant: ButtonOwnProps["variant"];
+  provided: boolean;
 }[] = [
   {
     title: "Sign up",
     href: SIGN_UP_PAGE,
     color: "secondary",
     variant: "outlined",
+    provided: false,
   },
   {
     title: "Login",
     href: LOGIN_PAGE,
     color: "primary",
     variant: "contained",
+    provided: true,
   },
 ];
 

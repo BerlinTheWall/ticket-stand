@@ -11,17 +11,19 @@ import GenresList from "../genres-list";
 import { convertMovieGenreIdsToNames } from "@/utils/genre-converter";
 import Link from "next/link";
 import { SINGLE_MOVIE_PAGE } from "@/constants/urls";
-import SeeMoreSlide from "../see-more-slide";
+import SeeMoreSlide from "../see-more-box";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { W500_IMAGE_URL } from "@/constants/image-urls";
+import SeeMoreBox from "../see-more-box";
 
 interface Props {
   title: string;
   movies: Movie[];
   href: string;
+  name: string;
 }
 
-const MovieSwiperXl: React.FC<Props> = ({ title, movies, href }) => {
+const MovieSwiperXl: React.FC<Props> = ({ title, movies, href,name }) => {
   const theme = useTheme();
 
   return (
@@ -42,12 +44,12 @@ const MovieSwiperXl: React.FC<Props> = ({ title, movies, href }) => {
         }}
       >
         <NextPrevEl
-          className="XlNextElSwiper"
+          className={`${name}-XlNextElSwiper`}
           sx={{ right: 0 }}
           Icon={<ChevronRightRoundedIcon color="inherit" />}
         />
         <NextPrevEl
-          className="XlPrevElSwiper"
+          className={`${name}-XlPrevElSwiper`}
           sx={{ left: 0 }}
           Icon={<ChevronLeftRoundedIcon color="inherit" />}
         />
@@ -57,8 +59,8 @@ const MovieSwiperXl: React.FC<Props> = ({ title, movies, href }) => {
           spaceBetween={15}
           navigation={{
             enabled: true,
-            nextEl: ".XlNextElSwiper",
-            prevEl: ".XlPrevElSwiper",
+            nextEl: `.${name}-XlNextElSwiper`,
+            prevEl: `.${name}-XlPrevElSwiper`,
           }}
           modules={[Autoplay, Navigation]}
           grabCursor={true}
@@ -168,51 +170,15 @@ const MovieSwiperXl: React.FC<Props> = ({ title, movies, href }) => {
               </SwiperSlide>
             );
           })}
-          {/* <SeeMoreSlide href={href} /> */}
-          <SwiperSlide
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              height: "100%",
-              alignSelf: "center",
-            }}
-          >
-            <Link
-              href={href}
+          {href && (
+            <SwiperSlide
               style={{
-                width: "100%",
+                alignSelf: "center",
               }}
             >
-              <Box
-                width={"65%"}
-                py={0.5}
-                px={1}
-                position={"relative"}
-                color="text.primary"
-                border="1px solid"
-                borderColor="primary.dark"
-                borderRadius={4}
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                gap={0}
-                sx={{
-                  bgcolor: `${theme.palette.primary.dark}15`,
-                  transition: "background-color 0.3s",
-                  "&:hover": {
-                    bgcolor: `${theme.palette.primary.dark}50`,
-                  },
-                }}
-              >
-                <Typography sx={{ fontSize: 16, color: "primary.dark" }}>
-                  See More
-                </Typography>
-                <ArrowForwardIosIcon
-                  sx={{ color: "primary.dark", fontSize: 18 }}
-                />
-              </Box>
-            </Link>
-          </SwiperSlide>
+              <SeeMoreBox href={href} sx={{ mx: "auto" }} />
+            </SwiperSlide>
+          )}
         </Swiper>
       </Box>
     </Box>
