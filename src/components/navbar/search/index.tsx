@@ -176,6 +176,7 @@ const MovieSearch: React.FC<MovieSearchProps> = ({ list }) => {
   return list.map((item) => {
     return (
       <Box
+        key={item.id}
         component={Link}
         href={`${
           item.media_type === "movie" ? SINGLE_MOVIE_PAGE : SINGLE_TVSERIES_PAGE
