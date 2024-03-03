@@ -95,7 +95,7 @@ const TVSeriesPage: NextPage<Props> = ({
           />
           {isLoading || isFetching ? (
             <Grid container spacing={3} px={7} mt={1}>
-              <MovieCardSkeletonLoader />
+              <MovieCardSkeletonLoader size={5} />
             </Grid>
           ) : (
             data && <EpisodeSwiper items={data?.episodes} title="Episodes" />
