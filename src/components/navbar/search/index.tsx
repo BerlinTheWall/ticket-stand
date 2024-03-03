@@ -2,8 +2,8 @@ import {
   Box,
   Button,
   ClickAwayListener,
+  Collapse,
   Fade,
-  Grid,
   OutlinedInput,
   Stack,
   Typography,
@@ -20,12 +20,11 @@ import { SINGLE_MOVIE_PAGE, SINGLE_TVSERIES_PAGE } from "@/constants/urls";
 import { Media } from "@/types/media";
 import { W500_IMAGE_URL } from "@/constants/image-urls";
 
+const MOVIE_PER_ROW = 3;
 export const NavbarSearch = () => {
   const [searchResults, setSearchResults] = useState<Media[]>([]);
   const [open, setOpen] = useState<boolean>(false);
-  // const [searchValue, setSearchValue] = useState<string>("");
-  const [displayResults, setDisplayResults] = useState<number>(3);
-  const [showLess, setShowLess] = useState<boolean>(false);
+  const [showMore, setShowMore] = useState<boolean>(false);
 
   const handleChange = useDebounce(
     async (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -45,13 +44,7 @@ export const NavbarSearch = () => {
   };
 
   const handleLoadMore = () => {
-    if (showLess) {
-      setShowLess(false);
-      setDisplayResults(displayResults - 3);
-    } else {
-      setDisplayResults(displayResults + 3);
-      setShowLess(true);
-    }
+    setShowMore((prev) => !prev);
   };
 
   return (
@@ -115,8 +108,8 @@ export const NavbarSearch = () => {
 
         {searchResults.length !== 0 && (
           <Fade in={open} timeout={open ? 1000 : 500}>
-            <Grid
-              container
+            <Stack
+              direction="row"
               maxWidth={{ sm: 450, xs: "100%" }}
               sx={{
                 width: "fit-content",
@@ -134,85 +127,98 @@ export const NavbarSearch = () => {
                 filter: (theme) =>
                   `drop-shadow(0px 2px 8px ${theme.palette.primary.main})`,
                 borderRadius: 2,
-                pb: 2,
+                p: 2,
+                flexWrap: "wrap",
+                rowGap: 2,
+                columnGap: 1,
+                justifyContent: "space-between",
               }}
             >
-              {searchResults
-                .slice(0, displayResults)
-                .map((searchResult, index: number) => {
-                  return (
-                    <Grid key={searchResult.id} item sm={4} xs={12} p={1.5}>
-                      <Link
-                        href={`${
-                          searchResult.media_type === "movie"
-                            ? SINGLE_MOVIE_PAGE
-                            : SINGLE_TVSERIES_PAGE
-                        }/${searchResult.id}`}
-                      >
-                        <Stack>
-                          <Box
-                            position="relative"
-                            width={"100%"}
-                            maxWidth={200}
-                            height={180}
-                            borderRadius={2}
-                            overflow="hidden"
-                            boxShadow={2}
-                          >
-                            <Image
-                              src={W500_IMAGE_URL + searchResult.poster_path}
-                              alt={
-                                searchResult.title
-                                  ? searchResult.title
-                                  : searchResult.name
-                                  ? searchResult.name
-                                  : "unknown"
-                              }
-                              fill
-                            />
-                          </Box>
-                          <Stack direction="column" mt={0.8}>
-                            <Typography
-                              textOverflow="ellipsis"
-                              overflow="hidden"
-                              fontWeight="bold"
-                              variant="body2"
-                            >
-                              {searchResult.title ?? searchResult.name}
-                            </Typography>
-                            <Stack
-                              fontSize={14}
-                              alignItems="center"
-                              direction={"row"}
-                            >
-                              <StarRateRoundedIcon
-                                sx={{
-                                  color: "warning.light",
-                                  fontSize: "inherit",
-                                }}
-                              />
-                              <Typography fontWeight="400" fontSize="inherit">
-                                {searchResult?.vote_average?.toFixed(1)}
-                              </Typography>
-                            </Stack>
-                          </Stack>
-                        </Stack>
-                      </Link>
-                    </Grid>
-                  );
-                })}
+              {/* show less */}
+              <MovieSearch list={searchResults.slice(0, MOVIE_PER_ROW)} />
 
-              <Grid item xs={12} px={2}>
-                {searchResults.length > 3 && (
+              {/* show more */}
+              <Collapse in={!showMore} sx={{ width: "100%" }}>
+                <Stack
+                  direction="row"
+                  sx={{
+                    flexWrap: "wrap",
+                    rowGap: 2,
+                    columnGap: 1,
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <MovieSearch
+                    list={searchResults.slice(MOVIE_PER_ROW, 2 * MOVIE_PER_ROW)}
+                  />
+                </Stack>
+              </Collapse>
+
+              <Box flex={1}>
+                {searchResults.length > MOVIE_PER_ROW && (
                   <Button onClick={handleLoadMore} variant="outlined" fullWidth>
-                    {showLess ? "Show Less" : "Show More"}
+                    {showMore ? "Show More" : "Show Less"}
                   </Button>
                 )}
-              </Grid>
-            </Grid>
+              </Box>
+            </Stack>
           </Fade>
         )}
       </Box>
     </ClickAwayListener>
   );
+};
+
+interface MovieSearchProps {
+  list: Media[];
+}
+const MovieSearch: React.FC<MovieSearchProps> = ({ list }) => {
+  return list.map((item) => {
+    return (
+      <Box
+        component={Link}
+        href={`${
+          item.media_type === "movie" ? SINGLE_MOVIE_PAGE : SINGLE_TVSERIES_PAGE
+        }/${item.id}`}
+        width={{ md: 125, xs: 200 }}
+      >
+        <Stack>
+          <Box
+            position="relative"
+            height={180}
+            borderRadius={2}
+            overflow="hidden"
+            boxShadow={2}
+          >
+            <Image
+              src={W500_IMAGE_URL + item.poster_path}
+              alt={item.title ? item.title : item.name ? item.name : "unknown"}
+              fill
+            />
+          </Box>
+          <Stack direction="column" mt={0.8}>
+            <Typography
+              textOverflow="ellipsis"
+              overflow="hidden"
+              fontWeight="bold"
+              variant="body2"
+            >
+              {item.title ?? item.name}
+            </Typography>
+            <Stack fontSize={14} alignItems="center" direction={"row"}>
+              <StarRateRoundedIcon
+                sx={{
+                  color: "warning.light",
+                  fontSize: "inherit",
+                }}
+              />
+              <Typography fontWeight="400" fontSize="inherit">
+                {item?.vote_average?.toFixed(1)}
+              </Typography>
+            </Stack>
+          </Stack>
+        </Stack>
+      </Box>
+    );
+  });
 };
