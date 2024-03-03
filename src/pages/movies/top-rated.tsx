@@ -9,6 +9,7 @@ import { QueryResult } from "@/types/general";
 import { TVSeries } from "@/types/tv-series";
 import { getTopRatedMovies } from "@/api/movies";
 import HeadTitle from "@/components/head-title";
+import ErrorMessage from "@/components/error-message";
 
 const TopRatedMoviesPage = () => {
   const router = useRouter();
@@ -32,7 +33,7 @@ const TopRatedMoviesPage = () => {
   };
 
   if (isError) {
-    return <div className="">isError</div>;
+    return <ErrorMessage />;
   }
 
   return (

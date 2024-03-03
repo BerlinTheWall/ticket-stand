@@ -17,6 +17,7 @@ import { useContext, useState } from "react";
 import MovieTypeChooser from "../profile-tab/movie-type-chooser";
 import MediaCard from "@/components/media/media-card";
 import { Media } from "@/types/media";
+import ErrorMessage from "@/components/error-message";
 
 const WatchList: React.FC<{}> = () => {
   const [selectedOption, setSelectedOption] =
@@ -37,7 +38,7 @@ const WatchList: React.FC<{}> = () => {
   };
 
   if (isError) {
-    return <div className="">isError </div>;
+    return <ErrorMessage />;
   }
 
   return (

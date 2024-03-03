@@ -1,4 +1,5 @@
 import { useLists } from "@/api/profile/hooks/useLists";
+import ErrorMessage from "@/components/error-message";
 import CreateListModal from "@/components/lists/create-list-modal";
 import ListCard from "@/components/lists/list-card";
 import MovieCardSkeletonLoader from "@/components/movies/movie-card-skeleton-loader";
@@ -46,7 +47,7 @@ const Lists: React.FC = () => {
   };
 
   if (isError) {
-    return <div className="">isError</div>;
+    return <ErrorMessage />;
   }
 
   return (

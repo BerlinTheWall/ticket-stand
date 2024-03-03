@@ -27,6 +27,7 @@ import { useRouter } from "next/router";
 import { Grid } from "@mui/material";
 import { MovieVideo } from "@/types/movie";
 import HeadTitle from "@/components/head-title";
+import ErrorMessage from "@/components/error-message";
 
 interface Props {
   tvSerie: TVSeries;
@@ -70,7 +71,7 @@ const TVSeriesPage: NextPage<Props> = ({
   });
 
   if (isError) {
-    return <div className="">isError </div>;
+    return <ErrorMessage />;
   }
 
   return (

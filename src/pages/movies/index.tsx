@@ -16,6 +16,7 @@ import { MovieGenre } from "@/constants/movie-genre";
 import { useMemo } from "react";
 import SearchBar from "@/components/search-bar";
 import HeadTitle from "@/components/head-title";
+import ErrorMessage from "@/components/error-message";
 
 const MovieListPage = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
@@ -42,7 +43,7 @@ const MovieListPage = () => {
   };
 
   if (isError) {
-    return <div className="">isError </div>;
+    return <ErrorMessage />;
   }
 
   return (

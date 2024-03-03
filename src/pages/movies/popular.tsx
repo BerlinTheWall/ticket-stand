@@ -9,6 +9,7 @@ import { QueryResult } from "@/types/general";
 import { TVSeries } from "@/types/tv-series";
 import { getPopularMovies } from "@/api/movies";
 import HeadTitle from "@/components/head-title";
+import ErrorMessage from "@/components/error-message";
 
 const PopularMoviesPage = () => {
   const router = useRouter();
@@ -32,7 +33,7 @@ const PopularMoviesPage = () => {
   };
 
   if (isError) {
-    return <div className="">isError</div>;
+    return <ErrorMessage />;
   }
 
   return (
