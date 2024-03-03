@@ -8,6 +8,7 @@ import queryKeys from "@/constants/query-keys";
 import { getPopularTVSeries } from "@/api/tv-series";
 import { QueryResult } from "@/types/general";
 import { TVSeries } from "@/types/tv-series";
+import HeadTitle from "@/components/head-title";
 
 const PopularTVSeriesPage = () => {
   const router = useRouter();
@@ -36,6 +37,7 @@ const PopularTVSeriesPage = () => {
 
   return (
     <MainLayout needMargin>
+      <HeadTitle title="Popular TV Series" />
       <MediaListWithPagination
         title={"Popular TV Series"}
         isLoading={isLoading}

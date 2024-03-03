@@ -15,6 +15,7 @@ import Credits from "@/components/movies/single-movie/credits";
 import MovieSwiperSm from "@/components/swiper-slides/movie-swiper-sm";
 import Comments from "@/components/movies/comments";
 import { Comment as CommentType } from "@/types/comment";
+import HeadTitle from "@/components/head-title";
 
 interface Props {
   movie: Movie;
@@ -33,6 +34,7 @@ const MoviePage: NextPage<Props> = ({
 }) => {
   return (
     <MainLayout>
+      <HeadTitle title={movie.title ?? ""} />
       <Box
         sx={{
           minHeight: "100vh",

@@ -9,6 +9,7 @@ import TabComponent from "@/components/profile/profile-tab";
 import withAuth from "@/helper/withAuth";
 import { ContextValue } from "@/types/general";
 import { W150_IMAGE_URL } from "@/constants/image-urls";
+import HeadTitle from "@/components/head-title";
 
 const ProfilePage: NextPage = () => {
   const theme = useTheme();
@@ -21,6 +22,7 @@ const ProfilePage: NextPage = () => {
   };
   return (
     <MainLayout>
+      <HeadTitle title="Profile" />
       <Box
         sx={{
           minHeight: "100vh",

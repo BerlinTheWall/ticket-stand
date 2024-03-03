@@ -52,6 +52,7 @@ export default function MyApp(props: MyAppProps) {
         <AppState>
           <CacheProvider value={emotionCache}>
             <Head>
+              <title>Ticket Stand</title>
               <meta
                 name="viewport"
                 content="initial-scale=1, width=device-width"

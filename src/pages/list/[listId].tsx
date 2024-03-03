@@ -20,6 +20,7 @@ import { Media } from "@/types/media";
 import { QueryClient, dehydrate, useQuery } from "@tanstack/react-query";
 import makeQueryKey from "@/utils/make-query";
 import queryKeys from "@/constants/query-keys";
+import HeadTitle from "@/components/head-title";
 
 interface QueryResult {
   data: SingleListType | undefined;
@@ -59,6 +60,7 @@ const ListPage: NextPage = () => {
 
   return (
     <MainLayout>
+      <HeadTitle title={`List ${data?.name}`} />
       <Box
         sx={{
           minHeight: "100vh",

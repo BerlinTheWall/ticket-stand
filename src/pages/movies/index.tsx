@@ -15,6 +15,7 @@ import MovieCardSkeletonLoader from "@/components/movies/movie-card-skeleton-loa
 import { MovieGenre } from "@/constants/movie-genre";
 import { useMemo } from "react";
 import SearchBar from "@/components/search-bar";
+import HeadTitle from "@/components/head-title";
 
 const MovieListPage = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
@@ -46,6 +47,7 @@ const MovieListPage = () => {
 
   return (
     <MainLayout needMargin>
+      <HeadTitle title={`${categoryName} Movies`} />
       <SearchBar readUrl />
       <Box mx={5} pt={2}>
         <Typography mb={2} component="h1" fontSize={24} fontWeight="bold">

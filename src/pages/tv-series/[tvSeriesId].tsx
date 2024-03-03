@@ -26,6 +26,7 @@ import queryKeys from "@/constants/query-keys";
 import { useRouter } from "next/router";
 import { Grid } from "@mui/material";
 import { MovieVideo } from "@/types/movie";
+import HeadTitle from "@/components/head-title";
 
 interface Props {
   tvSerie: TVSeries;
@@ -74,6 +75,7 @@ const TVSeriesPage: NextPage<Props> = ({
 
   return (
     <MainLayout>
+      <HeadTitle title="TV Series" />
       <Box
         sx={{
           minHeight: "100vh",
@@ -98,7 +100,11 @@ const TVSeriesPage: NextPage<Props> = ({
             data && <EpisodeSwiper items={data?.episodes} title="Episodes" />
           )}
         </Box>
-        <MovieSwiperMd items={series} title="Recommendations" name="recommendations" />
+        <MovieSwiperMd
+          items={series}
+          title="Recommendations"
+          name="recommendations"
+        />
         <Comments comments={comments} />
       </Box>
     </MainLayout>

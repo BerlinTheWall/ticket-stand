@@ -8,6 +8,7 @@ import makeQueryKey from "@/utils/make-query";
 import { QueryResult } from "@/types/general";
 import { TVSeries } from "@/types/tv-series";
 import { getTopRatedMovies } from "@/api/movies";
+import HeadTitle from "@/components/head-title";
 
 const TopRatedMoviesPage = () => {
   const router = useRouter();
@@ -36,6 +37,7 @@ const TopRatedMoviesPage = () => {
 
   return (
     <MainLayout needMargin>
+      <HeadTitle title="Top Rated Movies" />
       <MediaListWithPagination
         title={"Top Rated Movies"}
         isLoading={isLoading}
