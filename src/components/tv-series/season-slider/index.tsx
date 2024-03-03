@@ -9,6 +9,7 @@ import { Season } from "@/types/tv-series";
 import NextPrevEl from "@/components/swiper-slides/next-prev-button";
 import SeasonCardDetail from "./season-slider-detail";
 import { useState } from "react";
+import { W500_IMAGE_URL } from "@/constants/image-urls";
 
 interface Props {
   title: string;
@@ -112,9 +113,7 @@ const SeasonSwiper: React.FC<Props> = ({ title, items, setSeason }) => {
                   overflow="hidden"
                 >
                   <Image
-                    src={
-                      "https://www.themoviedb.org/t/p/w500/" + item.poster_path
-                    }
+                    src={W500_IMAGE_URL + item.poster_path}
                     alt={item.name}
                     width={1000}
                     height={100}
@@ -123,7 +122,6 @@ const SeasonSwiper: React.FC<Props> = ({ title, items, setSeason }) => {
                       height: "100%",
                       objectFit: "cover",
                       backgroundPosition: "center center",
-           
                     }}
                   />
                   <Box
@@ -133,7 +131,7 @@ const SeasonSwiper: React.FC<Props> = ({ title, items, setSeason }) => {
                       left: 0,
                       width: "100%",
                       height: "30%",
-          
+
                       background: (theme) =>
                         `linear-gradient(to bottom, transparent 0%, ${theme.palette.background.paper} 50%)`,
                     }}

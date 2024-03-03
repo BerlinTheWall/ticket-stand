@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import { Cast } from "@/types/credits";
 import Image from "next/image";
+import { W276_IMAGE_URL } from "@/constants/image-urls";
 
 interface Props {
   casts: Cast[];
@@ -88,45 +89,40 @@ const Credits: React.FC<Props> = ({ casts }) => {
         >
           {casts?.map((cast: Cast, index: number) => {
             return (
-              <>
-                <SwiperSlide
-                  key={cast?.credit_id}
-                  style={{
-                    width: "auto",
-                    display: "flex",
-                    paddingRight: "20px",
-                    paddingLeft: "20px",
-                  }}
-                >
-                  <Stack direction="row" alignItems="start" gap={2}>
-                    <Box sx={{ minWidth: 80, width: 80 }}>
-                      <Image
-                        src={
-                          "https://www.themoviedb.org/t/p/w276_and_h350_face" +
-                          cast.profile_path
-                        }
-                        alt={cast.name}
-                        width={100}
-                        height={80}
-                        style={{
-                          width: "100%",
-                          objectFit: "cover",
-                          backgroundPosition: "center center",
-                          borderRadius: 200,
-                        }}
-                      />
-                    </Box>
-                    <Stack direction={"column"}>
-                      <Typography sx={{ fontWeight: "bold" }}>
-                        {cast.name}
-                      </Typography>
-                      <Typography sx={{ fontSize: 14, color: "grey" }}>
-                        {cast.character}
-                      </Typography>
-                    </Stack>
+              <SwiperSlide
+                key={cast?.credit_id}
+                style={{
+                  width: "auto",
+                  display: "flex",
+                  paddingRight: "20px",
+                  paddingLeft: "20px",
+                }}
+              >
+                <Stack direction="row" alignItems="start" gap={2}>
+                  <Box sx={{ minWidth: 80, width: 80 }}>
+                    <Image
+                      src={W276_IMAGE_URL + cast.profile_path}
+                      alt={cast.name}
+                      width={100}
+                      height={80}
+                      style={{
+                        width: "100%",
+                        objectFit: "cover",
+                        backgroundPosition: "center center",
+                        borderRadius: 200,
+                      }}
+                    />
+                  </Box>
+                  <Stack direction={"column"}>
+                    <Typography sx={{ fontWeight: "bold" }}>
+                      {cast.name}
+                    </Typography>
+                    <Typography sx={{ fontSize: 14, color: "grey" }}>
+                      {cast.character}
+                    </Typography>
                   </Stack>
-                </SwiperSlide>
-              </>
+                </Stack>
+              </SwiperSlide>
             );
           })}
         </Swiper>

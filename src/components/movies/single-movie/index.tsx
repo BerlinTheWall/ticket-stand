@@ -6,6 +6,7 @@ import Image from "next/image";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import { convertMinuteToHour } from "@/utils/movie-length-converter";
 import ActionBar from "@/components/media/action-bar";
+import { W1920_IMAGE_URL, W500_IMAGE_URL } from "@/constants/image-urls";
 
 interface Props {
   movie: Movie;
@@ -19,10 +20,7 @@ const SingleMovie: React.FC<Props> = ({ movie, trailer }) => {
     <Box position="relative" height={isTablet ? 620 : 480}>
       <Box
         sx={{
-          backgroundImage: `url(${
-            "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
-            movie.backdrop_path
-          })`,
+          backgroundImage: `url(${W1920_IMAGE_URL + movie.backdrop_path})`,
           height: "100%",
           backgroundPosition: "center center",
           objectFit: "cover",
@@ -87,8 +85,8 @@ const SingleMovie: React.FC<Props> = ({ movie, trailer }) => {
             sx={{ height: { xs: "70%", md: "90%" } }}
           >
             <Image
-              src={"https://www.themoviedb.org/t/p/w500/" + movie.poster_path}
-              alt={movie.original_title}
+              src={W500_IMAGE_URL + movie.poster_path}
+              alt={movie.title}
               width={100}
               height={100}
               style={{
@@ -113,7 +111,7 @@ const SingleMovie: React.FC<Props> = ({ movie, trailer }) => {
               className="truncate-2-4"
               component="h1"
             >
-              {movie.original_title}
+              {movie.title}
             </Typography>
             <Stack
               direction="row"
@@ -121,7 +119,7 @@ const SingleMovie: React.FC<Props> = ({ movie, trailer }) => {
               gap={1}
               mt={1}
               whiteSpace="nowrap"
-              sx={{ display: { xs: "none", md: "flex" } }}
+              display={"flex"}
             >
               <StarRateRoundedIcon sx={{ color: "warning.light", mb: 0.3 }} />
               <Typography fontWeight="bold">
@@ -150,7 +148,7 @@ const SingleMovie: React.FC<Props> = ({ movie, trailer }) => {
                 genres={convertMovieGenreIdArraysToNames(movie.genres)}
               />
             </Stack>
-            <Typography marginTop={1} fontSize="1rem">
+            <Typography marginTop={1} fontSize="1rem" className="truncate-2-4">
               {movie.overview}
             </Typography>
           </Box>

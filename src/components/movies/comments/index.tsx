@@ -9,7 +9,7 @@ type Props = {
 
 const Comments: React.FC<Props> = ({ comments }) => {
   return (
-    <Box sx={{ paddingX: { sm: 5 } }}>
+    <Box sx={{ paddingX: { sm: 5, xs: 2 } }}>
       <Stack
         direction={"row"}
         alignItems={"center"}
@@ -19,8 +19,8 @@ const Comments: React.FC<Props> = ({ comments }) => {
           component="h1"
           fontSize={24}
           fontWeight={"bold"}
+          sx={{ paddingLeft: { xs: 0, sm: 2 } }}
           my={3}
-          paddingLeft={2}
         >
           Comments
         </Typography>

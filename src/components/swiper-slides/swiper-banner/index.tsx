@@ -8,6 +8,7 @@ import { Movie } from "@/types/movie";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import { convertMovieGenreIdsToNames } from "@/utils/genre-converter";
 import GenresList from "../genres-list";
+import { W1920_IMAGE_URL } from "@/constants/image-urls";
 
 type Props = {
   movies: Movie[];
@@ -46,11 +47,8 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
                 bgcolor={"background.default"}
               >
                 <Image
-                  src={
-                    "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
-                    movie.backdrop_path
-                  }
-                  alt={movie.original_title}
+                  src={W1920_IMAGE_URL + movie.backdrop_path}
+                  alt={movie.title}
                   width={10000}
                   height={100}
                   priority={true}
@@ -67,6 +65,7 @@ const SwiperBanner: React.FC<Props> = ({ movies }) => {
                     left: { xs: 0, sm: 50 },
                     px: { xs: "10px", sm: "20px" },
                     py: { xs: "10px", sm: "10px" },
+                    pb: { sm: "20px" },
                     borderRadius: { sm: 2, xs: 0 },
                     bgcolor: (theme) => `${theme.palette.background.paper}d6`,
                     position: "absolute",

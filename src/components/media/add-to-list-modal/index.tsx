@@ -82,10 +82,11 @@ const AddToListModal: React.FC = () => {
                       px: 2,
                       py: 1,
                       borderRadius: 2,
+                      ":hover": {
+                        borderColor: "primary.dark",
+                      },
                       boxShadow: (theme) =>
-                        `0px 2px 8px ${theme.palette.error.main}`,
-                      filter: (theme) =>
-                        `drop-shadow(0px 2px 1px ${theme.palette.info.main} )`,
+                        `0px 2px 8px ${theme.palette.primary.main}`,
                     }}
                     component={ButtonBase}
                     onClick={() => handleAddToList(item)}

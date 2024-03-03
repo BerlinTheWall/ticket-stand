@@ -8,6 +8,7 @@ import Image from "next/image";
 import TabComponent from "@/components/profile/profile-tab";
 import withAuth from "@/helper/withAuth";
 import { ContextValue } from "@/types/general";
+import { W150_IMAGE_URL } from "@/constants/image-urls";
 
 const ProfilePage: NextPage = () => {
   const theme = useTheme();
@@ -32,10 +33,7 @@ const ProfilePage: NextPage = () => {
           <Stack direction={"row"} gap={3} mt={5} pb={3}>
             {loggedIn && user?.avatar?.tmdb?.avatar_path ? (
               <Image
-                src={
-                  "http://www.themoviedb.org/t/p/w150_and_h150_face" +
-                  user.avatar.tmdb.avatar_path
-                }
+                src={W150_IMAGE_URL + user.avatar.tmdb.avatar_path}
                 alt={"Profile image"}
                 width={100}
                 height={100}

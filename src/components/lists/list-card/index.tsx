@@ -49,7 +49,6 @@ const ListCard: React.FC<Props> = ({ list, backgroundImage }) => {
           <ListCardDetail
             title={list.name}
             count={list.item_count}
-            favoriteCount={list.favorite_count}
             listType={list.list_type}
           />
         </Link>

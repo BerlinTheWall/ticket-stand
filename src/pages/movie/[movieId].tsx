@@ -43,9 +43,11 @@ const MoviePage: NextPage<Props> = ({
       >
         <SingleMovie movie={movie} trailer={trailer} />
         <Credits casts={credits.cast} />
-        <Box>
-          <MovieSwiperSm movies={movies} title="Recommended for you" />
-        </Box>
+        <MovieSwiperSm
+          items={movies}
+          title="Recommended for you"
+          name="recommendedForYou"
+        />
         <Comments comments={comments} />
       </Box>
     </MainLayout>

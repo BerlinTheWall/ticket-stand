@@ -56,13 +56,26 @@ export const FormInputSlider = ({
         <Typography sx={sx} whiteSpace={"nowrap"}>
           {label}:
         </Typography>
-        <Typography fontWeight={"bold"} color={"primary.dark"}>
-          {value[0]}
-        </Typography>
-        -
-        <Typography fontWeight={"bold"} color={"primary.dark"}>
-          {value[1]}
-        </Typography>
+        {isDouble ? (
+          <>
+            <Typography fontWeight={"bold"} color={"primary.dark"}>
+              {value[0]}
+            </Typography>
+            <span>-</span>
+            <Typography fontWeight={"bold"} color={"primary.dark"}>
+              {value[1]}
+            </Typography>
+          </>
+        ) : (
+          <Typography
+            sx={sx}
+            fontWeight={"bold"}
+            color={"primary.dark"}
+            fontSize={20}
+          >
+            {value}
+          </Typography>
+        )}
       </Stack>
       <Slider
         value={value}

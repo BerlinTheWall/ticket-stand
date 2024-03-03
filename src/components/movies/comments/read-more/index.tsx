@@ -18,7 +18,7 @@ const ReadMoreCollapse: React.FC<Props> = ({ text, maxLength }) => {
 
   return (
     <Stack mt={2} textAlign={"justify"} px={3}>
-      <Typography variant="body1">
+      <Typography variant="body1" sx={{ overflowWrap: "break-word" }}>
         {expanded ? text : `${text.slice(0, maxLength)}...`}
       </Typography>
       <Collapse in={expanded}>

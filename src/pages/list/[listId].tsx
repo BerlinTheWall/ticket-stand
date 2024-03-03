@@ -1,31 +1,10 @@
 import Box from "@mui/material/Box";
 import MainLayout from "@/layout/main-layout";
 import { GetServerSideProps, NextPage } from "next";
-import {
-  getMovieComments,
-  getMovieRecommendations,
-  getSingleMovie,
-  getSingleMovieCredits,
-} from "@/api/movies";
-import SingleMovie from "@/components/movies/single-movie";
-import { Credit } from "@/types/credits";
-import Credits from "@/components/movies/single-movie/credits";
-import MovieSwiperSm from "@/components/swiper-slides/movie-swiper-sm";
-import Comments from "@/components/movies/comments";
-import { Comment as CommentType } from "@/types/comment";
-import { Season, TVSeries } from "@/types/tv-series";
-import { getSingleTVSeries, getTVSeriesSeasons } from "@/api/tv-series";
-import SingleTVSerie from "@/components/tv-series/tv-series-card";
-import MovieSwiperMd from "@/components/swiper-slides/movie-swiper-md";
-import SeasonSwiper from "@/components/tv-series/season-slider";
-import EpisodeSwiper from "@/components/tv-series/episode-slider";
-import { useGetTVSeriesSeasons } from "@/api/tv-series/hooks/useGetEpisodes";
-import { useEffect, useState } from "react";
 import MovieCardSkeletonLoader from "@/components/movies/movie-card-skeleton-loader";
 import { SingleListType } from "@/types/list";
 import { getSingleList } from "@/api/lists";
 import { useRouter } from "next/router";
-import { useGetList } from "@/api/lists/hooks/useGetList";
 import {
   Button,
   Grid,
@@ -35,8 +14,6 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import { Movie } from "@/types/movie";
-import MovieCard from "@/components/movies/movie-card";
 import { PROFILE_PAGE } from "@/constants/urls";
 import MediaCard from "@/components/media/media-card";
 import { Media } from "@/types/media";
@@ -94,6 +71,7 @@ const ListPage: NextPage = () => {
           direction={"row"}
           justifyContent={"space-between"}
           alignItems={"center"}
+          mt={2}
         >
           <Stack direction={"row"} alignItems={"center"} gap={1}>
             <Typography
@@ -166,4 +144,3 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     },
   };
 };
-

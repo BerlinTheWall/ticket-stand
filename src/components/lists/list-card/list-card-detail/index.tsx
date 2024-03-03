@@ -1,5 +1,4 @@
-import { Box, Divider, Stack, Typography } from "@mui/material";
-import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
+import { Box, Stack, Typography } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LiveTvIcon from "@mui/icons-material/LiveTv";
 import MovieIcon from "@mui/icons-material/Movie";
@@ -8,7 +7,7 @@ import { profileListType } from "@/types/general";
 type Props = {
   title: string;
   count: number;
-  favoriteCount: number;
+  // favoriteCount: number;
   listType: profileListType;
   isMd?: boolean;
 };
@@ -16,10 +15,9 @@ type Props = {
 const ListCardDetail: React.FC<Props> = ({
   title,
   count,
-  favoriteCount,
+  // favoriteCount,
   listType,
 }) => {
-  
   return (
     <Box
       sx={{
@@ -71,7 +69,7 @@ const ListCardDetail: React.FC<Props> = ({
             </Typography>
           </Typography>
         </Box>
-        <Stack
+        {/* <Stack
           direction={"row"}
           alignItems={"center"}
           gap={0.5}
@@ -92,7 +90,7 @@ const ListCardDetail: React.FC<Props> = ({
             {favoriteCount}
           </Typography>
           <FavoriteIcon sx={{ color: "primary.dark" }} />
-        </Stack>
+        </Stack> */}
       </Stack>
     </Box>
   );

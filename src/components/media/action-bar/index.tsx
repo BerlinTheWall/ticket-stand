@@ -1,5 +1,4 @@
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { LoadingButton } from "@mui/lab";
 import { useIsLoggedIn } from "@/hooks/useIsLoggedIn";
@@ -8,7 +7,7 @@ import { useContext, useState } from "react";
 import { addToFavorites, addToWatchlist } from "@/api/profile";
 import { toast } from "react-toastify";
 import { useLists } from "@/api/profile/hooks/useLists";
-import { Button, Grid, Tooltip } from "@mui/material";
+import { Grid, Tooltip } from "@mui/material";
 import AddToListDrawer from "@/components/movies/single-movie/add-to-list-dropdown";
 import { ContextValue } from "@/types/general";
 import { UseQueryResult } from "@tanstack/react-query";
@@ -78,9 +77,11 @@ const ActionBar: React.FC<Props> = ({ mediaId, isMovie, url }) => {
 
   return (
     <Grid container spacing={2} mt={0.5}>
-      <Grid item lg={3} md={4} sm={5.5} xs={6}>
-        <TrailerModal url={url} />
-      </Grid>
+      {url && (
+        <Grid item lg={3} md={4} sm={5.5} xs={6}>
+          <TrailerModal url={url} />
+        </Grid>
+      )}
       <Grid item lg={3} md={4} sm={5.5} xs={6}>
         <Tooltip title={loggedIn ? "Add to Favorites" : "Login to proceed"}>
           <span>

@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography,  } from "@mui/material";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css/navigation";
 import Image from "next/image";
@@ -12,13 +12,17 @@ import Link from "next/link";
 import { SINGLE_MOVIE_PAGE, SINGLE_TVSERIES_PAGE } from "@/constants/urls";
 import { TVSeries } from "@/types/tv-series";
 import { isMovie } from "@/utils/check-is-movie";
+import { W1920_IMAGE_URL } from "@/constants/image-urls";
+import SeeMoreBox from "../see-more-box";
 
 interface Props {
   title: string;
   items: (Movie | TVSeries)[];
+  href?: string;
+  name: string;
 }
 
-const MovieSwiperMd: React.FC<Props> = ({ title, items }) => {
+const MovieSwiperMd: React.FC<Props> = ({ title, items, href, name }) => {
   return (
     <Box sx={{ paddingX: { sm: 5 } }}>
       <Typography
@@ -37,12 +41,12 @@ const MovieSwiperMd: React.FC<Props> = ({ title, items }) => {
         }}
       >
         <NextPrevEl
-          className="mdNextElSwiper"
+          className={`${name}-mdNextElSwiper`}
           sx={{ right: 0 }}
           Icon={<ChevronRightRoundedIcon color="inherit" />}
         />
         <NextPrevEl
-          className="mdPrevElSwiper"
+          className={`${name}-mdPrevElSwiper`}
           sx={{ left: 0 }}
           Icon={<ChevronLeftRoundedIcon color="inherit" />}
         />
@@ -52,8 +56,8 @@ const MovieSwiperMd: React.FC<Props> = ({ title, items }) => {
           spaceBetween={15}
           navigation={{
             enabled: true,
-            nextEl: ".mdNextElSwiper",
-            prevEl: ".mdPrevElSwiper",
+            nextEl: `.${name}-mdNextElSwiper`,
+            prevEl: `.${name}-mdPrevElSwiper`,
           }}
           modules={[Autoplay, Navigation]}
           grabCursor={true}
@@ -100,13 +104,8 @@ const MovieSwiperMd: React.FC<Props> = ({ title, items }) => {
                 >
                   <Box width="100%" height={250} position="relative">
                     <Image
-                      src={
-                        "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
-                        item.backdrop_path
-                      }
-                      alt={
-                        isMovie(item) ? item.original_title : item.original_name
-                      }
+                      src={W1920_IMAGE_URL + item.backdrop_path}
+                      alt={isMovie(item) ? item.title : item.name}
                       width={1000}
                       height={100}
                       style={{
@@ -132,10 +131,9 @@ const MovieSwiperMd: React.FC<Props> = ({ title, items }) => {
                       }}
                     />
                     <MovieCardDetail
+                      isMovie={isMovie(item)}
                       isMd
-                      title={
-                        isMovie(item) ? item.original_title : item.original_name
-                      }
+                      title={isMovie(item) ? item.title : item.name}
                       rating={item.vote_average}
                       genres={item.genre_ids}
                     />
@@ -144,6 +142,15 @@ const MovieSwiperMd: React.FC<Props> = ({ title, items }) => {
               </SwiperSlide>
             );
           })}
+          {href && (
+            <SwiperSlide
+              style={{
+                alignSelf: "center",
+              }}
+            >
+              <SeeMoreBox href={href} sx={{ mx: "auto" }} />
+            </SwiperSlide>
+          )}
         </Swiper>
       </Box>
     </Box>

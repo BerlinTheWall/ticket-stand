@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css/navigation";
 import Image from "next/image";
@@ -11,13 +11,21 @@ import GenresList from "../genres-list";
 import { convertMovieGenreIdsToNames } from "@/utils/genre-converter";
 import Link from "next/link";
 import { SINGLE_MOVIE_PAGE } from "@/constants/urls";
+import SeeMoreSlide from "../see-more-box";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { W500_IMAGE_URL } from "@/constants/image-urls";
+import SeeMoreBox from "../see-more-box";
 
 interface Props {
   title: string;
   movies: Movie[];
+  href: string;
+  name: string;
 }
 
-const MovieSwiperXl: React.FC<Props> = ({ title, movies }) => {
+const MovieSwiperXl: React.FC<Props> = ({ title, movies, href,name }) => {
+  const theme = useTheme();
+
   return (
     <Box sx={{ paddingX: { sm: 5 } }}>
       <Typography
@@ -36,12 +44,12 @@ const MovieSwiperXl: React.FC<Props> = ({ title, movies }) => {
         }}
       >
         <NextPrevEl
-          className="XlNextElSwiper"
+          className={`${name}-XlNextElSwiper`}
           sx={{ right: 0 }}
           Icon={<ChevronRightRoundedIcon color="inherit" />}
         />
         <NextPrevEl
-          className="XlPrevElSwiper"
+          className={`${name}-XlPrevElSwiper`}
           sx={{ left: 0 }}
           Icon={<ChevronLeftRoundedIcon color="inherit" />}
         />
@@ -51,8 +59,8 @@ const MovieSwiperXl: React.FC<Props> = ({ title, movies }) => {
           spaceBetween={15}
           navigation={{
             enabled: true,
-            nextEl: ".XlNextElSwiper",
-            prevEl: ".XlPrevElSwiper",
+            nextEl: `.${name}-XlNextElSwiper`,
+            prevEl: `.${name}-XlPrevElSwiper`,
           }}
           modules={[Autoplay, Navigation]}
           grabCursor={true}
@@ -110,11 +118,8 @@ const MovieSwiperXl: React.FC<Props> = ({ title, movies }) => {
                     color="text.primary"
                   >
                     <Image
-                      src={
-                        "https://www.themoviedb.org/t/p/w500/" +
-                        movie.poster_path
-                      }
-                      alt={movie.original_title}
+                      src={W500_IMAGE_URL + movie.poster_path}
+                      alt={movie.title}
                       width={100}
                       height={100}
                       style={{
@@ -154,7 +159,7 @@ const MovieSwiperXl: React.FC<Props> = ({ title, movies }) => {
                         component="h3"
                         className="truncate-2"
                       >
-                        {movie.original_title}
+                        {movie.title}
                       </Typography>
                       <GenresList
                         genres={convertMovieGenreIdsToNames(movie.genre_ids)}
@@ -165,6 +170,15 @@ const MovieSwiperXl: React.FC<Props> = ({ title, movies }) => {
               </SwiperSlide>
             );
           })}
+          {href && (
+            <SwiperSlide
+              style={{
+                alignSelf: "center",
+              }}
+            >
+              <SeeMoreBox href={href} sx={{ mx: "auto" }} />
+            </SwiperSlide>
+          )}
         </Swiper>
       </Box>
     </Box>

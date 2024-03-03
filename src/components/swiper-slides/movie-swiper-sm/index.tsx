@@ -1,4 +1,4 @@
-import { Box, Divider, Stack, Typography } from "@mui/material";
+import { Box, Divider, Stack, Typography,  } from "@mui/material";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css/navigation";
 import Image from "next/image";
@@ -11,30 +11,26 @@ import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import GenresList from "../genres-list";
 import { convertMovieGenreIdsToNames } from "@/utils/genre-converter";
 import { useEffect, useState } from "react";
-import { getPopularMovies } from "@/api/movies";
 import Link from "next/link";
-import { SINGLE_MOVIE_PAGE } from "@/constants/urls";
+import { SINGLE_MOVIE_PAGE, SINGLE_TVSERIES_PAGE } from "@/constants/urls";
+import { TVSeries } from "@/types/tv-series";
+import { isMovie } from "@/utils/check-is-movie";
+import { W500_IMAGE_URL } from "@/constants/image-urls";
+import SeeMoreBox from "../see-more-box";
 
 interface Props {
   title?: string;
-  movies: Movie[];
+  items: (Movie | TVSeries)[];
+  href?: string;
+  name: string;
 }
 
-const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
-  const [updatedMovies, setUpdatedMovies] = useState(movies);
-  const [page, setPages] = useState<number>(1);
+const MovieSwiperSm: React.FC<Props> = ({ title, items, href, name }) => {
+  const [updatedMedias, setUpdatedMedias] = useState(items);
 
   useEffect(() => {
-    setUpdatedMovies(movies);
-  }, [movies]);
-
-  const handleShow = async () => {
-    setPages(page + 1);
-    const { data: movies } = await getPopularMovies({
-      page: page + 1,
-    });
-    setUpdatedMovies((prevMovies) => [...prevMovies, ...movies.results]);
-  };
+    setUpdatedMedias(items);
+  }, [items]);
 
   return (
     <Box sx={{ paddingX: { sm: 5 } }}>
@@ -54,12 +50,12 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
         }}
       >
         <NextPrevEl
-          className="SmNextElSwiper"
+          className={`${name}-SmNextElSwiper`}
           sx={{ right: 0 }}
           Icon={<ChevronRightRoundedIcon color="inherit" />}
         />
         <NextPrevEl
-          className="SmPrevElSwiper"
+          className={`${name}-SmPrevElSwiper`}
           sx={{ left: 0 }}
           Icon={<ChevronLeftRoundedIcon color="inherit" />}
         />
@@ -69,10 +65,9 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
           spaceBetween={15}
           navigation={{
             enabled: true,
-            nextEl: ".SmNextElSwiper",
-            prevEl: ".SmPrevElSwiper",
+            nextEl: `.${name}-SmNextElSwiper`,
+            prevEl: `.${name}-SmPrevElSwiper`,
           }}
-          onReachEnd={handleShow}
           modules={[Autoplay, Navigation]}
           grabCursor={true}
           style={{ position: "relative" }}
@@ -111,14 +106,18 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
             },
           }}
         >
-          {updatedMovies?.map((movie: Movie, index) => {
+          {updatedMedias?.map((item: Movie | TVSeries, index) => {
             return (
               <SwiperSlide
-                key={movie.id}
+                key={item.id}
                 style={{ width: "100%", display: "flex" }}
               >
                 <Link
-                  href={`${SINGLE_MOVIE_PAGE}/${movie.id}`}
+                  href={
+                    isMovie(item)
+                      ? `${SINGLE_MOVIE_PAGE}/${item.id}`
+                      : `${SINGLE_TVSERIES_PAGE}/${item.id}`
+                  }
                   style={{ width: "100%" }}
                 >
                   <Typography
@@ -149,11 +148,8 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
                     px={0}
                   >
                     <Image
-                      src={
-                        "https://www.themoviedb.org/t/p/w500/" +
-                        movie.poster_path
-                      }
-                      alt={movie.original_title}
+                      src={W500_IMAGE_URL + item.poster_path}
+                      alt={isMovie(item) ? item.title : item.name}
                       width={100}
                       height={100}
                       style={{
@@ -175,7 +171,7 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
                           borderRadius: "7px",
                           width: "55px",
                           px: 1,
-                          display: !movie.adult ? "block" : "none",
+                          display: !item.adult ? "block" : "none",
                         }}
                         component="h3"
                       >
@@ -185,10 +181,10 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
                         sx={{ fontWeight: "bold", fontSize: "1rem" }}
                         component="h3"
                       >
-                        {movie.original_title}
+                        {isMovie(item) ? item.title : item.name}
                       </Typography>
                       <GenresList
-                        genres={convertMovieGenreIdsToNames(movie.genre_ids)}
+                        genres={convertMovieGenreIdsToNames(item.genre_ids)}
                       />
                       <Stack
                         direction={"row"}
@@ -201,16 +197,20 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
                           sx={{ color: "warning.light", mb: 0.3 }}
                         />
                         <Typography fontWeight={"bold"}>
-                          {movie.vote_average.toFixed(1)}
+                          {item.vote_average.toFixed(1)}
                         </Typography>
-                        <Divider
-                          orientation="vertical"
-                          flexItem
-                          sx={{ borderRightWidth: "2px", color: "gray" }}
-                        />
-                        <Typography fontWeight={"bold"}>
-                          {movie.release_date.slice(0, 4)}
-                        </Typography>
+                        {isMovie(item) && (
+                          <>
+                            <Divider
+                              orientation="vertical"
+                              flexItem
+                              sx={{ borderRightWidth: "2px", color: "gray" }}
+                            />
+                            <Typography fontWeight={"bold"}>
+                              {item.release_date.slice(0, 4)}
+                            </Typography>
+                          </>
+                        )}
                       </Stack>
                     </Stack>
                   </Stack>
@@ -218,6 +218,15 @@ const MovieSwiperSm: React.FC<Props> = ({ title, movies }) => {
               </SwiperSlide>
             );
           })}
+          {href && (
+            <SwiperSlide
+              style={{
+                alignSelf: "center",
+              }}
+            >
+              <SeeMoreBox href={href} sx={{ mx: "auto" }} />
+            </SwiperSlide>
+          )}
         </Swiper>
       </Box>
     </Box>

@@ -14,7 +14,7 @@ const MediaCardDetail: React.FC<Props> = ({ title, rating, genres }) => {
     <Box
       sx={{
         width: "100%",
-        px: { xs: "6px", sm: "10px" },
+        px: { xs: "6px", sm: "0px" },
         position: "absolute",
       }}
       bottom={6}

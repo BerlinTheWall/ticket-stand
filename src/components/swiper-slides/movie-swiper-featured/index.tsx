@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Divider,
   Stack,
   Typography,
@@ -15,10 +14,9 @@ import MovieCardDetail from "../movie-card-detail";
 import { Movie } from "@/types/movie";
 import { useState } from "react";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 import { convertMovieGenreIdsToNames } from "@/utils/genre-converter";
 import GenresList from "../genres-list";
+import { W1920_IMAGE_URL, W500_IMAGE_URL } from "@/constants/image-urls";
 
 interface Props {
   movies: Movie[];
@@ -38,11 +36,8 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
     <Box position="relative" marginTop="5rem" height={620}>
       <Box>
         <Image
-          src={
-            "https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces" +
-            selectedMovie.backdrop_path
-          }
-          alt={selectedMovie.original_title}
+          src={W1920_IMAGE_URL + selectedMovie.backdrop_path}
+          alt={selectedMovie.title}
           width={10000}
           height={100}
           className="swiper-featured-image"
@@ -90,7 +85,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
           className="truncate-2-4"
           component="h1"
         >
-          {selectedMovie.original_title}
+          {selectedMovie.title}
         </Typography>
         <Stack
           direction="row"
@@ -126,35 +121,6 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
             {selectedMovie.overview}
           </Typography>
         )}
-        <Stack
-          direction="row"
-          alignItems="center"
-          gap={2}
-          mt={2}
-          width="100%"
-          whiteSpace="nowrap"
-        >
-          <Button
-            variant="contained"
-            fullWidth
-            color="primary"
-            sx={{
-              fontSize: { xs: "0.7rem", sm: "0.8rem" },
-            }}
-            onClick={() => {}}
-          >
-            <PlayCircleFilledIcon style={{ marginRight: "8px" }} />
-            Watch Trailer
-          </Button>
-          <Button
-            variant="outlined"
-            fullWidth
-            color="secondary"
-            sx={{ fontSize: { xs: "0.7rem", sm: "0.8rem" } }}
-          >
-            <BookmarkBorderIcon style={{ marginRight: "8px" }} /> Add Watchlist
-          </Button>
-        </Stack>
       </Box>
       <Box
         sx={{
@@ -242,10 +208,8 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
                   }
                 >
                   <Image
-                    src={
-                      "https://www.themoviedb.org/t/p/w500/" + movie.poster_path
-                    }
-                    alt={movie.original_title}
+                    src={W500_IMAGE_URL + movie.poster_path}
+                    alt={movie.title}
                     width={100}
                     height={100}
                     style={{
@@ -270,9 +234,10 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
                     }}
                   />
                   <MovieCardDetail
-                    title={movie.original_title}
+                    title={movie.title}
                     rating={movie.vote_average}
                     genres={movie.genre_ids}
+                    isMovie={false}
                   />
                 </Box>
               </SwiperSlide>

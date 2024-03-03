@@ -12,6 +12,7 @@ import { useContext, useState } from "react";
 import { AppContext } from "@/context/AppContext";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { ContextValue } from "@/types/general";
+import { W150_IMAGE_URL } from "@/constants/image-urls";
 
 const ProfileDropdown: React.FC = () => {
   const { user, logout } = useContext(AppContext) as ContextValue;
@@ -39,10 +40,7 @@ const ProfileDropdown: React.FC = () => {
           aria-expanded={open ? "true" : undefined}
         >
           <Avatar
-            src={
-              "http://www.themoviedb.org/t/p/w150_and_h150_face" +
-              user!?.avatar?.tmdb?.avatar_path
-            }
+            src={W150_IMAGE_URL + user!?.avatar?.tmdb?.avatar_path}
             sx={{ bgcolor: "primary.main" }}
             alt={`${user!?.username} logo`}
           />
@@ -61,13 +59,14 @@ const ProfileDropdown: React.FC = () => {
         PaperProps={{
           elevation: 0,
           sx: {
+            borderRadius: 2,
             minWidth: 120,
             px: 2,
             display: "grid",
             overflow: "visible",
             filter: (theme) =>
-              `drop-shadow(0px 2px 8px ${theme.palette.primary.main})`,
-            mt: 1.5,
+              `drop-shadow(0px 2px 6px ${theme.palette.primary.main})`,
+            mt: 2,
             "& .MuiAvatar-root": {
               width: 32,
               height: 32,

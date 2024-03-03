@@ -7,6 +7,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
 import { AppContext } from "@/context/AppContext";
 import { ContextValue } from "@/types/general";
+import { addToFavorites, addToWatchlist } from "@/api/profile";
+import { toast } from "react-toastify";
 
 type Props = {
   mediaId: string | number;
@@ -18,34 +20,67 @@ const MovieCardToolTipAction: React.FC<Props> = ({ mediaId, isMovie }) => {
   const { openListModal } = useContext(AppContext) as ContextValue;
 
   const loggedIn = useIsLoggedIn();
+  const { user } = useContext(AppContext) as ContextValue;
 
   const handleListModal = () => {
     openListModal(mediaId, isMovie);
   };
 
-  const BUTTON_ACTION_ITEMS = useMemo(
-    () => [
-      {
-        title: "Add to Favorites",
-        color: "error",
-        icon: FavoriteIcon,
-        onClick: null,
-      },
-      {
-        title: "Add to Watchlist",
-        color: "inherit",
-        icon: BookmarkAddIcon,
-        onClick: null,
-      },
-      {
-        title: "Add to List",
-        color: "primary",
-        icon: FormatListBulletedIcon,
-        onClick: handleListModal,
-      },
-    ],
-    []
-  );
+  const handleLike = async () => {
+    try {
+      const res = await addToFavorites(
+        user!.id,
+        isMovie ? "movie" : "tv",
+        mediaId as number
+      );
+      toast.success("Added to Favorites!");
+      return res;
+    } catch (error) {
+      toast.error("Error in adding to Favorites!");
+      return error;
+    }
+  };
+
+  const handleAddToWatchlist = async () => {
+    if (loggedIn) {
+      // setIsWatchlistLoading(true);
+      try {
+        const res = await addToWatchlist(
+          user!.id,
+          isMovie ? "movie" : "tv",
+          mediaId as number
+        );
+        toast.success("Added to Watchlist!");
+        // setIsWatchlistLoading(false);
+        return res;
+      } catch (error) {
+        toast.error("Error in adding to Watchlist!");
+        // setIsWatchlistLoading(false);
+        return error;
+      }
+    }
+  };
+
+  const BUTTON_ACTION_ITEMS = [
+    {
+      title: "Add to Favorites",
+      color: "error",
+      icon: FavoriteIcon,
+      onClick: handleLike,
+    },
+    {
+      title: "Add to Watchlist",
+      color: "inherit",
+      icon: BookmarkAddIcon,
+      onClick: handleAddToWatchlist,
+    },
+    {
+      title: "Add to List",
+      color: "primary",
+      icon: FormatListBulletedIcon,
+      onClick: handleListModal,
+    },
+  ];
 
   const openTooltip = () => {
     setIsHover(true);

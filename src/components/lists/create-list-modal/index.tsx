@@ -5,7 +5,7 @@ import CustomModal from "@/components/modal";
 import { AppContext } from "@/context/AppContext";
 import { ContextValue } from "@/types/general";
 import { LoadingButton } from "@mui/lab";
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, Stack, Typography, useMediaQuery } from "@mui/material";
 import { QueryClient, useMutation } from "@tanstack/react-query";
 import { useContext, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -25,6 +25,8 @@ const CreateListModal: React.FC = () => {
   const queryClient = new QueryClient();
   const [showModal, setShowModal] = useState<boolean>(false);
   const { user } = useContext(AppContext) as ContextValue;
+  const isMobile = useMediaQuery("(min-width:600px)");
+  const width = !isMobile ? 365 : 600;
 
   const {
     handleSubmit,
@@ -52,7 +54,7 @@ const CreateListModal: React.FC = () => {
         Create List
       </Button>
       <CustomModal
-        width={600}
+        width={width}
         open={showModal}
         onClose={() => setShowModal(false)}
       >

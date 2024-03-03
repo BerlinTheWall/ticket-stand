@@ -32,7 +32,7 @@ interface Props {
   credits: Credit;
   series: TVSeries[];
   comments: CommentType[];
-  trailer: MovieVideo;
+  trailer?: MovieVideo;
 }
 
 interface QueryResult {
@@ -98,7 +98,7 @@ const TVSeriesPage: NextPage<Props> = ({
             data && <EpisodeSwiper items={data?.episodes} title="Episodes" />
           )}
         </Box>
-        <MovieSwiperMd items={series} title="Recommendations" />
+        <MovieSwiperMd items={series} title="Recommendations" name="recommendations" />
         <Comments comments={comments} />
       </Box>
     </MainLayout>
@@ -115,11 +115,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const credits = await getSingleTVSerieCredits(tvSeriesId);
   const comments = await getTVSerieComments(tvSeriesId);
   const videos = await getTvSeriesVideos(tvSeriesId);
-  let trailer;
+  let trailer = null;
   videos.results.map((video) => {
     if (video.type === "Trailer") trailer = video;
   });
-  if (trailer === null || trailer === undefined) trailer = videos.results[0];
+  if (trailer === null && videos.results[0] !== undefined)
+    trailer = videos.results[0];
 
   await queryClient.prefetchQuery({
     queryKey: makeQueryKey(queryKeys.tvSeries, {}),

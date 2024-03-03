@@ -4,7 +4,7 @@ import CustomModal from "@/components/modal";
 import { LOGIN_PAGE } from "@/constants/urls";
 import { useIsLoggedIn } from "@/hooks/useIsLoggedIn";
 import { LoadingButton } from "@mui/lab";
-import { Button, Link, Stack, Typography } from "@mui/material";
+import { Button, Link, Stack, Typography, useMediaQuery } from "@mui/material";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -34,6 +34,9 @@ const marks = [
 const AddCommentModal: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const loggedIn = useIsLoggedIn();
+  const isMobile = useMediaQuery("(min-width:600px)");
+  const isTablet = useMediaQuery("(min-width:900px)");
+  const width = !isMobile ? 365 : isTablet ? 600 : 550;
 
   const {
     handleSubmit,
@@ -65,8 +68,8 @@ const AddCommentModal: React.FC = () => {
         </Link>
       )}
       <CustomModal
-        width={600}
         open={showModal}
+        width={width}
         onClose={() => setShowModal(false)}
       >
         <Stack height={"100%"} width={"100%"} gap={3}>
@@ -87,7 +90,7 @@ const AddCommentModal: React.FC = () => {
             min={0}
             max={10}
             marks={marks}
-            sx={{ pb: 2 }}
+            sx={{ pb: 2, minWidth: 30 }}
             showValue
           />
           <FormInputTextArea

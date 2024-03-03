@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   ClickAwayListener,
-  Divider,
   Fade,
   Grid,
   OutlinedInput,
@@ -14,22 +13,23 @@ import SearchIcon from "@mui/icons-material/Search";
 import { ChangeEvent, useState } from "react";
 import { useDebounce } from "@/hooks/useDebounce";
 import { getSearchMovie } from "@/api/movies";
-import { Movie } from "@/types/movie";
 import Image from "next/image";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import Link from "next/link";
-import { SINGLE_MOVIE_PAGE } from "@/constants/urls";
-import { useRouter } from "next/router";
+import { SINGLE_MOVIE_PAGE, SINGLE_TVSERIES_PAGE } from "@/constants/urls";
+import { Media } from "@/types/media";
+import { W500_IMAGE_URL } from "@/constants/image-urls";
 
 export const NavbarSearch = () => {
-  const router = useRouter();
-  const [searchResults, setSearchResults] = useState<Movie[]>([]);
+  const [searchResults, setSearchResults] = useState<Media[]>([]);
   const [open, setOpen] = useState<boolean>(false);
-  const [searchValue, setSearchValue] = useState<string>("");
+  // const [searchValue, setSearchValue] = useState<string>("");
+  const [displayResults, setDisplayResults] = useState<number>(3);
+  const [showLess, setShowLess] = useState<boolean>(false);
 
   const handleChange = useDebounce(
     async (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      setSearchValue(e.target.value);
+      // setSearchValue(e.target.value);
       try {
         const movies = await getSearchMovie(e.target.value);
         setSearchResults(movies.results);
@@ -42,6 +42,16 @@ export const NavbarSearch = () => {
 
   const toggleOpen = () => {
     setOpen((prev) => !prev);
+  };
+
+  const handleLoadMore = () => {
+    if (showLess) {
+      setShowLess(false);
+      setDisplayResults(displayResults - 3);
+    } else {
+      setDisplayResults(displayResults + 3);
+      setShowLess(true);
+    }
   };
 
   return (
@@ -107,14 +117,15 @@ export const NavbarSearch = () => {
           <Fade in={open} timeout={open ? 1000 : 500}>
             <Grid
               container
+              maxWidth={{ sm: 450, xs: "100%" }}
               sx={{
                 width: "fit-content",
                 transition: "all 0.5s",
                 position: "fixed",
                 top: 90,
                 whiteSpace: "nowrap",
-                height: 300,
                 overflowX: "hidden",
+                height: 330,
                 bgcolor: "background.default",
                 opacity: open ? 1 : 0,
                 color: "text.primary",
@@ -126,79 +137,77 @@ export const NavbarSearch = () => {
                 pb: 2,
               }}
             >
-              {searchResults.slice(0, 3).map((searchResult, index: number) => {
-                return (
-                  <Grid key={searchResult.id} item sm={4} xs={12} p={1.5}>
-                    <Link href={`${SINGLE_MOVIE_PAGE}/${searchResult.id}`}>
-                      <Stack
-                        maxWidth={{ sm: 100, xs: "100%" }}
-                        alignItems="center"
+              {searchResults
+                .slice(0, displayResults)
+                .map((searchResult, index: number) => {
+                  return (
+                    <Grid key={searchResult.id} item sm={4} xs={12} p={1.5}>
+                      <Link
+                        href={`${
+                          searchResult.media_type === "movie"
+                            ? SINGLE_MOVIE_PAGE
+                            : SINGLE_TVSERIES_PAGE
+                        }/${searchResult.id}`}
                       >
-                        <Box
-                          position="relative"
-                          width={"100%"}
-                          maxWidth={200}
-                          height={150}
-                          borderRadius={2}
-                          overflow="hidden"
-                          boxShadow={2}
-                        >
-                          <Image
-                            src={
-                              "https://www.themoviedb.org/t/p/w500/" +
-                              searchResult.poster_path
-                            }
-                            alt={searchResult.original_title}
-                            fill
-                          />
-                        </Box>
-                        <Stack
-                          direction="row"
-                          spacing={1}
-                          alignItems="center"
-                          divider={<Divider orientation="vertical" flexItem />}
-                          mt={1}
-                        >
-                          <Stack
-                            fontSize={14}
-                            alignItems="center"
-                            direction={"row"}
-                          >
-                            <StarRateRoundedIcon
-                              sx={{
-                                color: "warning.light",
-                                fontSize: "inherit",
-                              }}
-                            />
-                            <Typography fontWeight="400" fontSize="inherit">
-                              {searchResult?.vote_average?.toFixed(1)}
-                            </Typography>
-                          </Stack>
-                          <Typography
+                        <Stack>
+                          <Box
+                            position="relative"
+                            width={"100%"}
+                            maxWidth={200}
+                            height={180}
+                            borderRadius={2}
                             overflow="hidden"
-                            textOverflow="ellipsis"
-                            fontWeight="bold"
-                            variant="body2"
+                            boxShadow={2}
                           >
-                            {searchResult.original_title ?? "..."}
-                          </Typography>
+                            <Image
+                              src={W500_IMAGE_URL + searchResult.poster_path}
+                              alt={
+                                searchResult.title
+                                  ? searchResult.title
+                                  : searchResult.name
+                                  ? searchResult.name
+                                  : "unknown"
+                              }
+                              fill
+                            />
+                          </Box>
+                          <Stack direction="column" mt={0.8}>
+                            <Typography
+                              textOverflow="ellipsis"
+                              overflow="hidden"
+                              fontWeight="bold"
+                              variant="body2"
+                            >
+                              {searchResult.title ?? searchResult.name}
+                            </Typography>
+                            <Stack
+                              fontSize={14}
+                              alignItems="center"
+                              direction={"row"}
+                            >
+                              <StarRateRoundedIcon
+                                sx={{
+                                  color: "warning.light",
+                                  fontSize: "inherit",
+                                }}
+                              />
+                              <Typography fontWeight="400" fontSize="inherit">
+                                {searchResult?.vote_average?.toFixed(1)}
+                              </Typography>
+                            </Stack>
+                          </Stack>
                         </Stack>
-                      </Stack>
-                    </Link>
-                  </Grid>
-                );
-              })}
+                      </Link>
+                    </Grid>
+                  );
+                })}
 
               <Grid item xs={12} px={2}>
-                <Button
-                  onClick={() => {
-                    router.push(`/movies?q=${searchValue}`);
-                  }}
-                  variant="outlined"
-                  fullWidth
-                >
-                  Load More
-                </Button>
+                {searchResults.length > 3 && (
+                  <Button onClick={handleLoadMore} variant="outlined" fullWidth>
+                    {showLess ? "Show Less" : "Show More"}
+                  </Button>
+                )}
               </Grid>
             </Grid>
           </Fade>

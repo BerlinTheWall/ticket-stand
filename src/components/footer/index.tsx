@@ -3,7 +3,7 @@ import Link from "next/link";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import TelegramIcon from "@mui/icons-material/Telegram";
-import { IMPLEMENTER } from "@/constants/implementers";
+import { IMPLEMENTERS } from "@/constants/implementers";
 
 const FOOTER_LINKS_2 = [
   { title: "Privacy policy", link: "/" },
@@ -51,26 +51,25 @@ const Footer: React.FC = () => {
                 direction={{ xs: "column", sm: "row", md: "row" }}
                 alignItems={{ xs: "center", sm: "start" }}
                 justifyContent={{
-                  md: "end",
                   sm: "center",
                   xs: "space-between",
                 }}
               >
                 <Typography fontSize={20}>Implemented by </Typography>
                 <Stack
-                  direction="row"
+                  direction={{ xs: "column", sm: "row" }}
                   spacing={1}
-                  alignItems="baseline"
+                  alignItems={{ xs: "center", sm: "baseline" }}
                   divider={<Typography>&</Typography>}
                 >
-                  {IMPLEMENTER.map((item) => {
+                  {IMPLEMENTERS.map((item) => {
                     return (
                       <Stack key={item.name}>
                         <Typography
                           sx={{
                             color: `${item.color}.main`,
                             fontWeight: "bold",
-                            fontSize: 20,
+                            fontSize: 23,
                           }}
                           component="h4"
                         >
@@ -88,6 +87,7 @@ const Footer: React.FC = () => {
                             <LinkedInIcon
                               sx={{
                                 color: `${item.color}.main`,
+                                fontSize: 30,
                               }}
                             />
                           </Link>
@@ -95,6 +95,7 @@ const Footer: React.FC = () => {
                             <GitHubIcon
                               sx={{
                                 color: `${item.color}.main`,
+                                fontSize: 30,
                               }}
                             />
                           </Link>
@@ -102,6 +103,7 @@ const Footer: React.FC = () => {
                             <TelegramIcon
                               sx={{
                                 color: `${item.color}.main`,
+                                fontSize: 30,
                               }}
                             />
                           </Link>
@@ -120,7 +122,7 @@ const Footer: React.FC = () => {
           marginTop={5}
           spacing={3}
         >
-          <Stack direction={"row"} spacing={3}>
+          <Stack direction={"row"} spacing={3} justifyContent={"space-between"}>
             {FOOTER_LINKS_2.map((link) => {
               return (
                 <Link prefetch={false} href={link.link} key={link.title}>
