@@ -8,6 +8,8 @@ import queryKeys from "@/constants/query-keys";
 import { QueryResult } from "@/types/general";
 import { TVSeries } from "@/types/tv-series";
 import { getPopularMovies } from "@/api/movies";
+import HeadTitle from "@/components/head-title";
+import ErrorMessage from "@/components/error-message";
 
 const PopularMoviesPage = () => {
   const router = useRouter();
@@ -31,11 +33,13 @@ const PopularMoviesPage = () => {
   };
 
   if (isError) {
-    return <div className="">isError</div>;
+    return <ErrorMessage />;
   }
 
   return (
     <MainLayout needMargin>
+      <HeadTitle title="Popular Movies" />
+
       <MediaListWithPagination
         title={"Popular Movies"}
         isLoading={isLoading}

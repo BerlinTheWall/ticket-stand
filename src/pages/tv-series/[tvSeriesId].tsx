@@ -26,6 +26,8 @@ import queryKeys from "@/constants/query-keys";
 import { useRouter } from "next/router";
 import { Grid } from "@mui/material";
 import { MovieVideo } from "@/types/movie";
+import HeadTitle from "@/components/head-title";
+import ErrorMessage from "@/components/error-message";
 
 interface Props {
   tvSerie: TVSeries;
@@ -69,11 +71,12 @@ const TVSeriesPage: NextPage<Props> = ({
   });
 
   if (isError) {
-    return <div className="">isError </div>;
+    return <ErrorMessage />;
   }
 
   return (
     <MainLayout>
+      <HeadTitle title="TV Series" />
       <Box
         sx={{
           minHeight: "100vh",
@@ -92,13 +95,17 @@ const TVSeriesPage: NextPage<Props> = ({
           />
           {isLoading || isFetching ? (
             <Grid container spacing={3} px={7} mt={1}>
-              <MovieCardSkeletonLoader />
+              <MovieCardSkeletonLoader size={5} />
             </Grid>
           ) : (
             data && <EpisodeSwiper items={data?.episodes} title="Episodes" />
           )}
         </Box>
-        <MovieSwiperMd items={series} title="Recommendations" name="recommendations" />
+        <MovieSwiperMd
+          items={series}
+          title="Recommendations"
+          name="recommendations"
+        />
         <Comments comments={comments} />
       </Box>
     </MainLayout>

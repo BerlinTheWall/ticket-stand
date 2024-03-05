@@ -3,11 +3,13 @@ import MainLayout from "@/layout/main-layout";
 import { Box, Container, useTheme } from "@mui/material";
 import { NextPage } from "next";
 import classes from "../styles/login.module.css";
+import HeadTitle from "@/components/head-title";
 
 const LoginPage: NextPage = () => {
   const theme = useTheme();
   return (
     <MainLayout>
+      <HeadTitle title="Login" />
       <Box
         sx={{
           minHeight: "100vh",

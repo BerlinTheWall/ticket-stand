@@ -10,6 +10,7 @@ import {
   useMediaQuery,
   useTheme,
   Tooltip,
+  Typography,
 } from "@mui/material";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import ThemeSwitch from "../../components/switch-theme";
@@ -135,7 +136,10 @@ const Navbar: React.FC = () => {
                         ) : (
                           <Tooltip
                             title={
-                              "Sign up API was not provided! You have to sign up in the TMDB website to continue."
+                              <Typography variant="body2" textAlign="justify">
+                                Sign up API was not provided! You have to sign
+                                up in the TMDB website to continue.
+                              </Typography>
                             }
                           >
                             <Button

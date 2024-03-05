@@ -2,7 +2,8 @@ import MainLayout from "@/layout/main-layout";
 import Images from "@/utils/image-helper";
 import { Box, Typography, useMediaQuery } from "@mui/material";
 import Image from "next/image";
-import type { GetStaticProps, NextPage } from "next";
+import type { NextPage } from "next";
+import HeadTitle from "@/components/head-title";
 
 const NotFound: NextPage = () => {
   const isTablet = useMediaQuery("(min-width:600px)");
@@ -10,6 +11,7 @@ const NotFound: NextPage = () => {
 
   return (
     <MainLayout>
+      <HeadTitle title="NotFound" />
       <Box
         sx={{
           minHeight: "80vh",

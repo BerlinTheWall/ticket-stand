@@ -8,6 +8,7 @@ import { IMPLEMENTERS } from "@/constants/implementers";
 import Link from "next/link";
 import { MouseEventHandler, useState } from "react";
 import { NextPage } from "next";
+import HeadTitle from "@/components/head-title";
 
 const SOCIAL_STYLE = {
   borderRadius: "50%",
@@ -22,6 +23,7 @@ const SOCIAL_STYLE = {
 const AboutUs: NextPage = () => {
   return (
     <MainLayout>
+      <HeadTitle title="About Us" />
       <Typography pt={5} textAlign="center" variant="h2" fontWeight={"bold"}>
         About Us
       </Typography>

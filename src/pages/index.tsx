@@ -26,6 +26,7 @@ import {
   TOP_RATED_TVSERIES_PAGE,
   TRENDING_TVSERIES_PAGE,
 } from "@/constants/urls";
+import HeadTitle from "@/components/head-title";
 
 interface Props {
   movies: Movie[];
@@ -45,6 +46,7 @@ export default function Home({
 }: Props) {
   return (
     <MainLayout>
+      <HeadTitle title="Home" />
       <Box
         sx={{
           minHeight: "100vh",

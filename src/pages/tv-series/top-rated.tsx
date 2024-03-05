@@ -8,6 +8,8 @@ import makeQueryKey from "@/utils/make-query";
 import { getTopRatedTVSeries } from "@/api/tv-series";
 import { QueryResult } from "@/types/general";
 import { TVSeries } from "@/types/tv-series";
+import HeadTitle from "@/components/head-title";
+import ErrorMessage from "@/components/error-message";
 
 const TopRatedTVSeriesPage = () => {
   const router = useRouter();
@@ -31,11 +33,12 @@ const TopRatedTVSeriesPage = () => {
   };
 
   if (isError) {
-    return <div className="">isError</div>;
+    return <ErrorMessage />;
   }
 
   return (
     <MainLayout needMargin>
+      <HeadTitle title="Top Rated TV Series" />
       <MediaListWithPagination
         title={"Top Rated TV Series"}
         isLoading={isLoading}

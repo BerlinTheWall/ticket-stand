@@ -15,6 +15,7 @@ import {
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import MovieTypeChooser from "../profile-tab/movie-type-chooser";
+import ErrorMessage from "@/components/error-message";
 
 const Favorites: React.FC<{}> = () => {
   const [selectedOption, setSelectedOption] =
@@ -35,7 +36,7 @@ const Favorites: React.FC<{}> = () => {
   };
 
   if (isError) {
-    return <div className="">isError </div>;
+    return <ErrorMessage />;
   }
 
   return (
