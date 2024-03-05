@@ -38,7 +38,7 @@ const Lists: React.FC = () => {
   const router = useRouter();
   const { user } = useContext(AppContext) as ContextValue;
 
-  const { data, isLoading, isFetching, isError } = useLists(user!?.id);
+  const { data, isLoading, isFetching, isError, refetch } = useLists(user!?.id);
 
   const handleChange = (event: any, value: number) => {
     router.replace({
@@ -61,7 +61,7 @@ const Lists: React.FC = () => {
         <Typography component="h1" fontSize={24} fontWeight="bold" pl={0}>
           My Lists
         </Typography>
-        <CreateListModal />
+        <CreateListModal refetch={refetch} />
       </Stack>
       <Grid container justifyContent="start" pt={3} spacing={2}>
         {isLoading || isFetching ? (

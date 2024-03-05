@@ -21,7 +21,11 @@ const defaultValues = {
   description: "",
 };
 
-const CreateListModal: React.FC = () => {
+type Props = {
+  refetch: () => void;
+};
+
+const CreateListModal: React.FC<Props> = ({ refetch }) => {
   const queryClient = new QueryClient();
   const [showModal, setShowModal] = useState<boolean>(false);
   const { user } = useContext(AppContext) as ContextValue;
@@ -38,9 +42,10 @@ const CreateListModal: React.FC = () => {
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     try {
-      const createdList = await createList(data.name, data.description);
+      await createList(data.name, data.description);
       queryClient.invalidateQueries(["lists", user?.id]);
       toast.success("List created successfully!");
+      refetch();
     } catch (error) {
       console.log(error);
     }
