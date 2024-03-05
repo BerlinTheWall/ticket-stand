@@ -7,6 +7,7 @@ import {
   OutlinedInput,
   Stack,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
@@ -22,13 +23,13 @@ import { W500_IMAGE_URL } from "@/constants/image-urls";
 
 const MOVIE_PER_ROW = 3;
 export const NavbarSearch = () => {
+  const isMobile = useMediaQuery("(max-width:450px)");
   const [searchResults, setSearchResults] = useState<Media[]>([]);
   const [open, setOpen] = useState<boolean>(false);
-  const [showMore, setShowMore] = useState<boolean>(false);
+  const [showMore, setShowMore] = useState<boolean>(true);
 
   const handleChange = useDebounce(
     async (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      // setSearchValue(e.target.value);
       try {
         const movies = await getSearchMovie(e.target.value);
         setSearchResults(movies.results);
@@ -131,7 +132,7 @@ export const NavbarSearch = () => {
                 flexWrap: "wrap",
                 rowGap: 2,
                 columnGap: 1,
-                justifyContent: "space-between",
+                justifyContent: isMobile ? "space-between" : "space-evenly",
               }}
             >
               {/* show less */}
@@ -145,7 +146,7 @@ export const NavbarSearch = () => {
                     flexWrap: "wrap",
                     rowGap: 2,
                     columnGap: 1,
-                    justifyContent: "space-between",
+                    justifyContent: isMobile ? "space-between" : "space-evenly",
                   }}
                 >
                   <MovieSearch
@@ -181,12 +182,12 @@ const MovieSearch: React.FC<MovieSearchProps> = ({ list }) => {
         href={`${
           item.media_type === "movie" ? SINGLE_MOVIE_PAGE : SINGLE_TVSERIES_PAGE
         }/${item.id}`}
-        width={{ md: 125, xs: 200 }}
+        width={{ md: 125, xs: 95 }}
       >
         <Stack>
           <Box
             position="relative"
-            height={180}
+            height={{ md: 180, xs: 140 }}
             borderRadius={2}
             overflow="hidden"
             boxShadow={2}

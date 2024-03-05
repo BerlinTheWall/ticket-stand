@@ -118,7 +118,7 @@ const Credits: React.FC<Props> = ({ casts }) => {
                       {cast.name}
                     </Typography>
                     <Typography sx={{ fontSize: 14, color: "grey" }}>
-                      {cast.character}
+                      {!!cast.character ? cast.character : "Unknown role"}
                     </Typography>
                   </Stack>
                 </Stack>

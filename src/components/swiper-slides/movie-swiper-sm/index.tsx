@@ -1,4 +1,4 @@
-import { Box, Divider, Stack, Typography,  } from "@mui/material";
+import { Box, Divider, Stack, Typography } from "@mui/material";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css/navigation";
 import Image from "next/image";
@@ -171,7 +171,7 @@ const MovieSwiperSm: React.FC<Props> = ({ title, items, href, name }) => {
                           borderRadius: "7px",
                           width: "55px",
                           px: 1,
-                          display: !item.adult ? "block" : "none",
+                          color: !item.adult ? "grey.600" : "primary.dark",
                         }}
                         component="h3"
                       >
