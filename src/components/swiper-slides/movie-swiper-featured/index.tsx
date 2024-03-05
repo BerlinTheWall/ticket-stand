@@ -237,7 +237,7 @@ const MovieSwiperFeatured: React.FC<Props> = ({ movies }) => {
                     title={movie.title}
                     rating={movie.vote_average}
                     genres={movie.genre_ids}
-                    isMovie={false}
+                    isMovie={true}
                   />
                 </Box>
               </SwiperSlide>
