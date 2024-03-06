@@ -152,17 +152,22 @@ const EpisodeSwiper: React.FC<Props> = ({ title, items }) => {
         </Swiper>
         <Box mt={4}>
           <Stack
-            direction="row"
-            alignItems="center"
             gap={1}
             mt={1}
+            mb={1}
             whiteSpace="nowrap"
+            sx={{
+              flexDirection: { xs: "column", sm: "row" },
+              alignItems: { xs: "start", sm: "center" },
+              gap: { xs: 0, sm: 1 },
+            }}
           >
             <Typography
               component={"h2"}
               fontSize={26}
               color={"primary.dark"}
               fontWeight={"bold"}
+              className={"truncate-1"}
             >
               {
                 items.find((item) => item.episode_number === selectedEpisode)

@@ -11,6 +11,7 @@ export const AUTH_BUTTONS: {
   color: ButtonOwnProps["color"];
   variant: ButtonOwnProps["variant"];
   provided: boolean;
+  target: boolean;
 }[] = [
   {
     title: "Sign up",
@@ -18,6 +19,7 @@ export const AUTH_BUTTONS: {
     color: "secondary",
     variant: "outlined",
     provided: false,
+    target: true,
   },
   {
     title: "Login",
@@ -25,6 +27,7 @@ export const AUTH_BUTTONS: {
     color: "primary",
     variant: "contained",
     provided: true,
+    target: false,
   },
 ];
 

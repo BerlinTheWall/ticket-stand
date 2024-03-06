@@ -92,7 +92,11 @@ export const NavbarSidebar: React.FC<NavbarSidebarProps> = ({
             <Stack direction="column-reverse" spacing={1} py={0.5}>
               {AUTH_BUTTONS.map((btn) => {
                 return (
-                  <Link href={btn.href} key={btn.title}>
+                  <Link
+                    href={btn.href}
+                    key={btn.title}
+                    target={btn.target ? "_blank" : "_parent"}
+                  >
                     <Button variant={btn.variant} fullWidth color={btn.color}>
                       {btn.title}
                     </Button>

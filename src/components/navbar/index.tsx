@@ -124,7 +124,11 @@ const Navbar: React.FC = () => {
                 <Stack direction="row" spacing={2}>
                   {AUTH_BUTTONS.map((btn) => {
                     return (
-                      <Link href={btn.href} key={btn.title}>
+                      <Link
+                        href={btn.href}
+                        key={btn.title}
+                        target={btn.target ? "_blank" : "_parent"}
+                      >
                         {btn.provided ? (
                           <Button
                             variant={btn.variant}

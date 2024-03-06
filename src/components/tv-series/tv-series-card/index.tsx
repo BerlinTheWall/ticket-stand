@@ -67,7 +67,7 @@ const SingleTVSerie: React.FC<Props> = ({ tvSerie, trailer }) => {
       <Box
         sx={{
           position: "absolute",
-          top: { xs: "25%", md: "20%" },
+          top: { xs: "15%", sm: "20%", md: "20%" },
           left: "3%",
           height: "80%",
           width: { xs: "95%", md: "95%" },
@@ -150,7 +150,7 @@ const SingleTVSerie: React.FC<Props> = ({ tvSerie, trailer }) => {
                 genres={convertTVSeriesGenreIdArraysToNames(tvSerie.genres)}
               />
             </Stack>
-            <Typography marginTop={1} fontSize="1rem">
+            <Typography marginTop={1} fontSize="1rem" textAlign={"justify"}>
               {tvSerie.overview}
             </Typography>
           </Box>
