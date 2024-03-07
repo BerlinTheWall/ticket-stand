@@ -127,7 +127,7 @@ const Navbar: React.FC = () => {
                       <Link
                         href={btn.href}
                         key={btn.title}
-                        target={btn.target ? "_blank" : "_parent"}
+                        target={btn.target ? "_blank" : ""}
                       >
                         {btn.provided ? (
                           <Button

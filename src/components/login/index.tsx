@@ -19,6 +19,7 @@ import { AppContext } from "@/context/AppContext";
 import { ContextValue } from "@/types/general";
 import Link from "next/link";
 import { SIGN_UP_PAGE } from "@/constants/urls";
+import { toast } from "react-toastify";
 
 interface IFormInput {
   username: string;
@@ -58,7 +59,7 @@ const LoginForm: React.FC = () => {
       setUser(account.data);
       router.back();
     } catch (error) {
-      console.log(error);
+      toast.error("Failed to Login");
     }
   };
 

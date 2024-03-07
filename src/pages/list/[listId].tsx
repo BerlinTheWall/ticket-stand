@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 import {
   Button,
   Grid,
-  Link,
   Pagination,
   Stack,
   Typography,
@@ -22,6 +21,7 @@ import makeQueryKey from "@/utils/make-query";
 import queryKeys from "@/constants/query-keys";
 import HeadTitle from "@/components/head-title";
 import ErrorMessage from "@/components/error-message";
+import Link from "next/link";
 
 interface QueryResult {
   data: SingleListType | undefined;

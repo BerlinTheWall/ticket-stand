@@ -95,7 +95,7 @@ export const NavbarSidebar: React.FC<NavbarSidebarProps> = ({
                   <Link
                     href={btn.href}
                     key={btn.title}
-                    target={btn.target ? "_blank" : "_parent"}
+                    target={btn.target ? "_blank" : ""}
                   >
                     <Button variant={btn.variant} fullWidth color={btn.color}>
                       {btn.title}
